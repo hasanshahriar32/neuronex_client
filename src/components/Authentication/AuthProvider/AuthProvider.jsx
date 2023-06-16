@@ -13,7 +13,7 @@ const AuthProvider = () => {
         const email = res.user?.email;
         const uid = res.user?.uid;
         const pic = res.user?.photoURL;
-        const verified = res.user?.isVerified;
+        const verified = res.user?.emailVerified;
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
         const notify = () => toast.success("Login Successful");
@@ -32,7 +32,7 @@ const AuthProvider = () => {
         const name = res.user?.displayName;
         const email = res.user?.email;
         const pic = res.user?.photoURL;
-        const verified = res.user?.isVerified;
+        const verified = res.user?.emailVerified;
         const uid = res.user?.uid;
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
