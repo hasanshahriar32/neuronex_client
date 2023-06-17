@@ -1,11 +1,15 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/", // for github pages
+  base: "/",
   build: {
-    outDir: "dist", // for github pages
+    outDir: "dist",
+  },
+  // Add the "postbuild" script to copy _redirects after the build
+  // is completed
+  scripts: {
+    postbuild: "cpy './_redirects' './dist'",
   },
 });
