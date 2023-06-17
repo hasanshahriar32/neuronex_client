@@ -8,7 +8,7 @@ const AuthProvider = () => {
   const handlegooglelogin = () => {
     handleGoogleSignIn()
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         const name = res.user?.displayName;
         const email = res.user?.email;
         const uid = res.user?.uid;
@@ -28,7 +28,7 @@ const AuthProvider = () => {
   const handlegithublogin = () => {
     handleGithubSignIn()
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         const name = res.user?.displayName;
         const email = res.user?.email;
         const pic = res.user?.photoURL;
@@ -56,6 +56,8 @@ const AuthProvider = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("save user", data);
+        // localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("token", JSON.stringify(data?.token));
       });
   };
   return (
