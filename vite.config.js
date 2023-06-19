@@ -7,9 +7,15 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  // Add the "postbuild" script to copy _redirects after the build
-  // is completed
-  scripts: {
-    postbuild: "cpy './_redirects' './dist'",
-  },
+
+  // server: {
+  //   port: 3000,
+  //   proxy: {
+  //     "/api": {
+  //       target: "http://localhost:8080",
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, ""),
+  //     },
+  //   },
+  // },
 });
