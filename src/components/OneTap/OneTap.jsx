@@ -15,7 +15,7 @@ const OneTap = () => {
         data-client_id="179292359244-34r5qu94683ah5kbmdbhvj3pl51k2hhj.apps.googleusercontent.com"
         data-context="signin"
         data-ux_mode="redirect"
-        data-login_uri="neuronex-dev.vercel.app"
+        data-login_uri="neuronex-client-dev.vercel.app"
         data-auto_select="true"
         data-itp_support="true"
       ></div>
