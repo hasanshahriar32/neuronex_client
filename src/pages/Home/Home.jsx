@@ -1,4 +1,4 @@
-import OneTap from "../../components/OneTap/OneTap";
+import OneTap from "../../components/Authentication/OneTap/OneTap";
 
 const Home = () => {
   return (
