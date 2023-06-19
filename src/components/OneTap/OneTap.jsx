@@ -12,7 +12,7 @@ const OneTap = () => {
       </Helmet>
       <div
         id="g_id_onload"
-        data-client_id="179292359244-34r5qu94683ah5kbmdbhvj3pl51k2hhj.apps.googleusercontent.com"
+        data-client_id="179292359244-p33587fda97a3fgp27s66k06q6a1gjun.apps.googleusercontent.com"
         data-context="signin"
         data-ux_mode="redirect"
         data-login_uri="neuronex-client-dev.vercel.app"
