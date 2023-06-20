@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import OneTap from "../../components/Authentication/OneTap/OneTap";
+// import OneTap from "../../components/Authentication/OneTap (Test)/OneTap";
 import HeroSection from "../../components/Hero/HeroSection";
 import { Container } from "../../components/container";
 import { StarsIllustration } from "../../components/stars";
