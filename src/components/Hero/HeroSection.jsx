@@ -1,5 +1,5 @@
-import { Button, Highlight } from "../Button";
-import { Hero, HeroSubtitle, HeroTitle } from "../hero";
+import { Button, Highlight } from "../../features/Button";
+import { Hero, HeroSubtitle, HeroTitle } from "./hero";
 import { HeroImage } from "./hero_img";
 
 const HeroSection = () => {
