@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "../layout/Main/Main";
-import Home from "../pages/Home/Home";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
+import Home from "../pages/Home/Home";
+import Compose from "../pages/Compose/Compose";
+import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -11,13 +13,21 @@ const Routes = () => {
       element: <Main></Main>,
       children: [
         { path: "/", element: <Home></Home> },
+        {
+          path: "/compose",
+          element: (
+            <PrivateRoute>
+              <Compose></Compose>
+            </PrivateRoute>
+          ),
+        },
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
       ],
     },
   ]);
   return (
-    <div>
+    <div className="bg-page-gradient pt-navigation-height">
       {" "}
       <RouterProvider router={router}></RouterProvider>
     </div>
