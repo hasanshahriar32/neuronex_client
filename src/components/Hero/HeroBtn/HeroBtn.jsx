@@ -27,7 +27,8 @@ export default function HeroBtn() {
   return (
     <MotionConfig transition={transition}>
       <motion.button
-        className="hero-btn relative flex justify-center  z-10"
+        onClick={handleClick}
+        className="hero-btn group relative flex justify-center  z-10"
         ref={ref}
         initial={false}
         animate={isHover ? "hover" : "rest"}
@@ -80,7 +81,6 @@ export default function HeroBtn() {
             variant="primary"
             size="large"
             variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
-            onClick={handleClick}
           >
             <span className="z-20 text-primary-text hover:text-white font-semibold font-sans group-hover:text-white">
               Get Started{" "}
