@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { Button } from "../../features/Button";
 import { Container } from "../../features/container";
 
 
@@ -80,9 +81,13 @@ const Header = () => {
                     <Link className="mr-6 text-sm" href="#">
                         Log in
                     </Link>
-                    <Link className="text-sm" href="#">
+                    <Button
+                        className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]"
+                        href="/"
+                        variant="primary"
+                        size="medium" >
                         Sign up
-                    </Link>
+                    </Button>
 
                 </div>
 
