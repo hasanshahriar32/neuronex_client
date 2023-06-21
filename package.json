@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-google-one-tap-login": "^0.1.1",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.45.0",
     "react-icons": "^4.9.0",
     "react-intersection-observer": "^9.5.1",
     "react-router-dom": "^6.13.0",
