@@ -1,3 +1,4 @@
+
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -25,18 +26,14 @@ export const HeroImage = () => {
                         id: Math.random().toString(36).substring(7),
                     },
                 ]);
-
                 renderLine(randomNumberBetween(800, 2500));
             }, timeout);
         };
-
         renderLine(randomNumberBetween(800, 1300));
-
         return () => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
     }, [inView, setLines]);
-
     return (
         <div ref={ref} className="mt-[12.8rem] [perspective:2000px]">
             <div
@@ -52,11 +49,13 @@ export const HeroImage = () => {
                         <span
                             key={line.id}
                             //   onAnimationEnd={() => removeLine(line.id)}
-                            style={{
-                                "--direction": line.direction,
-                                "--size": line.size,
-                                "--animation-duration": `${line.duration}ms`,
-                            }}
+                            style={
+                                {
+                                    "--direction": line.direction,
+                                    "--size": line.size,
+                                    "--animation-duration": `${line.duration}ms`,
+                                }
+                            }
                             className={classNames(
                                 "absolute top-0 block h-[1px] w-[10rem] bg-glow-lines",
                                 line.direction === "to left" &&

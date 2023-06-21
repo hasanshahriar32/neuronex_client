@@ -44,4 +44,3 @@ const Button = ({ children, variant, size, ...props }) => {
 };
 
 export { Button, Highlight };
-
