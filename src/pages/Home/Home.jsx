@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <div>
             <OneTap />
-            <div className="overflow-hidden pb-[16.4rem] md:pb-[26.6rem]">
+            <div className="overflow-hidden">
                 <Container className="pt-[6.4rem]">
                     <HeroSection />
                 </Container>

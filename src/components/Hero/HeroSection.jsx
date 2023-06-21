@@ -12,17 +12,16 @@ const HeroSection = () => {
                     variant="secondary"
                     size="small"
                 >
-                    <span>Linear 2022 Release – Built for scale</span>{" "}
+                    <span className="pr-2"> NeuroNex 2023 Release – Built for Education</span>
                     <Highlight>→</Highlight>
                 </Button>
                 <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-                    Linear is a better way
-                    <br className="hidden md:block" /> to build products
+                    NeuroNex: is a better
+                    <br className="hidden md:block" /> way to Learn
                 </HeroTitle>
                 <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-                    Meet the new standard for modern software development.
-                    <br className="hidden md:block" /> Streamline issues, sprints, and product
-                    roadmaps.
+                    Learning Journeys, Revolutionizing Education with Transformative
+                    <br className="hidden md:block" />Solutions for Personal Growth and Empowered Futures
                 </HeroSubtitle>
                 <Button
                     className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]"
