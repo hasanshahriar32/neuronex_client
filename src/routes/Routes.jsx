@@ -3,25 +3,35 @@ import Main from "../layout/Main/Main";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Home from "../pages/Home/Home";
+import Compose from "../pages/Compose/Compose";
+import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
 
 const Routes = () => {
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        { path: "/", element: <Home></Home> },
         {
-            path: "/",
-            element: <Main></Main>,
-            children: [
-                { path: "/", element: <Home></Home> },
-                { path: "/login", element: <Login></Login> },
-                { path: "/register", element: <Register></Register> },
-            ],
+          path: "/compose",
+          element: (
+            <PrivateRoute>
+              <Compose></Compose>
+            </PrivateRoute>
+          ),
         },
-    ]);
-    return (
-        <div className="bg-page-gradient pt-navigation-height">
-            {" "}
-            <RouterProvider router={router}></RouterProvider>
-        </div>
-    );
+        { path: "/login", element: <Login></Login> },
+        { path: "/register", element: <Register></Register> },
+      ],
+    },
+  ]);
+  return (
+    <div className="bg-page-gradient pt-navigation-height">
+      {" "}
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 };
 
 export default Routes;

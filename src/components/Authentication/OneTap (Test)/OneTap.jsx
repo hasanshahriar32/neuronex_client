@@ -1,11 +1,31 @@
 import { useGoogleOneTapLogin } from "react-google-one-tap-login";
-
+// import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 const OneTap = () => {
+  // const authenticateWithFirebase = async (idToken, accessToken) => {
+  //   const credential = firebase.auth.GoogleAuthProvider.credential(
+  //     idToken,
+  //     accessToken
+  //   );
+
+  //   try {
+  //     const userCredential = await firebase
+  //       .auth()
+  //       .signInWithCredential(credential);
+  //     const user = userCredential.user;
+  //     const uid = user.uid;
+
+  //     console.log(uid); // Output: Firebase-generated UID for the authenticated user
+  //   } catch (error) {
+  //     console.log("Error signing in with Firebase:", error);
+  //   }
+  // };
   useGoogleOneTapLogin({
     onError: (error) => {
       console.log("error", error);
     },
     onSuccess: (res) => {
+      // authenticateWithFirebase(res?., googleOneTapAccessToken);
       console.log("res", res);
       const name = res?.given_name;
       const email = res?.email;
