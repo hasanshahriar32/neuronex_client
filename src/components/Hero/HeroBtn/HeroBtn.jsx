@@ -5,6 +5,7 @@ import { Shapes } from "./Shapes";
 import { transition } from "./settings.jsx";
 import useMeasure from "react-use-measure";
 import { Button, Highlight } from "../../../features/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroBtn() {
   const [ref, bounds] = useMeasure({ scroll: false });
@@ -18,6 +19,11 @@ export default function HeroBtn() {
     mouseY.set(0);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/compose");
+  };
   return (
     <MotionConfig transition={transition}>
       <motion.button
@@ -74,6 +80,7 @@ export default function HeroBtn() {
             variant="primary"
             size="large"
             variants={{ hover: { scale: 0.85 }, press: { scale: 1.1 } }}
+            onClick={handleClick}
           >
             <span className="z-20 text-primary-text hover:text-white font-semibold font-sans group-hover:text-white">
               Get Started{" "}
