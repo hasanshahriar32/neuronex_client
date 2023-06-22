@@ -15,10 +15,8 @@ const Header = () => {
 
     useEffect(() => {
         const closeHamburgerNavigation = () => setHamburgerMenuIsOpen(false);
-
         window.addEventListener("orientationchange", closeHamburgerNavigation);
         window.addEventListener("resize", closeHamburgerNavigation);
-
         return () => {
             window.removeEventListener("orientationchange", closeHamburgerNavigation);
             window.removeEventListener("resize", closeHamburgerNavigation);
