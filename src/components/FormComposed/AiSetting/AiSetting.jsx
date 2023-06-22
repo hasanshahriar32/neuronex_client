@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
+import { AiContext } from "../FormContext/FormContext";
+import { useContext } from "react";
 
 export default function AiSetting() {
+  const { setAiConfig } = useContext(AiContext);
   const {
     register,
     handleSubmit,
@@ -12,7 +15,10 @@ export default function AiSetting() {
     },
   });
 
-  const onSubmit = (data) => alert(JSON.stringify(data));
+  const onSubmit = (data) => {
+    setAiConfig(data);
+    console.log(data);
+  };
 
   return (
     <div className="card shadow-primary  shadow-lg  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
@@ -102,7 +108,10 @@ export default function AiSetting() {
             )}
           </div>
 
-          <div className="flex justify-end w-full">
+          <div className="flex justify-between w-full">
+            <p className="mt-4">
+              <span className="text-gray-700 text-sm">Step 1 of 2</span>
+            </p>
             <button
               disabled={isSubmitting}
               className="btn btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
