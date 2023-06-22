@@ -1,5 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Main from "../layout/Main/Main";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
@@ -23,6 +22,7 @@ const Routes = () => {
             </PrivateRoute>
           ),
         },
+
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
       ],
@@ -36,26 +36,10 @@ const Routes = () => {
       ),
     },
   ]);
-
   return (
     <div className="bg-page-gradient pt-navigation-height">
-      <RouterProvider router={router}>
-        <AnimatePresence mode="wait">
-          <Outlet>
-            {({ route }) => (
-              <motion.div
-                key={route.path}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {route.element}
-              </motion.div>
-            )}
-          </Outlet>
-        </AnimatePresence>
-      </RouterProvider>
+      {" "}
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 };
