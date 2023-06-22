@@ -44,6 +44,16 @@ export default function AiSetting() {
                 <option value="Physics">Physics</option>
                 <option value="Literature">Literature</option>
                 <option value="IT">IT</option>
+                <option value="Biology">Biology</option>
+                <option value="History">History</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Economics">Economics</option>
+                <option value="Sociology">Sociology</option>
+                <option value="Political Science">Political Science</option>
+                <option value="Philosophy">Philosophy</option>
+                <option value="Art">Art</option>
+                <option value="Music">Music</option>
+                <option value="Geography">Geography</option>
               </select>
               {errors["subject-selection"] && (
                 <p role="alert" className="text-red-500">
