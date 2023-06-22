@@ -15,7 +15,7 @@ export default function AiSetting() {
   const onSubmit = (data) => alert(JSON.stringify(data));
 
   return (
-    <div className="card flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
+    <div className="card shadow-primary  shadow-lg  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
@@ -30,7 +30,7 @@ export default function AiSetting() {
                   required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subject-selection"] ? "true" : "false"}
-                className="form-select mb-2 select text-lg h-12 w-full  border-secondary text-gray-700"
+                className="form-select mb-2 select text-md h-12 w-full  border-secondary text-gray-700"
               >
                 <option disabled selected>
                   Subject Selection
@@ -77,7 +77,7 @@ export default function AiSetting() {
                 return (
                   <label
                     key={value + index}
-                    className="text-lg h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
+                    className="text-md h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
                       {...register("assistance-level", {
@@ -105,7 +105,7 @@ export default function AiSetting() {
           <div className="flex justify-end w-full">
             <button
               disabled={isSubmitting}
-              className="btn btn-secondary text-md btn-outline border border-secondary btn-lg "
+              className="btn btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
             >
               Next
             </button>

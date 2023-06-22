@@ -3,9 +3,9 @@ import AiSetting from "../../components/FormComposed/AiSetting/AiSetting";
 
 const Compose = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center min-h-screen min-w-full">
       <AiSetting />
-      <AiQuery />
+      {/* <AiQuery /> */}
       {/* <iframe
         width="100%"
         height="800"
