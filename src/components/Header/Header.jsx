@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Container } from "../../features/container";
+import { AuthContext } from "../Authentication/UserContext/UserContext";
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
@@ -22,6 +23,8 @@ const Header = () => {
       window.removeEventListener("resize", closeHamburgerNavigation);
     };
   }, [setHamburgerMenuIsOpen]);
+
+  const { user, logOut } = useContext(AuthContext);
 
   return (
     <header className="dark:disabled fixed top-0 left-0 z-40 w-full border-b border-transparent-white backdrop-blur-[12px]">
@@ -76,12 +79,20 @@ const Header = () => {
         </div>
 
         <div className="ml-auto flex h-full items-center">
-          <Link className="mr-6 text-sm" href="#">
-            Log in
-          </Link>
-          <Link className="text-sm" href="#">
-            Sign up
-          </Link>
+          {user?.uid ? (
+            <button className="mr-6 text-sm" onClick={() => logOut()}>
+              Log out
+            </button>
+          ) : (
+            <div>
+              <Link to="/login" className="mr-6 text-sm" href="#">
+                Log in
+              </Link>
+              <Link to="/register" className="text-sm" href="#">
+                Sign up
+              </Link>
+            </div>
+          )}
         </div>
 
         <button

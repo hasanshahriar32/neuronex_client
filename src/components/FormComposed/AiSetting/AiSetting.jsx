@@ -27,7 +27,7 @@ export default function AiSetting() {
               </span>
               <select
                 {...register("subject-selection", {
-                  required: "Please select a subject",
+                  required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subject-selection"] ? "true" : "false"}
                 className="form-select mb-2 select text-lg h-12 w-full  border-secondary text-gray-700"
