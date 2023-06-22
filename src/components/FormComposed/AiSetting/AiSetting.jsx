@@ -14,10 +14,6 @@ export default function AiSetting() {
 
   const onSubmit = (data) => alert(JSON.stringify(data));
 
-  // if (submissionId) {
-  //   return <p>Thank you! Submission Id: {submissionId}</p>;
-  // }
-
   return (
     <div className="card flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
       <div className="card-body">
@@ -31,10 +27,10 @@ export default function AiSetting() {
               </span>
               <select
                 {...register("subject-selection", {
-                  required: true,
+                  required: "Please select a subject",
                 })}
                 aria-invalid={errors["subject-selection"] ? "true" : "false"}
-                className="form-select select text-lg h-12 w-full  border-secondary text-gray-700"
+                className="form-select mb-2 select text-lg h-12 w-full  border-secondary text-gray-700"
               >
                 <option disabled selected>
                   Subject Selection
@@ -56,7 +52,7 @@ export default function AiSetting() {
                 <option value="Geography">Geography</option>
               </select>
               {errors["subject-selection"] && (
-                <p role="alert" className="text-red-500">
+                <p role="alert" className="text-red-500 border-error">
                   {errors["subject-selection"]?.message}
                 </p>
               )}
