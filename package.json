@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "postbuild": "cpy ./_redirects ./dist",
     "predeploy": "npm run build",
