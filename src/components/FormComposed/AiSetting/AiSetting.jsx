@@ -55,33 +55,40 @@ export default function AiSetting() {
 
           <div className="mb-4">
             <p className="mb-2 label text-lg">Assistance Level</p>
-            {[
-              { label: "Basic explanation", value: "Basic explanation" },
-              { label: "In-depth explanation", value: "In-depth explanation" },
-              {
-                label: "Step-by-step guidance",
-                value: "Step-by-step guidance",
-              },
-              { label: "Practice exercises", value: "Practice exercises" },
-            ].map(({ label, value }, index) => {
-              return (
-                <label
-                  key={value + index}
-                  className="text-lg h-12 min-w-[250px] max-w-[45%] flex flex-row flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
-                >
-                  <input
-                    {...register("assistance-level", {
-                      required: "Please select an item in the list.",
-                    })}
-                    aria-invalid={errors["assistance-level"] ? "true" : "false"}
-                    value={value}
-                    type="radio"
-                    className="form-radio h-6 w-6 radio radio-secondary text-indigo-600 transition duration-150 ease-in-out"
-                  />
-                  <span className="ml-2 ">{label}</span>
-                </label>
-              );
-            })}
+            <div className="flex flex-row justify-start md:justify-between flex-wrap gap-4 items-center">
+              {[
+                { label: "Basic explanation", value: "Basic explanation" },
+                {
+                  label: "In-depth explanation",
+                  value: "In-depth explanation",
+                },
+                {
+                  label: "Step-by-step guidance",
+                  value: "Step-by-step guidance",
+                },
+                { label: "Practice exercises", value: "Practice exercises" },
+              ].map(({ label, value }, index) => {
+                return (
+                  <label
+                    key={value + index}
+                    className="text-lg h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
+                  >
+                    <input
+                      {...register("assistance-level", {
+                        required: "Please select an item in the list.",
+                      })}
+                      aria-invalid={
+                        errors["assistance-level"] ? "true" : "false"
+                      }
+                      value={value}
+                      type="radio"
+                      className="form-radio h-6 w-6 radio radio-secondary text-indigo-600 transition duration-150 ease-in-out"
+                    />
+                    <span className="ml-2 ">{label}</span>
+                  </label>
+                );
+              })}
+            </div>
             {errors["assistance-level"] && (
               <p role="alert" className="text-red-500">
                 {errors["assistance-level"]?.message}
