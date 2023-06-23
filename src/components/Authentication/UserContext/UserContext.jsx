@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 import { useEffect } from "react";
@@ -50,6 +51,20 @@ const UserContext = ({ children }) => {
     return () => unsubscribe;
   }, []);
 
+  
+
+
+
+
+
+	//! User profile....
+	const userprofile = (name, photoURL) => {
+		return updateProfile(auth.currentUser, {
+			displayName: name,
+			photoURL: photoURL,
+		});
+	};
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -60,6 +75,7 @@ const UserContext = ({ children }) => {
     logOut,
     signin,
     createUser,
+    userprofile,
     user,
     loading,
     sendPassResetMail,

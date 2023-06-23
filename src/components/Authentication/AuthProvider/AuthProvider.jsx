@@ -63,16 +63,16 @@ const AuthProvider = () => {
   return (
     <div>
       <ToastContainer />
-      <div className="flex mx-16 justify-around items-center  mb-6">
+      <div className="">
         <button
           onClick={handlegooglelogin}
-          className="btn btn-ghost btn-circle "
+          className="w-full btn my-2"
         >
           login with google
         </button>
         <button
           onClick={handlegithublogin}
-          className="btn btn-ghost btn-circle "
+          className="w-full btn my-2"
         >
           login with github
         </button>
