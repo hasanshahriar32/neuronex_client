@@ -208,7 +208,7 @@ const Register = () => {
               </form>
 
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover text-background text-xl">
+                <a href="#" className="underline text-background text-xl">
                   <Link to="/login">Already have an account?</Link>
                 </a>
               </label>
