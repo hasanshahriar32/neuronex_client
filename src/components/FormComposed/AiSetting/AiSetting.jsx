@@ -36,7 +36,7 @@ export default function AiSetting() {
                   required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subject-selection"] ? "true" : "false"}
-                className="form-select mb-2 select text-md h-12 w-full  border-secondary text-gray-700"
+                className="form-select mb-2 select text-md h-12 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
                   Subject Selection
@@ -116,7 +116,7 @@ export default function AiSetting() {
                 required: "Please enter additional instruction.",
               })}
               type="text"
-              className="input h-12 text-lg input-secondary border-solid focus:border-dotted w-full"
+              className="input h-12 input-ghost text-lg input-secondary border-solid focus:border-dotted w-full"
               placeholder="Enter additional instruction"
             />
           </div>
