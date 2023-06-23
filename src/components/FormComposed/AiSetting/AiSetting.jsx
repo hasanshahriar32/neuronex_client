@@ -21,8 +21,8 @@ export default function AiSetting() {
   };
 
   return (
-    <div className="card shadow-primary  shadow-lg  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
-      <div className="card-body">
+    <div className="card  w-full  my-10 max-w-7xl">
+      <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
 
