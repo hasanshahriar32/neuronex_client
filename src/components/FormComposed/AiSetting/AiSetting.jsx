@@ -21,8 +21,8 @@ export default function AiSetting() {
   };
 
   return (
-    <div className="card shadow-primary  shadow-lg  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken  w-full max-w-7xl border-dashed border shadow-2xl bg-base-100">
-      <div className="card-body">
+    <div className="card  w-full  my-10 max-w-7xl">
+      <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
 
@@ -36,7 +36,7 @@ export default function AiSetting() {
                   required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subject-selection"] ? "true" : "false"}
-                className="form-select mb-2 select text-md h-12 w-full  border-secondary text-gray-700"
+                className="form-select mb-2 select text-md h-12 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
                   Subject Selection
@@ -116,7 +116,7 @@ export default function AiSetting() {
                 required: "Please enter additional instruction.",
               })}
               type="text"
-              className="input h-12 text-lg input-secondary border-solid focus:border-dotted w-full"
+              className="input h-12 input-ghost text-lg input-secondary border-solid focus:border-dotted w-full"
               placeholder="Enter additional instruction"
             />
           </div>
