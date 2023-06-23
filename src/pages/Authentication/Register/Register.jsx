@@ -29,9 +29,7 @@ const Register = () => {
     const name = data.name;
     const email = data.email;
     const password = data.password;
-    const role = data.role;
     const image = data.img;
-    // console.log(role, image)
 
     createUser(email, password)
       .then((result) => {
@@ -61,7 +59,6 @@ const Register = () => {
                 name,
                 email,
                 password,
-                role,
                 image: imgData.data.url,
               };
 
