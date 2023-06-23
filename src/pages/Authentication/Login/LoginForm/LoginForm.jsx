@@ -81,25 +81,25 @@ const LoginForm = () => {
         
       <div className="hero-content ">
           
-          <div className="card border-b-4 border-b-rose-400 flex-shrink-0 w-full  shadow-2xl bg-base-100">
+          <div className="card bg-white border-b-4 border-b-rose-400 flex-shrink-0 lg:w-[700px]  shadow-2xl">
             <div className="card-body">
-              <h3 className='font-serif text-2xl'>login Now</h3>
+              <h3 className='font-serif text-center text-2xl text-background'>login Now</h3>
           <form onSubmit={handleLogin}>
           <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-xl text-background">Email</span>
               </label>
-              <input onBlur={handleEmailForResetPassword} type="email" name='email' placeholder="email" className="input input-bordered" />
+              <input onBlur={handleEmailForResetPassword} type="email" name='email' placeholder="email" className="input input-bordered bg-grey border-0 text-white text-lg py-7" />
             </div>
             
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-xl text-background">Password</span>
               </label>
-              <div className="flex">
+              <div className="flex text-xl bg-grey border-0 rounded-lg">
               <input type={changePassword ? "password" : "text"}
-               name='password' placeholder="password" className="input w-full input-bordered" />
-              <span className=" flex items-center mx-2"
+               name='password' placeholder="password" className="input bg-grey border-0 text-white w-full text-lg py-7 input-bordered" />
+              <span className=" flex items-center mx-2 text-background cursor-pointer"
               onClick={() => {
                  setChangePassword(changeIcon);
               }}
@@ -108,18 +108,18 @@ const LoginForm = () => {
            </span>
               </div>
               <label className="label">
-                <p  onClick={handleForgetPassword} className="label-text-alt link link-hover hover:underline text-start">Forgot password?</p>
+                <p  onClick={handleForgetPassword} className="label-text-alt text-background text-xl link link-hover hover:underline text-start">Forgot password?</p>
               </label>
             </div>
             
             <div className="form-control mt-6">
-              <button className="btn bg-gradient-to-l hover:bg-gradient-to-r from-violet-500 to-fuchsia-500 border-0">Login</button>
+              <button className="btn text-xl h-10 text-white">Login</button>
              </div>
              
           </form>
              
             <label className="label">
-             <p  className="label-text-alt link link-hover hover:underline text-start">
+             <p  className="label-text-alt text-background link text-xl link-hover hover:underline text-start">
                  <Link to='/register'>create a new account</Link>
              </p>
             </label>
