@@ -4,14 +4,20 @@ import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../components/Authentication/UserContext/UserContext";
+import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const { createUser, userprofile, logOut } = useContext(AuthContext);
-
-  const navigate = useNavigate();
-
+	const [createdUserEmail, setCreatedUserEmail] = useState('');
+	const [token] = useToken(createdUserEmail)
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
+  const navigate = useNavigate();
+
+
+  if (token) {
+    navigate('/login')
+     }
 
   const {
     register,
@@ -76,7 +82,7 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-
+                  setCreatedUserEmail(result?.email)
                   // navigate("/login");
                   logOut();
                   toast.success("Registration successful");
