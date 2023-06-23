@@ -1,69 +1,71 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --navigation-height: 4.8rem;
   }
-  a:hover {
-    color: #747bff;
+
+  html {
+    @apply bg-background font-sans text-off-white;
+    font-size: 62.5%;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .highlighted-keys .active rect:first-child {
+    fill-opacity: 0.4;
+  }
+
+  .highlighted-keys .active rect:not(:first-child) {
+    stroke-opacity: 1;
+  }
+
+  .highlighted-keys .active path {
+    fill-opacity: 1;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: rgb(0 0 0 / 56%) 0px 3px 12px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      to right bottom,
+      rgb(255, 255, 255) 30%,
+      rgba(255, 255, 255, 0.38)
+    );
+    background-clip: text;
+    color: transparent;
+  }
+
+  .mask-radial-faded {
+    mask-image: radial-gradient(
+      circle at center center,
+      black,
+      transparent 80%
+    );
+  }
+
+  .mask-linear-faded {
+    mask-image: linear-gradient(black, transparent 70%);
+  }
+
+  .mask-keyboard {
+    mask-image: linear-gradient(
+      transparent 0%,
+      rgba(0, 0, 0, 0.57) 33.98%,
+      black 100%
+    );
+  }
+
+  .mask-shortcutkeys {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 40%,
+      black calc(60%),
+      transparent 100%
+    );
   }
 }
