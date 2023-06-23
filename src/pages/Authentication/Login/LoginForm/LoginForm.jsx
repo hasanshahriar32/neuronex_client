@@ -77,11 +77,11 @@ const LoginForm = () => {
     return (
       <div>
         
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         
       <div className="hero-content ">
           
-          <div className="card border-b-4 border-b-rose-400 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card border-b-4 border-b-rose-400 flex-shrink-0 w-full  shadow-2xl bg-base-100">
             <div className="card-body">
               <h3 className='font-serif text-2xl'>login Now</h3>
           <form onSubmit={handleLogin}>

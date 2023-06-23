@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../components/Authentication/UserContext/UserContext";
 
 const Register = () => {
-  const { createUser, userprofile, loading, logOut } = useContext(AuthContext);
+  const { createUser, userprofile, logOut } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -94,10 +94,7 @@ const Register = () => {
       });
   };
 
-  //! Loading . . .
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
