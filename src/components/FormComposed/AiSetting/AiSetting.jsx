@@ -108,7 +108,28 @@ export default function AiSetting() {
             )}
           </div>
 
-          <div className="flex justify-between w-full">
+          {/* get input text from user */}
+          <div className="mb-2">
+            <p className="mb-2 label text-lg">Enter additional instruction</p>
+            <input
+              {...register("additional-instruction", {
+                required: "Please enter additional instruction.",
+              })}
+              type="text"
+              className="input h-12 text-lg input-secondary border-solid focus:border-dotted w-full"
+              placeholder="Enter additional instruction"
+            />
+          </div>
+          {
+            // errors will return when field validation fails
+            errors["additional-instruction"] && (
+              <p role="alert" className="text-red-500">
+                {errors["additional-instruction"]?.message}
+              </p>
+            )
+          }
+
+          <div className="flex justify-between mt-2 w-full">
             <p className="mt-4">
               <span className="text-gray-700 text-sm">Step 1 of 2</span>
             </p>
