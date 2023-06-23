@@ -6,7 +6,6 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import app from "../../../../configs/firebase.config";
-import useToken from "../../../../hooks/useToken";
 
 const auth = getAuth(app);
 const LoginForm = () => {
@@ -17,8 +16,6 @@ const LoginForm = () => {
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
 
-
-
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -28,13 +25,12 @@ const LoginForm = () => {
 
     //! login By User Email
     signin(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        toast.success("Successfully Login!");
-        localStorage.setItem('userAccessToken', user?.accessToken);
-        navigate('/')
-      })
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      toast.success('Successfully Login.');
+      localStorage.setItem('userAccessToken', user.accessToken);
+    })
 
       .catch((error) => {
         console.log(error);
@@ -70,15 +66,15 @@ const LoginForm = () => {
     <div>
       <div className="hero min-h-screen">
         <div className="hero-content ">
-          <div className="card bg-white border-b-4 border-b-rose-400 flex-shrink-0 lg:w-[700px]  shadow-2xl">
+          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
             <div className="card-body">
-              <h3 className="font-serif text-center text-2xl text-background">
-                login Now
+              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
+                Login Now
               </h3>
               <form onSubmit={handleLogin}>
-                <div className="form-control">
+                <div className="form-control mb-2">
                   <label className="label">
-                    <span className="label-text text-xl text-background">
+                    <span className="label-text text-xl text-secondary">
                       Email
                     </span>
                   </label>
@@ -87,25 +83,25 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-bordered bg-grey border-0 text-white text-lg py-7"
+                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
                   />
                 </div>
 
-                <div className="form-control">
+                <div className="form-control mb-2">
                   <label className="label">
-                    <span className="label-text text-xl text-background">
+                    <span className="label-text text-xl text-secondary">
                       Password
                     </span>
                   </label>
-                  <div className="flex text-xl bg-grey border-0 rounded-lg">
+                  <div className="flex text-xl bg-ghost border-0 rounded-lg">
                     <input
                       type={changePassword ? "password" : "text"}
                       name="password"
                       placeholder="password"
-                      className="input bg-grey border-0 text-white w-full text-lg py-7 input-bordered"
+                      className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  w-full text-lg py-7"
                     />
                     <span
-                      className=" flex items-center mx-2 text-background cursor-pointer"
+                      className=" flex items-center mx-2 text-secondary cursor-pointer"
                       onClick={() => {
                         setChangePassword(changeIcon);
                       }}
@@ -113,27 +109,30 @@ const LoginForm = () => {
                       {changeIcon ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </span>
                   </div>
-                  <label className="label">
-                    <p
-                      onClick={handleForgetPassword}
-                      className="label-text-alt text-background text-xl link link-hover hover:underline text-start"
-                    >
-                      Forgot password?
-                    </p>
-                  </label>
+                  <div className="mt-5 flex items-center justify-between">
+                    <label className="label">
+                      <p
+                        onClick={handleForgetPassword}
+                        className="label-text-alt  text-secondary text-sm link link-hover hover:underline text-start"
+                      >
+                        Forgot password?
+                      </p>
+                    </label>
+                    <label className="label">
+                      <p className="label-text-alt text-secondary link text-sm link-hover hover:underline text-start">
+                        <Link to="/register">create a new account</Link>
+                      </p>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="form-control mt-6">
-                  <button className="btn text-xl h-10 text-white">Login</button>
+                  <button className="btn text-xl btn-lg btn-secondary w-full ">
+                    Login
+                  </button>
                 </div>
               </form>
-
-              <label className="label">
-                <p className="label-text-alt text-background link text-xl link-hover hover:underline text-start">
-                  <Link to="/register">create a new account</Link>
-                </p>
-              </label>
-
+              <div className="divider text-md mt-6 mb-4">OR</div>
               <AuthProvider />
             </div>
           </div>

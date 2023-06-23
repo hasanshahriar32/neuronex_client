@@ -66,13 +66,13 @@ const AuthProvider = () => {
       <div className="">
         <button
           onClick={handlegooglelogin}
-          className="w-full text-xl btn h-10 text-white my-2"
+          className="w-full btn-neutral text-xl btn h-10 btn-lg my-2"
         >
           login with google
         </button>
         <button
           onClick={handlegithublogin}
-          className="w-full text-xl btn h-10 text-white my-2"
+          className="w-full btn-neutral text-xl btn h-10 btn-lg my-2"
         >
           login with github
         </button>
