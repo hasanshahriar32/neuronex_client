@@ -3,19 +3,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../../components/Authentication/UserContext/UserContext";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import app from "../../../../configs/firebase.config";
 
-
+const auth = getAuth(app);
 const LoginForm = () => {
 
   
   const { signin } = useContext(AuthContext)
   
-  const navigate = useNavigate()
-
-
-  //! password show or hidden
+  const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
+  const navigate = useNavigate()
   
 
 
@@ -49,9 +50,35 @@ const LoginForm = () => {
   }
 
 
+    //! handle Forget Password
+
+    const handleEmailForResetPassword = (e) => {
+      const email = e.target.value;
+      setUserEmail(email);
+  
+      console.log(email);
+    };
+  
+    const handleForgetPassword = () => {
+      if (!userEmail) {
+        toast.error("Please enter your email address");
+      } else {
+        sendPasswordResetEmail(auth, userEmail)
+          .then(() => {
+            toast.info("password reset sent");
+          })
+          .catch((er) => {
+            toast.error(er.message);
+            console.error(er);
+          });
+      }
+    };
+
     return (
       <div>
+        
       <div className="hero min-h-screen bg-base-200">
+        
       <div className="hero-content ">
           
           <div className="card border-b-4 border-b-rose-400 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -62,7 +89,7 @@ const LoginForm = () => {
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input type="email" name='email' placeholder="email" className="input input-bordered" />
+              <input onBlur={handleEmailForResetPassword} type="email" name='email' placeholder="email" className="input input-bordered" />
             </div>
             
             <div className="form-control">
@@ -81,7 +108,7 @@ const LoginForm = () => {
            </span>
               </div>
               <label className="label">
-                <p  className="label-text-alt link link-hover hover:underline text-start">Forgot password?</p>
+                <p  onClick={handleForgetPassword} className="label-text-alt link link-hover hover:underline text-start">Forgot password?</p>
               </label>
             </div>
             
@@ -96,8 +123,12 @@ const LoginForm = () => {
                  <Link to='/register'>create a new account</Link>
              </p>
             </label>
+
+            <AuthProvider />
            </div>
         </div>
+        
+        
       </div>
     </div>
       </div>
