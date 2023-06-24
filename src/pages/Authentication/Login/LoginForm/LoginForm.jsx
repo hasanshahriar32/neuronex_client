@@ -14,6 +14,7 @@ const LoginForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -25,16 +26,25 @@ const LoginForm = () => {
 
     //! login By User Email
     signin(email, password)
-    .then((result) => {
-      const user = result.user;
-      console.log(user);
-      toast.success('Successfully Login.');
-      localStorage.setItem('userAccessToken', user.accessToken);
-    })
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("Successfully Login.");
+        localStorage.setItem("userAccessToken", user.accessToken);
+      })
 
       .catch((error) => {
         console.log(error);
-        toast.error("Something is wrong! Please Check and Try again");
+        toast.error("Something is wrong! Please Check and Try again", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       });
   };
 
@@ -49,14 +59,41 @@ const LoginForm = () => {
 
   const handleForgetPassword = () => {
     if (!userEmail) {
-      toast.error("Please enter your email address");
+      toast.error("Please enter your email address", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } else {
       sendPasswordResetEmail(auth, userEmail)
         .then(() => {
-          toast.info("password reset sent");
+          toast.info("password reset sent", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         })
         .catch((er) => {
-          toast.error(er.message);
+          toast.error(er.message, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
           console.error(er);
         });
     }

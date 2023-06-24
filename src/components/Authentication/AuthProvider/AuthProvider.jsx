@@ -16,7 +16,17 @@ const AuthProvider = () => {
         const verified = res.user?.emailVerified;
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
-        const notify = () => toast.success("Login Successful");
+        const notify = () =>
+          toast.success("Login Successful", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         notify();
       })
       .catch((err) => {
