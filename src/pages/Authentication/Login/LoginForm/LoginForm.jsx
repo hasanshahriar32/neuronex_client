@@ -120,7 +120,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
+                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-7"
                   />
                 </div>
 
@@ -130,12 +130,12 @@ const LoginForm = () => {
                       Password
                     </span>
                   </label>
-                  <div className="flex text-xl bg-ghost border-0 rounded-lg">
+                  <div className="flex text-xl bg-ghost border border-secondary border-dotted rounded-lg">
                     <input
                       type={changePassword ? "password" : "text"}
                       name="password"
                       placeholder="password"
-                      className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  w-full text-lg py-7"
+                      className="input focus:outline-none bg-ghost  w-full text-lg py-7"
                     />
                     <span
                       className=" flex items-center mx-2 text-secondary cursor-pointer"
