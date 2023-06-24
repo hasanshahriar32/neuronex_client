@@ -3,21 +3,22 @@ import { AiContext } from "../FormContext/FormContext";
 import { useContext } from "react";
 
 export default function AiSetting() {
-  const { setAiConfig } = useContext(AiContext);
+  const { setAiConfig, setModalState } = useContext(AiContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      "subject-selection": "",
-      "assistance-level": "",
+      subjectSelection: "",
+      assistanceLevel: "",
     },
   });
 
   const onSubmit = (data) => {
     setAiConfig(data);
     console.log(data);
+    setModalState(false);
   };
 
   return (
@@ -32,10 +33,10 @@ export default function AiSetting() {
                 Select Your Subject to Proceed
               </span>
               <select
-                {...register("subject-selection", {
+                {...register("subjectSelection", {
                   required: "Please select a subject.",
                 })}
-                aria-invalid={errors["subject-selection"] ? "true" : "false"}
+                aria-invalid={errors["subjectSelection"] ? "true" : "false"}
                 className="form-select mb-2 select text-md h-12 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
@@ -57,9 +58,9 @@ export default function AiSetting() {
                 <option value="Music">Music</option>
                 <option value="Geography">Geography</option>
               </select>
-              {errors["subject-selection"] && (
+              {errors["subjectSelection"] && (
                 <p role="alert" className="text-red-500 border-error">
-                  {errors["subject-selection"]?.message}
+                  {errors["subjectSelection"]?.message}
                 </p>
               )}
             </label>
@@ -86,11 +87,11 @@ export default function AiSetting() {
                     className="text-md h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
-                      {...register("assistance-level", {
+                      {...register("assistanceLevel", {
                         required: "Please select an item in the list.",
                       })}
                       aria-invalid={
-                        errors["assistance-level"] ? "true" : "false"
+                        errors["assistanceLevel"] ? "true" : "false"
                       }
                       value={value}
                       type="radio"
@@ -101,9 +102,9 @@ export default function AiSetting() {
                 );
               })}
             </div>
-            {errors["assistance-level"] && (
+            {errors["assistanceLevel"] && (
               <p role="alert" className="text-red-500">
-                {errors["assistance-level"]?.message}
+                {errors["assistanceLevel"]?.message}
               </p>
             )}
           </div>
@@ -135,7 +136,7 @@ export default function AiSetting() {
             </p>
             <button
               disabled={isSubmitting}
-              className="btn btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
+              className="btn modal-action btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
             >
               Next
             </button>

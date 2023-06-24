@@ -2,13 +2,22 @@
 
 import { Helmet } from "react-helmet";
 import "./aiQuery.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AiSetting from "../AiSetting/AiSetting";
+import { AiContext } from "../FormContext/FormContext";
 
 const AiQuery2 = () => {
+  const { modalState, aiConfig } = useContext(AiContext);
   const [messages, setMessages] = useState([
     { id: 1, type: "incoming", message: "Hi" },
     { id: 2, type: "outgoing", message: "Hello" },
   ]);
+
+  useEffect(() => {
+    const modal = document.getElementById("my_modal_4");
+    modal.checked = modalState;
+  }, [modalState]);
+
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
     element.scrollTop = element.scrollHeight;
@@ -17,6 +26,11 @@ const AiQuery2 = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const modal = document.getElementById("my_modal_4");
+    modal.checked = modalState;
+  };
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -45,7 +59,7 @@ const AiQuery2 = () => {
         <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
           <div className="relative flex items-center space-x-4">
             <div className="relative">
-              <span className="absolute text-green-500 right-0 bottom-0">
+              <span className="absolute text-success right-0 bottom-0">
                 <svg width="20" height="20">
                   <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
                 </svg>
@@ -60,7 +74,9 @@ const AiQuery2 = () => {
               <div className="text-2xl mt-1 flex items-center">
                 <span className="text-gray-700 mr-3">Title goes here</span>
               </div>
-              <span className="text-lg text-gray-600">Subject Name</span>
+              <span className="text-lg text-gray-600">
+                {aiConfig?.subjectSelection}
+              </span>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -83,6 +99,13 @@ const AiQuery2 = () => {
                 ></path>
               </svg>
             </button>
+            <label
+              // type="checkbox"
+              htmlFor="my_modal_4"
+              className=" tracking-wide ml-4 btn btn-primary text-sm"
+            >
+              Edit Config
+            </label>
           </div>
         </div>
         <style>
@@ -172,7 +195,9 @@ const AiQuery2 = () => {
                 className="inline-flex backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
                 onClick={handleSendMessage}
               >
-                <span className="font-bold text-md hidden sm:flex">Send</span>
+                <span className="font-bold tracking-wide text-md hidden sm:flex">
+                  Send
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -186,6 +211,18 @@ const AiQuery2 = () => {
           </div>
         </div>
       </div>
+      {/* modal to edit config  */}
+      <input type="checkbox" id="my_modal_4" className="modal-toggle" />
+      <div className="modal">
+        <div
+          onSubmit={handleSubmit}
+          className="modal-box w-11/12 chatScroll max-w-7xl"
+        >
+          <AiSetting></AiSetting>
+        </div>
+      </div>
+
+      {/* end of modal  */}
 
       <Helmet>
         <script>
