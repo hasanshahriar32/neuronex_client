@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import { Helmet } from "react-helmet";
-import "./aiQuery.module.css";
+import "./aiQuery.css";
 import { useEffect, useState } from "react";
 
 const AiQuery2 = () => {
@@ -87,28 +87,12 @@ const AiQuery2 = () => {
         </div>
         <style>
           {`
-          /* Hide the scrollbar */
-          #messages::-webkit-scrollbar {
-            width: 0.5rem;
-            background-color: transparent;
-          }
-      
-          /* Track */
-          #messages::-webkit-scrollbar-track {
-            background-color: transparent;
-          }
-      
-          /* Handle */
-          #messages::-webkit-scrollbar-thumb {
-            background-color: #4f46e5;
-            border-radius: 0.25rem;
-            width: 0.5rem;;  
-          }
+          
         `}
         </style>
         <div
           id="messages"
-          className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
+          className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
         >
           {messages.map((message) => (
             <div
