@@ -2,12 +2,46 @@
 
 import { Helmet } from "react-helmet";
 import "./aiQuery.module.css";
+import { useEffect, useState } from "react";
 
 const AiQuery2 = () => {
+  const [messages, setMessages] = useState([
+    { id: 1, type: "incoming", message: "Hi" },
+    { id: 2, type: "outgoing", message: "Hello" },
+  ]);
+  const scrollToBottom = () => {
+    const element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = () => {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+    if (message !== "") {
+      const newMessage = {
+        id: messages.length + 1,
+        type: "outgoing",
+        message,
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      input.value = "";
+      scrollToBottom();
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <div>
       {/* <!-- component --> */}
-      <div className="flex-1 px-[5%] justify-between flex flex-col w-screen max-h-screen">
+      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] max-h-screen">
         <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
           <div className="relative flex items-center space-x-4">
             <div className="relative">
@@ -51,54 +85,72 @@ const AiQuery2 = () => {
             </button>
           </div>
         </div>
+        <style>
+          {`
+          /* Hide the scrollbar */
+          #messages::-webkit-scrollbar {
+            width: 0.5rem;
+            background-color: transparent;
+          }
+      
+          /* Track */
+          #messages::-webkit-scrollbar-track {
+            background-color: transparent;
+          }
+      
+          /* Handle */
+          #messages::-webkit-scrollbar-thumb {
+            background-color: #4f46e5;
+            border-radius: 0.25rem;
+            width: 0.5rem;;  
+          }
+        `}
+        </style>
         <div
           id="messages"
-          className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
         >
-          <div className="backdrop-blur-md bg-grey-dark/30 p-2 chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    Can be verified on any platform using docker
-                  </span>
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`${
+                message.type === "incoming"
+                  ? "backdrop-blur-md bg-grey-dark/40"
+                  : "chat-message bg-grey-dark/80"
+              }  p-2`}
+            >
+              <div className="flex items-end">
+                <div
+                  className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
+                    message.type === "incoming" ? 2 : 1
+                  } items-${message.type === "incoming" ? "start" : "end"}`}
+                >
+                  <div>
+                    <span
+                      className={`px-4 py-2 rounded-lg inline-block rounded-${
+                        message.type === "incoming" ? "bl" : "br"
+                      }-none ${
+                        message.type === "incoming"
+                          ? "bg-gray-300 text-gray-600"
+                          : "bg-blue-600 text-white"
+                      }`}
+                    >
+                      {message.message}
+                    </span>
+                  </div>
                 </div>
+                <img
+                  src={
+                    message.type === "incoming"
+                      ? "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+                      : "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+                  }
+                  alt="Profile"
+                  className="w-6 h-6 rounded-full order-2"
+                />
               </div>
-              <img
-                src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
             </div>
-          </div>
-          <div className="chat-message backdrop-blur-md p-2 bg-grey-dark/80">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                    Your error message says permission denied, npm global
-                    installs must be given root privileges. Your error message
-                    says permission denied, npm global installs must be given
-                    root privileges.Your error message says permission denied,
-                    npm global installs must be given root privileges.Your error
-                    message says permission denied, npm global installs must be
-                    given root privileges.Your error message says permission
-                    denied, npm global installs must be given root
-                    privileges.Your error message says permission denied, npm
-                    global installs must be given root privileges.Your error
-                    message says permission denied, npm global installs must be
-                    given root privileges.Your error message says permission
-                    denied, npm global installs must be given root privileges.
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
+          ))}
         </div>
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
@@ -124,17 +176,19 @@ const AiQuery2 = () => {
               </button>
             </span>
             <input
+              id="message-input"
               type="text"
+              onKeyDown={handleKeyDown}
               placeholder="Write your message!"
               className="w-full text-md focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
             />
-
-            <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+            <div className="w-20 items-center inset-y-0 flex">
               <button
                 type="button"
-                className="inline-flex backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                className="inline-flex backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                onClick={handleSendMessage}
               >
-                <span className="font-bold text-md">Send</span>
+                <span className="font-bold text-md hidden sm:flex">Send</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
