@@ -6,7 +6,11 @@ import AiQuery2 from "../../components/FormComposed/AiQuery/AiQuery2";
 const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <input
+        id="my-drawer-2 "
+        type="checkbox"
+        className="drawer-toggle hidden h-0 w-0"
+      />
       {/* <Header /> */}
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* Page content here */}
@@ -18,7 +22,7 @@ const Dashboard = () => {
         </label>
         <AiQuery2 />
 
-        <Outlet />
+        {/* <Outlet /> */}
       </div>
       <div className="drawer-side z-40">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
