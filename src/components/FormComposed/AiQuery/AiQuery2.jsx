@@ -216,7 +216,7 @@ const AiQuery2 = () => {
       <div className="modal">
         <div
           onSubmit={handleSubmit}
-          className="modal-box w-11/12 chatScroll max-w-7xl"
+          className="modal-box w-full mx-auto chatScroll max-w-7xl"
         >
           <button
             onClick={() => {
