@@ -9,6 +9,7 @@ import app from "../../../../configs/firebase.config";
 
 const auth = getAuth(app);
 const LoginForm = () => {
+
   const { signin } = useContext(AuthContext);
 
   const [userEmail, setUserEmail] = useState("");
@@ -31,15 +32,13 @@ const LoginForm = () => {
       toast.success('Successfully Login.');
       localStorage.setItem('userAccessToken', user.accessToken);
     })
-
-      .catch((error) => {
+    .catch((error) => {
         console.log(error);
         toast.error("Something is wrong! Please Check and Try again");
       });
   };
 
   //! handle Forget Password
-
   const handleEmailForResetPassword = (e) => {
     const email = e.target.value;
     setUserEmail(email);
