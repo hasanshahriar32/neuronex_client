@@ -47,6 +47,9 @@ const AiQuery2 = () => {
     }
   };
   const handleKeyDown = (event) => {
+    if (event.key === "Enter" && event.shiftKey) {
+      return;
+    }
     if (event.key === "Enter") {
       event.preventDefault();
       handleSendMessage();
@@ -164,7 +167,7 @@ const AiQuery2 = () => {
             <span className="absolute inset-y-0 flex items-center">
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                className="inline-flex absolute top-0 items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -182,17 +185,17 @@ const AiQuery2 = () => {
                 </svg>
               </button>
             </span>
-            <input
+            <textarea
               id="message-input"
-              type="text"
+              // type="text"
               onKeyDown={handleKeyDown}
               placeholder="Write your message!"
-              className="w-full text-md focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+              className="w-full  textarea-secondary h-[50px] min-h-[50px] max-h-[200px] text-md focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
             />
-            <div className="w-20 items-center inset-y-0 flex">
+            <div className="w-20 h-full max-h-20 items-stretch inset-y-0 flex">
               <button
                 type="button"
-                className="inline-flex backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                className="inline-flex h-[50px] backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
                 onClick={handleSendMessage}
               >
                 <span className="font-bold tracking-wide text-md hidden sm:flex">
