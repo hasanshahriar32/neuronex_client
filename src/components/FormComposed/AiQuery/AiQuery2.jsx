@@ -5,6 +5,8 @@ import "./aiQuery.css";
 import { useContext, useEffect, useState } from "react";
 import AiSetting from "../AiSetting/AiSetting";
 import { AiContext } from "../FormContext/FormContext";
+import { AuthContext } from "../../Authentication/UserContext/UserContext";
+import { FiEdit3 } from "react-icons/fi";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
@@ -31,6 +33,8 @@ const AiQuery2 = () => {
     const modal = document.getElementById("my_modal_4");
     modal.checked = modalState;
   };
+
+  const { user } = useContext(AuthContext);
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -68,9 +72,9 @@ const AiQuery2 = () => {
                 </svg>
               </span>
               <img
-                src="https://cdn0.iconfinder.com/data/icons/celtic/50/Knot14-512.png"
+                src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
                 alt=""
-                className="w-10 sm:w-16 h-10 sm:h-16 bg-glass-gradient rounded-full"
+                className="w-10 sm:w-16 h-10 sm:h-16  rounded-full"
               />
             </div>
             <div className="flex flex-col leading-tight">
@@ -107,7 +111,10 @@ const AiQuery2 = () => {
               htmlFor="my_modal_4"
               className=" tracking-wide ml-4 btn btn-primary text-sm"
             >
-              Edit Config
+              <span>
+                <FiEdit3></FiEdit3>
+              </span>
+              <span className="hidden lg:flex">Edit Config</span>
             </label>
           </div>
         </div>
@@ -147,8 +154,8 @@ const AiQuery2 = () => {
                 <img
                   src={
                     message.type === "incoming"
-                      ? "https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                      : "https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+                      ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                      : user?.photoURL
                   }
                   alt="Profile"
                   className="w-6 h-6 rounded-full order-2"
