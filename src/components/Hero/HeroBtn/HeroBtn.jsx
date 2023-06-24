@@ -22,7 +22,7 @@ export default function HeroBtn() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/compose");
+    navigate("/dashboard/compose");
   };
   return (
     <MotionConfig transition={transition}>

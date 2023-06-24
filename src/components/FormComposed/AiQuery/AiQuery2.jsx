@@ -58,7 +58,7 @@ const AiQuery2 = () => {
   return (
     <div>
       {/* <!-- component --> */}
-      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] max-h-screen">
+      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] py-2 min-h-screen max-h-screen">
         <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
           <div className="relative flex items-center space-x-4">
             <div className="relative">
@@ -70,11 +70,11 @@ const AiQuery2 = () => {
               <img
                 src="https://cdn0.iconfinder.com/data/icons/celtic/50/Knot14-512.png"
                 alt=""
-                className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
+                className="w-10 sm:w-16 h-10 sm:h-16 bg-glass-gradient rounded-full"
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <div className="text-2xl mt-1 flex items-center">
+              <div className="text-md md:text-2xl mt-1 flex items-center">
                 <span className="text-gray-700 mr-3">Title goes here</span>
               </div>
               <span className="text-lg text-gray-600">
@@ -111,11 +111,6 @@ const AiQuery2 = () => {
             </label>
           </div>
         </div>
-        <style>
-          {`
-          
-        `}
-        </style>
         <div
           id="messages"
           className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
