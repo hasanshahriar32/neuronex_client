@@ -223,7 +223,7 @@ const AiQuery2 = () => {
               const modal = document.getElementById("my_modal_4");
               modal.checked = modalState;
             }}
-            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            className="btn btn-md btn-circle text-md  btn-ghost absolute right-2 top-2"
           >
             ✕
           </button>
