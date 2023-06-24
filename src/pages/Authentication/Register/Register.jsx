@@ -8,16 +8,15 @@ import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const { createUser, userprofile, logOut } = useContext(AuthContext);
-	const [createdUserEmail, setCreatedUserEmail] = useState('');
-	const [token] = useToken(createdUserEmail)
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
 
-
   if (token) {
-    navigate('/login')
-     }
+    navigate("/login");
+  }
 
   const {
     register,
@@ -65,10 +64,9 @@ const Register = () => {
                 name,
                 email,
                 pic: photoURL,
-                uid:user?.uid,
-                userAbout:'user',
+                uid: user?.uid,
+                userAbout: "user",
                 verified: user?.emailVerified,
-
               };
 
               //! Save User info to the database....
@@ -82,10 +80,19 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-                  setCreatedUserEmail(result?.email)
+                  setCreatedUserEmail(result?.email);
                   // navigate("/login");
                   logOut();
-                  toast.success("Registration successful");
+                  toast.success("Registration successful", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
                 });
             }
           });
@@ -93,20 +100,24 @@ const Register = () => {
       .catch((err) => console.error(err));
   };
 
-  
-
-
-
   const updateUserDetails = (name, photoURL) => {
     userprofile(name, photoURL)
       .then(() => {
-        toast.success("Profile Updated");
+        toast.success("Profile Updated", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
 
   return (
     <div>
@@ -115,14 +126,18 @@ const Register = () => {
           <div className="text-center"></div>
           <div className="card bg-white lg:w-[700px] border-t-4 border-t-rose-400 dark:border-t-white flex-shrink-0 shadow-2xl ">
             <div className="card-body">
-              <h3 className="font-serif text-2xl text-background underline">Register Here</h3>
+              <h3 className="font-serif text-2xl text-background underline">
+                Register Here
+              </h3>
               <form
                 onSubmit={handleSubmit(handleRegister)}
                 className="card-body"
               >
                 <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text text-xl text-background">Full Name </span>
+                    <span className="label-text text-xl text-background">
+                      Full Name{" "}
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -136,7 +151,9 @@ const Register = () => {
 
                 <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text text-xl text-background">email </span>
+                    <span className="label-text text-xl text-background">
+                      email{" "}
+                    </span>
                   </label>
                   <input
                     type="email"
@@ -151,7 +168,9 @@ const Register = () => {
                 <div className="flex">
                   <div className="form-control mx-1 w-full">
                     <label className="label">
-                      <span className="label-text text-xl text-background">Password </span>
+                      <span className="label-text text-xl text-background">
+                        Password{" "}
+                      </span>
                     </label>
                     <div className="">
                       <input
@@ -192,7 +211,9 @@ const Register = () => {
 
                 <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text text-xl text-background">Photo</span>
+                    <span className="label-text text-xl text-background">
+                      Photo
+                    </span>
                   </label>
                   <input
                     type="file"

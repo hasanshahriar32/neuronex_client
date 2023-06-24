@@ -1,19 +1,22 @@
 import { Outlet } from "react-router-dom";
 import Header from "../../components/Header/Header";
+import AiSetting from "../../components/FormComposed/AiSetting/AiSetting";
+import AiQuery2 from "../../components/FormComposed/AiQuery/AiQuery2";
 
 const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <Header />
+      {/* <Header /> */}
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="btn btn-primary fixed top-0 right-0 drawer-button lg:hidden"
         >
           Open drawer
         </label>
+        <AiQuery2 />
 
         <Outlet />
       </div>
