@@ -9,7 +9,6 @@ import app from "../../../../configs/firebase.config";
 
 const auth = getAuth(app);
 const LoginForm = () => {
-
   const { signin } = useContext(AuthContext);
 
   const [userEmail, setUserEmail] = useState("");
@@ -30,7 +29,16 @@ const LoginForm = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        toast.success("Successfully Login.");
+        toast.success("Successfully Login.", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         localStorage.setItem("userAccessToken", user.accessToken);
       })
 

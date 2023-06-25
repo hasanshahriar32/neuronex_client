@@ -1,6 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { AiContext } from "../../components/FormComposed/FormContext/FormContext";
 
 const Dashboard = () => {
+  const { setAiConfig } = useContext(AiContext);
+  const navigate = useNavigate();
   return (
     <div className="drawer absolute h-screen top-0 mt-0">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle " />
@@ -14,7 +19,7 @@ const Dashboard = () => {
           Open drawer
         </label>
         {/* <AiQuery2 /> */}
-
+        <ToastContainer />
         <Outlet />
       </div>
       <div className="drawer-side z-40">
@@ -25,7 +30,15 @@ const Dashboard = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link
+              onClick={(e) => {
+                e.preventDefault();
+                setAiConfig([]);
+                navigate("/dashboard/compose");
+              }}
+            >
+              New Session
+            </Link>
           </li>
         </ul>
       </div>
