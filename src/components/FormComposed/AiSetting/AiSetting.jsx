@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AiContext } from "../FormContext/FormContext";
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState } = useContext(AiContext);
@@ -16,6 +17,8 @@ export default function AiSetting() {
   });
 
   const onSubmit = (data) => {
+    const dataId = uuidv4();
+    data = { ...data, sessionId: dataId };
     setAiConfig(data);
     console.log(data);
     setModalState(false);
@@ -113,7 +116,7 @@ export default function AiSetting() {
           <div className="mb-2">
             <p className="mb-2 label text-lg">Enter additional instruction</p>
             <input
-              {...register("additional-instruction", {
+              {...register("additionalInstruction", {
                 required: "Please enter additional instruction.",
               })}
               type="text"
@@ -123,9 +126,9 @@ export default function AiSetting() {
           </div>
           {
             // errors will return when field validation fails
-            errors["additional-instruction"] && (
+            errors["additionalInstruction"] && (
               <p role="alert" className="text-red-500">
-                {errors["additional-instruction"]?.message}
+                {errors["additionalInstruction"]?.message}
               </p>
             )
           }
