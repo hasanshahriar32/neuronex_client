@@ -5,6 +5,7 @@ import Main from "../layout/Main/Main";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
+import UserProfile from "../pages/Dashboard/Profile/userProfile";
 import Home from "../pages/Home/Home";
 
 const Routes = () => {
@@ -29,8 +30,13 @@ const Routes = () => {
             children: [
                 {
                     path: "/dashboard/",
-                    element: <Compose></Compose>,
+                    element: <UserProfile></UserProfile>,
                 },
+                {
+                    path: "/dashboard/profile",
+                    element: <UserProfile></UserProfile>,
+                },
+
                 {
                     path: "/dashboard/compose",
                     element: <Compose></Compose>,

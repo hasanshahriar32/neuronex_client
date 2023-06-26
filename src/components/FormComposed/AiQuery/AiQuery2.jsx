@@ -72,11 +72,16 @@ const AiQuery2 = () => {
                                     <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
                                 </svg>
                             </span>
-                            <img
-                                src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
-                                alt=""
-                                className="w-10 sm:w-16 h-10 sm:h-16  rounded-full"
-                            />
+                            <label htmlFor="my-drawer-2" >
+                                <img
+
+                                    src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                                    alt=""
+                                    className="w-10 sm:w-16 h-10 sm:h-16  rounded-full cursor-pointer "
+                                />
+
+                            </label>
+
                         </div>
                         <div className="flex flex-col leading-tight">
                             <div className="text-md md:text-2xl mt-1 flex items-center">
