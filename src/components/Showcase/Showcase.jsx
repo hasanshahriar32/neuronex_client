@@ -24,10 +24,7 @@ const Showcase = () => {
             setIsSafari(true)
         }
     }, [userAgent])
-
     const container = useRef(null);
-
-
     const quotes = [
         {
             "id": 1,
@@ -180,8 +177,6 @@ const Showcase = () => {
             "author": "Kate Crawford"
         }
     ]
-
-
     const handleMouseMove = e => {
         let x = e.clientX - (container.current?.getBoundingClientRect().left || 0);
         let y = e.clientY - (container.current?.getBoundingClientRect().top || 0);
