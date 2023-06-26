@@ -4,14 +4,19 @@ import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../components/Authentication/UserContext/UserContext";
+import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const { createUser, userprofile, logOut } = useContext(AuthContext);
-
-  const navigate = useNavigate();
-
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
+  const navigate = useNavigate();
+
+  if (token) {
+    navigate("/login");
+  }
 
   const {
     register,
@@ -58,12 +63,14 @@ const Register = () => {
               const addedUser = {
                 name,
                 email,
-                password,
-                image: imgData.data.url,
+                pic: photoURL,
+                uid: user?.uid,
+                userAbout: "user",
+                verified: user?.emailVerified,
               };
 
               //! Save User info to the database....
-              fetch("https://neuronex-server-test.vercel.app/users", {
+              fetch("https://neuronex-server-test.vercel.app/user", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
@@ -73,10 +80,19 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-
-                  navigate("/login");
+                  setCreatedUserEmail(result?.email);
+                  // navigate("/login");
                   logOut();
-                  toast.success("Registration successful");
+                  toast.success("Registration successful", {
+                    position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
                 });
             }
           });
@@ -87,48 +103,62 @@ const Register = () => {
   const updateUserDetails = (name, photoURL) => {
     userprofile(name, photoURL)
       .then(() => {
-        toast.success("Profile Updated");
+        toast.success("Profile Updated", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex">
-          <div className="text-center lg:text-left"></div>
-          <div className="card border-t-4 border-t-rose-400 flex-shrink-0 shadow-2xl bg-base-100">
+          <div className="text-center"></div>
+          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
             <div className="card-body">
-              <h3 className="font-serif text-2xl">Register Here</h3>
+              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
+                Register Here
+              </h3>
               <form
                 onSubmit={handleSubmit(handleRegister)}
                 className="card-body"
               >
-                <div className="form-control mx-1 w-full max-w-xs">
+                <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text">Full Name </span>
+                    <span className="label-text text-xl text-secondary">
+                      Full Name{" "}
+                    </span>
                   </label>
                   <input
                     type="text"
                     {...register("name", {})}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
                   />
                   {errors.name && (
                     <p className="text-red-500">{errors.name.message}</p>
                   )}
                 </div>
 
-                <div className="form-control mx-1 w-full max-w-xs">
+                <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text">email </span>
+                    <span className="label-text text-xl text-secondary">
+                      email{" "}
+                    </span>
                   </label>
                   <input
                     type="email"
                     {...register("email", {})}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
                   />
                   {errors.email && (
                     <p className="text-red-500">{errors.email.message}</p>
@@ -136,36 +166,38 @@ const Register = () => {
                 </div>
 
                 <div className="flex">
-                  <div className="form-control mx-1 w-full max-w-xs">
+                  <div className="form-control mx-1 w-full">
                     <label className="label">
-                      <span className="label-text">Password </span>
+                      <span className="label-text text-xl text-secondary">
+                        Password{" "}
+                      </span>
                     </label>
                     <div className="">
                       <input
                         type={changePassword ? "password" : "text"}
                         {...register("password", {})}
-                        className="input input-bordered w-full max-w-xs"
+                        className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost w-full text-lg py-7"
                       />
                       {errors.password && (
-                        <p className="text-red-500">
+                        <p className="label-text text-xl text-secondary">
                           {errors.password.message}
                         </p>
                       )}
                       <span
-                        className="flex items-center mx-2"
+                        className="flex items-center mx-2 label-text text-xl text-secondary"
                         onClick={() => {
                           setChangePassword(changeIcon);
                         }}
                       >
                         {changeIcon ? (
-                          <p className="flex group cursor-pointer">
+                          <p className="flex group cursor-pointer text-xl">
                             <span className="mr-2 group-hover:underline">
                               Hidden Password
                             </span>
                             <BsEyeSlashFill className="mt-1" />
                           </p>
                         ) : (
-                          <p className="flex group cursor-pointer">
+                          <p className="flex group cursor-pointer text-xl">
                             <span className="mr-2 group-hover:underline">
                               Show Password
                             </span>
@@ -177,16 +209,18 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="form-control mx-1 w-full max-w-xs">
+                <div className="form-control mx-1 w-full">
                   <label className="label">
-                    <span className="label-text">Photo</span>
+                    <span className="label-text text-xl text-secondary">
+                      Photo
+                    </span>
                   </label>
                   <input
                     type="file"
                     {...register("img", {
                       required: "Photo is Required",
                     })}
-                    className="input input-bordered w-full max-w-xs"
+                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost w-full text-xl h-12"
                   />
                   {errors.img && (
                     <p className="text-red-500">{errors.img.message}</p>
@@ -194,14 +228,14 @@ const Register = () => {
                 </div>
 
                 <input
-                  className="btn bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-0 text-white w-full mt-4"
+                  className="btn text-xl btn-lg btn-secondary w-full mt-7"
                   value="Register"
                   type="submit"
                 />
               </form>
 
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <a href="#" className="label-text-alt text-secondary link text-lg link-hover hover:underline text-start">
                   <Link to="/login">Already have an account?</Link>
                 </a>
               </label>

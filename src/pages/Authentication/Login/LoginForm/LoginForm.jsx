@@ -9,130 +9,182 @@ import app from "../../../../configs/firebase.config";
 
 const auth = getAuth(app);
 const LoginForm = () => {
+  const { signin } = useContext(AuthContext);
 
-  
-  const { signin } = useContext(AuthContext)
-  
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
-  const navigate = useNavigate()
-  
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
 
-
-
-
-  const handleLogin = e => {
-
-    e.preventDefault()
+  const handleLogin = (e) => {
+    e.preventDefault();
 
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-   
-
     //! login By User Email
-		signin(email, password)
-      .then(() => {
-      navigate('/')
-      toast.success('Login Successful');
+    signin(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("Successfully Login.", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        localStorage.setItem("userAccessToken", user.accessToken);
       })
-      
-    .catch((error) => {
-      console.log(error);
-      toast.error('Something is wrong! Please Check and Try again');
-    });
 
+      .catch((error) => {
+        console.log(error);
+        toast.error("Something is wrong! Please Check and Try again", {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
+  };
 
+  //! handle Forget Password
+  const handleEmailForResetPassword = (e) => {
+    const email = e.target.value;
+    setUserEmail(email);
 
+    console.log(email);
+  };
 
-  }
-
-
-    //! handle Forget Password
-
-    const handleEmailForResetPassword = (e) => {
-      const email = e.target.value;
-      setUserEmail(email);
-  
-      console.log(email);
-    };
-  
-    const handleForgetPassword = () => {
-      if (!userEmail) {
-        toast.error("Please enter your email address");
-      } else {
-        sendPasswordResetEmail(auth, userEmail)
-          .then(() => {
-            toast.info("password reset sent");
-          })
-          .catch((er) => {
-            toast.error(er.message);
-            console.error(er);
+  const handleForgetPassword = () => {
+    if (!userEmail) {
+      toast.error("Please enter your email address", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } else {
+      sendPasswordResetEmail(auth, userEmail)
+        .then(() => {
+          toast.info("password reset sent", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
           });
-      }
-    };
+        })
+        .catch((er) => {
+          toast.error(er.message, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          console.error(er);
+        });
+    }
+  };
 
-    return (
-      <div>
-        
+  return (
+    <div>
       <div className="hero min-h-screen">
-        
-      <div className="hero-content ">
-          
-          <div className="card border-b-4 border-b-rose-400 flex-shrink-0 w-full  shadow-2xl bg-base-100">
+        <div className="hero-content ">
+          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
             <div className="card-body">
-              <h3 className='font-serif text-2xl'>login Now</h3>
-          <form onSubmit={handleLogin}>
-          <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input onBlur={handleEmailForResetPassword} type="email" name='email' placeholder="email" className="input input-bordered" />
-            </div>
-            
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <div className="flex">
-              <input type={changePassword ? "password" : "text"}
-               name='password' placeholder="password" className="input w-full input-bordered" />
-              <span className=" flex items-center mx-2"
-              onClick={() => {
-                 setChangePassword(changeIcon);
-              }}
-           >
-              {changeIcon ? <BsEyeSlashFill /> : <BsEyeFill />}
-           </span>
-              </div>
-              <label className="label">
-                <p  onClick={handleForgetPassword} className="label-text-alt link link-hover hover:underline text-start">Forgot password?</p>
-              </label>
-            </div>
-            
-            <div className="form-control mt-6">
-              <button className="btn bg-gradient-to-l hover:bg-gradient-to-r from-violet-500 to-fuchsia-500 border-0">Login</button>
-             </div>
-             
-          </form>
-             
-            <label className="label">
-             <p  className="label-text-alt link link-hover hover:underline text-start">
-                 <Link to='/register'>create a new account</Link>
-             </p>
-            </label>
+              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
+                Login Now
+              </h3>
+              <form onSubmit={handleLogin}>
+                <div className="form-control mb-2">
+                  <label className="label">
+                    <span className="label-text text-xl text-secondary">
+                      Email
+                    </span>
+                  </label>
+                  <input
+                    onBlur={handleEmailForResetPassword}
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-7"
+                  />
+                </div>
 
-            <AuthProvider />
-           </div>
+                <div className="form-control mb-2">
+                  <label className="label">
+                    <span className="label-text text-xl text-secondary">
+                      Password
+                    </span>
+                  </label>
+                  <div className="flex text-xl bg-ghost border border-secondary border-dotted rounded-lg">
+                    <input
+                      type={changePassword ? "password" : "text"}
+                      name="password"
+                      placeholder="password"
+                      className="input focus:outline-none bg-ghost  w-full text-lg py-7"
+                    />
+                    <span
+                      className=" flex items-center mx-2 text-secondary cursor-pointer"
+                      onClick={() => {
+                        setChangePassword(changeIcon);
+                      }}
+                    >
+                      {changeIcon ? <BsEyeSlashFill /> : <BsEyeFill />}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex items-center justify-between">
+                    <label className="label">
+                      <p
+                        onClick={handleForgetPassword}
+                        className="label-text-alt  text-secondary text-sm link link-hover hover:underline text-start"
+                      >
+                        Forgot password?
+                      </p>
+                    </label>
+                    <label className="label">
+                      <p className="label-text-alt text-secondary link text-sm link-hover hover:underline text-start">
+                        <Link to="/register">create a new account</Link>
+                      </p>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-control mt-6">
+                  <button className="btn text-xl btn-lg btn-secondary w-full ">
+                    Login
+                  </button>
+                </div>
+              </form>
+              <div className="divider text-md mt-6 mb-4">OR</div>
+              <AuthProvider />
+            </div>
+          </div>
         </div>
-        
-        
       </div>
     </div>
-      </div>
-    );
+  );
 };
 
 export default LoginForm;

@@ -33,7 +33,8 @@
     "react-router-dom": "^6.13.0",
     "react-toastify": "^9.1.3",
     "react-use-measure": "^2.1.1",
-    "three": "^0.153.0"
+    "three": "^0.153.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

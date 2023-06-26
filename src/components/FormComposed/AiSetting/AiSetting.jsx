@@ -1,27 +1,88 @@
 import { useForm } from "react-hook-form";
 import { AiContext } from "../FormContext/FormContext";
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 export default function AiSetting() {
-  const { setAiConfig } = useContext(AiContext);
+  const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      "subject-selection": "",
-      "assistance-level": "",
+      subjectSelection: "",
+      assistanceLevel: "",
     },
   });
 
   const onSubmit = (data) => {
-    setAiConfig(data);
-    console.log(data);
+    if (
+      data?.subjectSelection == aiConfig?.subjectSelection &&
+      data?.assistanceLevel == aiConfig?.assistanceLevel &&
+      data?.additionalInstruction == aiConfig?.additionalInstruction
+    ) {
+      setModalState(false);
+      toast.warning("No changes made!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+    const dataId = uuidv4();
+    data = { ...data, sessionId: dataId };
+
+    // setModalState(false);
+    if (
+      data?.subjectSelection !== "" ||
+      data?.assistanceLevel !== "" ||
+      data?.additionalInstruction !== ""
+    ) {
+      setAiConfig(data);
+      console.log(data);
+      toast.success("New session created!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setModalState(false);
+      return;
+    }
+    if (
+      data?.subjectSelection === "" ||
+      data?.assistanceLevel === "" ||
+      data?.additionalInstruction === ""
+    ) {
+      console.log("fill all fields");
+      setModalState(true);
+      toast.warning("Please fill all the fields!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   };
 
   return (
     <div className="card  w-full  my-10 max-w-7xl">
+      {/* <ToastContainer /> */}
       <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
@@ -32,10 +93,11 @@ export default function AiSetting() {
                 Select Your Subject to Proceed
               </span>
               <select
-                {...register("subject-selection", {
+                {...register("subjectSelection", {
                   required: "Please select a subject.",
                 })}
-                aria-invalid={errors["subject-selection"] ? "true" : "false"}
+                aria-invalid={errors["subjectSelection"] ? "true" : "false"}
+                defaultValue={aiConfig?.subjectSelection}
                 className="form-select mb-2 select text-md h-12 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
@@ -57,9 +119,9 @@ export default function AiSetting() {
                 <option value="Music">Music</option>
                 <option value="Geography">Geography</option>
               </select>
-              {errors["subject-selection"] && (
+              {errors["subjectSelection"] && (
                 <p role="alert" className="text-red-500 border-error">
-                  {errors["subject-selection"]?.message}
+                  {errors["subjectSelection"]?.message}
                 </p>
               )}
             </label>
@@ -86,11 +148,12 @@ export default function AiSetting() {
                     className="text-md h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
-                      {...register("assistance-level", {
+                      defaultValue={aiConfig?.assistanceLevel}
+                      {...register("assistanceLevel", {
                         required: "Please select an item in the list.",
                       })}
                       aria-invalid={
-                        errors["assistance-level"] ? "true" : "false"
+                        errors["assistanceLevel"] ? "true" : "false"
                       }
                       value={value}
                       type="radio"
@@ -101,9 +164,9 @@ export default function AiSetting() {
                 );
               })}
             </div>
-            {errors["assistance-level"] && (
+            {errors["assistanceLevel"] && (
               <p role="alert" className="text-red-500">
-                {errors["assistance-level"]?.message}
+                {errors["assistanceLevel"]?.message}
               </p>
             )}
           </div>
@@ -112,9 +175,10 @@ export default function AiSetting() {
           <div className="mb-2">
             <p className="mb-2 label text-lg">Enter additional instruction</p>
             <input
-              {...register("additional-instruction", {
+              {...register("additionalInstruction", {
                 required: "Please enter additional instruction.",
               })}
+              defaultValue={aiConfig?.additionalInstruction}
               type="text"
               className="input h-12 input-ghost text-lg input-secondary border-solid focus:border-dotted w-full"
               placeholder="Enter additional instruction"
@@ -122,9 +186,9 @@ export default function AiSetting() {
           </div>
           {
             // errors will return when field validation fails
-            errors["additional-instruction"] && (
+            errors["additionalInstruction"] && (
               <p role="alert" className="text-red-500">
-                {errors["additional-instruction"]?.message}
+                {errors["additionalInstruction"]?.message}
               </p>
             )
           }
@@ -135,7 +199,7 @@ export default function AiSetting() {
             </p>
             <button
               disabled={isSubmitting}
-              className="btn btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
+              className="btn modal-action btn-secondary text-md shadow-sm tracking-wide font-semibold focus:shadow-primary-text  hover:shadow-primary hover:shadow-info border border-secondary btn-lg "
             >
               Next
             </button>

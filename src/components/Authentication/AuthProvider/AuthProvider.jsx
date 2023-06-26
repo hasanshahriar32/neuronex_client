@@ -16,7 +16,17 @@ const AuthProvider = () => {
         const verified = res.user?.emailVerified;
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
-        const notify = () => toast.success("Login Successful");
+        const notify = () =>
+          toast.success("Login Successful", {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         notify();
       })
       .catch((err) => {
@@ -66,13 +76,13 @@ const AuthProvider = () => {
       <div className="">
         <button
           onClick={handlegooglelogin}
-          className="w-full btn my-2"
+          className="w-full tracking-wide btn-neutral text-xl btn h-10 btn-lg my-2"
         >
           login with google
         </button>
         <button
           onClick={handlegithublogin}
-          className="w-full btn my-2"
+          className="w-full tracking-wide btn-neutral text-xl btn h-10 btn-lg my-2"
         >
           login with github
         </button>

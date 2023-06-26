@@ -3,7 +3,7 @@ import Main from "../layout/Main/Main";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Home from "../pages/Home/Home";
-import Compose from "../pages/Compose/Compose";
+import Compose from "../pages/Dashboard/Compose/Compose";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
 import Dashboard from "../layout/Dashboard/Dashboard";
 
@@ -14,14 +14,6 @@ const Routes = () => {
       element: <Main></Main>,
       children: [
         { path: "/", element: <Home></Home> },
-        {
-          path: "/compose",
-          element: (
-            <PrivateRoute>
-              <Compose></Compose>
-            </PrivateRoute>
-          ),
-        },
 
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
@@ -34,6 +26,16 @@ const Routes = () => {
           <Dashboard />
         </PrivateRoute>
       ),
+      children: [
+        {
+          path: "/dashboard/",
+          element: <Compose></Compose>,
+        },
+        {
+          path: "/dashboard/compose",
+          element: <Compose></Compose>,
+        },
+      ],
     },
   ]);
   return (

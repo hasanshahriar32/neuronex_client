@@ -1,32 +1,89 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import { Helmet } from "react-helmet";
-import "./aiQuery.module.css";
+import "./aiQuery.css";
+import { useContext, useEffect, useState } from "react";
+import AiSetting from "../AiSetting/AiSetting";
+import { AiContext } from "../FormContext/FormContext";
+import { AuthContext } from "../../Authentication/UserContext/UserContext";
+import { FiEdit3 } from "react-icons/fi";
 
 const AiQuery2 = () => {
+  const { modalState, aiConfig } = useContext(AiContext);
+  const [messages, setMessages] = useState([
+    { id: 1, type: "incoming", message: "Hi" },
+    { id: 2, type: "outgoing", message: "Hello" },
+  ]);
+
+  useEffect(() => {
+    const modal = document.getElementById("my_modal_4");
+    modal.checked = modalState;
+  }, [modalState]);
+
+  const scrollToBottom = () => {
+    const element = document.getElementById("messages");
+    element.scrollTop = element.scrollHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const modal = document.getElementById("my_modal_4");
+    modal.checked = modalState;
+  };
+
+  const { user } = useContext(AuthContext);
+
+  const handleSendMessage = () => {
+    const input = document.getElementById("message-input");
+    const message = input.value.trim();
+    if (message !== "") {
+      const newMessage = {
+        id: messages.length + 1,
+        type: "outgoing",
+        message,
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      input.value = "";
+      scrollToBottom();
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && event.shiftKey) {
+      return;
+    }
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSendMessage();
+    }
+  };
   return (
     <div>
       {/* <!-- component --> */}
-      <div className="flex-1 px-[5%] justify-between flex flex-col w-screen max-h-screen">
+      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] py-2 min-h-screen max-h-screen">
         <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
           <div className="relative flex items-center space-x-4">
             <div className="relative">
-              <span className="absolute text-green-500 right-0 bottom-0">
+              <span className="absolute text-success right-0 bottom-0">
                 <svg width="20" height="20">
                   <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
                 </svg>
               </span>
               <img
-                src="https://cdn0.iconfinder.com/data/icons/celtic/50/Knot14-512.png"
+                src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
                 alt=""
-                className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
+                className="w-10 sm:w-16 h-10 sm:h-16  rounded-full"
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <div className="text-2xl mt-1 flex items-center">
+              <div className="text-md md:text-2xl mt-1 flex items-center">
                 <span className="text-gray-700 mr-3">Title goes here</span>
               </div>
-              <span className="text-lg text-gray-600">Subject Name</span>
+              <span className="text-lg text-gray-600">
+                {aiConfig?.subjectSelection}
+              </span>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -49,63 +106,70 @@ const AiQuery2 = () => {
                 ></path>
               </svg>
             </button>
+            <label
+              // type="checkbox"
+              htmlFor="my_modal_4"
+              className=" tracking-wide ml-4 btn btn-primary text-sm"
+            >
+              <span>
+                <FiEdit3></FiEdit3>
+              </span>
+              <span className="hidden lg:flex">Edit Config</span>
+            </label>
           </div>
         </div>
         <div
           id="messages"
-          className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
         >
-          <div className="backdrop-blur-md bg-grey-dark/30 p-2 chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    Can be verified on any platform using docker
-                  </span>
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`${
+                message.type === "incoming"
+                  ? "backdrop-blur-md bg-grey-dark/40"
+                  : "chat-message bg-grey-dark/80"
+              }  p-2`}
+            >
+              <div className="flex items-end">
+                <div
+                  className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
+                    message.type === "incoming" ? 2 : 1
+                  } items-${message.type === "incoming" ? "start" : "end"}`}
+                >
+                  <div>
+                    <span
+                      className={`px-4 py-2 rounded-lg inline-block rounded-${
+                        message.type === "incoming" ? "bl" : "br"
+                      }-none ${
+                        message.type === "incoming"
+                          ? "bg-gray-300 text-gray-600"
+                          : "bg-blue-600 text-white"
+                      }`}
+                    >
+                      {message.message}
+                    </span>
+                  </div>
                 </div>
+                <img
+                  src={
+                    message.type === "incoming"
+                      ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                      : user?.photoURL
+                  }
+                  alt="Profile"
+                  className="w-6 h-6 rounded-full order-2"
+                />
               </div>
-              <img
-                src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
             </div>
-          </div>
-          <div className="chat-message backdrop-blur-md p-2 bg-grey-dark/80">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                    Your error message says permission denied, npm global
-                    installs must be given root privileges. Your error message
-                    says permission denied, npm global installs must be given
-                    root privileges.Your error message says permission denied,
-                    npm global installs must be given root privileges.Your error
-                    message says permission denied, npm global installs must be
-                    given root privileges.Your error message says permission
-                    denied, npm global installs must be given root
-                    privileges.Your error message says permission denied, npm
-                    global installs must be given root privileges.Your error
-                    message says permission denied, npm global installs must be
-                    given root privileges.Your error message says permission
-                    denied, npm global installs must be given root privileges.
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
+          ))}
         </div>
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
               <button
                 type="button"
-                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                className="inline-flex absolute top-0 items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,18 +187,22 @@ const AiQuery2 = () => {
                 </svg>
               </button>
             </span>
-            <input
-              type="text"
+            <textarea
+              id="message-input"
+              // type="text"
+              onKeyDown={handleKeyDown}
               placeholder="Write your message!"
-              className="w-full text-md focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+              className="w-full  textarea-secondary h-[50px] min-h-[50px] max-h-[200px] text-md focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
             />
-
-            <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+            <div className="w-20 h-full max-h-20 items-stretch inset-y-0 flex">
               <button
                 type="button"
-                className="inline-flex backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                className="inline-flex h-[50px] backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                onClick={handleSendMessage}
               >
-                <span className="font-bold text-md">Send</span>
+                <span className="font-bold tracking-wide text-md hidden sm:flex">
+                  Send
+                </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -148,6 +216,27 @@ const AiQuery2 = () => {
           </div>
         </div>
       </div>
+      {/* modal to edit config  */}
+      <input type="checkbox" id="my_modal_4" className="modal-toggle" />
+      <div className="modal">
+        <div
+          onSubmit={handleSubmit}
+          className="modal-box w-full mx-auto chatScroll max-w-7xl"
+        >
+          <button
+            onClick={() => {
+              const modal = document.getElementById("my_modal_4");
+              modal.checked = modalState;
+            }}
+            className="btn btn-md btn-circle text-md  btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </button>
+          <AiSetting></AiSetting>
+        </div>
+      </div>
+
+      {/* end of modal  */}
 
       <Helmet>
         <script>

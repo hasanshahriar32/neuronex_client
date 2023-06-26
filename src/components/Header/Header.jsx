@@ -26,7 +26,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
 
   return (
-    <header className="dark:disabled fixed top-0 left-0 z-40 w-full border-b border-transparent-white backdrop-blur-[12px]">
+    <header className="dark:disabled fixed top-0 left-0 z-20 w-full border-b border-transparent-white backdrop-blur-[12px]">
       <Container className="flex h-navigation-height">
         <Link className="flex items-center text-md" href="/">
           Neuro Nex
