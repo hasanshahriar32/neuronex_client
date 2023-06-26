@@ -76,6 +76,7 @@ const AiQuery2 = () => {
         .then((data) => {
           console.log(data);
           setLoadingAi(false);
+          // const formattedMessage = data[0].text.replace(/\n/g, "<br/>");
           const newMessage = {
             id: messages.length + 1,
             type: "incoming",
@@ -179,8 +180,15 @@ const AiQuery2 = () => {
                     } items-${message.type === "incoming" ? "start" : "end"}`}
                   >
                     <div>
-                      <span
-                        className={`px-4 py-2 rounded-lg inline-block rounded-${
+                      <pre
+                        style={{
+                          overflowWrap: "normal",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          wordWrap: "break-word",
+                          width: "fit-content",
+                        }}
+                        className={`px-4  py-2 rounded-lg inline-block rounded-${
                           message.type === "incoming" ? "bl" : "br"
                         }-none ${
                           message.type === "incoming"
@@ -189,7 +197,7 @@ const AiQuery2 = () => {
                         }`}
                       >
                         {message.message}
-                      </span>
+                      </pre>
                     </div>
                   </div>
                   <img
