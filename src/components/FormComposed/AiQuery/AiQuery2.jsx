@@ -10,6 +10,7 @@ import { FiEdit3 } from "react-icons/fi";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
+  console.log("test", aiConfig)
   const [messages, setMessages] = useState([
     { id: 1, type: "incoming", message: "Hi" },
     { id: 2, type: "outgoing", message: "Hello" },
@@ -47,6 +48,35 @@ const AiQuery2 = () => {
       };
       console.log(newMessage);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+      // send promptconfig and get response      
+      const {subjectSelection,additionalInstruction, assistanceLevel, sessionId }= aiConfig
+      const promptConfig= {
+        subjectSelection,
+        question:message,
+        sessionId,
+        additionalInstruction,
+        assistanceLevel,
+        uid: user?.uid
+      }
+      fetch("https://neuronex-server.onrender.com/generate/prompt", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(promptConfig),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const newMessage = {
+          id: messages.length + 1,
+          type: "incoming",
+          message:data[0].text,
+        };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      });
+
       input.value = "";
       scrollToBottom();
     }
