@@ -45,6 +45,7 @@ const AiQuery2 = () => {
         type: "outgoing",
         message,
       };
+      console.log(newMessage);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       input.value = "";
       scrollToBottom();
