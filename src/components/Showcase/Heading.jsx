@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CommonHeading = ({ heading, noPadding }) => {
     const main = (
         <>

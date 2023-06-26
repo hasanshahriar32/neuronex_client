@@ -207,10 +207,8 @@ const Showcase = () => {
         container.current.addEventListener('mousemove', handleMouseMove)
     }, [container])
     const nest = [...Array(3)].map((single, i) => quotes.slice(i * 4, (i * 4) + 5))
-
-
     return (
-        <div className="  relative z-10">
+        <div className=" relative z-10 ">
             <div className='block md:hidden'>
                 <div>
                     <div className='flex flex-col justify-between md:hidden'>
@@ -243,9 +241,8 @@ const Showcase = () => {
                 </div>
             </div>
 
-
             <div onMouseLeave={handleMouseLeave} ref={container} className='overflow-hidden md:block hidden   relative h-screen w-full '>
-                <motion.div className='pt-10 w-full' ref={canvasRef}
+                <motion.div className='' ref={canvasRef}
                     initial={initial}
                     exit={initial}
                     animate={!isSafari ?
@@ -264,24 +261,24 @@ const Showcase = () => {
                             transition: { ease: "easeOut", duration: 0.7 },
                         }
                     } >
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+                    <div className="grid grid-cols-1 md:grid-cols-4">
                         <div className="col-span-1 ">
-                            {quotes.slice(0, 4)?.map((single, i) => (
+                            {quotes.slice(0, 6)?.map((single, i) => (
                                 <HomeShowCaseCard mp={mp} {...single} key={single.id} />
                             ))}
                         </div>
                         <div className="col-span-1">
-                            {quotes.slice(4, 8)?.map(single => (
+                            {quotes.slice(6, 12)?.map(single => (
                                 <HomeShowCaseCard mp={mp} {...single} key={single.id} />
                             ))}
                         </div>
                         <div className="col-span-1 ">
-                            {quotes.slice(8, 12)?.map(single => (
+                            {quotes.slice(12, 18)?.map(single => (
                                 <HomeShowCaseCard mp={mp} {...single} key={single.id} />
                             ))}
                         </div>
                         <div className="col-span-1 ">
-                            {quotes.slice(0, 4)?.map(single => (
+                            {quotes.slice(18, 24)?.map(single => (
                                 <HomeShowCaseCard mp={mp} {...single} key={single.id} />
                             ))}
                         </div>
@@ -290,11 +287,10 @@ const Showcase = () => {
 
                 <div className="flex justify-center items-center absolute pointer-events-none inset-0">
                     <div className='text-center w-1/2'>
-                        <h1>here some examples</h1>
+                        <h1 className="text-6xl">Ai make life Easier</h1>
                         <p className="text-lg mt-5  leading-relaxed text-gray-300">
-                            Here, you'll discover a collection of exciting components from my projects, including banners, dashboards, forms, small website typing test sites, and responsive checkers. I hope you find them enjoyable!
+                            Artificial Intelligence (AI) has emerged as a transformative force, revolutionizing various aspects of our lives and making them easier to navigate.
                         </p>
-
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ const HomeShowCaseCard = ({ author, text }) => {
 
     return (
         <>
-            <div target='_blank'>
+            <div className="" >
                 <div className={`overflow-hidden block text-gray-50 transition duration-300 homecate-card hover:no-underline no-underline hover:brightness-100 md:brightness-[.3]  w-full relative cursor-pointer `}>
                     <div className='overflow-hidden w-full h-full rounded-xl'>
                         <div className=''>
