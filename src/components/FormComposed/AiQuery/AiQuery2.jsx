@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Helmet } from "react-helmet";
-import "./aiQuery.css";
 import { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import { FiEdit3 } from "react-icons/fi";
+import { AuthContext } from "../../Authentication/UserContext/UserContext";
 import AiSetting from "../AiSetting/AiSetting";
 import { AiContext } from "../FormContext/FormContext";
-import { AuthContext } from "../../Authentication/UserContext/UserContext";
-import { FiEdit3 } from "react-icons/fi";
+import "./aiQuery.css";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
@@ -16,26 +16,26 @@ const AiQuery2 = () => {
     { id: 2, type: "outgoing", message: "Hello" },
   ]);
 
-  useEffect(() => {
-    const modal = document.getElementById("my_modal_4");
-    modal.checked = modalState;
-  }, [modalState]);
+    useEffect(() => {
+        const modal = document.getElementById("my_modal_4");
+        modal.checked = modalState;
+    }, [modalState]);
 
-  const scrollToBottom = () => {
-    const element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
-  };
+    const scrollToBottom = () => {
+        const element = document.getElementById("messages");
+        element.scrollTop = element.scrollHeight;
+    };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const modal = document.getElementById("my_modal_4");
-    modal.checked = modalState;
-  };
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const modal = document.getElementById("my_modal_4");
+        modal.checked = modalState;
+    };
 
-  const { user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -267,16 +267,16 @@ const AiQuery2 = () => {
         </div>
       </div>
 
-      {/* end of modal  */}
+            {/* end of modal  */}
 
-      <Helmet>
-        <script>
-          const el = document.getElementById('messages') el.scrollTop =
-          el.scrollHeight
-        </script>
-      </Helmet>
-    </div>
-  );
+            <Helmet>
+                <script>
+                    const el = document.getElementById('messages') el.scrollTop =
+                    el.scrollHeight
+                </script>
+            </Helmet>
+        </div>
+    );
 };
 
 export default AiQuery2;
