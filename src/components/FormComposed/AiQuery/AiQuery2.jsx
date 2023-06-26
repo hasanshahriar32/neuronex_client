@@ -74,10 +74,12 @@ const AiQuery2 = () => {
                             </span>
                             <label htmlFor="my-drawer-2" >
                                 <img
+
                                     src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
                                     alt=""
-                                    className="w-10 sm:w-16 h-10 sm:h-16  rounded-full cursor-pointer"
+                                    className="w-10 sm:w-16 h-10 sm:h-16  rounded-full cursor-pointer "
                                 />
+
                             </label>
 
                         </div>
