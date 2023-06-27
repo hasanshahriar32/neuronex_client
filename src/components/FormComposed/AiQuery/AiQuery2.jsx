@@ -7,6 +7,7 @@ import AiSetting from "../AiSetting/AiSetting";
 import { AiContext } from "../FormContext/FormContext";
 import { AuthContext } from "../../Authentication/UserContext/UserContext";
 import { FiEdit3 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
@@ -77,8 +78,24 @@ const AiQuery2 = () => {
         .then((data) => {
           console.log(data);
           setLoadingAi(false);
-          // const formattedMessage = data[0].text.replace(/\n/g, "<br/>");
-          setMessages((prevMessages) => [...prevMessages, ...data]);
+
+          if (Array.isArray(data) && data.length > 0) {
+            setMessages((prevMessages) => [...prevMessages, ...data]);
+          } else {
+            // Handle empty data or non-iterable response
+            console.log("Empty data or non-iterable response");
+            toast.error("No session available, no response from AI", {
+              // position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            // You can choose to display an error message or handle it as needed.
+          }
         })
         .catch((err) => {
           console.log(err);
