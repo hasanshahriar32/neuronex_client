@@ -213,6 +213,41 @@ const AiQuery2 = () => {
               </div>
             </div>
           ))}
+          {loadingAi && (
+            <div>
+              <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
+                <div className="flex items-end">
+                  <div
+                    className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
+                  >
+                    <div>
+                      <pre
+                        style={{
+                          overflowWrap: "normal",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          wordWrap: "break-word",
+                          width: "fit-content",
+                        }}
+                        className={`px-4  py-2 flex items-end gap-1 rounded-lg  rounded-bl-none bg-gray-300 text-gray-600
+                          `}
+                      >
+                        <span>Generating</span>
+                        <span className="loading loading-dots loading-xs"></span>
+                      </pre>
+                    </div>
+                  </div>
+                  <img
+                    src={
+                      "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                    }
+                    alt="Profile"
+                    className="w-6 h-6 rounded-full order-2"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
