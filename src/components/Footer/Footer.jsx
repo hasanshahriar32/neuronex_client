@@ -11,8 +11,7 @@ const footerLinks = [
             { title: "Pricing", href: "#" },
             { title: "Changelog", href: "#" },
             { title: "Docs", href: "#" },
-            { title: "Linear Method", href: "#" },
-            { title: "Download", href: "#" },
+
         ],
     },
     {
@@ -30,7 +29,7 @@ const footerLinks = [
         links: [
             { title: "Community", href: "#" },
             { title: "Contact", href: "#" },
-            { title: "DPA", href: "#" },
+
             { title: "Terms of service", href: "#" },
         ],
     },

@@ -10,10 +10,10 @@ import { FiEdit3 } from "react-icons/fi";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
-  console.log("test", aiConfig)
+  const [loadingAi, setLoadingAi] = useState(false);
+  console.log("test", aiConfig);
   const [messages, setMessages] = useState([
-    { id: 1, type: "incoming", message: "Hi" },
-    { id: 2, type: "outgoing", message: "Hello" },
+    // add a loading message
   ]);
 
   useEffect(() => {
@@ -47,35 +47,43 @@ const AiQuery2 = () => {
         message,
       };
       console.log(newMessage);
+      setLoadingAi(true);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      // send promptconfig and get response      
-      const {subjectSelection,additionalInstruction, assistanceLevel, sessionId }= aiConfig
-      const promptConfig= {
+      // send promptconfig and get response
+      const {
         subjectSelection,
-        question:message,
+        additionalInstruction,
+        assistanceLevel,
+        sessionId,
+      } = aiConfig;
+      const promptConfig = {
+        subjectSelection,
+        question: message,
         sessionId,
         additionalInstruction,
         assistanceLevel,
-        uid: user?.uid
-      }
+        uid: user?.uid,
+      };
       fetch("https://neuronex-server.onrender.com/generate/prompt", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(promptConfig),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const newMessage = {
-          id: messages.length + 1,
-          type: "incoming",
-          message:data[0].text,
-        };
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-      });
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(promptConfig),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setLoadingAi(false);
+          // const formattedMessage = data[0].text.replace(/\n/g, "<br/>");
+          const newMessage = {
+            id: messages.length + 1,
+            type: "incoming",
+            message: data[0].text,
+          };
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+        });
 
       input.value = "";
       scrollToBottom();
@@ -87,13 +95,16 @@ const AiQuery2 = () => {
     }
     if (event.key === "Enter") {
       event.preventDefault();
+      if (loadingAi) {
+        return;
+      }
       handleSendMessage();
     }
   };
   return (
     <div>
       {/* <!-- component --> */}
-      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] py-2 min-h-screen max-h-screen">
+      <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] lg:w-[70vw] py-2 min-h-screen max-h-screen">
         <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
           <div className="relative flex items-center space-x-4">
             <div className="relative">
@@ -154,46 +165,89 @@ const AiQuery2 = () => {
           className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
         >
           {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`${
-                message.type === "incoming"
-                  ? "backdrop-blur-md bg-grey-dark/40"
-                  : "chat-message bg-grey-dark/80"
-              }  p-2`}
-            >
-              <div className="flex items-end">
-                <div
-                  className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
-                    message.type === "incoming" ? 2 : 1
-                  } items-${message.type === "incoming" ? "start" : "end"}`}
-                >
-                  <div>
-                    <span
-                      className={`px-4 py-2 rounded-lg inline-block rounded-${
-                        message.type === "incoming" ? "bl" : "br"
-                      }-none ${
-                        message.type === "incoming"
-                          ? "bg-gray-300 text-gray-600"
-                          : "bg-blue-600 text-white"
-                      }`}
-                    >
-                      {message.message}
-                    </span>
+            <div key={message.id}>
+              <div
+                className={`${
+                  message.type === "incoming"
+                    ? "backdrop-blur-md bg-grey-dark/40"
+                    : "chat-message bg-grey-dark/80"
+                }  p-2`}
+              >
+                <div className="flex items-end">
+                  <div
+                    className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
+                      message.type === "incoming" ? 2 : 1
+                    } items-${message.type === "incoming" ? "start" : "end"}`}
+                  >
+                    <div>
+                      <pre
+                        style={{
+                          overflowWrap: "normal",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          wordWrap: "break-word",
+                          width: "fit-content",
+                        }}
+                        className={`px-4  py-2 rounded-lg inline-block rounded-${
+                          message.type === "incoming" ? "bl" : "br"
+                        }-none ${
+                          message.type === "incoming"
+                            ? "bg-gray-300 text-gray-600"
+                            : "bg-blue-600 text-white"
+                        }`}
+                      >
+                        {message.message}
+                      </pre>
+                    </div>
                   </div>
+                  <img
+                    src={
+                      message.type === "incoming"
+                        ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                        : user?.photoURL
+                    }
+                    alt="Profile"
+                    className="w-6 h-6 rounded-full order-2"
+                  />
                 </div>
-                <img
-                  src={
-                    message.type === "incoming"
-                      ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
-                      : user?.photoURL
-                  }
-                  alt="Profile"
-                  className="w-6 h-6 rounded-full order-2"
-                />
               </div>
             </div>
           ))}
+          {loadingAi && (
+            <div>
+              <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
+                <div className="flex items-end">
+                  <div
+                    className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
+                  >
+                    <div>
+                      <pre
+                        style={{
+                          overflowWrap: "normal",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          wordWrap: "break-word",
+                          width: "fit-content",
+                        }}
+                        className={`px-4  py-2 flex items-end gap-1 rounded-lg  rounded-bl-none bg-gray-300 text-gray-600
+                          `}
+                      >
+                        <span>Generating</span>
+                        <span className="loading loading-dots loading-xs"></span>
+                      </pre>
+                    </div>
+                  </div>
+                  <img
+                    src={
+                      "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                    }
+                    alt="Profile"
+                    className="w-6 h-6 rounded-full order-2"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
@@ -228,20 +282,28 @@ const AiQuery2 = () => {
             <div className="w-20 h-full max-h-20 items-stretch inset-y-0 flex">
               <button
                 type="button"
-                className="inline-flex h-[50px] backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                className={`inline-flex h-[50px] backdrop-blur-sm border border-grey-dark focus:bg-transparent-white/20 bg-transparent-white items-center justify-center rounded-l-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none ${
+                  loadingAi ? "btn-disabled" : ""
+                }`}
                 onClick={handleSendMessage}
               >
-                <span className="font-bold tracking-wide text-md hidden sm:flex">
-                  Send
-                </span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-6 w-6 ml-2 transform rotate-90"
-                >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
+                {loadingAi ? (
+                  <span className="loading loading-infinity loading-lg"></span>
+                ) : (
+                  <>
+                    <span className="font-bold tracking-wide text-md hidden sm:flex">
+                      Send
+                    </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="h-6 w-6 ml-2 transform rotate-90"
+                    >
+                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                    </svg>
+                  </>
+                )}
               </button>
             </div>
           </div>
