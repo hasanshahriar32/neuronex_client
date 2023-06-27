@@ -3,9 +3,12 @@ import { AiContext } from "../FormContext/FormContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { AuthContext } from "../../Authentication/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -17,7 +20,7 @@ export default function AiSetting() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (
       data?.subjectSelection == aiConfig?.subjectSelection &&
       data?.assistanceLevel == aiConfig?.assistanceLevel &&
@@ -45,8 +48,6 @@ export default function AiSetting() {
       data?.assistanceLevel !== "" ||
       data?.additionalInstruction !== ""
     ) {
-      setAiConfig(data);
-      console.log(data);
       toast.success("New session created!", {
         position: "top-center",
         autoClose: 2000,
@@ -57,6 +58,36 @@ export default function AiSetting() {
         progress: undefined,
         theme: "dark",
       });
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        };
+        const { dataGet } = await axios.post(
+          "https://neuronex-server-test.vercel.app/session",
+          {
+            sessionTitle: "",
+            sessionId: dataId,
+            uid: user?.uid,
+          },
+          config
+        );
+        setAiConfig(data);
+        console.log(data);
+        console.log(dataGet);
+      } catch (error) {
+        console.log(error);
+        toast({
+          title: "Error Occurred!",
+          description: "Failed to send the message.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+          theme: "dark",
+        });
+      }
       setModalState(false);
       return;
     }
