@@ -42,7 +42,7 @@ const AiQuery2 = () => {
     const message = input.value.trim();
     if (message !== "") {
       const newMessage = {
-        id: messages.length + 1,
+        // id: messages.length + 1,
         type: "outgoing",
         message,
       };
@@ -65,6 +65,7 @@ const AiQuery2 = () => {
         assistanceLevel,
         uid: user?.uid,
       };
+      console.log(promptConfig);
       fetch("https://neuronex-server.onrender.com/generate/prompt", {
         method: "POST",
         headers: {
@@ -77,12 +78,11 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
           // const formattedMessage = data[0].text.replace(/\n/g, "<br/>");
-          const newMessage = {
-            id: messages.length + 1,
-            type: "incoming",
-            message: data[0].text,
-          };
-          setMessages((prevMessages) => [...prevMessages, newMessage]);
+          setMessages((prevMessages) => [...prevMessages, ...data]);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoadingAi(false);
         });
 
       input.value = "";

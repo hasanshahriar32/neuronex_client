@@ -5,52 +5,57 @@ import Main from "../layout/Main/Main";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
-import UserProfile from "../pages/Dashboard/Profile/userProfile";
 import Home from "../pages/Home/Home";
+import ProfileLayout from "../layout/Profile/Profile";
+import Profile from "../components/profile/Profile";
+import ProfileEdit from "../layout/Profile/ProfileEdit";
 
 const Routes = () => {
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Main></Main>,
-            children: [
-                { path: "/", element: <Home></Home> },
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        { path: "/", element: <Home></Home> },
 
-                { path: "/login", element: <Login></Login> },
-                { path: "/register", element: <Register></Register> },
-            ],
-        },
+        { path: "/login", element: <Login></Login> },
+        { path: "/register", element: <Register></Register> },
+      ],
+    },
+    {
+      path: "/profile",
+      element: <ProfileLayout></ProfileLayout>,
+      children: [
+        { path: "/profile/", element: <Profile></Profile> },
+        { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      ),
+      children: [
         {
-            path: "/dashboard",
-            element: (
-                <PrivateRoute>
-                    <Dashboard />
-                </PrivateRoute>
-            ),
-            children: [
-                {
-                    path: "/dashboard/",
-                    element: <UserProfile></UserProfile>,
-                },
-                {
-                    path: "/dashboard/profile",
-                    element: <UserProfile></UserProfile>,
-                },
-
-                {
-                    path: "/dashboard/compose",
-                    element: <Compose></Compose>,
-                },
-            ],
+          path: "/dashboard/",
+          element: <Compose></Compose>,
         },
 
-    ]);
-    return (
-        <div className="bg-page-gradient pt-navigation-height">
-            {" "}
-            <RouterProvider router={router}></RouterProvider>
-        </div>
-    );
+        {
+          path: "/dashboard/compose",
+          element: <Compose></Compose>,
+        },
+      ],
+    },
+  ]);
+  return (
+    <div className="bg-page-gradient pt-navigation-height">
+      {" "}
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 };
 
 export default Routes;
