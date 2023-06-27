@@ -24,7 +24,12 @@ const Routes = () => {
     },
     {
       path: "/profile",
-      element: <ProfileLayout></ProfileLayout>,
+      element: (
+        <PrivateRoute>
+          {" "}
+          <ProfileLayout></ProfileLayout>
+        </PrivateRoute>
+      ),
       children: [
         { path: "/profile/", element: <Profile></Profile> },
         { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
