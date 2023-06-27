@@ -43,7 +43,7 @@ const AiQuery2 = () => {
     const message = input.value.trim();
     if (message !== "") {
       const newMessage = {
-        // id: messages.length + 1,
+        serial: messages.length + 1,
         type: "outgoing",
         message,
       };
@@ -80,7 +80,25 @@ const AiQuery2 = () => {
           setLoadingAi(false);
 
           if (Array.isArray(data) && data.length > 0) {
-            setMessages((prevMessages) => [...prevMessages, ...data]);
+            setMessages((prevMessages) => {
+              // Check if any message with the same serial number already exists
+              const existingMessageIndex = prevMessages.findIndex(
+                (message) => message.serial === data[0].serial
+              );
+
+              if (existingMessageIndex !== -1) {
+                // Remove the existing message with the same serial number
+                const updatedMessages = prevMessages.filter(
+                  (_, index) => index !== existingMessageIndex
+                );
+
+                // Append the new data to the updated messages
+                return [...updatedMessages, ...data];
+              } else {
+                // Append the new data to the previous messages
+                return [...prevMessages, ...data];
+              }
+            });
           } else {
             // Handle empty data or non-iterable response
             console.log("Empty data or non-iterable response");
