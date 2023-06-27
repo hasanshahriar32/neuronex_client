@@ -1,6 +1,8 @@
 import classNames from "classnames";
 // import OneTap from "../../components/Authentication/OneTap (Test)/OneTap";
+import Faq from "../../components/Faq/Faq";
 import HeroSection from "../../components/Hero/HeroSection";
+import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
 import { Container } from "../../features/container";
 import { StarsIllustration } from "../../features/stars";
@@ -25,6 +27,13 @@ const Home = () => {
                     )}
                 > <StarsIllustration />
                 </div>
+                <div className="container mx-auto ">
+                    <Price />
+                    <div className="mt-10">
+                        <Faq />
+                    </div>
+                </div>
+
             </div>
         </div>
     );
