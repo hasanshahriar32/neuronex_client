@@ -1,6 +1,7 @@
 import classNames from "classnames";
 // import OneTap from "../../components/Authentication/OneTap (Test)/OneTap";
 import HeroSection from "../../components/Hero/HeroSection";
+import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
 import { Container } from "../../features/container";
 import { StarsIllustration } from "../../features/stars";
@@ -24,6 +25,9 @@ const Home = () => {
                         "after:absolute after:top-1/2 after:-left-1/2 after:h-[142.8%] after:w-[200%] after:rounded-[50%] after:border-t after:border-[rgba(120,_119,_198,_0.4)] after:bg-background -mt-[240px]"
                     )}
                 > <StarsIllustration />
+                </div>
+                <div className="container mx-auto">
+                    <Price />
                 </div>
             </div>
         </div>
