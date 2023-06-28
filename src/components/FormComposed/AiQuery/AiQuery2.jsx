@@ -8,6 +8,7 @@ import { AiContext } from "../FormContext/FormContext";
 import { AuthContext } from "../../Authentication/UserContext/UserContext";
 import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
+import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
@@ -140,8 +141,8 @@ const AiQuery2 = () => {
     <div>
       {/* <!-- component --> */}
       <div className="flex-1 px-[5%] justify-between flex flex-col w-[95vw] lg:w-[70vw] py-2 min-h-screen max-h-screen">
-        <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-          <div className="relative flex items-center space-x-4">
+        <div className="flex flex-row-reverse sm:items-center justify-between py-3 border-b-2 border-gray-200">
+          <div className="relative flex-row-reverse text-end flex items-center space-x-4">
             <div className="relative">
               <span className="absolute text-success right-0 bottom-0">
                 <svg width="20" height="20">
@@ -158,41 +159,45 @@ const AiQuery2 = () => {
               <div className="text-md md:text-2xl mt-1 flex items-center">
                 <span className="text-gray-700 mr-3">Title goes here</span>
               </div>
-              <span className="text-lg text-gray-600">
+              <span className="text-lg text-gray-600 mr-3">
                 {aiConfig?.subjectSelection}
               </span>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="h-6 w-6"
+          <div>
+            <DrawerToggle></DrawerToggle>
+
+            <div className="flex items-center space-x-2">
+              <button
+                type="button"
+                className="inline-flex  items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                ></path>
-              </svg>
-            </button>
-            <label
-              // type="checkbox"
-              htmlFor="my_modal_4"
-              className=" tracking-wide ml-4 btn btn-primary text-sm"
-            >
-              <span>
-                <FiEdit3></FiEdit3>
-              </span>
-              <span className="hidden lg:flex">Edit Config</span>
-            </label>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  ></path>
+                </svg>
+              </button>
+              <label
+                // type="checkbox"
+                htmlFor="my_modal_4"
+                className=" tracking-wide ml-4 btn btn-primary text-sm"
+              >
+                <span>
+                  <FiEdit3></FiEdit3>
+                </span>
+                <span className="hidden lg:flex">Edit Config</span>
+              </label>
+            </div>
           </div>
         </div>
         <div

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../../Authentication/UserContext/UserContext";
+import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
@@ -116,7 +117,10 @@ export default function AiSetting() {
       {/* <ToastContainer /> */}
       <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
-          <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
+          <div className="flex flex-row-reverse justify-between flex-wrap-reverse w-full items-center">
+            <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
+            <DrawerToggle></DrawerToggle>
+          </div>
 
           <div className="mb-4 form-control">
             <label className=" flex flex-col">
