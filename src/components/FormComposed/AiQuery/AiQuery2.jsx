@@ -361,7 +361,7 @@ const AiQuery2 = () => {
               const modal = document.getElementById("my_modal_4");
               modal.checked = modalState;
             }}
-            className="btn btn-md btn-circle text-md  btn-error absolute  z-20 top-7 lg:top-4 right-8"
+            className="btn btn-md btn-circle text-md  btn-error sticky  z-20 top-7 lg:top-4 right-8"
           >
             ✕
           </button>
