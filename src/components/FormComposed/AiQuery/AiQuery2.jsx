@@ -351,7 +351,7 @@ const AiQuery2 = () => {
       </div>
       {/* modal to edit config  */}
       <input type="checkbox" id="my_modal_4" className="modal-toggle" />
-      <div className="modal">
+      <div className="modal z-10 lg:z-40">
         <div
           onSubmit={handleSubmit}
           className="modal-box -mt-10 w-full bg-transparent mx-auto chatScroll max-w-7xl"
@@ -361,7 +361,7 @@ const AiQuery2 = () => {
               const modal = document.getElementById("my_modal_4");
               modal.checked = modalState;
             }}
-            className="btn btn-md btn-circle text-md  btn-error absolute  z-20 right-12 top-7 lg:top-4 lg:right-4"
+            className="btn btn-md btn-circle text-md  btn-error absolute  z-20 top-7 lg:top-4 right-8"
           >
             ✕
           </button>

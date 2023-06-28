@@ -54,7 +54,7 @@ const Dashboard = () => {
         </div>
         <ToastContainer />
       </div>
-      <div className="drawer-side z-40">
+      <div className="drawer-side  z-30">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-[250px] gap-3 lg:w-[300px] h-full bg-base-200 text-lg text-base-content">
           {/* Sidebar content here */}
