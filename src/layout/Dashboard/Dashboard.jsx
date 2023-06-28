@@ -99,7 +99,7 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className=" flex flex-col p-4 w-[250px] gap-3 lg:w-[300px] h-full bg-base-200 text-lg text-base-content">
           {/* Sidebar content here */}
-          <div className="flex flex-row items-center justify-evenly">
+          <div className="flex lg:hidden flex-row items-center justify-evenly">
             <DrawerToggle />
             <ul className="menu lg:menu-horizontal bg-base-200  text-lg   rounded-box lg:mb-64">
               <li>
