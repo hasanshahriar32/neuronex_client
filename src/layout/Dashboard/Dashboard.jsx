@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AiContext } from "../../components/FormComposed/FormContext/FormContext";
+import DrawerToggle from "./DrawerToggle";
 
 const Dashboard = () => {
   const { setAiConfig, drawerOpen, setDrawerOpen } = useContext(AiContext);
@@ -58,6 +59,7 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-[250px] gap-3 lg:w-[300px] h-full bg-base-200 text-lg text-base-content">
           {/* Sidebar content here */}
+          <DrawerToggle />
           <li>
             <Link to="/">Home</Link>
           </li>
