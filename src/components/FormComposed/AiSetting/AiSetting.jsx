@@ -113,9 +113,9 @@ export default function AiSetting() {
   };
 
   return (
-    <div className="card  w-full  my-10 max-w-7xl">
+    <div className="card  w-full my-2 lg:my-10 max-w-7xl">
       {/* <ToastContainer /> */}
-      <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
+      <div className="card-body shadow-primary mx-[5%]  shadow-sm   flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <div className="flex flex-row-reverse justify-between flex-wrap-reverse w-full place-items-start">
             <h1 className="text-4xl font-bold">AI Configure</h1>

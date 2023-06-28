@@ -354,14 +354,14 @@ const AiQuery2 = () => {
       <div className="modal">
         <div
           onSubmit={handleSubmit}
-          className="modal-box w-full mx-auto chatScroll max-w-7xl"
+          className="modal-box w-full bg-transparent mx-auto chatScroll max-w-7xl"
         >
           <button
             onClick={() => {
               const modal = document.getElementById("my_modal_4");
               modal.checked = modalState;
             }}
-            className="btn btn-md btn-circle text-md  btn-ghost absolute right-2 top-2"
+            className="btn btn-md btn-circle text-md  btn-error absolute  z-20 right-12 top-7 lg:top-4 lg:right-4"
           >
             ✕
           </button>
