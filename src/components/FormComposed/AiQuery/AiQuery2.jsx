@@ -9,14 +9,12 @@ import { AuthContext } from "../../Authentication/UserContext/UserContext";
 import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
   const [loadingAi, setLoadingAi] = useState(false);
-  console.log("test", aiConfig);
-  const [messages, setMessages] = useState([
-    // add a loading message
-  ]);
+  const { messages, setMessages } = useContext(ChatContext);
 
   useEffect(() => {
     const modal = document.getElementById("my_modal_4");

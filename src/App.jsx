@@ -1,3 +1,4 @@
+import SessionContext from "../Contexts/SessionContext/SessionContext";
 import UserContext from "./components/Authentication/UserContext/UserContext";
 import FormContext from "./components/FormComposed/FormContext/FormContext";
 import Routes from "./routes/Routes";
@@ -7,7 +8,9 @@ function App() {
     <>
       <UserContext>
         <FormContext>
-          <Routes />
+          <SessionContext>
+            <Routes />
+          </SessionContext>
         </FormContext>
       </UserContext>
     </>

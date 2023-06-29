@@ -12,6 +12,7 @@ const Dashboard = () => {
   const drawerRef = useRef(null);
   const [drawerCheckboxChecked, setDrawerCheckboxChecked] = useState(false);
   const [sesstionData, setSessionData] = useState([]);
+  const [loadingSession, setLoadingSession] = useState(false);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const Dashboard = () => {
   };
 
   const getSessions = async () => {
+    setLoadingSession(true);
     try {
       const config = {
         headers: {
@@ -61,9 +63,11 @@ const Dashboard = () => {
         config
       );
       setSessionData(dataGet);
+      setLoadingSession(false);
       console.log(dataGet);
     } catch (error) {
       console.log(error);
+      setLoadingSession(false);
       toast.error({
         title: "Error Occurred!",
         description: "Failed to fetch user session data.",
@@ -124,6 +128,11 @@ const Dashboard = () => {
             </ul>
           </div>
           <div className="chatScroll h-screen overflow-y-scroll">
+            {loadingSession && (
+              <div className="flex items-center h-full w-full text-3xl justify-center">
+                <span className="loading loading-ring text-3xl h-12 w-12"></span>
+              </div>
+            )}
             <SideCard sesstionData={sesstionData} />
           </div>
 

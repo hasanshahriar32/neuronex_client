@@ -1,11 +1,58 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useContext } from "react";
+import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { AiContext } from "../../../components/FormComposed/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
+  const { setMessages } = useContext(ChatContext);
+  const { setAiConfig, setModalState } = useContext(AiContext);
+  // const handleDelete = (id) => {};
+  const handleFetchMessage = async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/session/single",
+        {
+          sessionId: id,
+        },
+        config
+      );
+      setMessages(dataGet.messages);
+      const aiConfigs = {
+        subjectSelection: dataGet?.subjectSelection,
+        assistanceLevel: dataGet?.assistanceLevel,
+        additionalInstruction: dataGet?.additionalInstruction,
+      };
+      setAiConfig(aiConfigs);
+      setModalState(false);
+      console.log(dataGet);
+    } catch (error) {
+      console.log(error);
+      toast.error({
+        title: "Error Occurred!",
+        description: "Failed to fetch user session data.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        theme: "dark",
+      });
+    }
+  };
   return (
     <>
       {sesstionData?.map((session) => (
-        <Link key={session?._id}>
+        <Link
+          key={session?._id}
+          onClick={() => handleFetchMessage(session?.sessionId)}
+        >
           <div className="h-[180px] my-2 max-h-[180px] min-h-[180px] lg:h-[200px] lg:max-h-[200px] lg:min-h-[200px] overflow-hidden flex items-center justify-center">
             <a href="" className="group relative block h-64  sm:h-80 lg:h-96">
               <span className="absolute inset-0 border-2 border-dashed border-black"></span>
@@ -54,11 +101,13 @@ const SideCard = ({ sesstionData }) => {
                     {session?.sessionTitle}
                   </h2>
                   <div className="flex mt-4  items-center justify-between flex-row flex-wrap">
-                    <div className="flex  gap-1">
-                      <span className="whitespace-nowrap rounded-full w-[120px] lg:w-[150px] overflow-hidden bg-success-content px-2 py-1 text-xs text-accent">
-                        {session?.subjectSelection}
-                      </span>
-                    </div>
+                    {session?.subjectSelection && (
+                      <div className="flex  gap-1">
+                        <span className="whitespace-nowrap rounded-full w-[120px] lg:w-[150px] overflow-hidden bg-success-content px-2 py-1 text-xs text-accent">
+                          {session?.subjectSelection}
+                        </span>
+                      </div>
+                    )}
                     <button
                       type="button"
                       className="inline-flex  items-center justify-center rounded-lg border w-10 text-xl lg:text-2xl transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
