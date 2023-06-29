@@ -77,7 +77,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getSessions();
-  }, []);
+  }, [setAiConfig]);
 
   return (
     <div className="drawer lg:drawer-open -mt-12" ref={drawerRef}>
@@ -103,7 +103,7 @@ const Dashboard = () => {
             <DrawerToggle />
             <ul className="menu lg:menu-horizontal bg-base-200  text-lg   rounded-box lg:mb-64">
               <li>
-                <details open>
+                <details>
                   <summary className="btn   text-md lg:btn-secondary btn-ghost ">
                     {/* <button className="btn  w-8 lg:w-full text-md lg:btn-secondary btn-ghost ">
                       <FaSort /> */}
@@ -123,7 +123,7 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
-          <div className="chatScroll overflow-y-scroll">
+          <div className="chatScroll h-screen overflow-y-scroll">
             <SideCard sesstionData={sesstionData} />
           </div>
 
