@@ -1,5 +1,6 @@
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 const SideCard = ({ sesstionData }) => {
   return (
     <>
@@ -12,7 +13,7 @@ const SideCard = ({ sesstionData }) => {
               <div className="relative group-hover:ml-2 group-hover:mt-2 duration-100 flex h-full transform items-end border-2 border-black  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
                 <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0  lg:p-8">
                   {/* date and time  */}
-                  <div className="flex items-center mt-3 lg:mt-5 justify-between">
+                  <div className="flex items-center mt-3 text-xs lg:text-sm lg:mt-5 justify-between">
                     <div className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +29,13 @@ const SideCard = ({ sesstionData }) => {
                           d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                         />
                       </svg>
-                      <p className="text-sm font-medium">12/12/2021</p>
+                      <p className=" font-medium">
+                        {
+                          new Date(session?.updatedAt)
+                            .toISOString()
+                            .split("T")[0]
+                        }
+                      </p>
                     </div>
                     <div className="flex items-center">
                       <svg
@@ -46,52 +53,51 @@ const SideCard = ({ sesstionData }) => {
                         />
                       </svg>
 
-                      <p className="text-sm font-medium">12:00</p>
+                      <p className="font-medium">
+                        {
+                          new Date(session?.updatedAt)
+                            .toISOString()
+                            .split("T")[1]
+                            .split(".")[0]
+                        }
+                      </p>
                     </div>
                   </div>
                   {/* title */}
 
-                  <h2 className="mt-4 h-14 overflow-hidden text-xl font-medium ">
+                  <h2 className="w-[170px] lg:w-[180px] mt-4 h-14 lg:h-15 overflow-hidden text-xl font-medium ">
                     {session?.sessionTitle}
                   </h2>
                   <div className="flex mt-4  items-center justify-between flex-row flex-wrap">
                     <div className="flex  gap-1">
                       <span className="whitespace-nowrap rounded-full w-[120px] lg:w-[150px] overflow-hidden bg-success-content px-2 py-1 text-xs text-accent">
-                        Subject Name Subject Name Subject Name Subject
-                        NameSubject Name Subject NameSubject Name Subject Name
+                        {session?.subjectSelection}
                       </span>
                     </div>
                     <button
                       type="button"
-                      className="inline-flex  items-center justify-center rounded-lg border w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                      className="inline-flex  items-center justify-center rounded-lg border w-10 text-xl lg:text-2xl transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        className="h-6 w-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        ></path>
-                      </svg>
+                      {session?.isFavourite ? (
+                        <AiFillHeart className="text-red-500" />
+                      ) : (
+                        <AiOutlineHeart />
+                      )}
                     </button>
                   </div>
                 </div>
 
                 <div className="absolute p-4 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 group-hover:bg-base-100/40 lg:p-8">
-                  <h3 className="text-xl font-medium ">Go around the world</h3>
+                  <h2 className="w-[170px] lg:w-[180px] h-14 lg:h-15 overflow-hidden text-xl font-medium ">
+                    {session?.sessionTitle}
+                  </h2>
 
                   <div className="flex mt-8 flex-row items-center justify-between">
                     <div className="flex flex-row items-center justify-start">
                       <p className="text-accent-focus font-bold">Restore </p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 mt-1 group-hover:translate-x-3 duration-1000 rotate-90 text-accent-focus"
+                        className="h-6 w-6  group-hover:translate-x-3 duration-1000 rotate-90 text-accent-focus"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
