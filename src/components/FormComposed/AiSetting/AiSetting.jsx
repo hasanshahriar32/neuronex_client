@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../../Authentication/UserContext/UserContext";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
+  const { setMessages } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -49,6 +51,8 @@ export default function AiSetting() {
       data?.assistanceLevel !== "" ||
       data?.additionalInstruction !== ""
     ) {
+      setAiConfig([]);
+      setMessages([]);
       toast.success("New session created!", {
         position: "top-center",
         autoClose: 2000,

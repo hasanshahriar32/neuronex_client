@@ -8,7 +8,7 @@ import axios from "axios";
 import { AiContext } from "../../../components/FormComposed/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
   const { setMessages } = useContext(ChatContext);
-  const { setAiConfig, setModalState } = useContext(AiContext);
+  const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
   // const handleDelete = (id) => {};
   const handleFetchMessage = async (id) => {
     try {
@@ -57,10 +57,28 @@ const SideCard = ({ sesstionData }) => {
         >
           <div className="h-[180px] my-2 max-h-[180px] min-h-[180px] lg:h-[200px] lg:max-h-[200px] lg:min-h-[200px] overflow-hidden flex items-center justify-center">
             <a href="" className="group relative block h-64  sm:h-80 lg:h-96">
-              <span className="absolute inset-0 border-2 border-dashed border-black"></span>
+              <span
+                className={`absolute inset-0 border-2 border-dashed ${
+                  aiConfig?.sessionId === session?.sessionId
+                    ? ""
+                    : "border-accent-focus"
+                }`}
+              ></span>
 
-              <div className="relative group-hover:ml-2 group-hover:mt-2 duration-100 flex h-full transform items-end border-2 border-black  transition-transform group-hover:-translate-x-2 group-hover:-translate-y-2">
-                <div className="p-4 !pt-0 transition-opacity group-hover:absolute group-hover:opacity-0  lg:p-8">
+              <div
+                className={`relative  duration-100 flex h-full transform items-end border-2 transition-transform  ${
+                  aiConfig?.sessionId === session?.sessionId
+                    ? "border-accent mt-2 -translate-x-2 -translate-y-2 ml-2"
+                    : "group-hover:mt-2 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:ml-2 "
+                }`}
+              >
+                <div
+                  className={`p-4 !pt-0 transition-opacity   lg:p-8 ${
+                    aiConfig?.sessionId === session?.sessionId
+                      ? "absolute opacity-0"
+                      : "group-hover:absolute group-hover:opacity-0"
+                  }`}
+                >
                   {/* date and time  */}
                   <div className="flex items-center mt-3 text-xs lg:text-sm lg:mt-5 justify-between">
                     <div className="flex items-center">
@@ -123,7 +141,13 @@ const SideCard = ({ sesstionData }) => {
                   </div>
                 </div>
 
-                <div className="absolute p-4 opacity-0 transition-opacity group-hover:relative group-hover:opacity-100 group-hover:bg-base-100/40 lg:p-8">
+                <div
+                  className={`absolute p-4 opacity-0 transition-opacity  lg:p-8 ${
+                    aiConfig?.sessionId === session?.sessionId
+                      ? "relative opacity-100 bg-base-100/40"
+                      : "group-hover:relative group-hover:opacity-100 group-hover:bg-base-100/40"
+                  }`}
+                >
                   <h2 className="w-[170px] lg:w-[180px] h-14 lg:h-15 overflow-hidden text-xl font-medium ">
                     {session?.sessionTitle}
                   </h2>
