@@ -78,7 +78,11 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
-          if (Array.isArray(data) && data.length > 0) {
+          if (
+            Array.isArray(data) &&
+            data?.length > 0 &&
+            data?.sessionId === aiConfig?.sessionId
+          ) {
             setMessages((prevMessages) => {
               // Check if any message with the same serial number already exists
               const existingMessageIndex = prevMessages.findIndex(
