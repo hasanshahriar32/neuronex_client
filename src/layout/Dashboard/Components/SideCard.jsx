@@ -30,8 +30,10 @@ const SideCard = ({ sesstionData }) => {
         subjectSelection: dataGet?.subjectSelection,
         assistanceLevel: dataGet?.assistanceLevel,
         additionalInstruction: dataGet?.additionalInstruction,
+        sessionId: dataGet?.sessionId,
       };
       setAiConfig(aiConfigs);
+      console.log(aiConfigs);
       setModalState(false);
       console.log(dataGet);
     } catch (error) {

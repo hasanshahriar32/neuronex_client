@@ -71,6 +71,8 @@ export default function AiSetting() {
           {
             sessionTitle: data?.additionalInstruction || "",
             subjectSelection: data?.subjectSelection,
+            assistanceLevel: data?.assistanceLevel,
+            additionalInstruction: data?.additionalInstruction,
             sessionId: dataId,
             uid: user?.uid,
           },
