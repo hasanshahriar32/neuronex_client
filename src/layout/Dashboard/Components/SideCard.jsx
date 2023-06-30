@@ -154,7 +154,11 @@ const SideCard = ({ sesstionData }) => {
 
                   <div className="flex mt-8 flex-row items-center justify-between">
                     <div className="flex flex-row items-center justify-start">
-                      <p className="text-accent-focus font-bold">Restore </p>
+                      <p className="text-accent-focus font-bold">
+                        {aiConfig?.sessionId === session?.sessionId
+                          ? "Active"
+                          : "Restore"}
+                      </p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6  group-hover:translate-x-3 duration-1000 rotate-90 text-accent-focus"
