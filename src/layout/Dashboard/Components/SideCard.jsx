@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { AiContext } from "../../../components/FormComposed/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
-  const { setMessages } = useContext(ChatContext);
+  const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
   // const handleDelete = (id) => {};
   const handleFetchMessage = async (id) => {
+    setSessionMessageLoading(true);
     try {
       const config = {
         headers: {
@@ -35,9 +36,11 @@ const SideCard = ({ sesstionData }) => {
       setAiConfig(aiConfigs);
       console.log(aiConfigs);
       setModalState(false);
+      setSessionMessageLoading(false);
       console.log(dataGet);
     } catch (error) {
       console.log(error);
+      setSessionMessageLoading(false);
       toast.error({
         title: "Error Occurred!",
         description: "Failed to fetch user session data.",

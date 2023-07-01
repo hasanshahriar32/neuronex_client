@@ -5,7 +5,13 @@ const SessionContext = ({ children }) => {
   const [messages, setMessages] = useState([
     // add a loading message
   ]);
-  const ChatInfo = { messages, setMessages };
+  const [sessionMessageLoading, setSessionMessageLoading] = useState(false);
+  const ChatInfo = {
+    messages,
+    setMessages,
+    sessionMessageLoading,
+    setSessionMessageLoading,
+  };
   return (
     <ChatContext.Provider value={ChatInfo}>{children}</ChatContext.Provider>
   );

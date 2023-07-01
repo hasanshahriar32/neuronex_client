@@ -10,11 +10,13 @@ import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
 import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
+import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);
   const [loadingAi, setLoadingAi] = useState(false);
-  const { messages, setMessages } = useContext(ChatContext);
+  const { messages, sessionMessageLoading, setMessages } =
+    useContext(ChatContext);
 
   useEffect(() => {
     const modal = document.getElementById("my_modal_4");
@@ -202,95 +204,106 @@ const AiQuery2 = () => {
             </div>
           </div>
         </div>
-        <div
-          id="messages"
-          className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
-        >
-          {messages.map((message) => (
-            <div key={message.id}>
-              <div
-                className={`${
-                  message.type === "incoming"
-                    ? "backdrop-blur-md bg-grey-dark/40"
-                    : "chat-message bg-grey-dark/80"
-                }  p-2`}
-              >
-                <div className="flex items-end">
-                  <div
-                    className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
-                      message.type === "incoming" ? 2 : 1
-                    } items-${message.type === "incoming" ? "start" : "end"}`}
-                  >
-                    <div>
-                      <pre
-                        style={{
-                          overflowWrap: "normal",
-                          whiteSpace: "pre-wrap",
-                          wordBreak: "break-word",
-                          wordWrap: "break-word",
-                          width: "fit-content",
-                        }}
-                        className={`px-4  py-2 rounded-lg inline-block rounded-${
-                          message.type === "incoming" ? "bl" : "br"
-                        }-none ${
-                          message.type === "incoming"
-                            ? "bg-gray-300 text-gray-600"
-                            : "bg-blue-600 text-white"
-                        }`}
-                      >
-                        {message.message}
-                      </pre>
+        {sessionMessageLoading ? (
+          <div className="flex flex-col items-center">
+            <img
+              className="w-[150px] lg:w-[200px] h-[150px] lg:h-[200px] mx-auto"
+              src="https://media.tenor.com/gHBEW8k6LdsAAAAi/airplane-travel.gif"
+              alt="time travel"
+            />
+            <progress className="progress progress-secondary  w-[50%] h-3 mt-8"></progress>
+          </div>
+        ) : (
+          <div
+            id="messages"
+            className="flex flex-col chatScroll space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
+          >
+            {messages.map((message) => (
+              <div key={message.id}>
+                <div
+                  className={`${
+                    message.type === "incoming"
+                      ? "backdrop-blur-md bg-grey-dark/40"
+                      : "chat-message bg-grey-dark/80"
+                  }  p-2`}
+                >
+                  <div className="flex items-end">
+                    <div
+                      className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-${
+                        message.type === "incoming" ? 2 : 1
+                      } items-${message.type === "incoming" ? "start" : "end"}`}
+                    >
+                      <div>
+                        <pre
+                          style={{
+                            overflowWrap: "normal",
+                            whiteSpace: "pre-wrap",
+                            wordBreak: "break-word",
+                            wordWrap: "break-word",
+                            width: "fit-content",
+                          }}
+                          className={`px-4  py-2 rounded-lg inline-block rounded-${
+                            message.type === "incoming" ? "bl" : "br"
+                          }-none ${
+                            message.type === "incoming"
+                              ? "bg-gray-300 text-gray-600"
+                              : "bg-blue-600 text-white"
+                          }`}
+                        >
+                          {message.message}
+                        </pre>
+                      </div>
                     </div>
+                    <img
+                      src={
+                        message.type === "incoming"
+                          ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                          : user?.photoURL
+                      }
+                      alt="Profile"
+                      className="w-6 h-6 rounded-full order-2"
+                    />
                   </div>
-                  <img
-                    src={
-                      message.type === "incoming"
-                        ? "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
-                        : user?.photoURL
-                    }
-                    alt="Profile"
-                    className="w-6 h-6 rounded-full order-2"
-                  />
                 </div>
               </div>
-            </div>
-          ))}
-          {loadingAi && (
-            <div>
-              <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
-                <div className="flex items-end">
-                  <div
-                    className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
-                  >
-                    <div>
-                      <pre
-                        style={{
-                          overflowWrap: "normal",
-                          whiteSpace: "pre-wrap",
-                          wordBreak: "break-word",
-                          wordWrap: "break-word",
-                          width: "fit-content",
-                        }}
-                        className={`px-4  py-2 flex items-end gap-1 rounded-lg  rounded-bl-none bg-gray-300 text-gray-600
+            ))}
+            {loadingAi && (
+              <div>
+                <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
+                  <div className="flex items-end">
+                    <div
+                      className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
+                    >
+                      <div>
+                        <pre
+                          style={{
+                            overflowWrap: "normal",
+                            whiteSpace: "pre-wrap",
+                            wordBreak: "break-word",
+                            wordWrap: "break-word",
+                            width: "fit-content",
+                          }}
+                          className={`px-4  py-2 flex items-end gap-1 rounded-lg  rounded-bl-none bg-gray-300 text-gray-600
                           `}
-                      >
-                        <span>Generating</span>
-                        <span className="loading loading-dots loading-xs"></span>
-                      </pre>
+                        >
+                          <span>Generating</span>
+                          <span className="loading loading-dots loading-xs"></span>
+                        </pre>
+                      </div>
                     </div>
+                    <img
+                      src={
+                        "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
+                      }
+                      alt="Profile"
+                      className="w-6 h-6 rounded-full order-2"
+                    />
                   </div>
-                  <img
-                    src={
-                      "https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png"
-                    }
-                    alt="Profile"
-                    className="w-6 h-6 rounded-full order-2"
-                  />
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
