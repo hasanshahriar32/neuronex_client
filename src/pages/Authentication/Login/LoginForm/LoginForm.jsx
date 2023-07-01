@@ -199,7 +199,7 @@ const LoginForm = () => {
                   </button>
                 </div>
               </form>
-              <div className="divider text-md mt-6 mb-4">OR</div>
+              <div className="divider text-md m-3">OR</div>
               <AuthProvider />
             </div>
           </div>

@@ -82,7 +82,7 @@ const AuthProvider = () => {
         </button>
         <button
           onClick={handlegithublogin}
-          className="w-full text-xl btn-neutral btn-lg my-2 h-10 tracking-wide rounded-lg uppercase font-semibold"
+          className="w-full tracking-wide btn-neutral text-xl btn h-10 btn-lg my-2"
         >
           login with github
         </button>
