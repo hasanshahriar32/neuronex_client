@@ -125,7 +125,7 @@ const Register = () => {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex">
           <div className="text-center"></div>
-          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
+          <div className="card border-secondary bg-page-gradient inset-0 border-2 border-dashed shadow-transparent/90 shadow-primary shadow-lg flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
             <div className="card-body">
               <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
                 Register Here

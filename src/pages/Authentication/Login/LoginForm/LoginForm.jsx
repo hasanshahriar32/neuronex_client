@@ -40,7 +40,6 @@ const LoginForm = () => {
           theme: "dark",
         });
 
-        
         const addedUser = {
           name: user.displayName,
           email: user.email,
@@ -49,7 +48,6 @@ const LoginForm = () => {
           userAbout: "user",
           verified: user?.emailVerified,
         };
-
 
         //! Save User info to the database....
         fetch("https://neuronex-server-test.vercel.app/user", {
@@ -63,8 +61,7 @@ const LoginForm = () => {
           .then((result) => {
             console.log(result);
             localStorage.setItem("token", result.token);
-          })
-
+          });
       })
 
       .catch((error) => {
@@ -136,7 +133,7 @@ const LoginForm = () => {
     <div>
       <div className="hero min-h-screen">
         <div className="hero-content ">
-          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 shadow-2xl">
+          <div className="card border-secondary bg-page-gradient shadow-transparent/90 shadow-primary shadow-lg  border-dashed inset-0 border-2 flex-shrink-0 shadow-2xl">
             <div className="card-body">
               <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
                 Login Now
