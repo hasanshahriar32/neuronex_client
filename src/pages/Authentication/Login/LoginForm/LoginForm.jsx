@@ -39,7 +39,32 @@ const LoginForm = () => {
           progress: undefined,
           theme: "dark",
         });
-        localStorage.setItem("userAccessToken", user.accessToken);
+
+        
+        const addedUser = {
+          name: user.displayName,
+          email: user.email,
+          pic: user.photoURL,
+          uid: user?.uid,
+          userAbout: "user",
+          verified: user?.emailVerified,
+        };
+
+
+        //! Save User info to the database....
+        fetch("https://neuronex-server-test.vercel.app/user", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(addedUser),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            localStorage.setItem("userAccessToken", result.token);
+          })
+
       })
 
       .catch((error) => {
