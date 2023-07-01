@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { AiContext } from "../../../components/FormComposed/FormContext/FormContext";
+import { AiContext } from "../../../../Contexts/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
   const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);

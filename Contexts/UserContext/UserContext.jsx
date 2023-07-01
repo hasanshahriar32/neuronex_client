@@ -14,7 +14,8 @@ import {
 } from "firebase/auth";
 
 import { useEffect } from "react";
-import app from "../../../configs/firebase.config";
+import app from "../../src/configs/firebase.config";
+
 export const AuthContext = createContext();
 const auth = getAuth(app);
 // eslint-disable-next-line react/prop-types
@@ -51,19 +52,13 @@ const UserContext = ({ children }) => {
     return () => unsubscribe;
   }, []);
 
-  
-
-
-
-
-
-	//! User profile....
-	const userprofile = (name, photoURL) => {
-		return updateProfile(auth.currentUser, {
-			displayName: name,
-			photoURL: photoURL,
-		});
-	};
+  //! User profile....
+  const userprofile = (name, photoURL) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photoURL,
+    });
+  };
 
   const logOut = () => {
     setLoading(true);

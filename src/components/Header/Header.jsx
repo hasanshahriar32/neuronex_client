@@ -4,7 +4,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // import { Button } from "../../features/Button";
 import { Container } from "../../features/container";
-import { AuthContext } from "../Authentication/UserContext/UserContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);

@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../../../components/Authentication/UserContext/UserContext";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import app from "../../../../configs/firebase.config";
+import { AuthContext } from "../../../../../Contexts/UserContext/UserContext";
 
 const auth = getAuth(app);
 const LoginForm = () => {
