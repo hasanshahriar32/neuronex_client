@@ -2,7 +2,7 @@ import { useContext } from "react";
 // import { Children } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import LoadingAnimation from "../../LoadingAnimation/LoadingAnimation";
-import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);

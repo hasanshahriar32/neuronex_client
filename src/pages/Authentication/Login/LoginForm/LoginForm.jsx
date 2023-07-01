@@ -5,7 +5,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import app from "../../../../configs/firebase.config";
-import { AuthContext } from "../../../../../Contexts/UserContext/UserContext";
+import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 
 const auth = getAuth(app);
 const LoginForm = () => {

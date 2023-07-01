@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 const AuthProvider = () => {
   const { handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
