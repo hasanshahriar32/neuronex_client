@@ -208,10 +208,10 @@ const AiQuery2 = () => {
           <div className="flex flex-col items-center">
             <img
               className="w-[150px] lg:w-[200px] h-[150px] lg:h-[200px] mx-auto"
-              src="https://media.tenor.com/gHBEW8k6LdsAAAAi/airplane-travel.gif"
+              src="https://i.giphy.com/media/9ZxzuJq34mvgGZmE84/giphy.webp"
               alt="time travel"
             />
-            <progress className="progress progress-secondary  w-[50%] h-3 mt-8"></progress>
+            {/* <progress className="progress progress-secondary  w-[50%] h-3 mt-8"></progress> */}
           </div>
         ) : (
           <div
