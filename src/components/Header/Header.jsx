@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // import { Button } from "../../features/Button";
-import { Container } from "../../features/container";
-import { AuthContext } from "../../../Contexts/UserContext/UserContext";
+import { Container } from "../features/container";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);

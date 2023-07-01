@@ -4,12 +4,12 @@ import { Helmet } from "react-helmet";
 import "./aiQuery.css";
 import { useContext, useEffect, useState } from "react";
 import AiSetting from "../AiSetting/AiSetting";
-import { AiContext } from "../../../../Contexts/FormContext/FormContext";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
-import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
-import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 const AiQuery2 = () => {
   const { modalState, aiConfig } = useContext(AiContext);

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { AiContext } from "../../../Contexts/FormContext/FormContext";
+import { AiContext } from "../../Contexts/FormContext/FormContext";
 import DrawerToggle from "./DrawerToggle";
 import SideCard from "./Components/SideCard";
 import axios from "axios";
-import { AuthContext } from "../../../Contexts/UserContext/UserContext";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 const Dashboard = () => {
   const { setAiConfig, drawerOpen, setDrawerOpen } = useContext(AiContext);
   const navigate = useNavigate();

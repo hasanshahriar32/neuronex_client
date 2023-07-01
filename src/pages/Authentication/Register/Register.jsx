@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 // import useToken from "../../../hooks/useToken";
 
 const Register = () => {

@@ -2,10 +2,10 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useContext } from "react";
-import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
+import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { AiContext } from "../../../../Contexts/FormContext/FormContext";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
   const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);

@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-import { AiContext } from "../../../../Contexts/FormContext/FormContext";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import axios from "axios";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
-import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
-import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
