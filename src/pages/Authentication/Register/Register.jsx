@@ -4,19 +4,19 @@ import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../components/Authentication/UserContext/UserContext";
-import useToken from "../../../hooks/useToken";
+// import useToken from "../../../hooks/useToken";
 
 const Register = () => {
-  const { createUser, userprofile, logOut } = useContext(AuthContext);
-  const [createdUserEmail, setCreatedUserEmail] = useState("");
-  const [token] = useToken(createdUserEmail);
+  const { createUser, userprofile } = useContext(AuthContext);
+  // const [createdUserEmail, setCreatedUserEmail] = useState("");
+  // const [token] = useToken(createdUserEmail);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
 
-  if (token) {
-    navigate("/login");
-  }
+  // if (token) {
+  //   navigate("/login");
+  // }
 
   const {
     register,
@@ -80,9 +80,10 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-                  setCreatedUserEmail(result?.email);
+                  // setCreatedUserEmail(result?.email);
+                  localStorage.setItem("token", result.token);
                   // navigate("/login");
-                  logOut();
+                  // logOut();
                   toast.success("Registration successful", {
                     position: "bottom-center",
                     autoClose: 5000,

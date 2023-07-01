@@ -62,7 +62,7 @@ const LoginForm = () => {
           .then((res) => res.json())
           .then((result) => {
             console.log(result);
-            localStorage.setItem("userAccessToken", result.token);
+            localStorage.setItem("token", result.token);
           })
 
       })
@@ -136,13 +136,13 @@ const LoginForm = () => {
     <div>
       <div className="hero min-h-screen">
         <div className="hero-content ">
-          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
+          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 shadow-2xl">
             <div className="card-body">
               <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
                 Login Now
               </h3>
               <form onSubmit={handleLogin}>
-                <div className="form-control mb-2">
+                <div className="form-control">
                   <label className="label">
                     <span className="label-text text-xl text-secondary">
                       Email
@@ -153,7 +153,7 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-7"
+                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-5"
                   />
                 </div>
 
@@ -168,7 +168,7 @@ const LoginForm = () => {
                       type={changePassword ? "password" : "text"}
                       name="password"
                       placeholder="password"
-                      className="input focus:outline-none bg-ghost  w-full text-lg py-7"
+                      className="input focus:outline-none bg-ghost  w-full text-lg py-5"
                     />
                     <span
                       className=" flex items-center mx-2 text-secondary cursor-pointer"
@@ -197,7 +197,7 @@ const LoginForm = () => {
                 </div>
 
                 <div className="form-control mt-6">
-                  <button className="btn text-xl btn-lg btn-secondary w-full ">
+                  <button className="btn text-xl btn-lg btn-secondary w-1/2 mx-auto ">
                     Login
                   </button>
                 </div>
