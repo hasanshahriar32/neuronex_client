@@ -132,7 +132,7 @@ const LoginForm = () => {
   return (
     <div>
       <div className="hero min-h-screen">
-        <div className="hero-content ">
+        <div className="hero-content">
           <div className="card border-secondary bg-page-gradient shadow-transparent/90 shadow-primary shadow-lg  border-dashed inset-0 border-2 flex-shrink-0 shadow-2xl">
             <div className="card-body">
               <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
@@ -165,7 +165,7 @@ const LoginForm = () => {
                       type={changePassword ? "password" : "text"}
                       name="password"
                       placeholder="password"
-                      className="input focus:outline-none bg-ghost  w-full text-lg py-5"
+                      className="input focus:outline-none bg-ghost  lg:w-full w-96 text-lg py-5"
                     />
                     <span
                       className=" flex items-center mx-2 text-secondary cursor-pointer"
