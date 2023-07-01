@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // import { Button } from "../../features/Button";
-import { Container } from "../../features/container";
-import { AuthContext } from "../Authentication/UserContext/UserContext";
+import { Container } from "../features/container";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 
 const Header = () => {
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
@@ -26,7 +26,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
 
   return (
-    <header className="dark:disabled fixed top-0 left-0 z-40 w-full border-b border-transparent-white backdrop-blur-[12px]">
+    <header className="dark:disabled fixed top-0 left-0 z-20 w-full border-b border-transparent-white backdrop-blur-[12px]">
       <Container className="flex h-navigation-height">
         <Link className="flex items-center text-md" href="/">
           Neuro Nex

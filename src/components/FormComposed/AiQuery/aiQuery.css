@@ -1,0 +1,54 @@
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
+.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #1f1f20;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+
+.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #222222;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+}
+
+.chatScroll::-webkit-scrollbar {
+  width: 0px;
+}
+
+.chatScroll::-webkit-scrollbar-thumb {
+  background: rgba(136, 136, 136, 0.281);
+}
+
+.chatScroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* hide :horizontal  */
+.chatScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* 
+
+#messages::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+
+#messages::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#messages::-webkit-scrollbar-thumb {
+  background-color: #25325b;
+  border-radius: 0.25rem;
+  width: 0.5rem;
+} */
