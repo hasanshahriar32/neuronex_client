@@ -160,7 +160,7 @@ const AiQuery2 = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-md md:text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3">{aiConfig?.title}</span>
+                <span className="text-gray-700 mr-3">{aiConfig?.sessionTitle}</span>
               </div>
               <span className="text-lg text-gray-600 mr-3">
                 {aiConfig?.subjectSelection}
