@@ -135,7 +135,7 @@ const LoginForm = () => {
   return (
     <div>
       <div className="hero min-h-screen">
-        <div className="hero-content ">
+        <div className="hero-content">
           <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 shadow-2xl">
             <div className="card-body">
               <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
