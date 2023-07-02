@@ -31,6 +31,7 @@ const AuthProvider = () => {
             theme: "dark",
           });
         navigate(from, { replace: true });
+
         notify();
       })
       .catch((err) => {
@@ -81,13 +82,13 @@ const AuthProvider = () => {
       <div className="">
         <button
           onClick={handlegooglelogin}
-          className="w-full tracking-wide btn-neutral text-md btn h-10 btn-lg my-2"
+          className="w-full tracking-wide btn-neutral  btn h-10 btn-lg my-1"
         >
           login with google
         </button>
         <button
           onClick={handlegithublogin}
-          className="w-full tracking-wide btn-neutral text-md btn h-10 btn-lg my-2"
+          className="w-full tracking-wide btn-neutral  btn h-10 btn-lg my-1"
         >
           login with github
         </button>
