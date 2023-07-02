@@ -161,13 +161,13 @@ const AiQuery2 = () => {
        );
        // setAiConfig([...aiConfig, {isBookmarked: dataGet?.isBookmarked}])
        // Check if the first object has the "isBookmarked" property
-       if (aiConfig?.hasOwnProperty("isBookmarked")) {
+      //  if (aiConfig?.hasOwnProperty("isBookmarked")) {
          // Set the value of "isBookmarked" to the second object's value
          aiConfig.isBookmarked = dataGet?.isBookmarked;
-       } else {
+      //  } else {
          // Add the "isBookmarked" property to the first object with the value from the second object
-         aiConfig.isBookmarked = dataGet?.isBookmarked;
-       }
+        //  aiConfig.isBookmarked = dataGet?.isBookmarked;
+      //  }
        console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
        console.log(dataGet);
      } catch (error) {
