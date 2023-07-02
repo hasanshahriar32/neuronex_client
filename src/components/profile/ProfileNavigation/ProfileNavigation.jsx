@@ -5,10 +5,23 @@ const ProfileNavigation = () => {
     <div>
       <nav aria-label="Main Nav" className="flex flex-col">
         <NavLink
+          to="/"
+          title="Home"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
+              : "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
+          }
+        >
+          
+        Neuro Nex
+        </NavLink>
+
+        <NavLink
           to="/profile/"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-secondary bg-primary  px-4 py-3 "
+              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
               : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
           }
         >
@@ -29,11 +42,12 @@ const ProfileNavigation = () => {
 
           <span className="text-sm font-medium"> Account </span>
         </NavLink>
+
         <NavLink
           to="/profile/edit"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-secondary bg-primary  px-4 py-3 "
+              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
               : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
           }
         >
@@ -59,11 +73,12 @@ const ProfileNavigation = () => {
 
           <span className="text-sm font-medium"> Edit Profile </span>
         </NavLink>
+
         <NavLink
           to="/settings/notification"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-secondary bg-primary  px-4 py-3 "
+              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
               : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
           }
         >
@@ -84,11 +99,12 @@ const ProfileNavigation = () => {
 
           <span className="text-sm font-medium"> Notifications </span>
         </NavLink>
+
         <NavLink
           to="/settings/business_info"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-secondary bg-primary  px-4 py-3 "
+              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
               : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
           }
         >
@@ -114,7 +130,7 @@ const ProfileNavigation = () => {
           to="/settings/payment"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-secondary bg-primary  px-4 py-3 "
+              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
               : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
           }
         >
@@ -135,6 +151,7 @@ const ProfileNavigation = () => {
 
           <span className="text-sm font-medium"> Payment Methods</span>
         </NavLink>
+        
       </nav>
     </div>
   );
