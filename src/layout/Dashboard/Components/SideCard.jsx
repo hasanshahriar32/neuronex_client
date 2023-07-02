@@ -2,15 +2,16 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useContext } from "react";
-import { ChatContext } from "../../../../Contexts/SessionContext/SessionContext";
+import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { AiContext } from "../../../components/FormComposed/FormContext/FormContext";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 const SideCard = ({ sesstionData }) => {
-  const { setMessages } = useContext(ChatContext);
+  const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
   // const handleDelete = (id) => {};
   const handleFetchMessage = async (id) => {
+    setSessionMessageLoading(true);
     try {
       const config = {
         headers: {
@@ -31,13 +32,17 @@ const SideCard = ({ sesstionData }) => {
         assistanceLevel: dataGet?.assistanceLevel,
         additionalInstruction: dataGet?.additionalInstruction,
         sessionId: dataGet?.sessionId,
+        sessionTitle: dataGet?.sessionTitle,
+        isBookmarked: dataGet?.isBookmarked || false,
       };
       setAiConfig(aiConfigs);
       console.log(aiConfigs);
       setModalState(false);
+      setSessionMessageLoading(false);
       console.log(dataGet);
     } catch (error) {
       console.log(error);
+      setSessionMessageLoading(false);
       toast.error({
         title: "Error Occurred!",
         description: "Failed to fetch user session data.",
@@ -132,7 +137,7 @@ const SideCard = ({ sesstionData }) => {
                       type="button"
                       className="inline-flex  items-center justify-center rounded-lg border w-10 text-xl lg:text-2xl transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                     >
-                      {session?.isFavourite ? (
+                      {session?.isBookmarked ? (
                         <AiFillHeart className="text-red-500" />
                       ) : (
                         <AiOutlineHeart />

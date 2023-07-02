@@ -1,7 +1,7 @@
-import SessionContext from "../Contexts/SessionContext/SessionContext";
-import UserContext from "./components/Authentication/UserContext/UserContext";
-import FormContext from "./components/FormComposed/FormContext/FormContext";
+import SessionContext from "./Contexts/SessionContext/SessionContext";
 import Routes from "./routes/Routes";
+import UserContext from "./Contexts/UserContext/UserContext";
+import FormContext from "./Contexts/FormContext/FormContext";
 
 function App() {
   return (

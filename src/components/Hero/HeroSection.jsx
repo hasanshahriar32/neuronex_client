@@ -1,4 +1,4 @@
-import { Button, Highlight } from "../../features/Button";
+import { Button, Highlight } from "../features/Button";
 import HeroBtn from "./HeroBtn/HeroBtn";
 import { Hero, HeroSubtitle, HeroTitle } from "./hero";
 import { HeroImage } from "./hero_img";

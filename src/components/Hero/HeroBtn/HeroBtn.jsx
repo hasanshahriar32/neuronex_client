@@ -4,7 +4,7 @@ import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import { Shapes } from "./Shapes";
 import { transition } from "./settings.jsx";
 import useMeasure from "react-use-measure";
-import { Button, Highlight } from "../../../features/Button";
+import { Button, Highlight } from "../../features/Button";
 import { useNavigate } from "react-router-dom";
 
 export default function HeroBtn() {
@@ -22,7 +22,7 @@ export default function HeroBtn() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/dashboard/compose");
+    navigate("/ai/compose");
   };
   return (
     <MotionConfig transition={transition}>

@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthContext } from "../UserContext/UserContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const AuthProvider = () => {
   const { handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const from = location.state?.from?.pathname || '/';
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const handlegooglelogin = () => {
     handleGoogleSignIn()
       .then((res) => {
@@ -30,7 +30,7 @@ const AuthProvider = () => {
             progress: undefined,
             theme: "dark",
           });
-          navigate(from, { replace: true });
+        navigate(from, { replace: true });
         notify();
       })
       .catch((err) => {

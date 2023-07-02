@@ -38,7 +38,7 @@ const Routes = () => {
       ],
     },
     {
-      path: "/dashboard",
+      path: "/ai",
       element: (
         <PrivateRoute>
           <Dashboard />
@@ -46,12 +46,12 @@ const Routes = () => {
       ),
       children: [
         {
-          path: "/dashboard/",
+          path: "/ai/",
           element: <Compose></Compose>,
         },
 
         {
-          path: "/dashboard/compose",
+          path: "/ai/compose",
           element: <Compose></Compose>,
         },
       ],
