@@ -30,7 +30,7 @@ const AuthProvider = () => {
             progress: undefined,
             theme: "dark",
           });
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
 
         notify();
       })
@@ -52,7 +52,7 @@ const AuthProvider = () => {
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
         const notify = () => toast.success("Login Successful");
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
         notify();
       })
       .catch((err) => {
@@ -74,6 +74,7 @@ const AuthProvider = () => {
         console.log("save user", data);
         // localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", JSON.stringify(data?.token));
+        navigate(from, { replace: true });
       });
   };
   return (
