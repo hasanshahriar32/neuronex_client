@@ -75,6 +75,19 @@ const AuthProvider = () => {
         // localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", JSON.stringify(data?.token));
         navigate(from, { replace: true });
+      })
+      .catch((err)=>{
+        toast.error(err.message, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        console.log(err)
       });
   };
   return (
