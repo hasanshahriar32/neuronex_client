@@ -133,7 +133,17 @@ const Dashboard = () => {
                 <span className="loading loading-ring text-3xl h-12 w-12"></span>
               </div>
             )}
-            <SideCard sesstionData={sesstionData} />
+            {sesstionData?.length > 0 ? (
+              <SideCard sesstionData={sesstionData} />
+            ) : (
+              <div className="w-full flex items-center justify-center h-full">
+                <img
+                  src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2ZudG96b3JxNTB2Z2xhcnhqMmU1ZGdob2R4amsxZTUweXp2ZnozYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/dDBFDK1a7WMqD411R2/giphy.gif"
+                  alt="blank"
+                  className="w-[100px] h-[100px] lg:w-[150px] lg:h-[150px]"
+                />
+              </div>
+            )}
           </div>
 
           <li>

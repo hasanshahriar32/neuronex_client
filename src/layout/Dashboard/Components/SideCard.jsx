@@ -32,7 +32,8 @@ const SideCard = ({ sesstionData }) => {
         assistanceLevel: dataGet?.assistanceLevel,
         additionalInstruction: dataGet?.additionalInstruction,
         sessionId: dataGet?.sessionId,
-        sessionTitle: dataGet?.sessionTitle
+        sessionTitle: dataGet?.sessionTitle,
+        isBookmarked: dataGet?.isBookmarked || false,
       };
       setAiConfig(aiConfigs);
       console.log(aiConfigs);
