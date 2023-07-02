@@ -9,6 +9,7 @@ import Home from "../pages/Home/Home";
 import ProfileLayout from "../layout/Profile/Profile";
 import Profile from "../components/profile/Profile";
 import ProfileEdit from "../layout/Profile/ProfileEdit";
+import AllUsers from "../layout/Dashboard/AllUsers/AllUsers";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -33,6 +34,7 @@ const Routes = () => {
       children: [
         { path: "/profile/", element: <Profile></Profile> },
         { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
+        { path: "/profile/all-users", element: <AllUsers /> },
       ],
     },
     {
