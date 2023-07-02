@@ -62,7 +62,7 @@ const AuthProvider = () => {
       });
   };
   const saveUserToDb = (name, pic, email, uid, userAbout, verified) => {
-    fetch("https://neuronex-server-test.vercel.app/user", {
+    fetch("https://neuronex-server.onrender.com/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,18 +76,18 @@ const AuthProvider = () => {
         localStorage.setItem("token", JSON.stringify(data?.token));
         navigate(from, { replace: true });
       })
-      .catch((err)=>{
+      .catch((err) => {
         toast.error(err.message, {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-        console.log(err)
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(err);
       });
   };
   return (

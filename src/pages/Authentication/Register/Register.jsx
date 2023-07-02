@@ -65,7 +65,7 @@ const Register = () => {
               };
 
               //! Save User info to the database....
-              fetch("https://neuronex-server-test.vercel.app/user", {
+              fetch("https://neuronex-server.onrender.com/user", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
