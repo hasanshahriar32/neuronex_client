@@ -14,9 +14,9 @@ const LoginForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+	const from = location.state?.from?.pathname || '/';
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -61,6 +61,7 @@ const LoginForm = () => {
           .then((result) => {
             console.log(result);
             localStorage.setItem("token", result.token);
+            navigate(from, { replace: true });
           });
       })
 

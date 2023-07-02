@@ -8,15 +8,11 @@ import { AuthContext } from "../../../components/Authentication/UserContext/User
 
 const Register = () => {
   const { createUser, userprofile } = useContext(AuthContext);
-  // const [createdUserEmail, setCreatedUserEmail] = useState("");
-  // const [token] = useToken(createdUserEmail);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
+	const from = location.state?.from?.pathname || '/';
 
-  // if (token) {
-  //   navigate("/login");
-  // }
 
   const {
     register,
@@ -80,10 +76,8 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-                  // setCreatedUserEmail(result?.email);
                   localStorage.setItem("token", result.token);
-                  // navigate("/login");
-                  // logOut();
+                  navigate(from, { replace: true });
                   toast.success("Registration successful", {
                     position: "bottom-center",
                     autoClose: 5000,
