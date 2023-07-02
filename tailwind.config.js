@@ -22,6 +22,8 @@ export default {
     colors: {
       transparent: "transparent",
       white: "#fff",
+      red: "#ff0000",
+      yellow: "#FBFF00",
       "off-white": "#f7f8f8",
       "transparent-white": "rgba(255, 255, 255, 0.08)",
       background: "#000212",
