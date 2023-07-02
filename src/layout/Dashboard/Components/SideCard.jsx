@@ -137,7 +137,7 @@ const SideCard = ({ sesstionData }) => {
                       type="button"
                       className="inline-flex  items-center justify-center rounded-lg border w-10 text-xl lg:text-2xl transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                     >
-                      {session?.isFavourite ? (
+                      {session?.isBookmarked ? (
                         <AiFillHeart className="text-red-500" />
                       ) : (
                         <AiOutlineHeart />

@@ -145,23 +145,32 @@ const AiQuery2 = () => {
 
   const handleFavorite = async()=>{
      try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-      const { data: dataGet } = await axios.post(
-        "https://neuronex-server-test.vercel.app/session/favorite/switch",
-        {
-          sessionId: aiConfig?.sessionId,
-          uid: user?.uid,
-        },
-        config
-      );
-      // setAiConfig([...aiConfig, {isBookmarked: dataGet?.isBookmarked}])
-      console.log(dataGet)
-    } catch (error) {
+       const config = {
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${localStorage.getItem("token")}`,
+         },
+       };
+       const { data: dataGet } = await axios.post(
+         "https://neuronex-server-test.vercel.app/session/favorite/switch",
+         {
+           sessionId: aiConfig?.sessionId,
+           uid: user?.uid,
+         },
+         config
+       );
+       // setAiConfig([...aiConfig, {isBookmarked: dataGet?.isBookmarked}])
+       // Check if the first object has the "isBookmarked" property
+       if (aiConfig?.hasOwnProperty("isBookmarked")) {
+         // Set the value of "isBookmarked" to the second object's value
+         aiConfig.isBookmarked = dataGet?.isBookmarked;
+       } else {
+         // Add the "isBookmarked" property to the first object with the value from the second object
+         aiConfig.isBookmarked = dataGet?.isBookmarked;
+       }
+       console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
+       console.log(dataGet);
+     } catch (error) {
       console.log(error);
       toast.error({
         title: "Error Occurred!",
