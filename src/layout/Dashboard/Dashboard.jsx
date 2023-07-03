@@ -54,7 +54,7 @@ const Dashboard = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server.onrender.com/session/all",
+        "https://neuronex-server-test.vercel.app/session/all",
         {
           page: 1,
           limit: 50,

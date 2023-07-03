@@ -50,7 +50,7 @@ const LoginForm = () => {
         };
 
         //! Save User info to the database....
-        fetch("https://neuronex-server.onrender.com/user", {
+        fetch("https://neuronex-server-test.vercel.app/user", {
           method: "POST",
           headers: {
             "content-type": "application/json",

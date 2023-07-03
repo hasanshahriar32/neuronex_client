@@ -62,7 +62,7 @@ const AuthProvider = () => {
       });
   };
   const saveUserToDb = (name, pic, email, uid, userAbout, verified) => {
-    fetch("https://neuronex-server.onrender.com/user", {
+    fetch("https://neuronex-server-test.vercel.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

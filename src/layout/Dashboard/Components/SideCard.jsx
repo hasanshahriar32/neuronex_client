@@ -20,7 +20,7 @@ const SideCard = ({ sesstionData }) => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server.onrender.com/session/single",
+        "https://neuronex-server-test.vercel.app/session/single",
         {
           sessionId: id,
         },

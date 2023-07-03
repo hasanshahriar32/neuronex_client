@@ -152,7 +152,7 @@ const AiQuery2 = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server.onrender.com/session/favorite/switch",
+        "https://neuronex-server-test.vercel.app/session/favorite/switch",
         {
           sessionId: aiConfig?.sessionId,
           uid: user?.uid,
