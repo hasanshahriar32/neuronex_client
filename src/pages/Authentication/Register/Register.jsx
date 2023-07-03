@@ -1,22 +1,17 @@
-import { toast } from "react-toastify";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 // import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const { createUser, userprofile } = useContext(AuthContext);
-  // const [createdUserEmail, setCreatedUserEmail] = useState("");
-  // const [token] = useToken(createdUserEmail);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
-
-  // if (token) {
-  //   navigate("/login");
-  // }
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -80,10 +75,8 @@ const Register = () => {
                 .then((res) => res.json())
                 .then((result) => {
                   console.log(result);
-                  // setCreatedUserEmail(result?.email);
                   localStorage.setItem("token", result.token);
-                  // navigate("/login");
-                  // logOut();
+                  navigate(from, { replace: true });
                   toast.success("Registration successful", {
                     position: "bottom-center",
                     autoClose: 5000,
@@ -122,44 +115,43 @@ const Register = () => {
 
   return (
     <div>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex">
-          <div className="text-center"></div>
-          <div className="card border-secondary bg-page-gradient inset-0 border-2 border-dashed shadow-transparent/90 shadow-primary shadow-lg flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
-            <div className="card-body">
-              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
+      <div className="flex items-center justify-center h-[90vh] ">
+        <div className="max-w-xl ">
+          <div className="card  bg-page-gradient shadow-transparent/90 shadow-primary">
+            <div className="px-2 pt-4">
+              <h3 className="font-serif font-semibold text-center text-2xl text-secondary">
                 Register Here
               </h3>
               <form
                 onSubmit={handleSubmit(handleRegister)}
                 className="card-body"
               >
-                <div className="form-control mx-1 w-full">
+                <div className="form-control w-full ">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md mb-1 text-secondary">
                       Full Name{" "}
                     </span>
                   </label>
                   <input
                     type="text"
                     {...register("name", {})}
-                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
+                    className="input  border-secondary bg-ghost  text-lg py-5"
                   />
                   {errors.name && (
                     <p className="text-red-500">{errors.name.message}</p>
                   )}
                 </div>
 
-                <div className="form-control mx-1 w-full">
+                <div className="form-control  w-full">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
-                      email{" "}
+                    <span className="label-text text-md text-secondary mb-1 mt-2">
+                      Email{" "}
                     </span>
                   </label>
                   <input
                     type="email"
                     {...register("email", {})}
-                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost  text-lg py-7"
+                    className="input  border-secondary   bg-ghost  text-lg py-5"
                   />
                   {errors.email && (
                     <p className="text-red-500">{errors.email.message}</p>
@@ -167,9 +159,9 @@ const Register = () => {
                 </div>
 
                 <div className="flex">
-                  <div className="form-control mx-1 w-full">
+                  <div className="form-control w-full">
                     <label className="label">
-                      <span className="label-text text-xl text-secondary">
+                      <span className="label-text text-md mb-1 mt-2 text-secondary">
                         Password{" "}
                       </span>
                     </label>
@@ -177,7 +169,7 @@ const Register = () => {
                       <input
                         type={changePassword ? "password" : "text"}
                         {...register("password", {})}
-                        className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost w-full text-lg py-7"
+                        className="input input-secondary  w-full text-md py-5"
                       />
                       {errors.password && (
                         <p className="label-text text-xl text-secondary">
@@ -185,24 +177,24 @@ const Register = () => {
                         </p>
                       )}
                       <span
-                        className="flex items-center mx-2 label-text text-xl text-secondary"
+                        className="flex items-center mx-2 label-text  text-secondary"
                         onClick={() => {
                           setChangePassword(changeIcon);
                         }}
                       >
                         {changeIcon ? (
-                          <p className="flex group cursor-pointer text-xl">
+                          <p className="flex group cursor-pointer text-xs mt-1 justify-end">
                             <span className="mr-2 group-hover:underline">
                               Hidden Password
                             </span>
-                            <BsEyeSlashFill className="mt-1" />
+                            <BsEyeSlashFill className="" />
                           </p>
                         ) : (
-                          <p className="flex group cursor-pointer text-xl">
+                          <p className="flex group cursor-pointer text-xs mt-1 justify-end">
                             <span className="mr-2 group-hover:underline">
                               Show Password
                             </span>
-                            <BsEyeFill className="mt-1" />
+                            <BsEyeFill className="" />
                           </p>
                         )}
                       </span>
@@ -210,9 +202,9 @@ const Register = () => {
                   </div>
                 </div>
 
-                <div className="form-control mx-1 w-full">
+                <div className="form-control  w-full">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md mb-1 text-secondary">
                       Photo
                     </span>
                   </label>
@@ -221,7 +213,7 @@ const Register = () => {
                     {...register("img", {
                       required: "Photo is Required",
                     })}
-                    className="input input-secondary border-secondary focus:border-dotted border-solid  bg-ghost w-full text-xl h-12"
+                    className="input input-secondary  bg-ghost w-full text-md h-8"
                   />
                   {errors.img && (
                     <p className="text-red-500">{errors.img.message}</p>
@@ -229,19 +221,17 @@ const Register = () => {
                 </div>
 
                 <input
-                  className="btn text-xl btn-lg btn-secondary w-full mt-7"
+                  className="btn text-md btn-lg btn-secondary w-full mt-7"
                   value="Register"
                   type="submit"
                 />
               </form>
-
               <label className="label">
-                <a
-                  href="#"
-                  className="label-text-alt text-secondary link text-lg link-hover hover:underline text-start"
-                >
-                  <Link to="/login">Already have an account?</Link>
-                </a>
+                <span className="text-secondary  text-md link-hover hover:underline pb-4">
+                  <Link className="ml-4" to="/login">
+                    Already have an account?
+                  </Link>
+                </span>
               </label>
             </div>
           </div>

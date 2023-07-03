@@ -10,9 +10,11 @@ import { toast } from "react-toastify";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import axios from "axios";
 
 const AiQuery2 = () => {
-  const { modalState, aiConfig } = useContext(AiContext);
+  const { modalState, setAiConfig, aiConfig } = useContext(AiContext);
   const [loadingAi, setLoadingAi] = useState(false);
   const { messages, sessionMessageLoading, setMessages } =
     useContext(ChatContext);
@@ -140,6 +142,43 @@ const AiQuery2 = () => {
       handleSendMessage();
     }
   };
+
+  const handleFavorite = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/session/favorite/switch",
+        {
+          sessionId: aiConfig?.sessionId,
+          uid: user?.uid,
+        },
+        config
+      );
+
+      setAiConfig((prevConfig) => ({
+        ...prevConfig,
+        isBookmarked: dataGet?.isBookmarked,
+      }));
+
+      console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
+      console.log(dataGet);
+    } catch (error) {
+      console.log(error);
+      toast.error({
+        title: "Error Occurred!",
+        description: "Failed to switch favourite.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        theme: "dark",
+      });
+    }
+  };
   return (
     <div>
       {/* <!-- component --> */}
@@ -160,7 +199,9 @@ const AiQuery2 = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-md md:text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3">{aiConfig?.title}</span>
+                <span className="text-gray-700 mr-3">
+                  {aiConfig?.sessionTitle}
+                </span>
               </div>
               <span className="text-lg text-gray-600 mr-3">
                 {aiConfig?.subjectSelection}
@@ -172,23 +213,15 @@ const AiQuery2 = () => {
 
             <div className="flex items-center space-x-2">
               <button
+                onClick={handleFavorite}
                 type="button"
-                className="inline-flex  items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                className="inline-flex text-3xl items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
-                </svg>
+                {aiConfig?.isBookmarked == true ? (
+                  <AiFillHeart />
+                ) : (
+                  <AiOutlineHeart />
+                )}
               </button>
               <label
                 // type="checkbox"
