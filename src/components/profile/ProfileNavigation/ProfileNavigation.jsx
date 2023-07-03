@@ -75,7 +75,7 @@ const ProfileNavigation = () => {
         </NavLink>
 
         <NavLink
-          to="/profile/all-users"
+          to="/admin/all-users"
           className={({ isActive }) =>
             isActive
               ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
