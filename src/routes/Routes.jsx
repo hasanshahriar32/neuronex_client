@@ -1,17 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
+import Profile from "../components/profile/Profile";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
+import ProfileLayout from "../layout/Profile/Profile";
+import ProfileEdit from "../layout/Profile/ProfileEdit";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
 import Home from "../pages/Home/Home";
-import ProfileLayout from "../layout/Profile/Profile";
-import Profile from "../components/profile/Profile";
-import ProfileEdit from "../layout/Profile/ProfileEdit";
-import AllUsers from "../layout/Admin/AllUsers/AllUsers";
-import AdminLayout from "../layout/Admin/AdminLayout";
 import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
+import AdminLayout from "../layout/Admin/AdminLayout";
+import AllUsers from "../layout/Admin/AllUsers/AllUsers";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -65,6 +65,8 @@ const Routes = () => {
         },
       ],
     },
+    { path: "/login", element: <Login></Login> },
+    { path: "/register", element: <Register></Register> },
   ]);
   return (
     <div className="bg-page-gradient pt-navigation-height">

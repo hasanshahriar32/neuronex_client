@@ -42,7 +42,7 @@ const OneTap = () => {
     },
   });
   const saveUserToDb = (name, pic, email, uid, userAbout, verified) => {
-    fetch("https://neuronex-server-test.vercel.app/user", {
+    fetch("https://neuronex-server.onrender.com/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -143,34 +143,31 @@ const AiQuery2 = () => {
     }
   };
 
-  const handleFavorite = async()=>{
-     try {
-       const config = {
-         headers: {
-           "Content-Type": "application/json",
-           Authorization: `Bearer ${localStorage.getItem("token")}`,
-         },
-       };
-       const { data: dataGet } = await axios.post(
-         "https://neuronex-server-test.vercel.app/session/favorite/switch",
-         {
-           sessionId: aiConfig?.sessionId,
-           uid: user?.uid,
-         },
-         config
-       );
-       // setAiConfig([...aiConfig, {isBookmarked: dataGet?.isBookmarked}])
-       // Check if the first object has the "isBookmarked" property
-      //  if (aiConfig?.hasOwnProperty("isBookmarked")) {
-         // Set the value of "isBookmarked" to the second object's value
-         aiConfig.isBookmarked = dataGet?.isBookmarked;
-      //  } else {
-         // Add the "isBookmarked" property to the first object with the value from the second object
-        //  aiConfig.isBookmarked = dataGet?.isBookmarked;
-      //  }
-       console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
-       console.log(dataGet);
-     } catch (error) {
+  const handleFavorite = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server.onrender.com/session/favorite/switch",
+        {
+          sessionId: aiConfig?.sessionId,
+          uid: user?.uid,
+        },
+        config
+      );
+
+      setAiConfig((prevConfig) => ({
+        ...prevConfig,
+        isBookmarked: dataGet?.isBookmarked,
+      }));
+
+      console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
+      console.log(dataGet);
+    } catch (error) {
       console.log(error);
       toast.error({
         title: "Error Occurred!",
@@ -181,7 +178,7 @@ const AiQuery2 = () => {
         theme: "dark",
       });
     }
-  }
+  };
   return (
     <div>
       {/* <!-- component --> */}
@@ -202,7 +199,9 @@ const AiQuery2 = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-md md:text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3">{aiConfig?.sessionTitle}</span>
+                <span className="text-gray-700 mr-3">
+                  {aiConfig?.sessionTitle}
+                </span>
               </div>
               <span className="text-lg text-gray-600 mr-3">
                 {aiConfig?.subjectSelection}
@@ -218,9 +217,11 @@ const AiQuery2 = () => {
                 type="button"
                 className="inline-flex text-3xl items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
-                {
-                  aiConfig?.isBookmarked == true? <AiFillHeart />: <AiOutlineHeart /> 
-                }
+                {aiConfig?.isBookmarked == true ? (
+                  <AiFillHeart />
+                ) : (
+                  <AiOutlineHeart />
+                )}
               </button>
               <label
                 // type="checkbox"

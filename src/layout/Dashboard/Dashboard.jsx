@@ -1,11 +1,11 @@
+import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AiContext } from "../../Contexts/FormContext/FormContext";
-import DrawerToggle from "./DrawerToggle";
-import SideCard from "./Components/SideCard";
-import axios from "axios";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
+import SideCard from "./Components/SideCard";
+import DrawerToggle from "./DrawerToggle";
 const Dashboard = () => {
   const { setAiConfig, drawerOpen, setDrawerOpen } = useContext(AiContext);
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Dashboard = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server-test.vercel.app/session/all",
+        "https://neuronex-server.onrender.com/session/all",
         {
           page: 1,
           limit: 50,
@@ -64,7 +64,6 @@ const Dashboard = () => {
       );
       setSessionData(dataGet);
       setLoadingSession(false);
-      console.log(dataGet);
     } catch (error) {
       console.log(error);
       setLoadingSession(false);

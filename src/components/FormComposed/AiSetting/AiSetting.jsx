@@ -71,7 +71,7 @@ export default function AiSetting() {
           },
         };
         const { dataGet } = await axios.post(
-          "https://neuronex-server-test.vercel.app/session",
+          "https://neuronex-server.onrender.com/session",
           {
             sessionTitle: data?.additionalInstruction || "",
             subjectSelection: data?.subjectSelection,
