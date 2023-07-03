@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
 import Profile from "../components/profile/Profile";
+import AllUsers from "../layout/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
 import ProfileLayout from "../layout/Profile/Profile";
@@ -18,12 +19,7 @@ const Routes = () => {
     {
       path: "/",
       element: <Main></Main>,
-      children: [
-        { path: "/", element: <Home></Home> },
-
-        { path: "/login", element: <Login></Login> },
-        { path: "/register", element: <Register></Register> },
-      ],
+      children: [{ path: "/", element: <Home></Home> }],
     },
     {
       path: "/profile",
@@ -36,15 +32,16 @@ const Routes = () => {
       children: [
         { path: "/profile/", element: <Profile></Profile> },
         { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
-        
       ],
     },
     {
       path: "/admin",
-      element: <AdminRoute><AdminLayout /></AdminRoute>,
-      children: [
-        { path: "/admin/all-users", element: <AllUsers /> },
-      ],
+      element: (
+        <AdminRoute>
+          <AdminLayout />
+        </AdminRoute>
+      ),
+      children: [{ path: "/admin/all-users", element: <AllUsers /> }],
     },
     {
       path: "/ai",
