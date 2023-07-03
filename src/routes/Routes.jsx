@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
 import Profile from "../components/profile/Profile";
-import AllUsers from "../layout/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
 import ProfileLayout from "../layout/Profile/Profile";
