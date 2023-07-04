@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-// import ProfileNavigation from "../../components/profile/ProfileNavigation/ProfileNavigation";
+import AdminNavigation from "../../pages/Admin/AdminNavigation/AdminNavigation";
 
 const AdminLayout = () => {
   return (
@@ -17,7 +17,7 @@ const AdminLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-          {/* <ProfileNavigation></ProfileNavigation> */}
+          <AdminNavigation />
         </ul>
       </div>
     </div>
