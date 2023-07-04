@@ -76,6 +76,7 @@ const Register = () => {
                 .then((result) => {
                   console.log(result);
                   localStorage.setItem("token", result.token);
+                  localStorage.setItem("user_id", result._id);
                   navigate(from, { replace: true });
                   toast.success("Registration successful", {
                     position: "bottom-center",
