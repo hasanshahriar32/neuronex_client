@@ -177,12 +177,13 @@ const AiQuery2 = () => {
         config
       );
 
+      // Use the callback version of setAiConfig to work with the latest state
+      const currentBookmarkState = dataGet?.isBookmarked
       setAiConfig((prevConfig) => ({
         ...prevConfig,
-        isBookmarked: dataGet?.isBookmarked,
+        isBookmarked: !currentBookmarkState,
       }));
 
-      console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
       console.log(dataGet);
     } catch (error) {
       console.log(error);
@@ -196,6 +197,7 @@ const AiQuery2 = () => {
       });
     }
   };
+
   return (
     <div>
       {/* <!-- component --> */}
