@@ -1,10 +1,10 @@
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../../../components/Authentication/UserContext/UserContext";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import app from "../../../../configs/firebase.config";
 
 const auth = getAuth(app);
@@ -14,9 +14,9 @@ const LoginForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -39,7 +39,30 @@ const LoginForm = () => {
           progress: undefined,
           theme: "dark",
         });
-        localStorage.setItem("userAccessToken", user.accessToken);
+
+        const addedUser = {
+          name: user.displayName,
+          email: user.email,
+          pic: user.photoURL,
+          uid: user?.uid,
+          userAbout: "user",
+          verified: user?.emailVerified,
+        };
+
+        //! Save User info to the database....
+        fetch("https://neuronex-server-test.vercel.app/user", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(addedUser),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            localStorage.setItem("token", result.token);
+            navigate(from, { replace: true });
+          });
       })
 
       .catch((error) => {
@@ -106,20 +129,19 @@ const LoginForm = () => {
         });
     }
   };
-
   return (
     <div>
-      <div className="hero min-h-screen">
-        <div className="hero-content ">
-          <div className="card border-primary bg-page-gradient border-dashed shadow-transparent/90 shadow-primary shadow-lg border flex-shrink-0 lg:w-[700px] w-[90vw] shadow-2xl">
+      <div className="flex items-center justify-center h-[90vh]">
+        <div className="max-w-xl">
+          <div className="card shadow-transparent/90 shadow-primary  shadow-2xl">
             <div className="card-body">
-              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
-                Login Now
+              <h3 className="font-serif font-semibold text-center text-2xl text-secondary w-full">
+                Login
               </h3>
               <form onSubmit={handleLogin}>
-                <div className="form-control mb-2">
+                <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md text-secondary mb-1">
                       Email
                     </span>
                   </label>
@@ -128,13 +150,13 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-7"
+                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-md py-5"
                   />
                 </div>
 
-                <div className="form-control mb-2">
+                <div className="form-control my-2">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md text-secondary mb-1">
                       Password
                     </span>
                   </label>
@@ -143,7 +165,7 @@ const LoginForm = () => {
                       type={changePassword ? "password" : "text"}
                       name="password"
                       placeholder="password"
-                      className="input focus:outline-none bg-ghost  w-full text-lg py-7"
+                      className="input focus:outline-none bg-ghost  w-full text-lg py-5"
                     />
                     <span
                       className=" flex items-center mx-2 text-secondary cursor-pointer"
@@ -154,7 +176,7 @@ const LoginForm = () => {
                       {changeIcon ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </span>
                   </div>
-                  <div className="mt-5 flex items-center justify-between">
+                  <div className="mt-1 flex items-center justify-between">
                     <label className="label">
                       <p
                         onClick={handleForgetPassword}
@@ -171,13 +193,13 @@ const LoginForm = () => {
                   </div>
                 </div>
 
-                <div className="form-control mt-6">
-                  <button className="btn text-xl btn-lg btn-secondary w-full ">
+                <div className="form-control mt-6 ">
+                  <button className="btn text-md  btn-secondary w-full ">
                     Login
                   </button>
                 </div>
               </form>
-              <div className="divider text-md mt-6 mb-4">OR</div>
+              <div className="divider text-md mt-6 ">OR</div>
               <AuthProvider />
             </div>
           </div>

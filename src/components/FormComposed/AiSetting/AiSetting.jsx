@@ -1,11 +1,17 @@
 import { useForm } from "react-hook-form";
-import { AiContext } from "../FormContext/FormContext";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import axios from "axios";
+import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
+import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
+  const { setMessages } = useContext(ChatContext);
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -17,7 +23,7 @@ export default function AiSetting() {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (
       data?.subjectSelection == aiConfig?.subjectSelection &&
       data?.assistanceLevel == aiConfig?.assistanceLevel &&
@@ -45,8 +51,8 @@ export default function AiSetting() {
       data?.assistanceLevel !== "" ||
       data?.additionalInstruction !== ""
     ) {
-      setAiConfig(data);
-      console.log(data);
+      setAiConfig([]);
+      setMessages([]);
       toast.success("New session created!", {
         position: "top-center",
         autoClose: 2000,
@@ -57,6 +63,39 @@ export default function AiSetting() {
         progress: undefined,
         theme: "dark",
       });
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        };
+        const { dataGet } = await axios.post(
+          "https://neuronex-server-test.vercel.app/session",
+          {
+            sessionTitle: data?.additionalInstruction || "",
+            subjectSelection: data?.subjectSelection,
+            assistanceLevel: data?.assistanceLevel,
+            additionalInstruction: data?.additionalInstruction,
+            sessionId: dataId,
+            uid: user?.uid,
+          },
+          config
+        );
+        setAiConfig(data);
+        console.log(data);
+        console.log(dataGet);
+      } catch (error) {
+        console.log(error);
+        toast({
+          title: "Error Occurred!",
+          description: "Failed to send the message.",
+          status: "error",
+          duration: 4000,
+          isClosable: true,
+          theme: "dark",
+        });
+      }
       setModalState(false);
       return;
     }
@@ -81,11 +120,16 @@ export default function AiSetting() {
   };
 
   return (
-    <div className="card  w-full  my-10 max-w-7xl">
+    <div className="card  w-full my-6 max-w-7xl">
       {/* <ToastContainer /> */}
-      <div className="card-body shadow-primary mx-[5%]  shadow-2xl  flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed border bg-base-100">
+      <div className="card-body shadow-primary mx-[5%]  shadow-sm   flex-shrink-0 border-secondary-focus bg-hero-glow bg-blend-darken shadow-transparent/90 border-dashed inset-0 border-2  bg-base-100">
         <form onSubmit={handleSubmit(onSubmit)} className="">
-          <h1 className="text-4xl font-bold mb-4">AI Configure</h1>
+          <div className="flex flex-row-reverse justify-between flex-wrap-reverse w-full place-items-end">
+            <h1 className="text-4xl font-bold">AI Configure</h1>
+            <div className="mb-2">
+              <DrawerToggle></DrawerToggle>
+            </div>
+          </div>
 
           <div className="mb-4 form-control">
             <label className=" flex flex-col">
@@ -98,7 +142,7 @@ export default function AiSetting() {
                 })}
                 aria-invalid={errors["subjectSelection"] ? "true" : "false"}
                 defaultValue={aiConfig?.subjectSelection}
-                className="form-select mb-2 select text-md h-12 w-full select-ghost  border-secondary text-gray-700"
+                className="form-select select text-sm h-8 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
                   Subject Selection
@@ -128,8 +172,8 @@ export default function AiSetting() {
           </div>
 
           <div className="mb-4">
-            <p className="mb-2 label text-lg">Assistance Level</p>
-            <div className="flex flex-row justify-start md:justify-between flex-wrap gap-4 items-center">
+            <p className="label text-lg">Assistance Level</p>
+            <div className="flex flex-row justify-start md:justify-between flex-wrap gap-1 items-center">
               {[
                 { label: "Basic explanation", value: "Basic explanation" },
                 {
@@ -145,7 +189,7 @@ export default function AiSetting() {
                 return (
                   <label
                     key={value + index}
-                    className="text-md h-12 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
+                    className="text-sm h-8 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
                       defaultValue={aiConfig?.assistanceLevel}
@@ -157,7 +201,7 @@ export default function AiSetting() {
                       }
                       value={value}
                       type="radio"
-                      className="form-radio h-6 w-6 radio radio-secondary text-indigo-600 transition duration-150 ease-in-out"
+                      className="form-radio h-4 w-4 radio radio-secondary text-indigo-600 transition duration-150 ease-in-out"
                     />
                     <span className="ml-2 ">{label}</span>
                   </label>
@@ -173,14 +217,14 @@ export default function AiSetting() {
 
           {/* get input text from user */}
           <div className="mb-2">
-            <p className="mb-2 label text-lg">Enter additional instruction</p>
+            <p className=" label text-lg">Enter additional instruction</p>
             <input
               {...register("additionalInstruction", {
                 required: "Please enter additional instruction.",
               })}
               defaultValue={aiConfig?.additionalInstruction}
               type="text"
-              className="input h-12 input-ghost text-lg input-secondary border-solid focus:border-dotted w-full"
+              className="input h-8 input-ghost text-sm input-secondary border-solid focus:border-dotted w-full"
               placeholder="Enter additional instruction"
             />
           </div>
