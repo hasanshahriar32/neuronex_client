@@ -18,12 +18,15 @@ const AiQuery2 = () => {
   const [loadingAi, setLoadingAi] = useState(false);
   const { messages, sessionMessageLoading, setMessages } =
     useContext(ChatContext);
-
+    const [messageSearch, setMessageSearch] = useState([])
+    const [currentSessionid, setCurrentSessionid] = useState(aiConfig?.sessionId)
   useEffect(() => {
     const modal = document.getElementById("my_modal_4");
     modal.checked = modalState;
   }, [modalState]);
-
+  useEffect(()=>{setCurrentSessionid(aiConfig?.sessionId)},[setAiConfig,aiConfig?.sessionId])
+  useEffect(()=>{setMessageSearch([])},[setAiConfig,aiConfig?.sessionId])
+  
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
     element.scrollTop = element.scrollHeight;
@@ -39,6 +42,19 @@ const AiQuery2 = () => {
   };
 
   const { user } = useContext(AuthContext);
+
+  function convertTextToJson(text) {
+  const lines = text.split("\n");
+  const json = lines.map((line, index) => {
+    return {
+      id: index + 1,
+      content: line.trim(),
+    };
+  });
+  return json;
+}
+
+
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -81,10 +97,14 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
+          const generatedSearch = handleSearchSuggestion(data[1]?.message);
+        //   console.log(generatedSearch, "search")
+
+        console.log(data[0]?.sessionId, currentSessionid)
           if (
             Array.isArray(data) &&
             data?.length > 0 &&
-            data[0]?.sessionId === aiConfig?.sessionId
+            data[0]?.sessionId == currentSessionid
           ) {
             setMessages((prevMessages) => {
               // Check if any message with the same serial number already exists
@@ -143,6 +163,37 @@ const AiQuery2 = () => {
     }
   };
 
+
+  // make search suggestion
+  const handleSearchSuggestion = async (message) => {
+    setMessageSearch([])
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/generate/suggestions",
+        {
+          sessionId: aiConfig?.sessionId,
+          message: message,
+        },
+        config
+      );
+
+      // Use the callback version
+
+      console.log(dataGet);
+      const json = convertTextToJson(dataGet?.message);
+      console.log(json)
+        setMessageSearch(json)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //voice to text
   const [isListening, setIsListening] = useState(false);
   // eslint-disable-next-line no-undef
@@ -159,6 +210,13 @@ const AiQuery2 = () => {
     setIsListening(false);
   });
   // voice to text end
+  const handleSearchInput =(searchItem)=>{
+  document.getElementById("message-input").value =searchItem;
+      document.getElementById("message-input").focus();
+      handleSendMessage();
+      setMessageSearch([])
+
+}
 
   const handleFavorite = async () => {
     try {
@@ -353,6 +411,21 @@ const AiQuery2 = () => {
                 </div>
               </div>
             )}
+            {
+                messageSearch?.length > 0 && <div><h2>Search also for:</h2>
+                <br />
+            {
+                messageSearch?.length > 0 && (
+                    <ul className="flex flex-col md:flex-row md:gap-2 flex-wrap gap-0 items-start hover:mouse-pointer justify-start md:justify-between">
+                    {messageSearch.map((search) => (
+                        <a  key={search.id} onClick={()=>handleSearchInput(search.content)}>{search.content}</a>
+                    ))}
+                    </ul>
+                )
+            }</div>
+            }
+            
+
           </div>
         )}
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
