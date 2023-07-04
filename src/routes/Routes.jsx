@@ -13,6 +13,7 @@ import AdminLayout from "../layout/Admin/Admin";
 import Admin from "../pages/Admin/Admin";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageAdmins from "../pages/Admin/ManageAdmins";
+import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -37,9 +38,9 @@ const Routes = () => {
     {
       path: "/admin",
       element: (
-        // <AdminRoute>
-        <AdminLayout />
-        // </AdminRoute>
+        <AdminRoute>
+          <AdminLayout />
+        </AdminRoute>
       ),
       children: [
         { path: "/admin/", element: <Admin /> },

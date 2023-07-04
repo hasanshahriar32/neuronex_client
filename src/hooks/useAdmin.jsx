@@ -1,23 +1,34 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useAdmin = (uid) => {
+const useAdmin = (id) => {
   const [admin, setAdmin] = useState(false);
   const [loadingAdmin, setLoadingAdmin] = useState(true);
   useEffect(() => {
-    if (uid) {
-      fetch(`https://neuronex-server.vercel.app/users/admin/${uid}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setAdmin(data.isAdmin);
-          //   alert(data.isAdmin);
+    async function getAdmin() {
+      if (id) {
+        try {
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          };
+          const { data: dataGet } = await axios.get(
+            `https://neuronex-server-test.vercel.app/admin/${id}`,
+            config
+          );
+
+          console.log(dataGet);
+          setAdmin(dataGet.isAdmin);
           setLoadingAdmin(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        } catch (error) {
+          console.log(error);
+        }
+      }
     }
-  }, [uid]);
+    getAdmin();
+  }, [id]);
   return [admin, loadingAdmin];
 };
 
