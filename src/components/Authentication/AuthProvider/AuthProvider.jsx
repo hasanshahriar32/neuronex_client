@@ -74,6 +74,7 @@ const AuthProvider = () => {
         console.log("save user", data);
         // localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", JSON.stringify(data?.token));
+        localStorage.setItem("user_id", JSON.stringify(data?._id));
         navigate(from, { replace: true });
       })
       .catch((err) => {
