@@ -23,7 +23,9 @@ const useAdmin = (id) => {
           setAdmin(dataGet.isAdmin);
           setLoadingAdmin(false);
         } catch (error) {
+          setAdmin(false);
           console.log(error);
+          setLoadingAdmin(false);
         }
       }
     }
