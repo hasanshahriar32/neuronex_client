@@ -4,14 +4,11 @@ import Profile from "../components/profile/Profile";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
 import ProfileLayout from "../layout/Profile/Profile";
-import ProfileEdit from "../layout/Profile/ProfileEdit";
+import ProfileEdit from "../components/profile/ProfileEdit";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
 import Home from "../pages/Home/Home";
-import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
-import AdminLayout from "../layout/Admin/AdminLayout";
-import AllUsers from "../layout/Admin/AllUsers/AllUsers";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -33,15 +30,15 @@ const Routes = () => {
         { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
       ],
     },
-    {
-      path: "/admin",
-      element: (
-        <AdminRoute>
-          <AdminLayout />
-        </AdminRoute>
-      ),
-      children: [{ path: "/admin/all-users", element: <AllUsers /> }],
-    },
+    // {
+    //   path: "/admin",
+    //   element: (
+    //     <AdminRoute>
+    //       <AdminLayout />
+    //     </AdminRoute>
+    //   ),
+    //   children: [{ path: "/admin/all-users", element: <AllUsers /> }],
+    // },
     {
       path: "/ai",
       element: (
