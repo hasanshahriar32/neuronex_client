@@ -5,13 +5,7 @@ const ProfileLayout = () => {
     return (
         <div className="drawer lg:drawer-open absolute top-0">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center ">
-                <label
-                    htmlFor="my-drawer-2"
-                    className="btn btn-primary drawer-button lg:hidden"
-                >
-                    Open drawer
-                </label>
+            <div className="drawer-content flex flex-col items-center justify-center h-[86vh]">
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">

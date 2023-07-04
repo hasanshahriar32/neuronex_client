@@ -5,8 +5,7 @@ const AdminLayout = () => {
     return (
         <div className="drawer lg:drawer-open absolute top-0">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center">
-
+            <div className="drawer-content flex flex-col items-center justify-center h-screen overflow-scroll">
                 <Outlet></Outlet>
             </div>
             <div className="drawer-side">
