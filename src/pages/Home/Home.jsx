@@ -6,6 +6,7 @@ import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
 import { Container } from "../../components/features/container";
 import { StarsIllustration } from "../../components/features/stars";
+import Contact from "../../components/Contact/Contact";
 
 const Home = () => {
   return (
@@ -35,6 +36,8 @@ const Home = () => {
             <Faq />
           </div>
         </div>
+
+        <Contact />
       </div>
     </div>
   );

@@ -22,6 +22,8 @@ const Routes = () => {
       element: <Main></Main>,
       children: [{ path: "/", element: <Home></Home> }],
     },
+
+
     {
       path: "/profile",
       element: (
@@ -67,6 +69,7 @@ const Routes = () => {
         },
       ],
     },
+    
     { path: "/login", element: <Login></Login> },
     { path: "/register", element: <Register></Register> },
   ]);
