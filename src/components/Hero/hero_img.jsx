@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import img from "../../assets/hero.webp";
+import img from "../../assets/hero_sd.gif";
 
 const randomNumberBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
