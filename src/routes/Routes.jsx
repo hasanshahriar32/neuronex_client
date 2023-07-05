@@ -11,6 +11,7 @@ import ManageUsers from "../pages/Admin/ManageUsers";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import ProfilePage from "../pages/profile/ProfileSection";
@@ -68,6 +69,7 @@ const Routes = () => {
         },
         { path: "/login", element: <Login></Login> },
         { path: "/register", element: <Register></Register> },
+        { path: '*', element: <ErrorPage /> },
     ]);
     return (
         <div className="bg-page-gradient pt-navigation-height">
