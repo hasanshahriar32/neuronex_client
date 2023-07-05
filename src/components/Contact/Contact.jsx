@@ -1,9 +1,17 @@
+import { Helmet } from "react-helmet";
 
 
 const Contact = () => {
     return (
-        <div>
-            <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
+      <div>
+        <Helmet>
+          <script
+            type="text/javascript"
+            src="https://form.jotform.com/jsform/231855048166460"
+          ></script>
+        </Helmet>
+
+        {/* <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
 		<div className="py-6 md:py-0 md:px-6">
 			<h1 className="text-4xl font-bold">Contact us</h1>
 			<p className="pt-2 pb-4">Fill in the form to start a conversation</p>
@@ -44,8 +52,8 @@ const Contact = () => {
 			</label>
 			<button type="button" className="self-center px-8 py-3 text-lg rounded border bg-[#6867bc]">Submit</button>
 		</form>
-	</div>
-        </div>
+	</div> */}
+      </div>
     );
 };
 
