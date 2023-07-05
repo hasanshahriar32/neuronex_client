@@ -1,24 +1,30 @@
+import { useState } from "react";
+import PaymentModal from "../Payment/PaymentModal";
+
 const Price = () => {
 
     const pricingData = [
         {
             plan: 'Basic',
             price: 19.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3'],
+            estimatedGeneration: 100,
+            validity: 60,
         },
         {
             plan: 'Standard',
             price: 29.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'],
+            estimatedGeneration: 300,
+            validity: 90,
         },
         {
             plan: 'Premium',
             price: 49.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5'],
+            estimatedGeneration: 500,
+            validity: 120,
         },
     ];
 
-
+    const [packagE, setPackage] = useState({});
 
     return (
         <div className="">
@@ -37,14 +43,15 @@ const Price = () => {
                                         <li key={index} className="text-sm text-gray-600">{feature}</li>
                                     ))}
                                 </ul>
-                                <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-                                    Add to Cart
-                                </button>
+                                <label
+                                    onClick={() => setPackage(data)}
+                                    htmlFor="my-modal-3" className='btn btn-sm btn-warning'>PAY</label>
                             </div>
                         </div></>
                 )}
 
             </div>
+            <PaymentModal packagE={packagE} setPackage={setPackage} />
         </div>
     );
 };
