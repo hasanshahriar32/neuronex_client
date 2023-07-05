@@ -1,7 +1,7 @@
 import classNames from "classnames";
 // import OneTap from "../../components/Authentication/OneTap (Test)/OneTap";
-import Contact from "../../components/Contact/Contuct";
-import Faq from "../../components/Faq/Faq";
+import Contact from "../../components/Contact/Contact";
+import { default as Faq } from "../../components/Faq/Faq";
 import HeroSection from "../../components/Hero/HeroSection";
 import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
@@ -32,11 +32,10 @@ const Home = () => {
                 </div>
                 <div className="container mx-auto ">
                     <Price />
-                    <div className="mt-10">
+                    <div className="my-10">
                         <Faq />
                     </div>
                 </div>
-
                 <Contact />
             </div>
         </div>
