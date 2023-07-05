@@ -3,19 +3,18 @@ import { useEffect, useState } from 'react';
 import UserContext, { AuthContext } from '../../Contexts/UserContext/UserContext';
 import "../../index.css";
 
+// eslint-disable-next-line no-unused-vars
 const CheckoutForm = ({ packagE, setPackage }) => {
     const stripe = useStripe();
     //load user
     const { user } = UserContext(AuthContext)
     const elements = useElements();
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null);
     const [clientSecret, setClientSecret] = useState("");
-    const id = packagE?.id;
-
-
+    const id = packagE?._id;
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-
         fetch("https://neuronex-server-test.vercel.app/payment/create-intent", {
             method: "POST",
             headers: {
