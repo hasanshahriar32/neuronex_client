@@ -7,6 +7,7 @@ import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
 import { Container } from "../../components/features/container";
 import { StarsIllustration } from "../../components/features/stars";
+import MeetTeam from "../../components/Team/Components/MeetTeam";
 
 const Home = () => {
   return (
@@ -37,6 +38,7 @@ const Home = () => {
                     </div> */}
         </div>
         <Contact />
+        <MeetTeam />
       </div>
     </div>
   );

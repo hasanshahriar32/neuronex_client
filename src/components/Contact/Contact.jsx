@@ -29,7 +29,7 @@ const Contact = () => {
   };
   return (
     <div>
-      <div className=" my-[130px] text-sm">
+      <div className="mb-[50px] mt-[130px] text-sm">
         <section className="mb-32">
           <div className="relative h-[350px] overflow-hidden bg-cover bg-[50%] bg-no-repeat bg-[url('https://i.ibb.co/KD78n2D/Whats-App-Image-2023-07-06-at-12-12-27-AM.jpg')] opacity-60"></div>
           <div className="wrapper">

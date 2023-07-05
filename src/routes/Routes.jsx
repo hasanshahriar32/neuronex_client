@@ -15,13 +15,20 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import ProfilePage from "../pages/profile/ProfileSection";
+import Team from "../components/Team/Team";
+import FAQ from "../components/Faq/Faq";
 
 const Routes = () => {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
-      children: [{ path: "/", element: <Home></Home> }],
+      children: [
+        { path: "/", element: <Home></Home> },
+        { path: "/home", element: <Home></Home> },
+        { path: "/team", element: <Team></Team> },
+        { path: "/faq", element: <FAQ></FAQ> },
+      ],
     },
     {
       path: "/profile",
