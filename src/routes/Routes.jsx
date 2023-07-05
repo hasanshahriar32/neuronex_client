@@ -1,17 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
-import Profile from "../components/profile/Profile";
+import Profile from "../pages/profile/Profile";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
 import ProfileLayout from "../layout/Profile/Profile";
-import ProfileEdit from "../layout/Profile/ProfileEdit";
+import ProfileEdit from "../pages/profile/ProfileEdit";
 import Login from "../pages/Authentication/Login/Login";
 import Register from "../pages/Authentication/Register/Register";
 import Compose from "../pages/Dashboard/Compose/Compose";
 import Home from "../pages/Home/Home";
+import AdminLayout from "../layout/Admin/Admin";
+import Admin from "../pages/Admin/Admin";
+import ManageUsers from "../pages/Admin/ManageUsers";
+import ManageAdmins from "../pages/Admin/ManageAdmins";
 import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
-import AdminLayout from "../layout/Admin/AdminLayout";
-import AllUsers from "../layout/Admin/AllUsers/AllUsers";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -40,7 +42,11 @@ const Routes = () => {
           <AdminLayout />
         </AdminRoute>
       ),
-      children: [{ path: "/admin/all-users", element: <AllUsers /> }],
+      children: [
+        { path: "/admin/", element: <Admin /> },
+        { path: "/admin/all-users", element: <ManageUsers /> },
+        { path: "/admin/all-admins", element: <ManageAdmins /> },
+      ],
     },
     {
       path: "/ai",

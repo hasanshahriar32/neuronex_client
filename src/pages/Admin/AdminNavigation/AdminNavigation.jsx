@@ -1,28 +1,15 @@
 import { NavLink } from "react-router-dom";
 
-const ProfileNavigation = () => {
+const AdminNavigation = () => {
   return (
     <div>
       <nav aria-label="Main Nav" className="flex flex-col">
         <NavLink
-          to="/"
-          title="Home"
+          to="/admin/"
           className={({ isActive }) =>
             isActive
-              ? "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
-              : "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
-          }
-        >
-          
-        Neuro Nex
-        </NavLink>
-
-        <NavLink
-          to="/profile/"
-          className={({ isActive }) =>
-            isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
+              ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
+              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-gray-500 hover:border-gray-100 hover:bg-gray-50 hover:text-gray-700"
           }
         >
           <svg
@@ -40,15 +27,14 @@ const ProfileNavigation = () => {
             />
           </svg>
 
-          <span className="text-sm font-medium"> Account </span>
+          <span className="text-sm font-medium"> Admin Dashboard </span>
         </NavLink>
-
         <NavLink
-          to="/profile/edit"
+          to="/admin/all-admins"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
+              ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
+              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-gray-500 hover:border-gray-100 hover:bg-gray-50 hover:text-gray-700"
           }
         >
           <svg
@@ -71,41 +57,14 @@ const ProfileNavigation = () => {
             />
           </svg>
 
-          <span className="text-sm font-medium"> Edit Profile </span>
+          <span className="text-sm font-medium"> Manage Admins </span>
         </NavLink>
-
-        <NavLink
-          to="/admin/all-users"
+        {/* <NavLink
+          to="/admin/all-categories"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
-          }
-        >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-
-          <span className="text-sm font-medium"> All Users </span>
-        </NavLink>
-
-        <NavLink
-          to="/settings/notification"
-          className={({ isActive }) =>
-            isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
+              ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
+              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-gray-500 hover:border-gray-100 hover:bg-gray-50 hover:text-gray-700"
           }
         >
           <svg
@@ -123,15 +82,14 @@ const ProfileNavigation = () => {
             />
           </svg>
 
-          <span className="text-sm font-medium"> Notifications </span>
-        </NavLink>
-
+          <span className="text-sm font-medium"> Manage Categories </span>
+        </NavLink> */}
         <NavLink
-          to="/settings/business_info"
+          to="/admin/all-users"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
+              ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
+              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-gray-500 hover:border-gray-100 hover:bg-gray-50 hover:text-gray-700"
           }
         >
           <svg
@@ -149,15 +107,15 @@ const ProfileNavigation = () => {
             />
           </svg>
 
-          <span className="text-sm font-medium"> Business Info </span>
+          <span className="text-sm font-medium"> Manage Users </span>
         </NavLink>
 
         <NavLink
-          to="/settings/payment"
+          to="/admin/all-gigs"
           className={({ isActive }) =>
             isActive
-              ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
-              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-secondary hover:border-gray-100 hover:bg-gray-50 hover:text-secondary"
+              ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
+              : "flex items-center gap-2 border-l-[3px] border-transparent px-4 py-3 text-gray-500 hover:border-gray-100 hover:bg-gray-50 hover:text-gray-700"
           }
         >
           <svg
@@ -175,12 +133,11 @@ const ProfileNavigation = () => {
             />
           </svg>
 
-          <span className="text-sm font-medium"> Payment Methods</span>
+          <span className="text-sm font-medium"> Manage Gigs</span>
         </NavLink>
-        
       </nav>
     </div>
   );
 };
 
-export default ProfileNavigation;
+export default AdminNavigation;

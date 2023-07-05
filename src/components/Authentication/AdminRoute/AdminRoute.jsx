@@ -7,7 +7,7 @@ import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [admin, loadingAdmin] = useAdmin(user?.uid);
+  const [admin, loadingAdmin] = useAdmin(localStorage.getItem("user_id"));
   //   const [isAdminLoading, setIsAdminLoading] = useState(true);
   const location = useLocation();
 
@@ -21,6 +21,6 @@ const AdminRoute = ({ children }) => {
   if (user && user.uid && admin) {
     return children;
   }
-  return <Navigate to="/home" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/" state={{ from: location }} replace></Navigate>;
 };
 export default AdminRoute;

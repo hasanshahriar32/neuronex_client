@@ -1,28 +1,35 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Helmet } from "react-helmet";
-import "./aiQuery.css";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import AiSetting from "../AiSetting/AiSetting";
-import { AiContext } from "../../../Contexts/FormContext/FormContext";
+import { Helmet } from "react-helmet";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import axios from "axios";
+import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import AiSetting from "../AiSetting/AiSetting";
+import "./aiQuery.css";
 
 const AiQuery2 = () => {
   const { modalState, setAiConfig, aiConfig } = useContext(AiContext);
   const [loadingAi, setLoadingAi] = useState(false);
   const { messages, sessionMessageLoading, setMessages } =
     useContext(ChatContext);
-
+  const [messageSearch, setMessageSearch] = useState([]);
+  const [currentSessionid, setCurrentSessionid] = useState(aiConfig?.sessionId);
   useEffect(() => {
     const modal = document.getElementById("my_modal_4");
     modal.checked = modalState;
   }, [modalState]);
+  useEffect(() => {
+    setCurrentSessionid(aiConfig?.sessionId);
+  }, [setAiConfig, aiConfig?.sessionId]);
+  useEffect(() => {
+    setMessageSearch([]);
+  }, [setAiConfig, aiConfig?.sessionId]);
 
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
@@ -39,6 +46,17 @@ const AiQuery2 = () => {
   };
 
   const { user } = useContext(AuthContext);
+
+  function convertTextToJson(text) {
+    const lines = text.split("\n");
+    const json = lines.map((line, index) => {
+      return {
+        id: index + 1,
+        content: line.trim(),
+      };
+    });
+    return json;
+  }
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -81,10 +99,14 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
+          handleSearchSuggestion(data[1]?.message);
+          //   console.log(generatedSearch, "search")
+
+          console.log(data[0]?.sessionId, currentSessionid);
           if (
             Array.isArray(data) &&
             data?.length > 0 &&
-            data[0]?.sessionId === aiConfig?.sessionId
+            data[0]?.sessionId == currentSessionid
           ) {
             setMessages((prevMessages) => {
               // Check if any message with the same serial number already exists
@@ -143,6 +165,59 @@ const AiQuery2 = () => {
     }
   };
 
+  // make search suggestion
+  const handleSearchSuggestion = async (message) => {
+    setMessageSearch([]);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/generate/suggestions",
+        {
+          sessionId: aiConfig?.sessionId,
+          message: message,
+        },
+        config
+      );
+
+      // Use the callback version
+
+      console.log(dataGet);
+      const json = convertTextToJson(dataGet?.message);
+      console.log(json);
+      setMessageSearch(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //voice to text
+  const [isListening, setIsListening] = useState(false);
+  // eslint-disable-next-line no-undef
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US"; // Set the language (optional)
+  const startRecognition = () => {
+    setIsListening(true);
+    recognition.start();
+  };
+  recognition.addEventListener("result", (event) => {
+    document.getElementById("message-input").value =
+      event.results[0][0].transcript;
+    document.getElementById("message-input").focus();
+    setIsListening(false);
+  });
+  // voice to text end
+  const handleSearchInput = (searchItem) => {
+    document.getElementById("message-input").value = searchItem;
+    document.getElementById("message-input").focus();
+    handleSendMessage();
+    setMessageSearch([]);
+  };
+
   const handleFavorite = async () => {
     try {
       const config = {
@@ -160,12 +235,13 @@ const AiQuery2 = () => {
         config
       );
 
+      // Use the callback version of setAiConfig to work with the latest state
+      const currentBookmarkState = dataGet?.isBookmarked;
       setAiConfig((prevConfig) => ({
         ...prevConfig,
-        isBookmarked: dataGet?.isBookmarked,
+        isBookmarked: !currentBookmarkState,
       }));
 
-      console.log(aiConfig, { isBookmarked: dataGet?.isBookmarked });
       console.log(dataGet);
     } catch (error) {
       console.log(error);
@@ -179,6 +255,7 @@ const AiQuery2 = () => {
       });
     }
   };
+
   return (
     <div>
       {/* <!-- component --> */}
@@ -334,12 +411,34 @@ const AiQuery2 = () => {
                 </div>
               </div>
             )}
+            {messageSearch?.length > 0 && (
+              <div>
+                <h2>Search also for:</h2>
+                <br />
+                {messageSearch?.length > 0 && (
+                  <ul className="flex flex-col md:flex-row md:gap-2 flex-wrap gap-0 items-start hover:mouse-pointer justify-start md:justify-between">
+                    {messageSearch.map((search) => (
+                      <a
+                        key={search.id}
+                        onClick={() => handleSearchInput(search.content)}
+                      >
+                        {search.content}
+                      </a>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
         )}
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
+              {isListening && (
+                <span className="loading loading-ring text-success relative left-7 top-2 loading-md"></span>
+              )}
               <button
+                onClick={startRecognition}
                 type="button"
                 className="inline-flex absolute top-0 items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
