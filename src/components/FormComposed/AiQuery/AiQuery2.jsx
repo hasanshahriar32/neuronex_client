@@ -99,7 +99,7 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
-          const generatedSearch = handleSearchSuggestion(data[1]?.message);
+          handleSearchSuggestion(data[1]?.message);
           //   console.log(generatedSearch, "search")
 
           console.log(data[0]?.sessionId, currentSessionid);
