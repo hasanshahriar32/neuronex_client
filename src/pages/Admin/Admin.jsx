@@ -71,66 +71,87 @@ const Admin = () => {
                 <LoadingAnimation></LoadingAnimation>
             ) : (
                 <div className="">
-                    <figure className="md:flex bg-slate-100 rounded-xl p-8">
-                        {adminData?.pic ? (
-                            <img
-                                className="md:w-[240px] md:h-auto md:rounded-none rounded-full mx-auto w-24 h-24"
-                                src={adminData?.pic}
-                                alt={adminData?.name}
-                                width="384" height="512"
-                            />
-                        ) : (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-24 h-24"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                    clipRule="evenodd"
-                                />
+                    <section className="relative block h-[300px]">
+                        <div className="absolute -top-12 w-full h-full bg-center bg-cover" style={{
+                            backgroundImage: "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80')"
+                        }
+                        }>
+                            <span id="blackOverlay" className="w-full absolute opacity-50 bg-black"></span>
+                        </div >
+                        <div className="top-18 bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden " style={{ transform: "translateZ(0px)" }}>
+                            <svg className="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                                <polygon className="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
                             </svg>
-                        )}
-                        <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
-                            <blockquote>
-                                <p className="text-lg font-medium">
-                                    {adminData?.name} <br />
-                                    {adminData?.email}
-                                </p>
-                            </blockquote>
-                            <figcaption className="font-medium">
-                                <div className="text-sky-500 dark:text-sky-400">
-                                    <p className="">_id: {adminData?._id}</p>
-                                    <p className="">uid: {adminData?.uid}</p>
-                                </div>
-                                <div className="text-slate-700 flex items-center justify-center">
-                                    <p className="">
-                                        {adminData?.verified ? "Verified ✅" : "Not Verified "}
-                                    </p>
-                                    <div className="">
-                                        <button
-                                            onClick={handleChange}
-                                            className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
-                                        >
-                                            Change Admin Password
-                                        </button>
-                                    </div>
-
-                                </div>
-                                <label
-                                    htmlFor="my-drawer-2"
-                                    className="btn btn-sm btn-ghost btn-rounded btn-primary"
-                                >
-                                    Open drawer
-                                </label>
-                            </figcaption>
                         </div>
-                    </figure>
-                    <div>
-                    </div>
+                    </section >
+                    <section className="relative -mt-[160px] bg-blueGray-200">
+                        <div className="container mx-auto px-4">
+                            <div className="relative flex flex-col min-w-0 break-words bg-base-200 w-full mb-6 shadow-xl rounded-lg -mt-64">
+                                <div className="px-6">
+                                    <div className="flex flex-wrap justify-center">
+                                        <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                                            <div className="relative">
+                                                <img src={adminData?.pic}
+                                                    alt={adminData?.name} className="shadow-xl rounded-full h-auto w-[200px] align-middle border-none absolute -m-[78px] -ml-20 lg:-ml-16 max-w-[150px] " />
+                                            </div>
+                                        </div>
+                                        <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                                            <div className="py-6 px-3 mt-32 sm:mt-0">
 
+                                                <label htmlFor="my-drawer-2" className="cursor-pointer btn btn-sm lg:hidden">Open drawer </label>
+                                            </div>
+
+                                        </div>
+                                        <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                                            <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                                                <div className="lg:mr-4 p-3 text-center md:text-left  md:text-md">
+                                                    <p className="">id: {adminData?._id}</p>
+                                                    <p className="">uid: {adminData?.uid}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="text-center mt-12">
+                                        <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
+                                            {adminData?.name}
+
+                                        </h3>
+                                        <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold ">
+                                            <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400">
+                                                {adminData?.email}
+                                            </i>
+                                        </div>
+                                        <div className="mb-2 text-blueGray-600 mt-10">
+                                            <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                                            {adminData?.verified ? "Verified ✅" : "Not Verified "}
+                                        </div>
+                                        <div className="mb-2 text-blueGray-600">
+                                            <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                                            <label
+                                                onClick={handleChange}
+                                                className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer"
+                                            >
+                                                Change Admin Password
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                                        <div className="flex flex-wrap justify-center">
+                                            <div className="w-full px-4">
+                                                <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                                                    An artist of considerable range, Jenna the name taken by
+                                                    Melbourne-raised, Brooklyn-based Nick Murphy writes,
+                                                    performs and records all of his own music, giving it a
+                                                    warm, intimate feel with a solid groove structure. An
+                                                    artist of considerable range.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                     <div className="w-full">
                         <input type="checkbox" id="my-modal-5" className="modal-toggle" />
                         <div className="modal modal-bottom sm:modal-middle">

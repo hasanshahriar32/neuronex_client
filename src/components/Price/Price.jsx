@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PaymentModal from "../Payment/PaymentModal";
 
 const Price = () => {
+    const [packagE, setPackage] = useState({});
     const [pricingData, setPricingData] = useState([])
     const getPackage = async () => {
         const { data: dataGet } = await axios.get(
@@ -13,7 +14,6 @@ const Price = () => {
     useEffect(() => {
         getPackage();
     }, [])
-    const [packagE, setPackage] = useState({});
 
     return (
         <div className="-mt-[250px] lg:px-[80px] ">
@@ -60,7 +60,6 @@ const Price = () => {
                             </div>
                         </div></>
                 )}
-
             </div>
             <PaymentModal packagE={packagE} setPackage={setPackage} />
         </div>
