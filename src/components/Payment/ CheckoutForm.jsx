@@ -1,45 +1,33 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
-import { useAddToCart } from '../../Context/AddToCatd';
 import UserContext, { AuthContext } from '../../Contexts/UserContext/UserContext';
 import "../../index.css";
 
-const CheckoutForm = ({ product, setProduct }) => {
+const CheckoutForm = ({ packagE, setPackage }) => {
     const stripe = useStripe();
-    const { refetch } = useAddToCart()
     //load user
     const { user } = UserContext(AuthContext)
     const elements = useElements();
     const [error, setError] = useState(null);
     const [clientSecret, setClientSecret] = useState("");
+    const id = packagE?.id;
 
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
 
-        fetch("https://iconic-server-v2.vercel.app/create-payment-intent", {
+        fetch("https://neuronex-server-test.vercel.app/payment/create-intent", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ price }),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({ id }),
         })
             .then((res) => res.json())
             .then((data) => setClientSecret(data.clientSecret));
-    }, [price]);
+    }, [id]);
 
-    const handelDelete = (product) => {
-        fetch(`https://iconic-server-v2.vercel.app/api/v2/cart/payment?email=${user?.email}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ product })
-        })
-            .then(res => res.json())
-            .then(data => {
-                refetch();
-                setProduct(null)
-            })
-    }
     const addToDb = (product) => {
         console.log(product);
 
@@ -50,6 +38,7 @@ const CheckoutForm = ({ product, setProduct }) => {
         const card = elements.getElement(CardElement);
 
         if (card == null) { return; }
+        // eslint-disable-next-line no-unused-vars
         const { error, paymentMethod } = await stripe.createPaymentMethod({ type: 'card', card, });
 
         if (error) {
@@ -61,7 +50,7 @@ const CheckoutForm = ({ product, setProduct }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        email: product?.userEmail,
+                        email: user?.email,
                     },
                 },
             },
@@ -72,8 +61,7 @@ const CheckoutForm = ({ product, setProduct }) => {
         if (paymentIntent.status === "succeeded") {
             const confirmPayment = {
                 paymentID: paymentIntent.id,
-                address,
-                ...product,
+                ...packagE,
                 data: new Date().toDateString(),
                 status: 'Confirmed',
                 max: null,
@@ -81,8 +69,6 @@ const CheckoutForm = ({ product, setProduct }) => {
             addToDb(confirmPayment)
         }
     };
-
-
     return (
         <form onSubmit={handleSubmit}>
             <div className=" ">
