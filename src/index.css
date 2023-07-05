@@ -69,13 +69,6 @@
     );
   }
 }
-form {
-  width: 30vw;
-  min-width: 450px;
-  align-self: center;
-  border-radius: 7px;
-  padding: 40px;
-}
 
 /* @import "react-toastify/dist/ReactToastify.css";
  */
