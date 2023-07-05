@@ -4,18 +4,7 @@ const ProfileNavigation = () => {
   return (
     <div>
       <nav aria-label="Main Nav" className="flex flex-col">
-        <NavLink
-          to="/"
-          title="Home"
-          className={({ isActive }) =>
-            isActive
-              ? "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
-              : "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center"
-          }
-        >
-          
-        Neuro Nex
-        </NavLink>
+        
 
         <NavLink
           to="/profile/"
@@ -178,6 +167,18 @@ const ProfileNavigation = () => {
           <span className="text-sm font-medium"> Payment Methods</span>
         </NavLink>
         
+      <NavLink
+          to="/"
+          title="Home"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center absolute bottom-0 ml-5"
+              : "bg-secondary px-4 mb-3 py-3 text-white text-md rounded-md font-medium text-center absolute bottom-0 ml-5"
+          }
+        >
+          
+        Neuro Nex
+        </NavLink>
       </nav>
     </div>
   );

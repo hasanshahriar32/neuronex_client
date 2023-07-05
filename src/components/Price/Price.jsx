@@ -21,7 +21,7 @@ const Price = () => {
 
 
     return (
-        <div className="">
+        <div id="price">
             <div className="grid grid-cols-3 gap-4">
                 {pricingData.map((data) =>
                     <>
