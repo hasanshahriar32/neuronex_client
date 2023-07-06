@@ -7,7 +7,7 @@ import CheckoutForm from "./ CheckoutForm";
 const PaymentModal = ({ packagE, setPackage }) => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const stripePromise = loadStripe(
-    "pk_test_51M6D28BetmksUXSc82ENaSvliF6HG6MDJv4cL2aTFQDKZVA00yZpVctAPBfcXjQq7PaRET9GUVg5DJVm7qCdbBDZ00c5vWBKMp"
+    "pk_test_51LEJNMB95tAlnqnFFTycKfYO8NSYd3h0YEpTQdCbyoq3SDCHwly1lXBvNlzTqCae9wGjv1XEJRzMcYCtq8ZppehG00OUL8d9WB"
   );
 
   const handleCheckboxChange = (event) => {

@@ -149,7 +149,7 @@ const Price = () => {
                     </label>
                   ) : (
                     <label>
-                      <Link to="/login" className="btn btn-sm btn-warning mt-4">
+                      <Link to="/login" className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4">
                         Login to pay
                       </Link>
                     </label>
