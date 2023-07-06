@@ -9,8 +9,8 @@ const PaymentModal = ({ packagE, setPackage }) => {
     return (
         <div>
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box relative">
+            <div className="modal ">
+                <div className="modal-box relative p-[29px] ">
                     <label
                         onClick={() => setPackage(null)}
                         htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>

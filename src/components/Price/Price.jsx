@@ -18,7 +18,10 @@ const Price = () => {
     return (
         <div className="-mt-[230px] lg:px-[80px]" id="price">
             <div className="mb-4">
-                <h2 className="text-5xl text-center mb-10">
+                <h2 className="text-5xl text-center ">
+                    Pricing
+                </h2>
+                <h2 className="text-2xl text-center mb-10">
                     Package to suit your plan
                 </h2>
                 <div className="overflow-x-auto border m-4 p-2 shadow-secondary">
