@@ -1,6 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PaymentModal from "../Payment/PaymentModal";
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const Price = () => {
   const [packagE, setPackage] = useState({});
@@ -42,40 +63,49 @@ const Price = () => {
           </table>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
-        {pricingData.map((data) => (
-          <>
-            <div className="backdrop-blur-lg shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
-              <div className="p-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  {data?.plan}
-                </h3>
-                <div className="flex items-center mt-3">
-                  <span className="text-gray-700 font-semibold text-lg">$</span>
-                  <span className="text-gray-900 text-2xl font-semibold">
-                    {data?.price}
-                  </span>
+      <motion.ul
+        className="container"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
+          {pricingData.map((data) => (
+            <motion.li variants={item} key={data?.price}>
+              <div className="backdrop-blur-lg hover:backdrop-blur shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
+                <div className="p-4">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {data?.plan}
+                  </h3>
+                  <div className="flex items-center mt-3">
+                    <span className="text-gray-700 font-semibold text-lg">
+                      $
+                    </span>
+                    <span className="text-gray-900 text-2xl font-semibold">
+                      {data?.price}
+                    </span>
+                  </div>
+                  <ul className="mt-4 ">
+                    <p className="text-gray-900 text-lg font-semibold">
+                      validity :{data?.validity}
+                    </p>
+                    <p className="text-gray-700 font-semibold text-lg">
+                      Generation:{data?.estimatedGeneration}(EST)
+                    </p>
+                  </ul>
+                  <label
+                    onClick={() => setPackage(data)}
+                    htmlFor="my-modal-3"
+                    className="btn btn-md tracking-wide btn-warning mt-4"
+                  >
+                    Recharge Now!
+                  </label>
                 </div>
-                <ul className="mt-4 ">
-                  <p className="text-gray-900 text-lg font-semibold">
-                    validity :{data?.validity}
-                  </p>
-                  <p className="text-gray-700 font-semibold text-lg">
-                    Generation:{data?.estimatedGeneration}(EST)
-                  </p>
-                </ul>
-                <label
-                  onClick={() => setPackage(data)}
-                  htmlFor="my-modal-3"
-                  className="btn btn-sm btn-warning mt-4"
-                >
-                  PAY
-                </label>
               </div>
-            </div>
-          </>
-        ))}
-      </div>
+            </motion.li>
+          ))}
+        </div>
+      </motion.ul>
       <PaymentModal packagE={packagE} setPackage={setPackage} />
     </div>
   );

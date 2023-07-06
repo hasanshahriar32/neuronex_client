@@ -1,5 +1,11 @@
 export const StarsIllustration = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="872" height="731" fill="none">
+  <svg
+    className="-z-30"
+    xmlns="http://www.w3.org/2000/svg"
+    width="872"
+    height="731"
+    fill="none"
+  >
     <g fill="#fff" opacity="0.7">
       <circle
         cx="227.718"

@@ -70,7 +70,7 @@ const CheckoutForm = ({ packagE, setPackage }) => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <div className=" ">
+            <div className=" m-5">
                 <CardElement
                     options={{
                         style: {
@@ -87,8 +87,8 @@ const CheckoutForm = ({ packagE, setPackage }) => {
                         },
                     }}
                 />
-                <button type="submit" className='btn-warning btn btn-sm mt-6' disabled={!stripe || !clientSecret}>
-                    Pay
+                <button type="submit" className='btn-warning btn tracking-wide btn-md mt-6' disabled={!stripe || !clientSecret}>
+                    Recharge Now
                 </button>
             </div>
         </form>
