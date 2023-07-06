@@ -3,7 +3,7 @@ const FAQ = () => {
   return (
     <div className="my-[100px] container mx-auto lg:px-[80px]">
       <div className="md:flex gap-4">
-        <div className="md:w-1/2 flex items-center justify-items-center">
+        <div className="md:w-1/2 lg:flex items-center hidden justify-items-center">
           <img
             src={img}
             alt="illustration-woman-online"

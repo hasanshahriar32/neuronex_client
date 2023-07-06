@@ -69,12 +69,17 @@ const Price = () => {
       <div className="mb-4">
         <motion.h2
           ref={ref}
-          className="text-5xl text-center mb-10"
+          className=" text-center mb-10"
           variants={headingVariant}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Package to suit your plan
+          <h2 className="text-5xl text-center ">
+                    Pricing
+                </h2>
+                <h2 className="text-2xl text-center mb-10">
+                    Package to suit your plan
+                </h2>
         </motion.h2>
         <motion.div
           // ref={ref}
