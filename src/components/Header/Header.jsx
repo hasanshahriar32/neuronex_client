@@ -10,7 +10,7 @@ const Header = () => {
     const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
     useEffect(() => {
         const html = document.querySelector("html");
-        if (html) html.classList.toggle("overflow-hidden", hamburgerMenuIsOpen);
+        if (html) html.classList.toggle("overflow-scroll", hamburgerMenuIsOpen);
     }, [hamburgerMenuIsOpen]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Header = () => {
     return (
         <header className="dark:disabled fixed top-0 left-0 z-20 w-full border-b border-transparent-white backdrop-blur-[12px]">
             <Container className="flex h-navigation-height">
-                <Link className="flex items-center text-md" href="/">
+                <Link className="flex items-center text-md" to="/">
                     Neuro Nex
                 </Link>
                 <div
@@ -59,7 +59,7 @@ const Header = () => {
                                 <a href="#price">Price</a>
                             </li>
                             <li>
-                                <Link to='/profile/'>Account</Link>
+                                <Link to='/profile'>Account</Link>
                             </li>
                             <li>
                                 <Link to='/admin'>Dashboard</Link>
