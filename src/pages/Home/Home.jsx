@@ -1,11 +1,13 @@
 import classNames from "classnames";
 // import OneTap from "../../components/Authentication/OneTap (Test)/OneTap";
-import Faq from "../../components/Faq/Faq";
+import Contact from "../../components/Contact/Contact";
+// import { default as Faq } from "../../components/Faq/Faq";
 import HeroSection from "../../components/Hero/HeroSection";
 import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
 import { Container } from "../../components/features/container";
 import { StarsIllustration } from "../../components/features/stars";
+import MeetTeam from "../../components/Team/Components/MeetTeam";
 
 const Home = () => {
   return (
@@ -31,10 +33,12 @@ const Home = () => {
         </div>
         <div className="container mx-auto ">
           <Price />
-          <div className="mt-10">
-            <Faq />
-          </div>
+          {/* <div className="my-10">
+                        <Faq />
+                    </div> */}
         </div>
+        <Contact />
+        <MeetTeam />
       </div>
     </div>
   );

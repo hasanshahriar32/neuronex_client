@@ -56,7 +56,7 @@ const ManageUsers = () => {
             {!userData ? (
                 <LoadingAnimation></LoadingAnimation>
             ) : (
-                <div className="overflow-x-auto w-full">
+                <div className="overflow-x-auto w-full mt-10">
                     <table className="table w-full">
                         {/* head */}
                         <thead>

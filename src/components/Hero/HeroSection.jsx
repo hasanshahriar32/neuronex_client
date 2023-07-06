@@ -13,9 +13,9 @@ const HeroSection = () => {
           variant="secondary"
           size="small"
         >
-          <span className="pr-2">
+          <span className="pr-2 flex flex-row gap-1">
             {" "}
-            NeuroNex 2023 Release – Built for Education
+            <span>NeuroNex 2023 Release </span> <span className="hidden md:block">– Built for Education</span>
           </span>
           <Highlight>→</Highlight>
         </Button>
