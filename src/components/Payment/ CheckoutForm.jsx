@@ -4,9 +4,10 @@ import UserContext, {
   AuthContext,
 } from "../../Contexts/UserContext/UserContext";
 import "../../index.css";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line no-unused-vars
-const CheckoutForm = ({ packagE, setPackage, agreeTerms }) => {
+const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const stripe = useStripe();
   //load user
   const { user } = UserContext(AuthContext);
@@ -26,11 +27,40 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms }) => {
       body: JSON.stringify({ id }),
     })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => setClientSecret(data.clientSecret))
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err.message);
+      });
   }, [id]);
 
   const addToDb = (product) => {
+    setModalOpen(true);
     console.log(product);
+    fetch("http://localhost:5000/payment/resolve-intent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data?.status === "Confirmed") {
+          toast.success("Payment Successful", {
+            theme: "dark",
+          });
+          setPackage(null);
+        }
+        setModalOpen(false);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setModalOpen(false);
+        console.log(err.message);
+      });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();

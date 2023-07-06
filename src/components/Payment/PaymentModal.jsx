@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import "../../index.css";
@@ -14,6 +14,11 @@ const PaymentModal = ({ packagE, setPackage }) => {
     setAgreeTerms(event.target.checked);
   };
 
+  const [modalOpen, setModalOpen] = useState(null);
+  useEffect(() => {
+    const modal = document.getElementById("my-modal-3");
+    modal.checked = modalOpen;
+  }, [modalOpen]);
   return (
     <div>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -64,6 +69,7 @@ const PaymentModal = ({ packagE, setPackage }) => {
             </div>
             <Elements stripe={stripePromise}>
               <CheckoutForm
+                setModalOpen={setModalOpen}
                 setPackage={setPackage}
                 packagE={packagE}
                 agreeTerms={agreeTerms}
