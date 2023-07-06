@@ -75,7 +75,7 @@ const Price = () => {
           Package to suit your plan
         </motion.h2>
         <motion.div
-          ref={ref}
+          // ref={ref}
           className="overflow-x-auto border m-4 p-2 shadow-secondary"
           variants={tableVariant}
           initial="hidden"
@@ -110,7 +110,7 @@ const Price = () => {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
           {pricingData.map((data) => (
-            <motion.li variants={item} key={data?.price}>
+            <motion.li variants={item} key={data?.price} className="item">
               <div className="bg-[#070C1C] group  shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
                 <div className="p-4">
                   <h3 className="text-lg font-medium text-gray-900">

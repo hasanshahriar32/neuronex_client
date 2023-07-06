@@ -22,7 +22,7 @@ const PaymentModal = ({ packagE, setPackage }) => {
           <label
             onClick={() => setPackage(null)}
             htmlFor="my-modal-3"
-            className="btn btn-sm btn-circle absolute right-2 top-2"
+            className="btn btn-sm btn-warning btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
@@ -54,7 +54,7 @@ const PaymentModal = ({ packagE, setPackage }) => {
               <input
                 type="checkbox"
                 id="terms-checkbox"
-                className="mr-2"
+                className="mr-2 checkbox checkbox-warning"
                 checked={agreeTerms}
                 onChange={handleCheckboxChange}
               />
