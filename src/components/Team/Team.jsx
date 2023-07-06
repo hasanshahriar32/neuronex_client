@@ -42,7 +42,7 @@ const Team = () => {
         <span className="h-1 w-14 rounded-3xl bg-gray-700" />
       </div>
 
-      <div className="mx-auto px-4 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-y-4 sm:gap-y-10">
+      <div className="mx-auto flex flex-col items-center justify-center px-4 w-full max-w-5xl sm:grid grid-cols-1 lg:grid-cols-2 gap-y-4 sm:gap-y-10">
         {/* :PICTURES CONTAINER */}
         <div className="col-span-full lg:col-span-1 flex flex-col sm:flex-row justify-center items-start">
           {/* ::Team members */}
@@ -70,24 +70,26 @@ const Team = () => {
             <img
               src={people[member].picture}
               alt=""
-              className="w-[300px]  h-[300px]  object-cover"
+              className="w-[250px] h-[250px] sm:w-[300px]  sm:h-[300px]  object-cover"
             />
           </div>
         </div>
 
         {/* :DETAILS CONTAINER */}
-        <div className="col-span-full lg:col-span-1 mx-auto lg:mx-0 max-w-lg flex flex-col justify-center space-y-4">
+        <div className="col-span-full lg:col-span-1 mx-0 sm:mx-auto lg:mx-0 max-w-lg flex flex-col justify-center space-y-4">
           {/* ::Role */}
           <span className="font-bold text-lg uppercase tracking-wider">
             {people[member].role}
           </span>
           {/* ::Name */}
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold  -space-y-2">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold flex items-center flex-wrap flex-row gap-2">
             <span className="block">{people[member].firstname}</span>
             <span className="block">{people[member].lastname}</span>
           </h3>
           {/* ::Description */}
-          <p className="py-2 text-sm text-base">{people[member].description}</p>
+          <p className="py-2 text-sm text-justify text-base">
+            {people[member].description}
+          </p>
           {/* ::Socials */}
           <div className="mb-4 inline-flex space-x-4">
             {/* Facebook */}
