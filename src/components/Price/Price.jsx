@@ -1,5 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import PaymentModal from "../Payment/PaymentModal";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -38,7 +40,7 @@ const tableVariant = {
 const Price = () => {
   const [packagE, setPackage] = useState({});
   const [pricingData, setPricingData] = useState([]);
-
+  const { user } = useContext(AuthContext);
   // useInView hook
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger once when the component comes into view
@@ -132,13 +134,21 @@ const Price = () => {
                       Generation:{data?.estimatedGeneration}(EST)
                     </p>
                   </ul>
-                  <label
-                    onClick={() => setPackage(data)}
-                    htmlFor="my-modal-3"
-                    className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
-                  >
-                    Recharge Now!
-                  </label>
+                  {user?.uid ? (
+                    <label
+                      onClick={() => setPackage(data)}
+                      htmlFor="my-modal-3"
+                      className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
+                    >
+                      Recharge Now!
+                    </label>
+                  ) : (
+                    <label>
+                      <Link to="/login" className="btn btn-sm btn-warning mt-4">
+                        Login to pay
+                      </Link>
+                    </label>
+                  )}
                 </div>
               </div>
             </motion.li>
