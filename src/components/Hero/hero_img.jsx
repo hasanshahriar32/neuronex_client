@@ -9,7 +9,7 @@ const randomNumberBetween = (min, max) => {
 };
 
 export const HeroImage = () => {
-  const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: false });
+  const { ref, inView } = useInView({ triggerOnce: true });
   const [lines, setLines] = useState([]);
   const timeoutRef = useRef(null);
 
@@ -35,7 +35,16 @@ export const HeroImage = () => {
     };
   }, [inView, setLines]);
   return (
-    <div id="HeroImage" ref={ref} className="mt-[12.8rem] [perspective:2000px]">
+    <div
+      id="HeroImage"
+      ref={ref}
+      className={classNames(
+        "mt-[12.8rem] [perspective:2000px]",
+        inView ? "animate-image-rotate" : "[transform:rotateX(25deg)]",
+        "before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-hero-glow before:opacity-0 before:[filter:blur(120px)]",
+        inView && "before:animate-image-glow"
+      )}
+    >
       <div
         className={classNames(
           "relative rounded-lg border border-transparent-white bg-white bg-opacity-[0.01] bg-hero-gradient",

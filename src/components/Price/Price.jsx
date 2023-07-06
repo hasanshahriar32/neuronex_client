@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PaymentModal from "../Payment/PaymentModal";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -9,7 +10,8 @@ const container = {
     opacity: 1,
     scale: 1,
     transition: {
-      delayChildren: 0.3,
+      delayChildren: 0,
+      duration: 1,
       staggerChildren: 0.2,
     },
   },
@@ -23,9 +25,27 @@ const item = {
   },
 };
 
+const headingVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const tableVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const Price = () => {
   const [packagE, setPackage] = useState({});
   const [pricingData, setPricingData] = useState([]);
+
+
+    // useInView hook
+  const [ref, inView] = useInView({
+    triggerOnce: true, // Only trigger once when the component comes into view
+    threshold: 0.1, // Adjust the threshold value as per your needs
+  });
+
   const getPackage = async () => {
     const { data: dataGet } = await axios.get(
       `https://neuronex-server-test.vercel.app/package/all`
@@ -36,14 +56,31 @@ const Price = () => {
     getPackage();
   }, []);
 
+    useEffect(() => {
+    // Start the animation when the component comes into view
+    if (inView) {
+      // Code to start the animation here
+    }
+  }, [inView]);
+
   return (
     <div className="-mt-[250px] lg:px-[80px] ">
       <div className="mb-4">
-        <h2 className="text-5xl text-center mb-10">
+        <motion.h2
+          className="text-5xl text-center mb-10"
+          variants={headingVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
           Package to suit your plan
-        </h2>
-        <div className="overflow-x-auto border m-4 p-2 shadow-secondary">
-          <table className="table table-xl text-center ">
+        </motion.h2>
+        <motion.div
+          className="overflow-x-auto border m-4 p-2 shadow-secondary"
+          variants={tableVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <table className="table table-xl text-center">
             {/* head */}
             <thead>
               <tr className="text-md">
@@ -55,19 +92,20 @@ const Price = () => {
             <tbody>
               {/* row 1 */}
               <tr className=" text-md">
-                <td> gpt-3.5-turbo </td>
+                <td>gpt-3.5-turbo</td>
                 <td>$0.0015 / 1K tokens</td>
                 <td>$0.002 / 1K tokens</td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </motion.div>
       </div>
       <motion.ul
+        ref={ref} // Attach the ref to the <ul> element
         className="container"
         variants={container}
         initial="hidden"
-        animate="visible"
+        animate={inView ? "visible" : "hidden"}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
           {pricingData.map((data) => (
