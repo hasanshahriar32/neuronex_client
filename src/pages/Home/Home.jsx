@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div>
             {/* <OneTap /> */}
-            <div className="overflow-hidden ">
+            <div className="overflow-hidden">
                 <Container className="pt-[6.4rem]">
                     <HeroSection />
                 </Container>
@@ -27,14 +27,13 @@ const Home = () => {
                         "after:absolute after:top-1/2 after:-left-1/2 after:h-[142.8%] after:w-[200%] after:rounded-[50%] after:border-t after:border-[rgba(120,_119,_198,_0.4)] after:bg-background -mt-[240px]"
                     )}
                 >
-                    {" "}
                     <StarsIllustration />
                 </div>
-                <div className="container mx-auto ">
+                <div className="container mx-auto">
                     <Price />
-                    <div className="my-10">
-                        <Faq />
-                    </div>
+                </div>
+                <div className="my-10">
+                    <Faq />
                 </div>
                 <Contact />
             </div>

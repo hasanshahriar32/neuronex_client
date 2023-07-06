@@ -1,11 +1,11 @@
 import img from "./images/illustration-woman-online-mobile.svg";
 const FAQ = () => {
     return (
-        <div className="my-[100px] ">
+        <div className="my-[100px] container mx-auto lg:px-[80px]">
 
-            <div className="md:flex justify-around gap-4">
+            <div className="md:flex gap-4">
                 <div className="md:w-1/2 flex items-center justify-items-center">
-                    <img src={img} alt="illustration-woman-online" className="h-[380px] -ml-8 md:h-[300px] lg:h-[500px]" />
+                    <img src={img} alt="illustration-woman-online" className="h-[380px] -ml-8 md:h-[300px] lg:h-[400px]" />
                 </div>
 
                 <div className="md:w-1/2 p-4 md:p-0 text-md">
