@@ -1,10 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import PaymentModal from "../Payment/PaymentModal";
 
 const Price = () => {
     const [packagE, setPackage] = useState({});
     const [pricingData, setPricingData] = useState([]);
+    const { user } = useContext(AuthContext)
     const getPackage = async () => {
         const { data: dataGet } = await axios.get(
             `https://neuronex-server-test.vercel.app/package/all`
@@ -67,13 +70,18 @@ const Price = () => {
                                         Generation:{data?.estimatedGeneration}(EST)
                                     </p>
                                 </ul>
-                                <label
+                                {user?.uid ? <label
                                     onClick={() => setPackage(data)}
                                     htmlFor="my-modal-3"
                                     className="btn btn-sm btn-warning mt-4"
                                 >
                                     PAY
-                                </label>
+                                </label> :
+                                    <label>
+                                        <Link to="/login" className="btn btn-sm btn-warning mt-4">
+                                            Login to pay
+                                        </Link>
+                                    </label>}
                             </div>
                         </div>
                     </>
