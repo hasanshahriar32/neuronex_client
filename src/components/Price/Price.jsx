@@ -39,8 +39,7 @@ const Price = () => {
   const [packagE, setPackage] = useState({});
   const [pricingData, setPricingData] = useState([]);
 
-
-    // useInView hook
+  // useInView hook
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger once when the component comes into view
     threshold: 0.1, // Adjust the threshold value as per your needs
@@ -56,7 +55,7 @@ const Price = () => {
     getPackage();
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     // Start the animation when the component comes into view
     if (inView) {
       // Code to start the animation here
@@ -67,6 +66,7 @@ const Price = () => {
     <div className="-mt-[250px] lg:px-[80px] ">
       <div className="mb-4">
         <motion.h2
+          ref={ref}
           className="text-5xl text-center mb-10"
           variants={headingVariant}
           initial="hidden"
@@ -75,6 +75,7 @@ const Price = () => {
           Package to suit your plan
         </motion.h2>
         <motion.div
+          ref={ref}
           className="overflow-x-auto border m-4 p-2 shadow-secondary"
           variants={tableVariant}
           initial="hidden"
@@ -110,7 +111,7 @@ const Price = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
           {pricingData.map((data) => (
             <motion.li variants={item} key={data?.price}>
-              <div className="backdrop-blur-lg hover:backdrop-blur shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
+              <div className="bg-[#070C1C] group  shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
                 <div className="p-4">
                   <h3 className="text-lg font-medium text-gray-900">
                     {data?.plan}
@@ -134,7 +135,7 @@ const Price = () => {
                   <label
                     onClick={() => setPackage(data)}
                     htmlFor="my-modal-3"
-                    className="btn btn-md tracking-wide btn-warning mt-4"
+                    className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
                   >
                     Recharge Now!
                   </label>
