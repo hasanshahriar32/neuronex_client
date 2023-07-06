@@ -15,6 +15,18 @@ const Team = () => {
       linkedinURL: "https://www.linkedin.com/in/hasanshahriar32",
       youtubeURL: "https://www.youtube.com/channel/UCHehUx9eSXXKl3xAMXm0mbQ",
     },
+    {
+      firstname: "Md",
+      lastname: "Shakeeb",
+      role: "Web Developer",
+      picture: "https://i.ibb.co/NyN02PD/20220525121312-IMG-1526.jpg",
+      description:
+        "As a highly skilled and experienced front-end developer with over a year of professional expertise, my passion lies in coding, programming, continuous learning, and troubleshooting complex coding problems. I have a proven track record of successfully utilizing cutting-edge technologies, including HTML5, CSS3, Bootstrap5, Tailwind, JavaScript, React, Express, MongoDB, Node.js, and Responsive design, to deliver outstanding results.",
+      facebookURL: "https://www.facebook.com/info.mdshakeeb/",
+      githubURL: "https://github.com/info-mdshakeeb",
+      linkedinURL: "https://www.linkedin.com/in/mdshakeeb/",
+      youtubeURL: "",
+    },
   ];
 
   const [member, setMember] = useState(0);
