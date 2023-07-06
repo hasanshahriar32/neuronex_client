@@ -1,11 +1,11 @@
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import app from "../../../../configs/firebase.config";
 import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
+import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
+import app from "../../../../configs/firebase.config";
 
 const auth = getAuth(app);
 const LoginForm = () => {
@@ -14,9 +14,9 @@ const LoginForm = () => {
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
-  // eslint-disable-next-line no-unused-vars
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -61,6 +61,8 @@ const LoginForm = () => {
           .then((result) => {
             console.log(result);
             localStorage.setItem("token", result.token);
+            localStorage.setItem("user_id", result._id);
+            navigate(from, { replace: true });
           });
       })
 
@@ -128,20 +130,19 @@ const LoginForm = () => {
         });
     }
   };
-
   return (
     <div>
-      <div className="hero min-h-screen">
-        <div className="hero-content ">
-          <div className="card border-secondary bg-page-gradient shadow-transparent/90 shadow-primary shadow-lg  border-dashed inset-0 border-2 flex-shrink-0 shadow-2xl">
+      <div className="flex items-center justify-center h-[90vh]">
+        <div className="max-w-xl">
+          <div className="card shadow-transparent/90 shadow-primary  shadow-2xl">
             <div className="card-body">
-              <h3 className="font-serif font-semibold text-center text-3xl text-secondary">
-                Login Now
+              <h3 className="font-serif font-semibold text-center text-2xl text-secondary w-full">
+                Login
               </h3>
               <form onSubmit={handleLogin}>
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md text-secondary mb-1">
                       Email
                     </span>
                   </label>
@@ -150,13 +151,13 @@ const LoginForm = () => {
                     type="email"
                     name="email"
                     placeholder="email"
-                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-lg py-5"
+                    className="input input-secondary border-secondary focus:outline-none border-dotted  bg-ghost  text-md py-5"
                   />
                 </div>
 
-                <div className="form-control mb-2">
+                <div className="form-control my-2">
                   <label className="label">
-                    <span className="label-text text-xl text-secondary">
+                    <span className="label-text text-md text-secondary mb-1">
                       Password
                     </span>
                   </label>
@@ -176,7 +177,7 @@ const LoginForm = () => {
                       {changeIcon ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </span>
                   </div>
-                  <div className="mt-5 flex items-center justify-between">
+                  <div className="mt-1 flex items-center justify-between">
                     <label className="label">
                       <p
                         onClick={handleForgetPassword}
@@ -193,13 +194,13 @@ const LoginForm = () => {
                   </div>
                 </div>
 
-                <div className="form-control mt-6">
-                  <button className="btn text-xl btn-lg btn-secondary w-1/2 mx-auto ">
+                <div className="form-control mt-6 ">
+                  <button className="btn text-md  btn-secondary w-full ">
                     Login
                   </button>
                 </div>
               </form>
-              <div className="divider text-md mt-6 mb-4">OR</div>
+              <div className="divider text-md mt-6 ">OR</div>
               <AuthProvider />
             </div>
           </div>

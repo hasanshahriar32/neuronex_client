@@ -1,26 +1,35 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Helmet } from "react-helmet";
-import "./aiQuery.css";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import AiSetting from "../AiSetting/AiSetting";
-import { AiContext } from "../../../Contexts/FormContext/FormContext";
+import { Helmet } from "react-helmet";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiEdit3 } from "react-icons/fi";
 import { toast } from "react-toastify";
-import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
+import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
+import AiSetting from "../AiSetting/AiSetting";
+import "./aiQuery.css";
 
 const AiQuery2 = () => {
-  const { modalState, aiConfig } = useContext(AiContext);
+  const { modalState, setAiConfig, aiConfig } = useContext(AiContext);
   const [loadingAi, setLoadingAi] = useState(false);
   const { messages, sessionMessageLoading, setMessages } =
     useContext(ChatContext);
-
+  const [messageSearch, setMessageSearch] = useState([]);
+  const [currentSessionid, setCurrentSessionid] = useState(aiConfig?.sessionId);
   useEffect(() => {
     const modal = document.getElementById("my_modal_4");
     modal.checked = modalState;
   }, [modalState]);
+  useEffect(() => {
+    setCurrentSessionid(aiConfig?.sessionId);
+  }, [setAiConfig, aiConfig?.sessionId]);
+  useEffect(() => {
+    setMessageSearch([]);
+  }, [setAiConfig, aiConfig?.sessionId]);
 
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
@@ -37,6 +46,17 @@ const AiQuery2 = () => {
   };
 
   const { user } = useContext(AuthContext);
+
+  function convertTextToJson(text) {
+    const lines = text.split("\n");
+    const json = lines.map((line, index) => {
+      return {
+        id: index + 1,
+        content: line.trim(),
+      };
+    });
+    return json;
+  }
 
   const handleSendMessage = () => {
     const input = document.getElementById("message-input");
@@ -79,10 +99,14 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
+          handleSearchSuggestion(data[1]?.message);
+          //   console.log(generatedSearch, "search")
+
+          console.log(data[0]?.sessionId, currentSessionid);
           if (
             Array.isArray(data) &&
             data?.length > 0 &&
-            data[0]?.sessionId === aiConfig?.sessionId
+            data[0]?.sessionId == currentSessionid
           ) {
             setMessages((prevMessages) => {
               // Check if any message with the same serial number already exists
@@ -140,6 +164,98 @@ const AiQuery2 = () => {
       handleSendMessage();
     }
   };
+
+  // make search suggestion
+  const handleSearchSuggestion = async (message) => {
+    setMessageSearch([]);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/generate/suggestions",
+        {
+          sessionId: aiConfig?.sessionId,
+          message: message,
+        },
+        config
+      );
+
+      // Use the callback version
+
+      console.log(dataGet);
+      const json = convertTextToJson(dataGet?.message);
+      console.log(json);
+      setMessageSearch(json);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //voice to text
+  const [isListening, setIsListening] = useState(false);
+  // eslint-disable-next-line no-undef
+  const recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-US"; // Set the language (optional)
+  const startRecognition = () => {
+    setIsListening(true);
+    recognition.start();
+  };
+  recognition.addEventListener("result", (event) => {
+    document.getElementById("message-input").value =
+      event.results[0][0].transcript;
+    document.getElementById("message-input").focus();
+    setIsListening(false);
+  });
+  // voice to text end
+  const handleSearchInput = (searchItem) => {
+    document.getElementById("message-input").value = searchItem;
+    document.getElementById("message-input").focus();
+    handleSendMessage();
+    setMessageSearch([]);
+  };
+
+  const handleFavorite = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+      const { data: dataGet } = await axios.post(
+        "https://neuronex-server-test.vercel.app/session/favorite/switch",
+        {
+          sessionId: aiConfig?.sessionId,
+          uid: user?.uid,
+        },
+        config
+      );
+
+      // Use the callback version of setAiConfig to work with the latest state
+      const currentBookmarkState = dataGet?.isBookmarked;
+      setAiConfig((prevConfig) => ({
+        ...prevConfig,
+        isBookmarked: !currentBookmarkState,
+      }));
+
+      console.log(dataGet);
+    } catch (error) {
+      console.log(error);
+      toast.error({
+        title: "Error Occurred!",
+        description: "Failed to switch favourite.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        theme: "dark",
+      });
+    }
+  };
+
   return (
     <div>
       {/* <!-- component --> */}
@@ -160,7 +276,9 @@ const AiQuery2 = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-md md:text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3">{aiConfig?.title}</span>
+                <span className="text-gray-700 mr-3">
+                  {aiConfig?.sessionTitle}
+                </span>
               </div>
               <span className="text-lg text-gray-600 mr-3">
                 {aiConfig?.subjectSelection}
@@ -172,23 +290,15 @@ const AiQuery2 = () => {
 
             <div className="flex items-center space-x-2">
               <button
+                onClick={handleFavorite}
                 type="button"
-                className="inline-flex  items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                className="inline-flex text-3xl items-center justify-center rounded-lg border h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
-                </svg>
+                {aiConfig?.isBookmarked == true ? (
+                  <AiFillHeart />
+                ) : (
+                  <AiOutlineHeart />
+                )}
               </button>
               <label
                 // type="checkbox"
@@ -301,12 +411,34 @@ const AiQuery2 = () => {
                 </div>
               </div>
             )}
+            {messageSearch?.length > 0 && (
+              <div>
+                <h2>Search also for:</h2>
+                <br />
+                {messageSearch?.length > 0 && (
+                  <ul className="flex flex-col md:flex-row md:gap-2 flex-wrap gap-0 items-start hover:mouse-pointer justify-start md:justify-between">
+                    {messageSearch.map((search) => (
+                      <a
+                        key={search.id}
+                        onClick={() => handleSearchInput(search.content)}
+                      >
+                        {search.content}
+                      </a>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
         )}
         <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
+              {isListening && (
+                <span className="loading loading-ring text-success relative left-7 top-2 loading-md"></span>
+              )}
               <button
+                onClick={startRecognition}
                 type="button"
                 className="inline-flex absolute top-0 items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               >

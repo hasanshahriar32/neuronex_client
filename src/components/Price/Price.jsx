@@ -1,52 +1,152 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import PaymentModal from "../Payment/PaymentModal";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0,
+      duration: 1,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
+const headingVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const tableVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
 const Price = () => {
-
-    const pricingData = [
-        {
-            plan: 'Basic',
-            price: 19.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3'],
-        },
-        {
-            plan: 'Standard',
-            price: 29.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4'],
-        },
-        {
-            plan: 'Premium',
-            price: 49.99,
-            features: ['Feature 1', 'Feature 2', 'Feature 3', 'Feature 4', 'Feature 5'],
-        },
-    ];
+  const [packagE, setPackage] = useState({});
+  const [pricingData, setPricingData] = useState([]);
 
 
+    // useInView hook
+  const [ref, inView] = useInView({
+    triggerOnce: true, // Only trigger once when the component comes into view
+    threshold: 0.1, // Adjust the threshold value as per your needs
+  });
 
-    return (
-        <div className="">
-            <div className="grid grid-cols-3 gap-4">
-                {pricingData.map((data) =>
-                    <>
-                        <div className="backdrop-blur-lg shadow-lg rounded-lg overflow-hidden border ">
-                            <div className="p-4">
-                                <h3 className="text-lg font-medium text-gray-900">{data?.plan}</h3>
-                                <div className="flex items-center mt-3">
-                                    <span className="text-gray-700 font-semibold text-lg">$</span>
-                                    <span className="text-gray-900 text-2xl font-semibold">{data.price}</span>
-                                </div>
-                                <ul className="mt-4 space-y-2">
-                                    {data.features.map((feature, index) => (
-                                        <li key={index} className="text-sm text-gray-600">{feature}</li>
-                                    ))}
-                                </ul>
-                                <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div></>
-                )}
-
-            </div>
-        </div>
+  const getPackage = async () => {
+    const { data: dataGet } = await axios.get(
+      `https://neuronex-server-test.vercel.app/package/all`
     );
+    setPricingData(dataGet);
+  };
+  useEffect(() => {
+    getPackage();
+  }, []);
+
+    useEffect(() => {
+    // Start the animation when the component comes into view
+    if (inView) {
+      // Code to start the animation here
+    }
+  }, [inView]);
+
+  return (
+    <div className="-mt-[250px] lg:px-[80px] ">
+      <div className="mb-4">
+        <motion.h2
+          className="text-5xl text-center mb-10"
+          variants={headingVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          Package to suit your plan
+        </motion.h2>
+        <motion.div
+          className="overflow-x-auto border m-4 p-2 shadow-secondary"
+          variants={tableVariant}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
+          <table className="table table-xl text-center">
+            {/* head */}
+            <thead>
+              <tr className="text-md">
+                <th>Model</th>
+                <th>Input</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              <tr className=" text-md">
+                <td>gpt-3.5-turbo</td>
+                <td>$0.0015 / 1K tokens</td>
+                <td>$0.002 / 1K tokens</td>
+              </tr>
+            </tbody>
+          </table>
+        </motion.div>
+      </div>
+      <motion.ul
+        ref={ref} // Attach the ref to the <ul> element
+        className="container"
+        variants={container}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
+          {pricingData.map((data) => (
+            <motion.li variants={item} key={data?.price}>
+              <div className="backdrop-blur-lg hover:backdrop-blur shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
+                <div className="p-4">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {data?.plan}
+                  </h3>
+                  <div className="flex items-center mt-3">
+                    <span className="text-gray-700 font-semibold text-lg">
+                      $
+                    </span>
+                    <span className="text-gray-900 text-2xl font-semibold">
+                      {data?.price}
+                    </span>
+                  </div>
+                  <ul className="mt-4 ">
+                    <p className="text-gray-900 text-lg font-semibold">
+                      validity :{data?.validity}
+                    </p>
+                    <p className="text-gray-700 font-semibold text-lg">
+                      Generation:{data?.estimatedGeneration}(EST)
+                    </p>
+                  </ul>
+                  <label
+                    onClick={() => setPackage(data)}
+                    htmlFor="my-modal-3"
+                    className="btn btn-md tracking-wide btn-warning mt-4"
+                  >
+                    Recharge Now!
+                  </label>
+                </div>
+              </div>
+            </motion.li>
+          ))}
+        </div>
+      </motion.ul>
+      <PaymentModal packagE={packagE} setPackage={setPackage} />
+    </div>
+  );
 };
 
 export default Price;

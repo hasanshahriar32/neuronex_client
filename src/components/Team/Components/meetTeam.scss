@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+// body {
+//   background-color: #263238;
+// }
+
+.btnOfMeetTeam {
+  display: inline-block;
+  color: white;
+  min-width: 154px;
+  text-decoration: none;
+  margin-right: 50px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+
+  &:hover {
+    .button-strokeOfMeetTeam:nth-child(2) {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+.button-strokeOfMeetTeam {
+  display: block;
+  width: calc(100% - 40px);
+  height: 20px;
+  stroke: rgb(0, 191, 255);
+  position: absolute;
+  left: 20px;
+  bottom: -10px;
+  stroke-width: 4;
+
+  &:nth-child(2) {
+    stroke-dasharray: 650px;
+    stroke-dashoffset: 650px;
+    stroke: darken(#263238, 10%);
+    stroke-width: 5;
+    transition: stroke-dashoffset 800ms ease-out;
+  }
+}

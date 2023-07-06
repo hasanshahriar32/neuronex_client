@@ -53,25 +53,16 @@ const Header = () => {
               )}
             >
               <li>
-                <Link href="#">Features</Link>
+              <a href="#HeroImage">HeroImage</a>
               </li>
               <li>
-                <Link href="#">Method</Link>
-              </li>
-              <li className="md:hidden lg:block">
-                <Link href="#">Customers</Link>
-              </li>
-              <li className="md:hidden lg:block">
-                <Link href="#">Changelog</Link>
-              </li>
-              <li className="md:hidden lg:block">
-                <Link href="#">Integrations</Link>
+              <a href="#price">Price</a>
               </li>
               <li>
-                <Link href="#">Pricing</Link>
+              <Link to='/profile/'>Dashboard</Link>
               </li>
               <li>
-                <Link href="#">Company</Link>
+              <Link to='/admin'>Dashboard</Link>
               </li>
             </ul>
           </nav>

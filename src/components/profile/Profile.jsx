@@ -3,6 +3,7 @@ import { AuthContext } from "../../Contexts/UserContext/UserContext";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   return (
     <div>
       <div className="container mx-auto p-2">

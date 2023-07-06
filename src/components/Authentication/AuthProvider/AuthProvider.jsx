@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const AuthProvider = () => {
   const { handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const handlegooglelogin = () => {
     handleGoogleSignIn()
       .then((res) => {
@@ -27,6 +30,8 @@ const AuthProvider = () => {
             progress: undefined,
             theme: "dark",
           });
+        // navigate(from, { replace: true });
+
         notify();
       })
       .catch((err) => {
@@ -47,6 +52,7 @@ const AuthProvider = () => {
         const userAbout = "member";
         saveUserToDb(name, pic, email, uid, userAbout, verified);
         const notify = () => toast.success("Login Successful");
+        // navigate(from, { replace: true });
         notify();
       })
       .catch((err) => {
@@ -67,7 +73,22 @@ const AuthProvider = () => {
       .then((data) => {
         console.log("save user", data);
         // localStorage.setItem("user", JSON.stringify(data));
-        localStorage.setItem("token", JSON.stringify(data?.token));
+        localStorage.setItem("token", data?.token);
+        localStorage.setItem("user_id", data?._id);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(err);
       });
   };
   return (
@@ -76,13 +97,13 @@ const AuthProvider = () => {
       <div className="">
         <button
           onClick={handlegooglelogin}
-          className="w-full tracking-wide btn-neutral text-xl btn h-10 btn-lg my-2"
+          className="w-full tracking-wide btn-neutral  btn h-10 btn-lg my-1"
         >
           login with google
         </button>
         <button
           onClick={handlegithublogin}
-          className="w-full tracking-wide btn-neutral text-xl btn h-10 btn-lg my-2"
+          className="w-full tracking-wide btn-neutral  btn h-10 btn-lg my-1"
         >
           login with github
         </button>
