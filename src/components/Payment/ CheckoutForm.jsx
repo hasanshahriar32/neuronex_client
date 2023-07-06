@@ -102,6 +102,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
         ...packagE,
         data: new Date().toDateString(),
         status: "Confirmed",
+        uid: user?.uid,
         max: null,
       };
       addToDb(confirmPayment);

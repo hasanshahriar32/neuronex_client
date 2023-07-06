@@ -132,7 +132,7 @@ const Price = () => {
                   </div>
                   <ul className="mt-4 ">
                     <p className="text-gray-900 text-lg font-semibold">
-                      validity :{data?.validity}
+                      validity : {data?.validity} Days
                     </p>
                     <p className="text-gray-700 font-semibold text-lg">
                       Generation:{data?.estimatedGeneration}(EST)
