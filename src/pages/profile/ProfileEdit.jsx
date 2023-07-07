@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { deleteUser, getAuth, updateProfile } from "firebase/auth";
 import app from "../../configs/firebase.config";
+import { BsFillSendFill } from 'react-icons/bs';
 import { BiEditAlt } from 'react-icons/bi';
 
 
@@ -58,7 +59,7 @@ const UpdateProfile = () => {
       <section className=" dark:bg-gray-900">
         <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
           <div className="mb-4 text-xl font-bold text-gray-900 dark:text-white flex">
-            <span>Update profile</span> <BiEditAlt className="mt-1 mx-2" />
+          <BiEditAlt className="mt-1 mx-2" />  <span>Update profile</span> 
           </div>
           <form onSubmit={userUpdate} action="#">
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
@@ -192,7 +193,7 @@ const UpdateProfile = () => {
                 type="submit"
                 className="text-white hover:text-background bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex items-center gap-2 border-l-[3px] border-secondary bg-primary  py-3"
               >
-                Update profile
+               <BsFillSendFill className="mt-1 mx-2" /> Update profile
               </button>
               <button
                 onClick={deleteAccount}
