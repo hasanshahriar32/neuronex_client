@@ -35,7 +35,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const addToDb = (product) => {
     setModalOpen(true);
     console.log(product);
-    fetch("https://neuronex-server-test.vercel.app/payment/resolve-intent", {
+    fetch("http://localhost:5000/payment/resolve-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,6 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
       const confirmPayment = {
         paymentID: paymentIntent.id,
         ...packagE,
-        _id: packagE?._id,
         date: new Date().toDateString(),
         status: "Confirmed",
         uid: user?.uid,
