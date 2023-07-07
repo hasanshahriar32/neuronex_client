@@ -35,7 +35,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const addToDb = (product) => {
     setModalOpen(true);
     console.log(product);
-    fetch("https://neuronex-server.onrender.com/payment/resolve-intent", {
+    fetch("https://neuronex-server-test.vercel.app/payment/resolve-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
