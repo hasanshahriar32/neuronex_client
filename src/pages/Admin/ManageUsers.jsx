@@ -55,7 +55,7 @@ const ManageUsers = () => {
                 <LoadingAnimation></LoadingAnimation>
             ) : (
                 <div className="overflow-x-auto mx-10 mt-10">
-                    <div className="flex md:justify-between">
+                    <div className="flex md:justify-between ">
                         <h2 className="text-4xl font-bold mb-5">Manage Users</h2>
                         <label
                             htmlFor="my-drawer-2"
@@ -71,7 +71,7 @@ const ManageUsers = () => {
                                 <th>Name</th>
                                 <th>Credential</th>
                                 <th>About</th>
-                                <th>Token used</th>
+                                <th>Payed</th>
                                 <th>Token Remail</th>
                                 <th></th>
                             </tr>
@@ -126,7 +126,7 @@ const ManageUsers = () => {
                                 {/* <!-- Buttons --> */}
                                 <button
                                     onClick={() => {
-                                        if (page > 2) {
+                                        if (page > 1) {
                                             setPage(page - 1);
                                         }
                                     }}

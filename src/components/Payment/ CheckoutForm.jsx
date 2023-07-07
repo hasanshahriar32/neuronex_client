@@ -1,12 +1,14 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import "../../index.css";
-import { toast } from "react-toastify";
 
 // eslint-disable-next-line no-unused-vars
 const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
+  console.log(packagE);
   const stripe = useStripe();
+  console.log(stripe);
   //load user
   const { user } = useContext(AuthContext);
   const elements = useElements();
@@ -28,7 +30,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
       .then((data) => setClientSecret(data.clientSecret))
       .catch((err) => {
         toast.error(err.message);
-        console.log(err.message);
+        console.log(err);
       });
   }, [id]);
 

@@ -5,9 +5,9 @@ import { default as Faq } from "../../components/Faq/Faq";
 import HeroSection from "../../components/Hero/HeroSection";
 import Price from "../../components/Price/Price";
 import Showcase from "../../components/Showcase/Showcase";
+import MeetTeam from "../../components/Team/Components/MeetTeam";
 import { Container } from "../../components/features/container";
 import { StarsIllustration } from "../../components/features/stars";
-import MeetTeam from "../../components/Team/Components/MeetTeam";
 
 const Home = () => {
     return (
@@ -17,7 +17,6 @@ const Home = () => {
                 <Container className="pt-[6.4rem]">
                     <HeroSection />
                 </Container>
-                <Container>{/* <Clients /> */}</Container>
                 <div className="mt-16">
                     <Showcase />
                 </div>
