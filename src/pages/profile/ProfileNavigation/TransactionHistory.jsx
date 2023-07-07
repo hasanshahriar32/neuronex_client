@@ -1,11 +1,24 @@
+import { useState } from "react";
+import TransactionTableBody from "./TransactionTableBody";
 
 
 const TransactionHistory = () => {
+
+    const [currentAmount, setCurrentAmount] = useState()
+
     return (
         <div className="w-full h-screen p-10">
-            <div className="my-10">
+            <div className="my-10 flex justify-between">
+                <div>
                 <h1 className="text-white text-3xl font-semibold font-sans">Neuro Nex</h1>
-                <p className="text-white text-lg">All Transaction History</p>
+                <p className="text-white text-sm">All Transaction History</p>
+                <p className="text-white text-sm">UID : {currentAmount?.uid}</p>
+                </div>
+
+                <div>
+                    <p className="text-sm">Current Amount : ${currentAmount?.currentBalance}</p>
+                    <p className="text-sm">validity : {currentAmount?.validity?.slice(0,10)}</p>
+                </div>
             </div>
 
             {/* Transaction Query */}
@@ -93,7 +106,7 @@ const TransactionHistory = () => {
 
             {/* Transaction Body */}
             <div>
-                
+                <TransactionTableBody setCurrentAmount = {setCurrentAmount} />
             </div>
         </div>
     );
