@@ -172,7 +172,7 @@ const ManageAdmins = () => {
             ) : (
                 <section className=" p-3 sm:p-5">
                     <h2 className="text-4xl font-bold mb-5">Manage Admins</h2>
-                    <div className="mx-auto px-2 lg:px-4  min-h-[88vh]">
+                    <div className="mx-auto px-2 lg:px-4  min-h-[80vh]">
                         {/* <!-- Start coding here --> */}
                         <ToastContainer></ToastContainer>
                         <div className="relative shadow-md sm:rounded-lg overflow-hidden ">
