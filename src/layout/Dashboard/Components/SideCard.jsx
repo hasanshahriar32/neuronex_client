@@ -72,7 +72,7 @@ const SideCard = ({ sesstionData }) => {
                                     }`}
                             >
                                 <div
-                                    className={`p-4 !pt-0 transition-opacity ${aiConfig?.sessionId === session?.sessionId
+                                    className={`p-4 my-[2px] lg:my-[1px] !pt-0 transition-opacity ${aiConfig?.sessionId === session?.sessionId
                                         ? "absolute opacity-0"
                                         : "group-hover:absolute group-hover:opacity-0"
                                         }`}
