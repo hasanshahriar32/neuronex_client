@@ -58,18 +58,13 @@ const Price = () => {
         getPackage();
     }, []);
 
-    useEffect(() => {
-        // Start the animation when the component comes into view
-        if (inView) {
-            // Code to start the animation here
-        }
-    }, [inView]);
-
     return (
-        <div className="-mt-[250px] lg:px-[80px] ">
+        <div
+            ref={ref}
+            className="-mt-[250px] lg:px-[80px] ">
             <div className="mb-4">
                 <motion.h2
-                    ref={ref}
+
                     className=" text-center mb-10"
                     variants={headingVariant}
                     initial="hidden"
@@ -108,7 +103,7 @@ const Price = () => {
                 </motion.div>
             </div>
             <motion.ul
-                ref={ref} // Attach the ref to the <ul> element
+                // ref={ref} // Attach the ref to the <ul> element
                 className="container"
                 variants={container}
                 initial="hidden"
