@@ -9,6 +9,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
 
     console.log(packagE);
     const stripe = useStripe();
+    console.log(stripe);
     //load user
     const { user } = useContext(AuthContext);
     const elements = useElements();
@@ -30,7 +31,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
             .then((data) => setClientSecret(data.clientSecret))
             .catch((err) => {
                 toast.error(err.message);
-                console.log(err.message);
+                console.log(err);
             });
     }, [id]);
 
