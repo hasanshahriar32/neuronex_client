@@ -98,7 +98,8 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
       const confirmPayment = {
         paymentID: paymentIntent.id,
         ...packagE,
-        data: new Date().toDateString(),
+        _id: packagE?._id,
+        date: new Date().toDateString(),
         status: "Confirmed",
         uid: user?.uid,
         max: null,
