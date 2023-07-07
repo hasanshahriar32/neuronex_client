@@ -5,6 +5,7 @@ import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import PaymentModal from "../Payment/PaymentModal";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { ToastContainer } from "react-toastify";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -74,12 +75,10 @@ const Price = () => {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <h2 className="text-5xl text-center ">
-                    Pricing
-                </h2>
-                <h2 className="text-2xl text-center mb-10">
-                    Package to suit your plan
-                </h2>
+          <h2 className="text-5xl text-center ">Pricing</h2>
+          <h2 className="text-2xl text-center mb-10">
+            Package to suit your plan
+          </h2>
         </motion.h2>
         <motion.div
           // ref={ref}
@@ -133,7 +132,7 @@ const Price = () => {
                   </div>
                   <ul className="mt-4 ">
                     <p className="text-gray-900 text-lg font-semibold">
-                      validity :{data?.validity}
+                      validity : {data?.validity} Days
                     </p>
                     <p className="text-gray-700 font-semibold text-lg">
                       Generation:{data?.estimatedGeneration}(EST)
@@ -149,7 +148,10 @@ const Price = () => {
                     </label>
                   ) : (
                     <label>
-                      <Link to="/login" className="btn btn-sm btn-warning mt-4">
+                      <Link
+                        to="/login"
+                        className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
+                      >
                         Login to pay
                       </Link>
                     </label>
@@ -161,6 +163,7 @@ const Price = () => {
         </div>
       </motion.ul>
       <PaymentModal packagE={packagE} setPackage={setPackage} />
+      <ToastContainer />
     </div>
   );
 };
