@@ -1,8 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
-import UserContext, {
-  AuthContext,
-} from "../../Contexts/UserContext/UserContext";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import "../../index.css";
 import { toast } from "react-toastify";
 
@@ -10,7 +8,7 @@ import { toast } from "react-toastify";
 const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const stripe = useStripe();
   //load user
-  const { user } = UserContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const elements = useElements();
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
@@ -37,7 +35,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const addToDb = (product) => {
     setModalOpen(true);
     console.log(product);
-    fetch("http://localhost:5000/payment/resolve-intent", {
+    fetch("https://neuronex-server-test.vercel.app/payment/resolve-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
