@@ -8,6 +8,7 @@ const TransactionHistory = () => {
 
     return (
         <div className="w-full h-screen p-10">
+            {/* Transaction Heading */}
             <div className="my-10 flex justify-between">
                 <div>
                 <h1 className="text-white text-3xl font-semibold font-sans">Neuro Nex</h1>
@@ -58,7 +59,7 @@ const TransactionHistory = () => {
 
                 <div className="-mt-5 mx-5">
                     <label htmlFor="HeadlineAct" className="block text-sm font-medium text-gray-900">
-                        Headliner
+                    Date
                     </label>
 
                     <select
@@ -66,14 +67,10 @@ const TransactionHistory = () => {
                         id="HeadlineAct"
                         className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
-                        <option value="">Please select</option>
-                        <option value="JM">John Mayer</option>
-                        <option value="SRV">Stevie Ray Vaughn</option>
-                        <option value="JH">Jimi Hendrix</option>
-                        <option value="BBK">B.B King</option>
-                        <option value="AK">Albert King</option>
-                        <option value="BG">Buddy Guy</option>
-                        <option value="EC">Eric Clapton</option>
+                        {
+                            currentAmount?.transactions.map((option, idx) => 
+                            <option key={idx} value="">{option?.updatedAt?.slice(0,10)}</option>
+                            ) }
                     </select>
                 </div>
                 
@@ -82,7 +79,7 @@ const TransactionHistory = () => {
 
             <div className="-mt-5">
                     <label htmlFor="HeadlineAct" className="block text-sm font-medium text-gray-900">
-                        Headliner
+                    Plan
                     </label>
 
                     <select
@@ -90,14 +87,10 @@ const TransactionHistory = () => {
                         id="HeadlineAct"
                         className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
                     >
-                        <option value="">Please select</option>
-                        <option value="JM">John Mayer</option>
-                        <option value="SRV">Stevie Ray Vaughn</option>
-                        <option value="JH">Jimi Hendrix</option>
-                        <option value="BBK">B.B King</option>
-                        <option value="AK">Albert King</option>
-                        <option value="BG">Buddy Guy</option>
-                        <option value="EC">Eric Clapton</option>
+                        {
+                            currentAmount?.transactions.map((option, idx) => 
+                            <option key={idx} value="">{option?.plan}</option>
+                            ) }
                     </select>
                 </div>
 
