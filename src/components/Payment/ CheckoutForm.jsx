@@ -1,15 +1,14 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
-import UserContext, {
-  AuthContext,
-} from "../../Contexts/UserContext/UserContext";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import "../../index.css";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line no-unused-vars
-const CheckoutForm = ({ packagE, setPackage, agreeTerms }) => {
+const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
   const stripe = useStripe();
   //load user
-  const { user } = UserContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const elements = useElements();
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
@@ -26,11 +25,40 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms }) => {
       body: JSON.stringify({ id }),
     })
       .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => setClientSecret(data.clientSecret))
+      .catch((err) => {
+        toast.error(err.message);
+        console.log(err.message);
+      });
   }, [id]);
 
   const addToDb = (product) => {
+    setModalOpen(true);
     console.log(product);
+    fetch("https://neuronex-server-test.vercel.app/payment/resolve-intent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data?.status === "Confirmed") {
+          toast.success("Payment Successful", {
+            theme: "dark",
+          });
+          setPackage(null);
+        }
+        setModalOpen(false);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setModalOpen(false);
+        console.log(err.message);
+      });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,6 +100,7 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms }) => {
         ...packagE,
         data: new Date().toDateString(),
         status: "Confirmed",
+        uid: user?.uid,
         max: null,
       };
       addToDb(confirmPayment);
