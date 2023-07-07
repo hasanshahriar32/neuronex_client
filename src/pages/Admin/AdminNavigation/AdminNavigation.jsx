@@ -144,7 +144,7 @@ const AdminNavigation = () => {
                         />
                     </svg>
 
-                    <span className="text-sm font-medium"> Manage Gigs</span>
+                    <NavLink to="/admin/manage-gigs" className="text-sm font-medium"> Manage Gigs</NavLink>
                 </NavLink>
             </nav>
         </div>

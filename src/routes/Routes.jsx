@@ -18,6 +18,7 @@ import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import ProfilePage from "../pages/profile/ProfileSection";
 import TransactionHistory from "../pages/profile/ProfileNavigation/TransactionHistory";
+import ManageGigs from "../pages/Admin/ManageGigs";
 
 const Routes = () => {
     const router = createBrowserRouter([
@@ -55,6 +56,7 @@ const Routes = () => {
                 { path: "/admin/", element: <Admin /> },
                 { path: "/admin/all-users", element: <ManageUsers /> },
                 { path: "/admin/all-admins", element: <ManageAdmins /> },
+                { path: "/admin/manage-gigs", element: <ManageGigs /> },
             ],
         },
         {
