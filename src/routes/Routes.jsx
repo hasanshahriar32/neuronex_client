@@ -53,6 +53,7 @@ const Routes = () => {
                 { path: "/admin/", element: <Admin /> },
                 { path: "/admin/all-users", element: <ManageUsers /> },
                 { path: "/admin/all-admins", element: <ManageAdmins /> },
+                { path: "/admin/all-admins", element: <ManageAdmins /> },
             ],
         },
         {
