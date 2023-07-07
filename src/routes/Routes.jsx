@@ -17,6 +17,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import ProfilePage from "../pages/profile/ProfileSection";
+import TransactionHistory from "../pages/profile/ProfileNavigation/TransactionHistory";
 
 const Routes = () => {
     const router = createBrowserRouter([
@@ -40,6 +41,7 @@ const Routes = () => {
             children: [
                 { path: "/profile/", element: <ProfilePage></ProfilePage> },
                 { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
+                { path: "/profile/my-transaction/history", element: <TransactionHistory /> },
             ],
         },
         {

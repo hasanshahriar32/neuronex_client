@@ -38,6 +38,17 @@ const Team = () => {
       linkedinURL: "https://www.linkedin.com/in/mdmusabbir/",
       youtubeURL: "",
     },
+    {
+      firstname: "MD",
+      lastname: "Hasan ",
+      role: "Web Developer",
+      picture: "https://i.ibb.co/hCnL0Q0/341741865-179599705014866-6842605451422987767-n.jpg",
+      description: "A skilled front-end developer who loves to build feature-rich and user-friendly web apps. I'm passionate about learning new programming tools and techniques, and solve complex problems. My core skills are JavaScript, React, Node, Express, and MongoDB. While not coding, I play chess, guitar, read a book, and often take a walk",
+      facebookURL: "https://www.facebook.com/ornilhasan0467/",
+      githubURL: "https://github.com/MdHasan0467",
+      linkedinURL: "https://www.linkedin.com/in/md-hasan149357/",
+      youtubeURL: "",
+    },
   ];
 
   const [member, setMember] = useState(0);
