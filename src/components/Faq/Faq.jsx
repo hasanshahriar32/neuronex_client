@@ -1,11 +1,9 @@
-import Lottie from 'lottie-react';
-import faq from '../../assets/lottie/faq1.json';
 const FAQ = () => {
     return (
         <div className="my-[100px] container mx-auto lg:px-[80px]">
             <div className="md:flex gap-4">
                 <div className="md:w-1/2 md:flex  items-center  justify-items-center">
-                    <Lottie className='w-[350px] lg:w-[450px] mx-auto' animationData={faq} loop={true} />
+                    {/* <Lottie className='w-[350px] lg:w-[450px] mx-auto' animationData={faq} loop={true} /> */}
                 </div>
 
                 <div className="md:w-1/2 p-4 md:p-0 text-md">
