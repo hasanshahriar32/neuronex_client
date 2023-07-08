@@ -1,20 +1,20 @@
-import SessionContext from "./Contexts/SessionContext/SessionContext";
-import Routes from "./routes/Routes";
-import UserContext from "./Contexts/UserContext/UserContext";
 import FormContext from "./Contexts/FormContext/FormContext";
-
+import SessionContext from "./Contexts/SessionContext/SessionContext";
+import UserContext from "./Contexts/UserContext/UserContext";
+import Routes from "./routes/Routes";
+import "./style.css";
 function App() {
-  return (
-    <>
-      <UserContext>
-        <FormContext>
-          <SessionContext>
-            <Routes />
-          </SessionContext>
-        </FormContext>
-      </UserContext>
-    </>
-  );
+    return (
+        <>
+            <UserContext>
+                <FormContext>
+                    <SessionContext>
+                        <Routes />
+                    </SessionContext>
+                </FormContext>
+            </UserContext>
+        </>
+    );
 }
 
 export default App;
