@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
+import FAQ from "../components/Faq/Faq";
+import Team from "../components/Team/Team";
 import AdminLayout from "../layout/Admin/Admin";
 import Dashboard from "../layout/Dashboard/Dashboard";
 import Main from "../layout/Main/Main";
@@ -15,8 +17,8 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import ProfilePage from "../pages/profile/ProfileSection";
-import Team from "../components/Team/Team";
-import FAQ from "../components/Faq/Faq";
+import TransactionHistory from "../pages/profile/ProfileNavigation/TransactionHistory";
+import ManageGigs from "../pages/Admin/ManageGigs";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -40,6 +42,10 @@ const Routes = () => {
       children: [
         { path: "/profile/", element: <ProfilePage></ProfilePage> },
         { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
+        {
+          path: "/profile/my-transaction/history",
+          element: <TransactionHistory />,
+        },
       ],
     },
     {
@@ -53,6 +59,7 @@ const Routes = () => {
         { path: "/admin/", element: <Admin /> },
         { path: "/admin/all-users", element: <ManageUsers /> },
         { path: "/admin/all-admins", element: <ManageAdmins /> },
+        { path: "/admin/manage-gigs", element: <ManageGigs /> },
       ],
     },
     {

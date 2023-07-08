@@ -4,6 +4,7 @@ import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation
 
 const ManageUsers = () => {
     const [userData, setUserData] = useState();
+    const [page, setPage] = useState(1);
     const handleDelete = (id) => {
         try {
             const user = async () => {
@@ -39,36 +40,39 @@ const ManageUsers = () => {
                     },
                 };
                 const { data } = await axios.get(
-                    `https://neuronex-server-test.vercel.app/user/all`,
-
+                    `https://neuronex-server-test.vercel.app/user/all?page=${page}&limit=8`,
                     config
                 );
                 setUserData(data);
             };
             user();
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+        } catch (error) { console.log(error); }
+    }, [page]);
 
     return (
-        <div className="w-full lg:w-[750px]">
+        <div className="w-full ">
             {!userData ? (
                 <LoadingAnimation></LoadingAnimation>
             ) : (
-                <div className="overflow-x-auto w-full mt-10">
-                    <table className="table w-full">
+                <div className="overflow-x-auto mx-10 mt-10">
+                    <div className="flex md:justify-between ">
+                        <h2 className="text-4xl font-bold mb-5">Manage Users</h2>
+                        <label
+                            htmlFor="my-drawer-2"
+                            className="btn btn-info btn-xs  btn-rounded lg:hidden mt-5 ml-16"
+                        >
+                            Open drawer
+                        </label>
+                    </div>
+                    <table className="table w-full text-md">
                         {/* head */}
                         <thead>
                             <tr>
-                                {/* <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th> */}
                                 <th>Name</th>
                                 <th>Credential</th>
                                 <th>About</th>
+                                <th>Payed</th>
+                                <th>Token Remail</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -80,11 +84,6 @@ const ManageUsers = () => {
                                     data-aos="fade-left"
                                     key={userData._id}
                                 >
-                                    {/* <th>
-                    <label>
-                      <input type="checkbox" className="checkbox " />
-                    </label>
-                  </th> */}
                                     <td>
                                         <div className="flex items-center space-x-3">
                                             <div className="avatar">
@@ -122,73 +121,53 @@ const ManageUsers = () => {
                             {/* row 2 */}
                         </tbody>
                         {/* foot */}
-                        <tfoot>
-                            <div className="flex  justify-end w-[100%]">
-                                {/* <th></th>
-                <th>Name</th>
-                <th>Credential</th>
-                <th>About</th>
-                <th></th> */}
+                        <tfoot className="flex">
+                            <div className="flex mt-2 xs:mt-0 items-center justify-center ">
+                                {/* <!-- Buttons --> */}
+                                <button
+                                    onClick={() => {
+                                        if (page > 1) {
+                                            setPage(page - 1);
+                                        }
+                                    }}
 
-                                <div className="flex flex-col items-center">
-                                    {/* <!-- Help text --> */}
-                                    <span className="text-sm text-gray-700 dark:text-gray-400">
-                                        Showing{" "}
-                                        <span className="font-semibold text-gray-900 dark:text-white">
-                                            1
-                                        </span>{" "}
-                                        to{" "}
-                                        <span className="font-semibold text-gray-900 dark:text-white">
-                                            10
-                                        </span>{" "}
-                                        of{" "}
-                                        <span className="font-semibold text-gray-900 dark:text-white">
-                                            100
-                                        </span>{" "}
-                                        Entries
-                                    </span>
-                                    <div className="inline-flex mt-2 xs:mt-0">
-                                        {/* <!-- Buttons --> */}
-                                        <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 mr-2"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                                                    clipRule="evenodd"
-                                                ></path>
-                                            </svg>
-                                            Prev
-                                        </button>
-                                        <button className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                            Next
-                                            <svg
-                                                aria-hidden="true"
-                                                className="w-5 h-5 ml-2"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                ></path>
-                                            </svg>
-                                        </button>
-                                        <label
-                                            htmlFor="my-drawer-2"
-                                            className="btn btn-sm btn-ghost btn-rounded btn-primary lg:hidden mt-2 ml-10"
-                                        >
-                                            Open drawer
-                                        </label>
-                                    </div>
-                                </div>
+                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 ">
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5 mr-2"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                    Prev
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setPage(page + 1);
+                                    }}
+                                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 ">
+                                    Next
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5 ml-2"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </button>
+
                             </div>
                         </tfoot>
                     </table>

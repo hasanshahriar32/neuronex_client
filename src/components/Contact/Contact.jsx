@@ -49,7 +49,7 @@ const Contact = () => {
                         >
                           <input
                             type="text"
-                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-b border-neutral-500"
                             id="exampleInput90"
                             placeholder="Name"
                             name="user_name"
@@ -68,10 +68,9 @@ const Contact = () => {
                         >
                           <input
                             type="email"
-                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-b border-neutral-500"
                             id="exampleInput91"
-                            placeholder="Email
-                                                 address"
+                            placeholder="Email  address"
                             required
                             name="user_email"
                           />
@@ -87,7 +86,7 @@ const Contact = () => {
                           data-te-input-wrapper-init
                         >
                           <textarea
-                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0 border-b border-neutral-500"
                             id="exampleFormControlTextarea1"
                             required
                             name="message"
@@ -132,19 +131,11 @@ const Contact = () => {
                               </div>
                             </div>
                             <div className="ml-6 grow">
-                              <p className="mb-2 font-bold dark:text-white">
+                              <p className="mb-2 font-bold text-neutral-500 dark:text-white">
                                 Technical support
                               </p>
-                              <p className="text-neutral-500 dark:text-neutral-200">
-                                admin@paradox-bd.com
-                              </p>
-                              <a
-                                href="https://t.me/mrxx32"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-neutral-500 dark:text-neutral-200"
-                              >
-                                https://t.me/mrxx32
+                              <a href="https://sjinnovation.com/" target="blank" className="text-neutral-500 dark:text-neutral-200">
+                              www.sjinnovation.com
                               </a>
                             </div>
                           </div>
@@ -170,19 +161,16 @@ const Contact = () => {
                               </div>
                             </div>
                             <div className="ml-6 grow">
-                              <p className="mb-2 font-bold dark:text-white">
-                                Sales questions
-                              </p>
-                              <p className="text-neutral-500 dark:text-neutral-200">
-                                admin@paradox-bd.com
+                              <p className="mb-2 font-bold text-neutral-500 dark:text-white">
+                              Featured Projects
                               </p>
                               <a
-                                href="https://t.me/mrxx32"
+                                href="https://sjinnovation.com/portfolio"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-neutral-500 dark:text-neutral-200"
                               >
-                                https://t.me/mrxx32
+                                www.sjinnovation.com/portfolio
                               </a>
                             </div>
                           </div>
@@ -208,19 +196,16 @@ const Contact = () => {
                               </div>
                             </div>
                             <div className="ml-6 grow">
-                              <p className="mb-2 font-bold dark:text-white">
-                                Press
-                              </p>
-                              <p className="text-neutral-500 dark:text-neutral-200">
-                                admin@paradox-bd.com
+                              <p className="mb-2 font-bold text-neutral-500 dark:text-white">
+                              QA Automation
                               </p>
                               <a
-                                href="https://t.me/mrxx32"
+                                href="https://www.sjinnovation.com/qa-automation"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-neutral-500 dark:text-neutral-200"
                               >
-                                https://t.me/mrxx32
+                              www.sjinnovation.com/qa-automation
                               </a>
                             </div>
                           </div>
@@ -246,19 +231,16 @@ const Contact = () => {
                               </div>
                             </div>
                             <div className="ml-6 grow">
-                              <p className="mb-2 font-bold dark:text-white">
-                                Bug report
-                              </p>
-                              <p className="text-neutral-500 dark:text-neutral-200">
-                                admin@paradox-bd.com
+                              <p className="mb-2 font-bold text-neutral-500 dark:text-white">
+                              Community Outreach
                               </p>
                               <a
-                                href="https://t.me/mrxx32"
+                                href="https://community.sjinnovation.com/"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="text-neutral-500 dark:text-neutral-200"
                               >
-                                https://t.me/mrxx32
+                                www.community.sjinnovation.com/
                               </a>
                             </div>
                           </div>
