@@ -27,6 +27,7 @@ const SideCard = ({ sesstionData }) => {
         config
       );
       setMessages(dataGet.messages);
+      console.log(dataGet);
       const aiConfigs = {
         subjectSelection: dataGet?.subjectSelection,
         assistanceLevel: dataGet?.assistanceLevel,

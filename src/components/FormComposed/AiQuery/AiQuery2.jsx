@@ -27,13 +27,16 @@ const AiQuery2 = () => {
   useEffect(() => {
     setCurrentSessionid(aiConfig?.sessionId);
   }, [setAiConfig, aiConfig?.sessionId]);
+  console.log(currentSessionid)
   useEffect(() => {
     setMessageSearch([]);
   }, [setAiConfig, aiConfig?.sessionId]);
 
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
+    element.scrollTop =
+      element.scrollHeight || element.clientHeight || element.offsetHeight || 0;
+
   };
 
   useEffect(() => {
@@ -108,7 +111,7 @@ const AiQuery2 = () => {
           handleSearchSuggestion(data[1]?.message);
           //   console.log(generatedSearch, "search")
 
-          console.log(data[0]?.sessionId, currentSessionid);
+          console.log(data[0]?.sessionId, aiConfig?.sessionId);
           if (
             Array.isArray(data) &&
             data?.length > 0 &&
