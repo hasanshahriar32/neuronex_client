@@ -2,7 +2,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast , ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import app from "../../../../configs/firebase.config";
@@ -132,6 +132,7 @@ const LoginForm = () => {
   };
   return (
     <div>
+      <ToastContainer />
       <div className="flex items-center justify-center h-[90vh]">
         <div className="max-w-xl">
           <div className="card shadow-transparent/90 shadow-primary  shadow-2xl">

@@ -5,6 +5,7 @@ import { FaHome } from "react-icons/fa";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { AiContext } from "../../Contexts/FormContext/FormContext";
+import { ChatContext } from "../../Contexts/SessionContext/SessionContext";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import SideCard from "./Components/SideCard";
 import DrawerToggle from "./DrawerToggle";
@@ -13,7 +14,8 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const drawerRef = useRef(null);
     const [drawerCheckboxChecked, setDrawerCheckboxChecked] = useState(false);
-    const [sesstionData, setSessionData] = useState([]);
+    // const [sesstionData, setSessionData] = useState([]);
+    const {sesstionData, setSessionData} = useContext(ChatContext)
     const [loadingSession, setLoadingSession] = useState(false);
     const { user } = useContext(AuthContext);
 

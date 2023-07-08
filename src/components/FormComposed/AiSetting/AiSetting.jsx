@@ -10,7 +10,7 @@ import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
-  const { setMessages } = useContext(ChatContext);
+  const { setMessages, sessionData, setSessionData } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -45,13 +45,11 @@ export default function AiSetting() {
     const dataId = uuidv4();
     data = { ...data, sessionId: dataId };
 
-    // setModalState(false);
     if (
       data?.subjectSelection !== "" ||
       data?.assistanceLevel !== "" ||
       data?.additionalInstruction !== ""
     ) {
-      setAiConfig([]);
       setMessages([]);
       toast.success("New session created!", {
         position: "top-center",
@@ -70,7 +68,7 @@ export default function AiSetting() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         };
-        const { dataGet } = await axios.post(
+        const { data: dataGet } = await axios.post(
           "https://neuronex-server-test.vercel.app/session",
           {
             sessionTitle: data?.additionalInstruction || "",
@@ -82,9 +80,12 @@ export default function AiSetting() {
           },
           config
         );
-        setAiConfig(data);
+        setAiConfig(dataGet);
+        // push data to sessiondata
         console.log(data);
         console.log(dataGet);
+        console.log(sessionData)
+        setSessionData([...sessionData, dataGet]);
       } catch (error) {
         console.log(error);
         toast({
