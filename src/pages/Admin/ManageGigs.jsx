@@ -81,11 +81,11 @@ const ManageGigs = () => {
             </form>
           </div>
         </section> */}
-            {/* 
+
             <div className="">
 
-                <Price />
-            </div> */}
+
+            </div>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 import LoadingAnimation from "../../../components/LoadingAnimation/LoadingAnimation";
@@ -8,6 +9,18 @@ const TransactionHistory = () => {
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [payment, setPayment] = useState([]);
+    //pricing 
+    const [pricingData, setPricingData] = useState([]);
+    const getPackage = async () => {
+        const { data: dataGet } = await axios.get(
+            `https://neuronex-server-test.vercel.app/package/all`
+        );
+        setPricingData(dataGet);
+    };
+
+    useEffect(() => {
+        getPackage();
+    }, []);
 
     useEffect(() => {
         setLoading(true)
@@ -64,25 +77,40 @@ const TransactionHistory = () => {
 
                     </div>
                 </div>
+                <form
+                    // onSubmit={handlePayment}
+                    className="flex items-center gap-8">
+                    <div className="">
+                        <p className="pb-1 text-sm">Plan</p>
+                        <select
 
+                            name="HeadlineAct"
+                            id="HeadlineAct"
+                            className="mt-1.5 w-[120px] rounded-lg border-gray-300 text-gray-700 sm:text-sm select select-secondary"
+                        >
+                            {pricingData?.map((option, idx) => (
+                                <option
+                                    key={idx}
 
-                <div className="">
-                    <p className="pb-1 text-sm">Plan</p>
-                    <select
-                        name="HeadlineAct"
-                        id="HeadlineAct"
+                                    value={option?._id}
+                                >
+                                    {option?.plan}
+                                </option>
+                            ))
+                            }
+                        </select>
+                    </div>
+                    <div className="">
+                    </div>
+                    <button
                         disabled
-                        className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm select select-secondary"
+                        htmlFor="my-modal-3"
+                        className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
                     >
-                        {
-                            payment?.transactions?.map((option, idx) =>
-                                <option key={idx} value="">{option?.plan}</option>
-                            )}
-                    </select>
-                </div>
-
+                        pay
+                    </button>
+                </form>
             </div>
-
 
             {/* Transaction Body */}
             <div className="">
