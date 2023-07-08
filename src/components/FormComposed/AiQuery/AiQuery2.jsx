@@ -262,7 +262,7 @@ const AiQuery2 = () => {
             <div className="flex-1 md:px-[5%] justify-between flex flex-col w-[95vw] lg:w-[70vw] py-2 min-h-screen max-h-screen">
                 <div className="flex flex-row-reverse sm:items-center justify-between py-3 border-b-2 border-gray-200">
                     <div className="relative flex-row-reverse text-end flex items-center space-x-4 ">
-                        <div className="relative">
+                        <div className="relative hidden md:block">
                             <span className="absolute text-success right-0 bottom-0">
                                 <svg width="20" height="20">
                                     <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
