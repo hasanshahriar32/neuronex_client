@@ -122,7 +122,7 @@ const AdminNavigation = () => {
                 </NavLink>
 
                 <NavLink
-                    to="/admin/all-gigs"
+                    to="/admin/manage-gigs"
                     className={({ isActive }) =>
                         isActive
                             ? "flex items-center gap-2 border-l-[3px] border-secondary bg-primary px-4 py-3 text-primary-content"
@@ -144,7 +144,7 @@ const AdminNavigation = () => {
                         />
                     </svg>
 
-                    <NavLink to="/admin/manage-gigs" className="text-sm font-medium"> Manage Gigs</NavLink>
+                    <span  className="text-sm font-medium"> Manage Gigs</span>
                 </NavLink>
             </nav>
         </div>
