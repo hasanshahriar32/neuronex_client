@@ -343,7 +343,7 @@ const AiQuery2 = () => {
                                 >
                                     <div className={`flex ${message.type === "incoming" ? "flex-row-reverse" : "items-center"} justify-center`}>
                                         <div
-                                            className={`flex flex-col md:space-y-2 text-md md:text-sm w-full min-w-xs mx-2 order-${message.type === "incoming" ? 2 : 1
+                                            className={`flex flex-col md:space-y-2 text-sm w-full min-w-xs mx-2 order-${message.type === "incoming" ? 2 : 1
                                                 } items-${message.type === "incoming" ? "start" : "end"}`}
                                         >
                                             <div>
@@ -381,7 +381,7 @@ const AiQuery2 = () => {
                         {loadingAi && (
                             <div>
                                 <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
-                                    <div className="flex items-end">
+                                    <div className="flex flex-row-reverse items-center">
                                         <div
                                             className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
                                         >
@@ -415,12 +415,12 @@ const AiQuery2 = () => {
                         )}
                         {messageSearch?.length > 0 && (
                             <div>
-                                <h2>Search also for:</h2>
+                                <h2 className="text-xl">Also search  for :</h2>
                                 <br />
                                 {messageSearch?.length > 0 && (
-                                    <ul className="flex flex-col md:flex-row md:gap-2 flex-wrap gap-0 items-start hover:mouse-pointer justify-start md:justify-between">
+                                    <ul className="flex flex-col md:flex-row md:gap-2 flex-wrap gap-0 items-start hover:mouse-pointer justify-start md:justify-between text-sm">
                                         {messageSearch.map((search) => (
-                                            <a
+                                            <a className="cursor-pointer"
                                                 key={search.id}
                                                 onClick={() => handleSearchInput(search.content)}
                                             >
