@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -16,12 +16,27 @@ export default function AiSetting() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     defaultValues: {
-      subjectSelection: "",
-      assistanceLevel: "",
+      subjectSelection: aiConfig?.subjectSelection || "",
+      assistanceLevel: aiConfig?.assistanceLevel || "",
+      additionalInstruction: aiConfig?.additionalInstruction || "",
     },
   });
+  useEffect(() => {
+    // Set default values for subjectSelection and assistanceLevel
+    const defaultSub = aiConfig?.subjectSelection || "";
+    const defaultAssist = aiConfig?.assistanceLevel || "";
+    const defaultAdditional = aiConfig?.additionalInstruction || "";
+
+    reset({
+      subjectSelection: defaultSub,
+      assistanceLevel: defaultAssist,
+      additionalInstruction: defaultAdditional,
+    });
+  }, [reset, aiConfig?.sessionId]);
+
   const onSubmit = async (data) => {
     if (
       data?.subjectSelection == aiConfig?.subjectSelection &&
@@ -86,8 +101,9 @@ export default function AiSetting() {
         console.log(sesstionData);
         if (sesstionData?.length === 0) {
           setSessionData([dataGet]);
+        } else {
+          setSessionData([dataGet, ...sesstionData]);
         }
-        else{setSessionData([dataGet , ...sesstionData]);}
       } catch (error) {
         console.log(error);
         toast({
@@ -144,7 +160,7 @@ export default function AiSetting() {
                   required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subjectSelection"] ? "true" : "false"}
-                defaultValue={localStorage.getItem("currentSub")}
+                defaultValue={aiConfig?.subjectSelection}
                 className="form-select select text-sm h-8 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
@@ -195,7 +211,7 @@ export default function AiSetting() {
                     className="text-sm h-8 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
-                      defaultValue={localStorage.getItem("currentAssist")}
+                      defaultValue={aiConfig?.assistanceLevel}
                       {...register("assistanceLevel", {
                         required: "Please select an item in the list.",
                       })}
