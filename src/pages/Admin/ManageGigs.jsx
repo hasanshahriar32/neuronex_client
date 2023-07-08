@@ -1,13 +1,11 @@
-import { BiEditAlt } from "react-icons/bi";
-import { BsFillSendFill } from "react-icons/bs";
-import { ToastContainer } from "react-toastify";
 
 
 const ManageGigs = () => {
+
     return (
-        <div className=" dark:bg-gray-900">
-        <ToastContainer />
-        <section className=" dark:bg-gray-900">
+        <div className="">
+
+            {/* <section className=" dark:bg-gray-900">
           <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
             <div className="mb-4 text-xl font-bold text-gray-900 dark:text-white flex">
               <BiEditAlt className="mt-1 mx-2" /> <span>Update profile</span>
@@ -82,8 +80,13 @@ const ManageGigs = () => {
               </div>
             </form>
           </div>
-        </section>
-      </div>
+        </section> */}
+            {/* 
+            <div className="">
+
+                <Price />
+            </div> */}
+        </div>
     );
 };
 
