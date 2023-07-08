@@ -9,7 +9,7 @@ import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 const SideCard = ({ sesstionData }) => {
     const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
     const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
-    // const handleDelete = (id) => {};
+
     const handleFetchMessage = async (id) => {
         setSessionMessageLoading(true);
         try {
@@ -53,6 +53,9 @@ const SideCard = ({ sesstionData }) => {
             });
         }
     };
+    const handleDeleteSession = (id) => {
+        console.log(id);
+    }
     return (
         <>
             {sesstionData?.map((session) => (
@@ -171,7 +174,14 @@ const SideCard = ({ sesstionData }) => {
                                                 />
                                             </svg>
                                         </div>
-                                        <button className="btn btn-error btn-outline text-lg">
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                handleDeleteSession(session?.sessionId);
+                                            }}
+                                            id="delete-session"
+                                            className="btn btn-error btn-outline text-lg border">
                                             <RiDeleteBinLine />
                                         </button>
                                     </div>

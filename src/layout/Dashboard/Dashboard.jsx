@@ -188,7 +188,7 @@ const Dashboard = () => {
                         )}
                     </div>
 
-                    <li className="flex flex-row  items-center  gap-2 justify-center text-md lg:text-lg">
+                    <li className="flex flex-row  items-center  gap-2 md:justify-center mx-5 md:mx-0 text-md lg:text-lg">
                         <Link
                             className="text-md btn btn-neutral shadow-sm btn-outline lg:text-lg"
                             to="/"
@@ -216,7 +216,7 @@ const Dashboard = () => {
                             </span>
                             <span>NEW</span>
                         </Link>
-                        <ul className="menu menu-horizontal  bg-base-200 text-lg rounded-box ">
+                        <ul className="menu menu-horizontal hidden md:block bg-base-200 text-lg rounded-box ">
                             <li className="">
                                 <details className="relative">
                                     <summary className="btn text-md btn-neutral shadow-sm btn-outline">
