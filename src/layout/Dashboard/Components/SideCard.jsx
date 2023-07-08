@@ -36,6 +36,9 @@ const SideCard = ({ sesstionData }) => {
         sessionTitle: dataGet?.sessionTitle,
         isBookmarked: dataGet?.isBookmarked || false,
       };
+      localStorage.setItem("currentSub" , dataGet?.subjectSelection);
+      localStorage.setItem("currentAssist" , dataGet?.assistanceLevel);
+      localStorage.setItem("currentAdditional" , dataGet?.additionalInstruction);
       setAiConfig(aiConfigs);
       console.log(aiConfigs);
       setModalState(false);

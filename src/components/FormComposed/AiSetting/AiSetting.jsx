@@ -144,7 +144,7 @@ export default function AiSetting() {
                   required: "Please select a subject.",
                 })}
                 aria-invalid={errors["subjectSelection"] ? "true" : "false"}
-                defaultValue={aiConfig?.subjectSelection}
+                defaultValue={localStorage.getItem("currentSub")}
                 className="form-select select text-sm h-8 w-full select-ghost  border-secondary text-gray-700"
               >
                 <option disabled selected>
@@ -195,7 +195,7 @@ export default function AiSetting() {
                     className="text-sm h-8 min-w-[250px] w-full  max-w-full md:max-w-[45%] flex flex-wrap overflow-hidden items-center input input-ghost border-secondary border-solid hover:border-double focus:border-dashed mb-2"
                   >
                     <input
-                      defaultValue={aiConfig?.assistanceLevel}
+                      defaultValue={localStorage.getItem("currentAssist")}
                       {...register("assistanceLevel", {
                         required: "Please select an item in the list.",
                       })}
