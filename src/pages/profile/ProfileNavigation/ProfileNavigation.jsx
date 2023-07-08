@@ -148,7 +148,7 @@ const ProfileNavigation = () => {
                     <span className="text-sm font-medium"> Business Info </span>
                 </NavLink> */}
                 <NavLink
-                    to="/settings/payment"
+                    to="/profile/my-transaction/history"
                     className={({ isActive }) =>
                         isActive
                             ? "flex items-center gap-2 border-l-[3px] border-secondary text-white bg-primary  px-4 py-3 "
@@ -169,7 +169,7 @@ const ProfileNavigation = () => {
                             d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
                         />
                     </svg>
-                    <NavLink to="/profile/my-transaction/history" className="text-sm font-medium">Make Payment</NavLink>
+                    <span className="text-sm font-medium">Make Payment</span>
                 </NavLink>
 
             </nav>
