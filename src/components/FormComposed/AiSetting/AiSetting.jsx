@@ -10,7 +10,7 @@ import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
-  const { setMessages, sessionData, setSessionData } = useContext(ChatContext);
+  const { setMessages, sesstionData, setSessionData } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -22,7 +22,6 @@ export default function AiSetting() {
       assistanceLevel: "",
     },
   });
-
   const onSubmit = async (data) => {
     if (
       data?.subjectSelection == aiConfig?.subjectSelection &&
@@ -84,8 +83,11 @@ export default function AiSetting() {
         // push data to sessiondata
         console.log(data);
         console.log(dataGet);
-        console.log(sessionData)
-        setSessionData([...sessionData, dataGet]);
+        console.log(sesstionData);
+        if (sesstionData?.length === 0) {
+          setSessionData([dataGet]);
+        }
+        else{setSessionData([dataGet , ...sesstionData]);}
       } catch (error) {
         console.log(error);
         toast({
