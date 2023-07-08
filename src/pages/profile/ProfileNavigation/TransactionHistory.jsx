@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { usePayment } from "../../../Contexts/PaymentContext/PaymentContext";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 import LoadingAnimation from "../../../components/LoadingAnimation/LoadingAnimation";
+import PaymentModal from "../../../components/Payment/PaymentModal";
 import TransactionTableBody from "./TransactionTableBody";
 
 
 const TransactionHistory = () => {
+    const { packagE, setPackage, setReload, reload } = usePayment();
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [payment, setPayment] = useState([]);
+
     //pricing 
     const [pricingData, setPricingData] = useState([]);
     const getPackage = async () => {
@@ -16,6 +21,14 @@ const TransactionHistory = () => {
             `https://neuronex-server-test.vercel.app/package/all`
         );
         setPricingData(dataGet);
+    };
+    const [selectedPackage, setSelectedPackage] = useState(pricingData[0]?._id);
+    const handlePayment = () => {
+        const id = document.getElementById("HeadlineAct").value
+        const data = pricingData?.find((item) => item._id === id)
+        setReload(false)
+        console.log(data);
+        setPackage(data)
     };
 
     useEffect(() => {
@@ -42,11 +55,11 @@ const TransactionHistory = () => {
                 setPayment(result[0]);
                 setLoading(false);
             });
-    }, []);
+    }, [reload]);
 
 
     return (
-        <div className="w-full h-screen p-10">
+        <div className="w-full h-screen p-4 md:p-6 lg:p-10">
             {/* Transaction Heading */}
             <div className="my-10 flex justify-between">
                 <div>
@@ -77,39 +90,41 @@ const TransactionHistory = () => {
 
                     </div>
                 </div>
-                <form
-                    // onSubmit={handlePayment}
-                    className="flex items-center gap-8">
-                    <div className="">
-                        <p className="pb-1 text-sm">Plan</p>
+                <div className="flex items-center gap-3">
+                    <p className="pb-1 text-sm hidden md:block font-bold text-white">  Recharge Now! </p>
+                    <div>
+                        <p className="pb-1 text-sm md:hidden ">  Recharge Now! </p>
                         <select
-
                             name="HeadlineAct"
                             id="HeadlineAct"
-                            className="mt-1.5 w-[120px] rounded-lg border-gray-300 text-gray-700 sm:text-sm select select-secondary"
+                            className="mt-1.5  md:w-[150px] rounded-lg border-gray-300 text-gray-700 sm:text-sm select select-secondary"
+                            onChange={(e) => setSelectedPackage(e.target.value)}
+                            value={selectedPackage}
                         >
                             {pricingData?.map((option, idx) => (
-                                <option
-                                    key={idx}
+                                <>
+                                    {idx === 0 && <option key={idx} disabled selected value="">Select Package</option>
+                                    }
+                                    <option key={idx}
+                                        id="package"
+                                        value={option?._id}>
+                                        {option?.plan}
+                                    </option>
 
-                                    value={option?._id}
-                                >
-                                    {option?.plan}
-                                </option>
-                            ))
-                            }
+                                </>
+
+                            ))}
                         </select>
                     </div>
-                    <div className="">
-                    </div>
-                    <button
-                        disabled
-                        htmlFor="my-modal-3"
-                        className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4"
-                    >
-                        pay
-                    </button>
-                </form>
+                    <label
+                        disabled={!selectedPackage}
+                        onClick={handlePayment}
+                        className="btn btn-md group-hover:scale-125 group-hover:ml-3 tracking-wide btn-warning mt-4 md:mt-0"
+                        htmlFor="my-modal-3">
+                        Pay
+                    </label>
+
+                </div>
             </div>
 
             {/* Transaction Body */}
@@ -118,6 +133,10 @@ const TransactionHistory = () => {
                     <LoadingAnimation />
                     : <TransactionTableBody transaction={payment?.transactions} />}
             </div>
+
+            {packagE &&
+                <PaymentModal />}
+            <ToastContainer />
         </div>
     );
 };

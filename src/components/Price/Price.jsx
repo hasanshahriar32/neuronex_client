@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { usePayment } from "../../Contexts/PaymentContext/PaymentContext";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import PaymentModal from "../Payment/PaymentModal";
 
@@ -39,7 +40,7 @@ const tableVariant = {
 };
 
 const Price = () => {
-    const [packagE, setPackage] = useState();
+
     const [pricingData, setPricingData] = useState([]);
     const { user } = useContext(AuthContext);
     // useInView hook
@@ -57,6 +58,8 @@ const Price = () => {
     useEffect(() => {
         getPackage();
     }, []);
+
+    const { packagE, setPackage } = usePayment()
 
     return (
         <div
@@ -158,7 +161,7 @@ const Price = () => {
                 </div>
             </motion.ul>
             {packagE &&
-                <PaymentModal packagE={packagE} setPackage={setPackage} />}
+                <PaymentModal />}
             <ToastContainer />
         </div>
     );

@@ -1,11 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { usePayment } from "../../Contexts/PaymentContext/PaymentContext";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
 import "../../index.css";
 
 // eslint-disable-next-line no-unused-vars
-const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
+const CheckoutForm = ({ agreeTerms, setModalOpen }) => {
+    const { packagE, setPackage, setReload } = usePayment();
     console.log(packagE);
     const stripe = useStripe();
     console.log(stripe);
@@ -49,14 +51,17 @@ const CheckoutForm = ({ packagE, setPackage, agreeTerms, setModalOpen }) => {
             .then((data) => {
                 console.log(data);
                 if (data?.status === "Confirmed") {
+                    setReload(true);
                     toast.success("Payment Successful", {
                         theme: "dark",
                     });
                     setPackage(null);
+
                 }
                 setModalOpen(false);
             })
             .catch((err) => {
+                setReload(false);
                 toast.error(err.message);
                 setModalOpen(false);
                 console.log(err.message);
