@@ -4,7 +4,7 @@ import TransactionTableBody from "./TransactionTableBody";
 
 const TransactionHistory = () => {
 
-    const [currentAmount, setCurrentAmount] = useState()
+    const [currentAmount, setCurrentAmount] = useState([])
 
     return (
         <div className="w-full h-screen p-10">

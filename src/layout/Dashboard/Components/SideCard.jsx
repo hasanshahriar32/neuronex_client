@@ -181,7 +181,7 @@ const SideCard = ({ sesstionData }) => {
                                                 handleDeleteSession(session?.sessionId);
                                             }}
                                             id="delete-session"
-                                            className="btn btn-error btn-outline text-lg border">
+                                            className={`btn btn-error btn-outline text-lg border ${aiConfig?.sessionId === session?.sessionId ? "btn-disabled" : ""}`}>
                                             <RiDeleteBinLine />
                                         </button>
                                     </div>
