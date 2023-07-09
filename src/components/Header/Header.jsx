@@ -68,9 +68,7 @@ const Header = () => {
                             <li>
                                 <Link to='/faq'>Faq</Link>
                             </li>
-                            <li>
-                                <Link to='/faq'>FAQ</Link>
-                            </li>
+
                         </ul>
                     </nav>
                 </div>
@@ -107,25 +105,7 @@ const Header = () => {
                                 <li><p onClick={() => logOut()}>Logout</p></li>
                             </ul>}
                     </div>
-
-
-                    {/* 
-                    {user?.uid ? (
-                        <button className="mr-6 text-sm" onClick={() => logOut()}>
-                            Log out
-                        </button>
-                    ) : (
-                        <div>
-                            <Link to="/login" className="mr-6 text-sm" href="#">
-                                Log in
-                            </Link>
-                            <Link to="/register" className="text-sm" href="#">
-                                Sign up
-                            </Link>
-                        </div>
-                    )} */}
                 </div>
-
                 <button
                     className="ml-6 md:hidden"
                     onClick={() => setHamburgerMenuIsOpen((open) => !open)}

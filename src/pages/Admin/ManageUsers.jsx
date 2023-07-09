@@ -1,13 +1,36 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
-import { toast } from "react-toastify";
 
 const ManageUsers = () => {
   const [userData, setUserData] = useState();
   const [page, setPage] = useState(1);
+  const [deleteId, setDeleteId] = useState();
+  const [confirm, setConfirm] = useState("");
+
+  const loadData = () => {
+    try {
+      const user = async () => {
+        const user = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user}`,
+          },
+        };
+        const { data } = await axios.get(
+          `https://neuronex-server-test.vercel.app/user/all?page=${page}&limit=8`,
+          config
+        );
+        setUserData(data);
+      };
+      user();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleDelete = (id) => {
-    
     try {
       const user = async () => {
         const user = localStorage.getItem("token");
@@ -18,11 +41,13 @@ const ManageUsers = () => {
         };
         const { data } = await axios.delete(
           `https://neuronex-server-test.vercel.app/admin/user/${id}`,
-
           config
         );
-        console.log(data);
-        alert("user deleted");
+        if (data.deletedCount === 1) {
+          toast.success("User Deleted Successfully", {
+            theme: "dark",
+          });
+        }
       };
       user();
     } catch (error) {
@@ -32,6 +57,8 @@ const ManageUsers = () => {
       console.log("something went wrong");
     }
   };
+
+  //see all transaction of a user
   const handleUid = async (uid) => {
     try {
       const config = {
@@ -63,25 +90,18 @@ const ManageUsers = () => {
       });
     }
   };
+
+  if (confirm === "delete") {
+    handleDelete(deleteId);
+    setConfirm("");
+    loadData();
+  }
+  if (confirm === "close") {
+    setConfirm("");
+  }
+
   useEffect(() => {
-    try {
-      const user = async () => {
-        const user = localStorage.getItem("token");
-        const config = {
-          headers: {
-            Authorization: `Bearer ${user}`,
-          },
-        };
-        const { data } = await axios.get(
-          `https://neuronex-server-test.vercel.app/user/all?page=${page}&limit=8`,
-          config
-        );
-        setUserData(data);
-      };
-      user();
-    } catch (error) {
-      console.log(error);
-    }
+    loadData();
   }, [page]);
 
   return (
@@ -144,8 +164,12 @@ const ManageUsers = () => {
                     {/* <button className="btn btn-ghost btn-xs">
                       Make Verified
                     </button> */}
+
                     <button
-                      onClick={() => handleDelete(userData?._id)}
+                      onClick={() => {
+                        window.my_modal_1.showModal();
+                        setDeleteId(userData?._id);
+                      }}
                       className="btn btn-error btn-outline btn-xs"
                     >
                       Delete
@@ -214,8 +238,13 @@ const ManageUsers = () => {
               </div>
             </tfoot>
           </table>
+          <ConfirmModal
+            message={"want to delete user"}
+            setConfirm={setConfirm}
+          />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
