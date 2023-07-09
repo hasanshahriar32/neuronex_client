@@ -7,6 +7,7 @@ const ManageUsers = () => {
   const [userData, setUserData] = useState();
   const [page, setPage] = useState(1);
   const handleDelete = (id) => {
+    
     try {
       const user = async () => {
         const user = localStorage.getItem("token");

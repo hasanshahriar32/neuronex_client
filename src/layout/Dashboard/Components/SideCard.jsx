@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
-const SideCard = ({ sesstionData }) => {
+const SideCard = ({ sesstionData , setRefetch }) => {
   const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
 
@@ -36,9 +36,9 @@ const SideCard = ({ sesstionData }) => {
         sessionTitle: dataGet?.sessionTitle,
         isBookmarked: dataGet?.isBookmarked || false,
       };
-      localStorage.setItem("currentSub" , dataGet?.subjectSelection);
-      localStorage.setItem("currentAssist" , dataGet?.assistanceLevel);
-      localStorage.setItem("currentAdditional" , dataGet?.additionalInstruction);
+      localStorage.setItem("currentSub", dataGet?.subjectSelection);
+      localStorage.setItem("currentAssist", dataGet?.assistanceLevel);
+      localStorage.setItem("currentAdditional", dataGet?.additionalInstruction);
       setAiConfig(aiConfigs);
       console.log(aiConfigs);
       setModalState(false);
@@ -57,9 +57,39 @@ const SideCard = ({ sesstionData }) => {
       });
     }
   };
-  const handleDeleteSession = (id) => {
-    console.log(id);
+  const handleDeleteSession = async (sessionId) => {
+    const data = { sessionId };
+    const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/session/${localStorage.getItem(
+          "user_id"
+        )}`,
+        { data },
+        config
+      );
+      console.log(response.data);
+      // alert("session removed");
+      setRefetch(true)
+    } catch (error) {
+      console.log(error);
+      toast.error({
+        title: "Error Occurred!",
+        description: "Failed to delete user session.",
+        status: "error",
+        duration: 4000,
+        isClosable: true,
+        theme: "dark",
+      });
+    }
   };
+
   return (
     <>
       {sesstionData?.map((session) => (

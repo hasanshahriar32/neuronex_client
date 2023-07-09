@@ -12,6 +12,7 @@ import DrawerToggle from "./DrawerToggle";
 const Dashboard = () => {
     const { setAiConfig, drawerOpen, setDrawerOpen } = useContext(AiContext);
     const navigate = useNavigate();
+    const [refetch, setRefetch] = useState(false)
     const drawerRef = useRef(null);
     const [drawerCheckboxChecked, setDrawerCheckboxChecked] = useState(false);
     // const [sesstionData, setSessionData] = useState([]);
@@ -51,6 +52,7 @@ const Dashboard = () => {
     const getSessions = async () => {
         setSessionData({});
         setLoadingSession(true);
+        setAiConfig([]);
         try {
             const config = {
                 headers: {
@@ -119,7 +121,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getSessions();
-    }, [setAiConfig]);
+    }, [setAiConfig , refetch]);
 
     return (
         <div className="drawer lg:drawer-open -mt-12" ref={drawerRef}>
@@ -178,7 +180,7 @@ const Dashboard = () => {
                             </div>
                         )}
                         {sesstionData?.length > 0 ? (
-                            <SideCard sesstionData={sesstionData} />
+                            <SideCard sesstionData={sesstionData} setRefetch={setRefetch} />
                         ) : (
                             <div className="w-full flex items-center justify-center h-full">
                                 <img
