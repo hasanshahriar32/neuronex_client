@@ -64,6 +64,9 @@ const Header = () => {
                             <li>
                                 <Link to='/admin'>Dashboard</Link>
                             </li>
+                            <li>
+                                <Link to='/faq'>FAQ</Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>
