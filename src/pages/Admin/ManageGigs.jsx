@@ -6,6 +6,7 @@ import ManageProfitModal from "./ManageProfitModal";
 const ManageGigs = () => {
     const [pricingData, setPricingData] = useState([]);
     const [packageInfo, setPackageInfo] = useState({});
+    const [refetch, setRefetch] = useState(false);
 
     const getPackage = async () => {
         const { data: dataGet } = await axios.get(
@@ -14,8 +15,9 @@ const ManageGigs = () => {
         setPricingData(dataGet);
     };
     useEffect(() => {
+        setRefetch(false)
         getPackage();
-    }, []);
+    }, [refetch]);
 
 
     return (
@@ -59,7 +61,7 @@ const ManageGigs = () => {
                 </div>
                 {
                     packageInfo &&
-                    <ManageProfitModal packageInfo={packageInfo} setPackageInfo={setPackageInfo} />}
+                    <ManageProfitModal packageInfo={packageInfo} setPackageInfo={setPackageInfo} setRefetch={setRefetch} />}
             </div>
             <>
 

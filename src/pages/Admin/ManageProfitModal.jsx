@@ -2,7 +2,7 @@ import axios from "axios";
 import { BsFillSendFill } from "react-icons/bs";
 import { toast } from "react-toastify";
 
-const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
+const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
     const inputData = [
         { ref: "Name", filed: "Add Name", value: packageInfo?.plan },
         { ref: "Price", filed: "Add Price", value: packageInfo?.price },
@@ -28,15 +28,8 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
                 profit: data.profit
             }, config
             )
-            if (dataGet._id) {
-                toast.success({
-                    title: "Success!",
-                    description: "Package Updated Successfully.",
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                    theme: "dark",
-                });
+            if (dataGet?._id) {
+                setRefetch(true)
                 setPackageInfo()
             }
         } catch (error) {
@@ -105,7 +98,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
                                     <div className="w-full">
                                         <button type="submit" className="btn btn-info w-full">
                                             <BsFillSendFill className="mt-1 mx-2 text-md" />
-                                            <p className="text-md">Update profile</p>
+                                            <p className="text-md">Update</p>
                                         </button>
                                     </div>
                                 </div>

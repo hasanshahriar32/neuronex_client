@@ -106,7 +106,6 @@ const AiQuery2 = () => {
                                 sessionTitle: data[1]?.title,
                             }));
                         }
-
                         setMessages((prevMessages) => {
                             // Check if any message with the same serial number already exists
                             const existingMessageIndex = prevMessages.findIndex(
@@ -141,6 +140,7 @@ const AiQuery2 = () => {
                         // You can choose to display an error message or handle it as needed.
                     }
                 })
+                // eslint-disable-next-line no-unused-vars
                 .catch((err) => {
                     setLoadingAi(false);
                 });
