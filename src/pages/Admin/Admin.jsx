@@ -129,7 +129,7 @@ const Admin = () => {
                                             <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
                                             <label
                                                 onClick={handleChange}
-                                                className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer"
+                                                className=" btn-warning btn btn-lg py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer"
                                             >
                                                 Change Admin Password
                                             </label>
@@ -162,13 +162,13 @@ const Admin = () => {
                                 <form onSubmit={handleChangePass} action="">
                                     <div>
                                         <label className="py-4" htmlFor="">
-                                            Please enter your old password
+                                            Please enter your old password (default is blank)
                                         </label>
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             type="password"
                                             name="oldPass"
-                                            placeholder="••••••••"
+                                            placeholder=""
                                             // defaultValue={users?.email}
                                             id="oldPass"
                                             // onBlur={handleEventBlur}
@@ -180,7 +180,7 @@ const Admin = () => {
                                             Please enter your new password
                                         </label>
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             type="password"
                                             name="newPass"
                                             placeholder="••••••••"
