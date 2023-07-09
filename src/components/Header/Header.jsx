@@ -68,6 +68,9 @@ const Header = () => {
                             <li>
                                 <Link to='/faq'>Faq</Link>
                             </li>
+                            <li>
+                                <Link to='/faq'>FAQ</Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>

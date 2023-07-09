@@ -1,6 +1,21 @@
 import Lottie from 'lottie-react';
 import faq from '../../assets/lottie/faq1.json';
+import { useLocation } from 'react-router';
 const FAQ = () => {
+
+    const location = useLocation()
+    const isFaqRoute= location.pathname === "/faq"
+
+    const additionalFaq= [
+        {
+            question: "Can I check my token use?",
+            answer: "Yes you can check your token use and remaining tokens from the dashboard."
+        },
+        {question: "Is the payment recurring or should I pay manually?",
+        answer: "You have to purchage tokens manually once you have used all the tokenes or the duration of the tokens is expired"
+        },
+    ]
+
     return (
         <div className="my-[100px] container mx-auto lg:px-[80px]">
             <div className="md:flex gap-4">
@@ -64,6 +79,19 @@ const FAQ = () => {
                                     during normal business hours.
                                 </p>
                             </details>
+                            
+                            {
+                            isFaqRoute &&
+                            additionalFaq.map((f) => (
+                                <details className="pb-5 border-b md:w-80 hover:cursor-pointer" key={f.question}>
+                                <summary className="flex justify-between items-center text-summary md:text-sm font-normal text-very-dark-grayish-blue hover:text-soft-red">
+                                    {f.question}
+                                </summary>
+                                <p className="text-dark-grayish-blue text-xs font-normal">{f.answer}</p>
+                                </details>
+                            ))
+                            }
+
                         </div>
                     </div>
                 </div>
