@@ -105,13 +105,13 @@ const Header = () => {
                             <div className={`flex items-center justify-center btn btn-ghost`}>
                                 <BiUser className='text-3xl' />
                                 {user?.uid ?
-                                    <div className=" text-sm">{user?.displayName}</div> :
+                                    <div className=" text-sm hidden md:block">{user?.displayName}</div> :
                                     <div className='text-sm ml-2'><Link to='/login'>Login</Link></div>
                                 }
                             </div>
                         </label>
                         {user?.uid &&
-                            <ul tabIndex={1} className="menu  dropdown-content w-[150px] text-sm shadow bg-base-100 ">
+                            <ul tabIndex={1} className="menu  dropdown-content w-[150px] -ml-10 md:ml-0 text-sm shadow bg-base-100 ">
                                 <li>
                                     <Link to="/profile" className="">
                                         Profile
