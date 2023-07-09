@@ -1,7 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { isChrome } from 'react-device-detect';
+import { isSafari } from 'react-device-detect';
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -108,15 +108,15 @@ const Price = () => {
             <motion.ul
                 // ref={ref} // Attach the ref to the <ul> element
                 className="container"
-                variants={isChrome ? container : null}
-                initial={isChrome ? "hidden" : "visible"}
+                variants={!isSafari ? container : null}
+                initial={!isSafari ? "hidden" : "visible"}
                 animate={inView ? "visible" : "hidden"}
             >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
                     {pricingData.map((data) => (
-                        <motion.li variants={isChrome ? item : null} key={data?.price} className="item">
+                        <motion.li variants={!isSafari ? item : null} key={data?.price} className="item">
                             <div className={`bg-[#070C1C]   shadow-lg rounded-lg overflow-hidden border  cursor-pointer
-                            ${isChrome && "hover:scale-95 duration-150 group"}
+                            ${!isSafari && "hover:scale-95 duration-150 group"}
                             `}>
                                 <div className="p-4">
                                     <h3 className="text-lg font-medium text-gray-900">
