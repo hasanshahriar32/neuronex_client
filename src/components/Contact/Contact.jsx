@@ -19,12 +19,10 @@ const Contact = () => {
             .then(
                 // eslint-disable-next-line no-unused-vars
                 (result) => {
-                    alert("Message Sent, We will get back to you shortly");
                     form.current.reset();
                 },
                 (error) => {
                     console.log(error.text);
-                    alert("An error occurred, Please try again");
                 }
             );
     };

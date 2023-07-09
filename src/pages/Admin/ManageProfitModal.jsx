@@ -1,4 +1,6 @@
+import axios from "axios";
 import { BsFillSendFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
     const inputData = [
@@ -8,6 +10,47 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
         { ref: "Generation", filed: "Add Generation", value: packageInfo?.estimatedGeneration },
         { ref: "profit", filed: "Service Charge", value: packageInfo?.profit }
     ]
+    const getSessions = async (data) => {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            };
+            const { data: dataGet } = await axios.patch(
+                `https://neuronex-server-test.vercel.app/package/${localStorage.getItem("user_id")}`, {
+                _id: packageInfo?._id,
+                plan: data.plan,
+                price: data.price,
+                estimatedGeneration: data.estimatedGeneration,
+                validity: data.validity,
+                profit: data.profit
+            }, config
+            )
+            if (dataGet._id) {
+                toast.success({
+                    title: "Success!",
+                    description: "Package Updated Successfully.",
+                    status: "success",
+                    duration: 2000,
+                    isClosable: true,
+                    theme: "dark",
+                });
+                setPackageInfo()
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error({
+                title: "Error Occurred!",
+                description: "Failed to fetch user session data.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+                theme: "dark",
+            });
+        }
+    };
     const handleUpdatePrice = (event) => {
         event.preventDefault(); // Prevent form submission reload
         // Perform your update logic here
@@ -16,11 +59,11 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
             plan: form.Name.value,
             price: form.Price.value,
             validity: form.validity.value,
-            estimatedGeneration: form.Generation.value
+            estimatedGeneration: form.Generation.value,
+            profit: form.profit.value
         };
-        console.log(updatedPackage);
+        getSessions(updatedPackage);
     };
-
     return (
         <div className="">
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -46,6 +89,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
                                                     <input
                                                         type="text"
                                                         name="name"
+                                                        required
                                                         id={data.ref}
                                                         defaultValue={data.value}
                                                         placeholder={data.ref}
