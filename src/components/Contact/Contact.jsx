@@ -28,7 +28,7 @@ const Contact = () => {
     };
     return (
         <div>
-            <div className="mb-[50px] mt-[130px] text-sm ">
+            <div className="mb-[50px] mt-[130px] text-sm">
                 <section className="mb-32">
                     <div className="relative h-[350px] overflow-hidden bg-cover bg-[50%] bg-no-repeat bg-[url('https://i.ibb.co/1ZRs8QR/Whats-App-Image-2023-07-06-at-00-12-27-1.jpg')] opacity-60"></div>
                     <div className="wrapper">
@@ -38,11 +38,13 @@ const Contact = () => {
                             }
                             className={`${!isSafari ? "" : "relative"}`}
                         >
-                            <div className="container px-6 md:px-12 mx-auto ">
+                            <div className="container px-6 md:px-12 mx-auto  ">
                                 <div className="block rounded-lg bg-[#091329]/100  md:py-16  -mt-[100px] ">
                                     <div className="flex flex-wrap ">
                                         <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6 ">
-                                            <form ref={form} onSubmit={sendEmail}>
+                                            <form ref={form}
+                                                className="m-6 md:m-0"
+                                                onSubmit={sendEmail}>
                                                 <div
                                                     className="relative mb-6"
                                                     data-te-input-wrapper-init
