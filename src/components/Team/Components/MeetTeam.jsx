@@ -25,7 +25,7 @@ const MeetTeam = () => {
         </svg>
 
         <div className="">
-          <a className="btnOfMeetTeam text-2xl tracking-wide">
+          <a className="btnOfMeetTeam text-2xl text-off-white tracking-wide">
             Meet Our Team
             <svg className="button-strokeOfMeetTeam" viewBox="0 0 154 13">
               <use href="#line"></use>
