@@ -5,7 +5,8 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
         { ref: "Name", filed: "Add Name", value: packageInfo?.plan },
         { ref: "Price", filed: "Add Price", value: packageInfo?.price },
         { ref: "validity", filed: "Add validity", value: packageInfo?.validity },
-        { ref: "Generation", filed: "Add Generation", value: packageInfo?.estimatedGeneration }
+        { ref: "Generation", filed: "Add Generation", value: packageInfo?.estimatedGeneration },
+        { ref: "profit", filed: "Service Charge", value: packageInfo?.profit }
     ]
     const handleUpdatePrice = (event) => {
         event.preventDefault(); // Prevent form submission reload

@@ -92,8 +92,14 @@ const Header = () => {
                                         Profile
                                     </Link>
                                 </li>
-                                <hr />
-                                <li>{admin && <Link to="/admin">Dashboard</Link>}</li>
+                                {admin &&
+                                    <>
+                                        <hr />
+                                        <li>
+                                            <Link to="/admin">Administration</Link>
+                                        </li>
+                                    </>}
+
                                 <hr />
                                 <li><p onClick={() => logOut()}>Logout</p></li>
                             </ul>}
