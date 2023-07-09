@@ -30,31 +30,6 @@ const ManageUsers = () => {
             console.log("something went wrong");
         }
     };
-    const handleUid = (uid) => {
-        try {
-            const user = async () => {
-
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                    body: JSON.stringify({ uid }),
-                };
-                const { data } = await axios.post(
-                    `https://neuronex-server-test.vercel.app/transaction/admin/all/${localStorage.getItem("user_id")}`,
-                    config
-                );
-                console.log(data);
-
-            };
-            user();
-        } catch (error) {
-            console.log(error);
-            alert(error.response.data.msg);
-            alert("something went wrong");
-            console.log("something went wrong");
-        }
-    }
     useEffect(() => {
         try {
             const user = async () => {
