@@ -1,4 +1,5 @@
 import FormContext from "./Contexts/FormContext/FormContext";
+import PaymentContext from "./Contexts/PaymentContext/PaymentContext";
 import SessionContext from "./Contexts/SessionContext/SessionContext";
 import UserContext from "./Contexts/UserContext/UserContext";
 import Routes from "./routes/Routes";
@@ -7,11 +8,13 @@ function App() {
     return (
         <>
             <UserContext>
-                <FormContext>
-                    <SessionContext>
-                        <Routes />
-                    </SessionContext>
-                </FormContext>
+                <PaymentContext>
+                    <FormContext>
+                        <SessionContext>
+                            <Routes />
+                        </SessionContext>
+                    </FormContext>
+                </PaymentContext>
             </UserContext>
         </>
     );
