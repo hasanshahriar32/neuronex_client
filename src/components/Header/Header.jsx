@@ -3,11 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 // import { Button } from "../../features/Button";
+import { BiUser } from "react-icons/bi";
 import { AuthContext } from "../../Contexts/UserContext/UserContext";
+import useAdmin from "../../hooks/useAdmin";
 import { Container } from "../features/container";
 
 const Header = () => {
     const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
+    const [admin] = useAdmin(localStorage.getItem("user_id"));
     useEffect(() => {
         const html = document.querySelector("html");
         if (html) html.classList.toggle("overflow-scroll", hamburgerMenuIsOpen);
@@ -28,9 +31,9 @@ const Header = () => {
     return (
         <header className="dark:disabled fixed top-0 left-0 z-20 w-full border-b border-transparent-white backdrop-blur-[12px]">
             <Container className="flex h-navigation-height">
-                <Link className="flex items-center text-md" to="/">
-                    Neuro Nex
-                </Link>
+                <a href="/" className="flex items-center text-lg  font-extrabold  text-white" >
+                    NeuroNex
+                </a>
                 <div
                     className={classNames(
                         "transition-[visibility] md:visible",
@@ -52,23 +55,52 @@ const Header = () => {
                                 hamburgerMenuIsOpen && "[&_a]:translate-y-0"
                             )}
                         >
+
                             <li>
-                                <a href="#HeroImage">Goal</a>
+                                <Link to='/docs'>Docs</Link>
                             </li>
                             <li>
-                                <a href="#price">Price</a>
+                                <Link to='/ai'>Services</Link>
                             </li>
                             <li>
-                                <Link to='/profile'>Account</Link>
+                                <Link to='/team'>About Us</Link>
                             </li>
                             <li>
-                                <Link to='/admin'>Dashboard</Link>
+                                <Link to='/faq'>Faq</Link>
                             </li>
                         </ul>
                     </nav>
                 </div>
 
                 <div className="ml-auto flex h-full items-center">
+
+                    <div className="dropdown">
+                        <label tabIndex={1}
+                            className=" transition-colors md:hover:bg-gray-50  ">
+                            <div className={`flex items-center justify-center btn btn-ghost`}>
+                                <BiUser className='text-3xl' />
+                                {user?.uid ?
+                                    <div className=" text-sm">{user?.displayName}</div> :
+                                    <div className='text-sm ml-2'><Link to='/login'>Login</Link></div>
+                                }
+                            </div>
+                        </label>
+                        {user?.uid &&
+                            <ul tabIndex={1} className="menu  dropdown-content w-[150px] text-sm shadow bg-base-100 ">
+                                <li>
+                                    <Link to="/profile" className="">
+                                        Profile
+                                    </Link>
+                                </li>
+                                <hr />
+                                <li>{admin && <Link to="/admin">Dashboard</Link>}</li>
+                                <hr />
+                                <li><p onClick={() => logOut()}>Logout</p></li>
+                            </ul>}
+                    </div>
+
+
+                    {/* 
                     {user?.uid ? (
                         <button className="mr-6 text-sm" onClick={() => logOut()}>
                             Log out
@@ -82,7 +114,7 @@ const Header = () => {
                                 Sign up
                             </Link>
                         </div>
-                    )}
+                    )} */}
                 </div>
 
                 <button

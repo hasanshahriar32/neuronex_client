@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminRoute from "../components/Authentication/AdminRoute/AdminRoute";
 import PrivateRoute from "../components/Authentication/PrivateRoute/PrivateRoute";
+import Docs from "../components/Docs/Docs";
 import FAQ from "../components/Faq/Faq";
 import Team from "../components/Team/Team";
 import AdminLayout from "../layout/Admin/Admin";
@@ -30,6 +31,7 @@ const Routes = () => {
                 { path: "/home", element: <Home></Home> },
                 { path: "/team", element: <Team></Team> },
                 { path: "/faq", element: <FAQ></FAQ> },
+                { path: "/docs", element: <Docs></Docs> },
             ],
         },
         {
