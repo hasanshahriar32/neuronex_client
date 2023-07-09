@@ -76,7 +76,8 @@ const SideCard = ({ sesstionData , setRefetch }) => {
       );
       console.log(response.data);
       // alert("session removed");
-      setRefetch(true)
+      setRefetch(true);
+      setAiConfig([]);
     } catch (error) {
       console.log(error);
       toast.error({
