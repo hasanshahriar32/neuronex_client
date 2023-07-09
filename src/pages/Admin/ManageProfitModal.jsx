@@ -1,13 +1,52 @@
+import axios from "axios";
 import { BsFillSendFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 
-const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
+const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
     const inputData = [
         { ref: "Name", filed: "Add Name", value: packageInfo?.plan },
         { ref: "Price", filed: "Add Price", value: packageInfo?.price },
         { ref: "validity", filed: "Add validity", value: packageInfo?.validity },
         { ref: "Generation", filed: "Add Generation", value: packageInfo?.estimatedGeneration },
-        { ref: "profit", filed: "Service Charge", value: packageInfo?.profit }
+        { ref: "profit", filed: "Service Charge", value: packageInfo?.profit },
+        { ref: "password", filed: "password", value: "", type: "password" }
     ]
+    const getSessions = async (data) => {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            };
+
+            const { data: dataGet } = await axios.patch(
+                `https://neuronex-server-test.vercel.app/package/${localStorage.getItem("user_id")}`, {
+                _id: packageInfo?._id,
+                plan: data.plan,
+                price: data.price,
+                estimatedGeneration: data.estimatedGeneration,
+                validity: data.validity,
+                profit: data.profit,
+                password: data.password || ''
+            }, config
+            )
+            if (dataGet?._id) {
+                setRefetch(true)
+                setPackageInfo()
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error({
+                title: "Error Occurred!",
+                description: "Failed to fetch user session data.",
+                status: "error",
+                duration: 4000,
+                isClosable: true,
+                theme: "dark",
+            });
+        }
+    };
     const handleUpdatePrice = (event) => {
         event.preventDefault(); // Prevent form submission reload
         // Perform your update logic here
@@ -16,11 +55,11 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
             plan: form.Name.value,
             price: form.Price.value,
             validity: form.validity.value,
-            estimatedGeneration: form.Generation.value
+            estimatedGeneration: form.Generation.value,
+            profit: form.profit.value
         };
-        console.log(updatedPackage);
+        getSessions(updatedPackage);
     };
-
     return (
         <div className="">
             <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -46,6 +85,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
                                                     <input
                                                         type="text"
                                                         name="name"
+                                                        required={data.type === "password" ? false : true}
                                                         id={data.ref}
                                                         defaultValue={data.value}
                                                         placeholder={data.ref}
@@ -61,7 +101,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo }) => {
                                     <div className="w-full">
                                         <button type="submit" className="btn btn-info w-full">
                                             <BsFillSendFill className="mt-1 mx-2 text-md" />
-                                            <p className="text-md">Update profile</p>
+                                            <p className="text-md">Update</p>
                                         </button>
                                     </div>
                                 </div>

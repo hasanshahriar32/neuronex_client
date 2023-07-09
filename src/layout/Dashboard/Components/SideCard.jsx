@@ -4,9 +4,9 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from 'sweetalert2';
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
-import Swal from 'sweetalert2';
 const SideCard = ({ sesstionData, setRefetch }) => {
     const { setMessages, setSessionMessageLoading } = useContext(ChatContext);
     const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
@@ -28,7 +28,6 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 config
             );
             setMessages(dataGet.messages);
-            console.log(dataGet);
             const aiConfigs = {
                 subjectSelection: dataGet?.subjectSelection,
                 assistanceLevel: dataGet?.assistanceLevel,
@@ -44,7 +43,6 @@ const SideCard = ({ sesstionData, setRefetch }) => {
             console.log(aiConfigs);
             setModalState(false);
             setSessionMessageLoading(false);
-            console.log(dataGet);
         } catch (error) {
             console.log(error);
             setSessionMessageLoading(false);
@@ -75,17 +73,16 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 { data },
                 config
             );
-            console.log(response.data);
-            // alert("session removed");
-            Swal.fire({
-                icon: 'success',
-                title: `LogOut SuccessFull`,
-                showConfirmButton: false, timer: 1500
-            })
+            if (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: `Delete SuccessFull`,
+                    showConfirmButton: false, timer: 1500
+                })
+            }
             setRefetch(true)
             setAiConfig([]);
         } catch (error) {
-            console.log(error);
             toast.error({
                 title: "Error Occurred!",
                 description: "Failed to delete user session.",
@@ -96,7 +93,7 @@ const SideCard = ({ sesstionData, setRefetch }) => {
             });
         }
     };
-     const handleDeleteSession = (sessionId) => {
+    const handleDeleteSession = (sessionId) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You want to delete !",
@@ -142,20 +139,6 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                                     {/* date and time  */}
                                     <div className="flex items-center text-xs lg:text-sm justify-between mt-2">
                                         <div className="flex items-center">
-                                            {/* <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6 mr-2"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                                />
-                                            </svg> */}
                                             {session?.updatedAt ? (
                                                 <p className=" font-medium">
                                                     {
