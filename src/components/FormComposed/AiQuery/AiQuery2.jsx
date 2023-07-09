@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
@@ -317,8 +318,57 @@ const AiQuery2 = () => {
                         className="flex flex-col chatScroll space-y-4  pt-3 md:p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
                     >
                         {messages.map((message) => (
-                            <div key={message.id}>
-                                <div
+                            <div
+                                className="pb-4"
+                                key={message.id}>
+                                {message.type === "incoming" &&
+                                    <div className="chat chat-start">
+                                        <div className="chat-image avatar">
+                                            <div className="w-9 rounded-full">
+                                                <img className="" src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png" />
+                                            </div>
+                                        </div>
+                                        <div className="chat-bubble text-sm">
+                                            <pre
+                                                style={{
+                                                    overflowWrap: "normal",
+                                                    whiteSpace: "pre-wrap",
+                                                    wordBreak: "break-word",
+                                                    wordWrap: "break-word",
+                                                    width: "fit-content",
+                                                }}
+                                                className=""
+                                            >
+                                                {message.message}
+                                            </pre>
+                                        </div>
+                                    </div>
+
+                                }
+                                {message.type === "outgoing" &&
+                                    <div className="chat chat-end">
+                                        <div className="chat-image avatar">
+                                            <div className="w-9 rounded-full">
+                                                <img className="" src={user?.photoURL} />
+                                            </div>
+                                        </div>
+                                        <div className="chat-bubble text-sm">
+                                            <pre
+                                                style={{
+                                                    overflowWrap: "normal",
+                                                    whiteSpace: "pre-wrap",
+                                                    wordBreak: "break-word",
+                                                    wordWrap: "break-word",
+                                                    width: "fit-content",
+                                                }}
+                                                className=""
+                                            >
+                                                {message.message}
+                                            </pre>
+                                        </div>
+                                    </div>
+                                }
+                                {/* <div
                                     className={`${message.type === "incoming"
                                         ? "backdrop-blur-md bg-grey-dark/40"
                                         : "chat-message bg-grey-dark/30 "
@@ -364,12 +414,12 @@ const AiQuery2 = () => {
                                                 }`}
                                         />
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         ))}
                         {loadingAi && (
                             <div>
-                                <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
+                                {/* <div className={`backdrop-blur-md bg-grey-dark/40 p-2`}>
                                     <div className="flex flex-row-reverse items-center">
                                         <div
                                             className={`flex flex-col space-y-2 text-xs w-full min-w-xs mx-2 order-2 items-start`}
@@ -399,7 +449,21 @@ const AiQuery2 = () => {
                                             className="w-6 h-6 rounded-full order-2"
                                         />
                                     </div>
+                                </div> */}
+                                <div className="chat chat-start">
+                                    <div className="chat-image avatar">
+                                        <div className="w-9 rounded-full">
+                                            <img className="" src="https://www.cambridgewireless.co.uk/media/uploads/files/AI-icon.png" />
+                                        </div>
+                                    </div>
+                                    <div className="chat-bubble text-sm">
+                                        <pre className="">
+                                            <span className="loading loading-dots loading-xs"></span>
+                                        </pre>
+                                    </div>
                                 </div>
+
+
                             </div>
                         )}
                         {messageSearch?.length > 0 && (

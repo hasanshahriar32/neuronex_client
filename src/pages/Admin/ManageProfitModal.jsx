@@ -8,7 +8,8 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
         { ref: "Price", filed: "Add Price", value: packageInfo?.price },
         { ref: "validity", filed: "Add validity", value: packageInfo?.validity },
         { ref: "Generation", filed: "Add Generation", value: packageInfo?.estimatedGeneration },
-        { ref: "profit", filed: "Service Charge", value: packageInfo?.profit }
+        { ref: "profit", filed: "Service Charge", value: packageInfo?.profit },
+        { ref: "password", filed: "password", value: "", type: "password" }
     ]
     const getSessions = async (data) => {
         try {
@@ -18,6 +19,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             };
+
             const { data: dataGet } = await axios.patch(
                 `https://neuronex-server-test.vercel.app/package/${localStorage.getItem("user_id")}`, {
                 _id: packageInfo?._id,
@@ -25,7 +27,8 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
                 price: data.price,
                 estimatedGeneration: data.estimatedGeneration,
                 validity: data.validity,
-                profit: data.profit
+                profit: data.profit,
+                password: data.password || ''
             }, config
             )
             if (dataGet?._id) {
@@ -82,7 +85,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
                                                     <input
                                                         type="text"
                                                         name="name"
-                                                        required
+                                                        required={data.type === "password" ? false : true}
                                                         id={data.ref}
                                                         defaultValue={data.value}
                                                         placeholder={data.ref}
