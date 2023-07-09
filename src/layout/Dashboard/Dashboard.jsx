@@ -52,7 +52,6 @@ const Dashboard = () => {
     const getSessions = async () => {
         setSessionData({});
         setLoadingSession(true);
-        setAiConfig([]);
         try {
             const config = {
                 headers: {
@@ -71,6 +70,7 @@ const Dashboard = () => {
             );
             setSessionData(dataGet);
             setLoadingSession(false);
+            setRefetch(false);
         } catch (error) {
             console.log(error);
             setLoadingSession(false);

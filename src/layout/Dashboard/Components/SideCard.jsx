@@ -4,7 +4,6 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Swal from 'sweetalert2';
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 const SideCard = ({ sesstionData, setRefetch }) => {
@@ -58,7 +57,7 @@ const SideCard = ({ sesstionData, setRefetch }) => {
             });
         }
     };
-    const deleteSessionFormDb = async (sessionId) => {
+    const handleDeleteSession = async (sessionId) => {
         const data = { sessionId };
         const config = {
             headers: {
@@ -66,6 +65,7 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         };
+
         try {
             const response = await axios.delete(
                 `http://localhost:5000/session/${localStorage.getItem(
@@ -75,13 +75,11 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 config
             );
             console.log(response.data);
-            Swal.fire({
-                icon: 'success',
-                title: `LogOut SuccessFull`,
-                showConfirmButton: false, timer: 1500
-            })
-            setRefetch(true)
+            // alert("session removed");
+            setRefetch(true);
+            setAiConfig([]);
         } catch (error) {
+            console.log(error);
             toast.error({
                 title: "Error Occurred!",
                 description: "Failed to delete user session.",
@@ -91,21 +89,6 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 theme: "dark",
             });
         }
-    }
-    const handleDeleteSession = (sessionId) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: `Yes, delete it!`
-        }).then((result) => {
-            if (result.isConfirmed) {
-                deleteSessionFormDb(sessionId);
-            }
-        })
     };
 
     return (

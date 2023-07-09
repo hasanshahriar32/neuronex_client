@@ -152,8 +152,9 @@ export default function AiSetting() {
 
           <div className="mb-4 form-control">
             <label className=" flex flex-col">
-              <span className="label text-gray-700 text-lg">
-                Select Your Subject to Proceed
+              <span className="label text-gray-700 text-lg flex justify-start gap-2">
+                <span>Select Your Subject to Proceed</span>
+                <span className="text-error">*</span>
               </span>
               <select
                 {...register("subjectSelection", {
@@ -191,7 +192,10 @@ export default function AiSetting() {
           </div>
 
           <div className="mb-4">
-            <p className="label text-lg">Assistance Level</p>
+            <p className="label text-lg flex justify-start gap-2">
+              <span>Assistance Level</span>
+              <span className="text-error">*</span>
+            </p>
             <div className="flex flex-row justify-start md:justify-between flex-wrap gap-1 items-center">
               {[
                 { label: "Basic explanation", value: "Basic explanation" },
@@ -239,7 +243,7 @@ export default function AiSetting() {
             <p className=" label text-lg">Enter additional instruction</p>
             <input
               {...register("additionalInstruction", {
-                required: "Please enter additional instruction.",
+                // required: "Please enter additional instruction.",
               })}
               defaultValue={aiConfig?.additionalInstruction}
               type="text"
