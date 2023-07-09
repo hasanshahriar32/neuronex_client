@@ -2,7 +2,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast , ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import app from "../../../../configs/firebase.config";
@@ -81,6 +81,21 @@ const LoginForm = () => {
       });
   };
 
+  const handleTestUser = () => {
+  const userEmail = "paradoxtechbd@outlook.com";
+  const userPassword = "neuronex";
+
+  // Call handleLogin with the test user credentials
+  handleLogin({
+    preventDefault: () => {},
+    target: {
+      email: { value: userEmail },
+      password: { value: userPassword }
+    }
+  });
+};
+
+
   //! handle Forget Password
   const handleEmailForResetPassword = (e) => {
     const email = e.target.value;
@@ -132,6 +147,7 @@ const LoginForm = () => {
   };
   return (
     <div>
+      <ToastContainer />
       <div className="flex items-center justify-center h-[90vh]">
         <div className="max-w-xl">
           <div className="card shadow-transparent/90 shadow-primary  shadow-2xl">
@@ -200,6 +216,9 @@ const LoginForm = () => {
                   </button>
                 </div>
               </form>
+              <button onClick={handleTestUser} className="btn mt-2 text-md  btn-primary w-full ">
+                Test Account
+              </button>
               <div className="divider text-md mt-6 ">OR</div>
               <AuthProvider />
             </div>

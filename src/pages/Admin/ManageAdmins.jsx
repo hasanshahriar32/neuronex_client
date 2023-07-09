@@ -166,21 +166,22 @@ const ManageAdmins = () => {
         modal.checked = true;
     };
     return (
-        <div className="w-full min-h-screen lg:w-[750px]">
+        <div className="w-full">
             {admin.length == 0 ? (
                 <LoadingAnimation></LoadingAnimation>
             ) : (
-                <section className="bg-gray-50  dark:bg-gray-900 p-3 sm:p-5">
-                    <div className="mx-auto  max-w-screen-xl px-2 lg:px-4">
+                <section className=" p-3 sm:p-5">
+                    <h2 className="text-4xl font-bold mb-5">Manage Admins</h2>
+                    <div className="mx-auto px-2 lg:px-4  min-h-[80vh]">
                         {/* <!-- Start coding here --> */}
                         <ToastContainer></ToastContainer>
-                        <div className="relative shadow-md sm:rounded-lg overflow-hidden">
-                            <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                                <div className="w-full md:w-1/2">
+                        <div className="relative shadow-md sm:rounded-lg overflow-hidden ">
+                            <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 ">
+                                <div className="w-full md:w-1/2 md:-ml-3">
                                     <div className="flex items-center">
                                         <label className="sr-only">Search</label>
                                         {!selectedId ? (
-                                            <div className="relative flex flex-row w-full">
+                                            <div className="relative flex flex-row w-full ">
                                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3">
                                                     {search.length < 1 && (
                                                         <svg
@@ -212,7 +213,7 @@ const ManageAdmins = () => {
                                                     type="text"
                                                     id="simple-search"
                                                     value={search}
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                    className="md:max-w-xl input input-secondary text-gray-900 text-md rounded-lg  block w-full pl-10 p-2"
                                                     placeholder="Search"
                                                     required=""
                                                 />
@@ -265,7 +266,7 @@ const ManageAdmins = () => {
                                             <button
                                                 onClick={addAdmin}
                                                 type="button "
-                                                className="flex items-center border justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                                                className="justify-center text-white  rounded-lg text-sm px-4 py-2 "
                                             >
                                                 <svg
                                                     className="h-3.5 w-3.5 mr-2"
@@ -305,7 +306,7 @@ const ManageAdmins = () => {
                                             </p>
                                             <form onSubmit={handleAdd} action="">
                                                 <input
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     type="password"
                                                     name="confirmAdd"
                                                     placeholder="••••••••"
@@ -332,11 +333,11 @@ const ManageAdmins = () => {
                                             </form>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-3 w-full md:w-auto">
+                                    <div className="flex items-center space-x-3 w-full justify-around ">
                                         <button
                                             id="actionsDropdownButton"
                                             data-dropdown-toggle="actionsDropdown"
-                                            className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-background focus:z-10 focus:ring-4 focus:ring-gray-200 cursor-pointer"
+                                            className="w-auto flex items-center justify-center px-4 text-md font-medium cursor-pointer btn btn-disabled"
                                             type="button"
                                         >
                                             <svg
@@ -383,7 +384,7 @@ const ManageAdmins = () => {
                                         <button
                                             id="filterDropdownButton"
                                             data-dropdown-toggle="filterDropdown"
-                                            className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-background focus:z-10 focus:ring-4 focus:ring-gray-200  cursor-pointer"
+                                            className="w-auto flex items-center justify-center px-4 text-md font-medium  btn btn-disabled"
                                             type="button"
                                         >
                                             <svg
@@ -484,7 +485,7 @@ const ManageAdmins = () => {
                                         </div>
                                         <label
                                             htmlFor="my-drawer-2"
-                                            className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-background focus:z-10 focus:ring-4 focus:ring-gray-200 lg:hidden cursor-pointer"
+                                            className="w-auto flex items-center justify-center  text-sm  cursor-pointer btn btn-info lg:hidden"
                                         >
                                             Open drawer
                                         </label>
@@ -520,7 +521,7 @@ const ManageAdmins = () => {
                                             {admin.map((adminData) => (
                                                 <tr
                                                     key={adminData._id}
-                                                    className="border-b "
+                                                    className=""
                                                 >
                                                     <th
                                                         scope="row"
@@ -619,7 +620,7 @@ const ManageAdmins = () => {
                                     <p className="py-4">Please enter your password to confirm</p>
                                     <form onSubmit={handleRemove} action="">
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             type="password"
                                             name="confirmRemove"
                                             placeholder="••••••••"
@@ -646,106 +647,6 @@ const ManageAdmins = () => {
                                     </form>
                                 </div>
                             </div>
-                            <nav
-                                className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-                                aria-label="Table navigation"
-                            >
-                                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                                    Showing
-                                    <span className="font-semibold text-gray-900 ">
-                                        1-10
-                                    </span>
-                                    of
-                                    <span className="font-semibold text-gray-900 ">
-                                        1000
-                                    </span>
-                                </span>
-                                <ul className="inline-flex items-stretch -space-x-px">
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
-                                        >
-                                            <span className="sr-only">Previous</span>
-                                            <svg
-                                                className="w-5 h-5"
-                                                aria-hidden="true"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >
-                                            1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >
-                                            2
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            aria-current="page"
-                                            className="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                                        >
-                                            3
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >
-                                            ...
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >
-                                            100
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="#"
-                                            className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                                        >
-                                            <span className="sr-only">Next</span>
-                                            <svg
-                                                className="w-5 h-5"
-                                                aria-hidden="true"
-                                                fill="currentColor"
-                                                viewBox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </section>

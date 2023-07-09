@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 // import useToken from "../../../hooks/useToken";
 
@@ -88,11 +88,26 @@ const Register = () => {
                     progress: undefined,
                     theme: "dark",
                   });
+                })
+                .catch((err) => {
+                  console.log(err);
                 });
             }
           });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
   };
 
   const updateUserDetails = (name, photoURL) => {
@@ -116,6 +131,7 @@ const Register = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className="flex items-center justify-center h-[90vh] ">
         <div className="max-w-xl ">
           <div className="card  bg-page-gradient shadow-transparent/90 shadow-primary">

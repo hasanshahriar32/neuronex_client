@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -10,18 +10,32 @@ import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 
 export default function AiSetting() {
   const { setAiConfig, setModalState, aiConfig } = useContext(AiContext);
-  const { setMessages } = useContext(ChatContext);
+  const { setMessages, sesstionData, setSessionData } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     defaultValues: {
-      subjectSelection: "",
-      assistanceLevel: "",
+      subjectSelection: aiConfig?.subjectSelection || "",
+      assistanceLevel: aiConfig?.assistanceLevel || "",
+      additionalInstruction: aiConfig?.additionalInstruction || "",
     },
   });
+  useEffect(() => {
+    // Set default values for subjectSelection and assistanceLevel
+    const defaultSub = aiConfig?.subjectSelection || "";
+    const defaultAssist = aiConfig?.assistanceLevel || "";
+    const defaultAdditional = aiConfig?.additionalInstruction || "";
+
+    reset({
+      subjectSelection: defaultSub,
+      assistanceLevel: defaultAssist,
+      additionalInstruction: defaultAdditional,
+    });
+  }, [reset, aiConfig?.sessionId]);
 
   const onSubmit = async (data) => {
     if (
@@ -45,13 +59,11 @@ export default function AiSetting() {
     const dataId = uuidv4();
     data = { ...data, sessionId: dataId };
 
-    // setModalState(false);
     if (
       data?.subjectSelection !== "" ||
       data?.assistanceLevel !== "" ||
       data?.additionalInstruction !== ""
     ) {
-      setAiConfig([]);
       setMessages([]);
       toast.success("New session created!", {
         position: "top-center",
@@ -70,7 +82,7 @@ export default function AiSetting() {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         };
-        const { dataGet } = await axios.post(
+        const { data: dataGet } = await axios.post(
           "https://neuronex-server-test.vercel.app/session",
           {
             sessionTitle: data?.additionalInstruction || "",
@@ -82,9 +94,16 @@ export default function AiSetting() {
           },
           config
         );
-        setAiConfig(data);
+        setAiConfig(dataGet);
+        // push data to sessiondata
         console.log(data);
         console.log(dataGet);
+        console.log(sesstionData);
+        if (sesstionData?.length === 0) {
+          setSessionData([dataGet]);
+        } else {
+          setSessionData([dataGet, ...sesstionData]);
+        }
       } catch (error) {
         console.log(error);
         toast({
@@ -133,8 +152,9 @@ export default function AiSetting() {
 
           <div className="mb-4 form-control">
             <label className=" flex flex-col">
-              <span className="label text-gray-700 text-lg">
-                Select Your Subject to Proceed
+              <span className="label text-gray-700 text-lg flex justify-start gap-2">
+                <span>Select Your Subject to Proceed</span>
+                <span className="text-error">*</span>
               </span>
               <select
                 {...register("subjectSelection", {
@@ -172,7 +192,10 @@ export default function AiSetting() {
           </div>
 
           <div className="mb-4">
-            <p className="label text-lg">Assistance Level</p>
+            <p className="label text-lg flex justify-start gap-2">
+              <span>Assistance Level</span>
+              <span className="text-error">*</span>
+            </p>
             <div className="flex flex-row justify-start md:justify-between flex-wrap gap-1 items-center">
               {[
                 { label: "Basic explanation", value: "Basic explanation" },
@@ -220,7 +243,7 @@ export default function AiSetting() {
             <p className=" label text-lg">Enter additional instruction</p>
             <input
               {...register("additionalInstruction", {
-                required: "Please enter additional instruction.",
+                // required: "Please enter additional instruction.",
               })}
               defaultValue={aiConfig?.additionalInstruction}
               type="text"

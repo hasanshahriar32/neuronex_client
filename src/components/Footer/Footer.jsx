@@ -5,6 +5,7 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Container } from "../features/container";
+import MeetTeam from "../Team/Components/MeetTeam";
 
 const footerLinks = [
   {
@@ -50,15 +51,21 @@ const Footer = () => (
   <footer className="mt-12 border-t border-transparent-white py-[5.6rem] text-sm">
     <Container className="flex flex-col justify-between lg:flex-row">
       <div>
-        <div className="flex h-full flex-row justify-between lg:flex-col">
+        <div className="flex items-start w-full h-full flex-row justify-between lg:flex-col">
           <div className="flex items-center text-grey">
             NeuroNex - Assistance for Your Questions
+          </div>
+          <div className="lg:flex hidden relative right-5">
+            <MeetTeam />
           </div>
           <div className="mt-auto flex space-x-4 text-grey">
             <AiFillGithub className="w-6 h-6" />
             <AiFillLinkedin className="w-6 h-6" />
             <AiFillTwitterCircle className="w-6 h-6" />
           </div>
+        </div>
+        <div className="flex lg:hidden">
+          <MeetTeam />
         </div>
       </div>
       <div className="flex flex-wrap">

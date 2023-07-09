@@ -3,6 +3,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { deleteUser, getAuth, updateProfile } from "firebase/auth";
 import app from "../../configs/firebase.config";
+import { BsFillSendFill } from "react-icons/bs";
+import { BiEditAlt } from "react-icons/bi";
+
 const UpdateProfile = () => {
   const auth = getAuth(app);
   const user = auth.currentUser;
@@ -12,6 +15,7 @@ const UpdateProfile = () => {
   const userUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
+    console.log(form);
     const name = form.name.value;
     const image = form.image.value;
     updateProfile(auth.currentUser, {
@@ -54,12 +58,12 @@ const UpdateProfile = () => {
       <ToastContainer />
       <section className=" dark:bg-gray-900">
         <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-          <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-            Update profile
-          </h2>
+          <div className="mb-4 text-xl font-bold text-gray-900 dark:text-white flex">
+            <BiEditAlt className="mt-1 mx-2" /> <span>Update profile</span>
+          </div>
           <form onSubmit={userUpdate} action="#">
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-              <div className="sm:col-span-2">
+              {/* <div className="sm:col-span-2">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Profile Name
                 </label>
@@ -84,6 +88,46 @@ const UpdateProfile = () => {
                   defaultValue={user?.photoURL}
                   placeholder="Insert image link"
                 />
+              </div> */}
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="Profile Name"
+                  className="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+                >
+                  <input
+                    type="text"
+                    name="name"
+                    id="Profile Name"
+                    defaultValue={user?.displayName}
+                    placeholder="Profile Name"
+                    className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+
+                  <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
+                    Profile Name
+                  </span>
+                </label>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="Profile Image Link"
+                  className="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+                >
+                  <input
+                    type="text"
+                    defaultValue={user?.photoURL}
+                    name="image"
+                    id="Profile Image Link"
+                    placeholder="Profile Image Link"
+                    className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+
+                  <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
+                    Profile Image Link
+                  </span>
+                </label>
               </div>
               {/* <div className="sm:col-span-2">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -146,14 +190,14 @@ const UpdateProfile = () => {
             <div className="flex items-center space-x-4">
               <button
                 type="submit"
-                className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="text-white hover:text-background bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex items-center gap-2 border-l-[3px] border-secondary bg-primary  py-3"
               >
-                Update profile
+                <BsFillSendFill className="mt-1 mx-2" /> Update profile
               </button>
               <button
                 onClick={deleteAccount}
                 type="button"
-                className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                className="text-red-600 inline-flex items-center hover:text-background border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-red-600 dark:hover:bg-red-600 dark:focus:ring-red-900 gap-2 border-l-[3px] border-secondary text-white bg-red hover:bg-red py-3"
               >
                 <svg
                   className="w-5 h-5 mr-1 -ml-1"

@@ -12,5 +12,9 @@ module.exports = {
     rules: {
         'react-refresh/only-export-components': 'warn',
         'react/prop-types': 'off',
+        //console error
+        'no-console': 'off',
+        'no-used-vars': 'off',
+
     },
 }
