@@ -1,7 +1,7 @@
 import emailjs from "@emailjs/browser";
 import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useRef } from "react";
-import { isChrome } from "react-device-detect";
+import { isSafari } from "react-device-detect";
 
 const Contact = () => {
     const { scrollYProgress } = useViewportScroll();
@@ -36,9 +36,9 @@ const Contact = () => {
                     <div className="wrapper">
                         <motion.div
                             style={
-                                isChrome && { scale }
+                                !isSafari && { scale }
                             }
-                            className={`${isChrome ? "" : "relative"}`}
+                            className={`${!isSafari ? "" : "relative"}`}
                         >
                             <div className="container px-6 md:px-12 mx-auto ">
                                 <div className="block rounded-lg bg-[#091329]/100  md:py-16  -mt-[100px] ">
