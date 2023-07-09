@@ -81,6 +81,21 @@ const LoginForm = () => {
       });
   };
 
+  const handleTestUser = () => {
+  const userEmail = "paradoxtechbd@outlook.com";
+  const userPassword = "neuronex";
+
+  // Call handleLogin with the test user credentials
+  handleLogin({
+    preventDefault: () => {},
+    target: {
+      email: { value: userEmail },
+      password: { value: userPassword }
+    }
+  });
+};
+
+
   //! handle Forget Password
   const handleEmailForResetPassword = (e) => {
     const email = e.target.value;
@@ -201,6 +216,9 @@ const LoginForm = () => {
                   </button>
                 </div>
               </form>
+              <button onClick={handleTestUser} className="btn mt-2 text-md  btn-primary w-full ">
+                Test Account
+              </button>
               <div className="divider text-md mt-6 ">OR</div>
               <AuthProvider />
             </div>

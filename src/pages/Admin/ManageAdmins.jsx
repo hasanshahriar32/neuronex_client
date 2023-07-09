@@ -213,7 +213,7 @@ const ManageAdmins = () => {
                                                     type="text"
                                                     id="simple-search"
                                                     value={search}
-                                                    className="md:max-w-xl text-gray-900 text-md rounded-lg  block w-full pl-10 p-2"
+                                                    className="md:max-w-xl input input-secondary text-gray-900 text-md rounded-lg  block w-full pl-10 p-2"
                                                     placeholder="Search"
                                                     required=""
                                                 />
@@ -306,7 +306,7 @@ const ManageAdmins = () => {
                                             </p>
                                             <form onSubmit={handleAdd} action="">
                                                 <input
-                                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     type="password"
                                                     name="confirmAdd"
                                                     placeholder="••••••••"
@@ -620,7 +620,7 @@ const ManageAdmins = () => {
                                     <p className="py-4">Please enter your password to confirm</p>
                                     <form onSubmit={handleRemove} action="">
                                         <input
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            className="bg-gray-50 input input-secondary border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             type="password"
                                             name="confirmRemove"
                                             placeholder="••••••••"

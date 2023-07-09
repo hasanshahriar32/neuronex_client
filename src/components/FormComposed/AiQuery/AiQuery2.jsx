@@ -27,13 +27,16 @@ const AiQuery2 = () => {
   useEffect(() => {
     setCurrentSessionid(aiConfig?.sessionId);
   }, [setAiConfig, aiConfig?.sessionId]);
+  console.log(currentSessionid);
+  localStorage.setItem("currentSessionid", currentSessionid);
   useEffect(() => {
     setMessageSearch([]);
   }, [setAiConfig, aiConfig?.sessionId]);
 
   const scrollToBottom = () => {
     const element = document.getElementById("messages");
-    element.scrollTop = element.scrollHeight;
+    element.scrollTop =
+      element.scrollHeight || element.clientHeight || element.offsetHeight || 0;
   };
 
   useEffect(() => {
@@ -105,15 +108,25 @@ const AiQuery2 = () => {
           console.log(data);
           setLoadingAi(false);
 
-          handleSearchSuggestion(data[1]?.message);
           //   console.log(generatedSearch, "search")
 
-          console.log(data[0]?.sessionId, currentSessionid);
+          console.log(
+            data[0]?.sessionId,
+            localStorage.getItem("currentSessionid")
+          );
           if (
             Array.isArray(data) &&
             data?.length > 0 &&
-            data[0]?.sessionId == currentSessionid
+            data[0]?.sessionId == localStorage.getItem("currentSessionid")
           ) {
+            handleSearchSuggestion(data[1]?.message);
+            if (data[1]?.title && data[1]?.title?.length > 1) {
+              setAiConfig((prevConfig) => ({
+                ...prevConfig,
+                sessionTitle: data[1]?.title,
+              }));
+            }
+
             setMessages((prevMessages) => {
               // Check if any message with the same serial number already exists
               const existingMessageIndex = prevMessages.findIndex(
@@ -222,7 +235,7 @@ const AiQuery2 = () => {
   // voice to text end
   const handleSearchInput = (searchItem) => {
     document.getElementById("message-input").value = searchItem;
-    document.getElementById("message-input").focus();
+    // document.getElementById("message-input").focus();
     handleSendMessage();
     setMessageSearch([]);
   };
@@ -317,10 +330,9 @@ const AiQuery2 = () => {
                 </span>
                 <span className="hidden lg:flex">Edit Config</span>
               </label>
-              
             </div>
             <span className="text-lg text-gray-600 ml-3 lg:ml-6">
-                {aiConfig?.subjectSelection}
+              {aiConfig?.subjectSelection}
             </span>
           </div>
         </div>

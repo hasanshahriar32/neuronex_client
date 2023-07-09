@@ -111,7 +111,7 @@ const ManageUsers = () => {
                     </button> */}
                                         <button
                                             onClick={() => handleDelete(userData?._id)}
-                                            className="btn btn-danger btn-xs"
+                                            className="btn btn-error btn-outline btn-xs"
                                         >
                                             Delete
                                         </button>
