@@ -1,10 +1,12 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
+import { usePayment } from "../../Contexts/PaymentContext/PaymentContext";
 import "../../index.css";
 import CheckoutForm from "./ CheckoutForm";
 
-const PaymentModal = ({ packagE, setPackage }) => {
+const PaymentModal = () => {
+    const { setPackage } = usePayment();
 
     const [agreeTerms, setAgreeTerms] = useState(false);
     const stripePromise = loadStripe(
@@ -70,8 +72,6 @@ const PaymentModal = ({ packagE, setPackage }) => {
                         <Elements stripe={stripePromise}>
                             {<CheckoutForm
                                 setModalOpen={setModalOpen}
-                                setPackage={setPackage}
-                                packagE={packagE}
                                 agreeTerms={agreeTerms}
                             />}
                         </Elements>
