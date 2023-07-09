@@ -1,6 +1,7 @@
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
+import { isChrome } from 'react-device-detect';
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -40,7 +41,7 @@ const tableVariant = {
 };
 
 const Price = () => {
-
+    const { packagE, setPackage } = usePayment()
     const [pricingData, setPricingData] = useState([]);
     const { user } = useContext(AuthContext);
     // useInView hook
@@ -59,7 +60,7 @@ const Price = () => {
         getPackage();
     }, []);
 
-    const { packagE, setPackage } = usePayment()
+
 
     return (
         <div
@@ -67,7 +68,6 @@ const Price = () => {
             className="-mt-[250px] lg:px-[80px] ">
             <div className="mb-4">
                 <motion.h2
-
                     className=" text-center mb-10"
                     variants={headingVariant}
                     initial="hidden"
@@ -108,14 +108,16 @@ const Price = () => {
             <motion.ul
                 // ref={ref} // Attach the ref to the <ul> element
                 className="container"
-                variants={container}
-                initial="hidden"
+                variants={isChrome ? container : null}
+                initial={isChrome ? "hidden" : "visible"}
                 animate={inView ? "visible" : "hidden"}
             >
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
                     {pricingData.map((data) => (
-                        <motion.li variants={item} key={data?.price} className="item">
-                            <div className="bg-[#070C1C] group  shadow-lg rounded-lg overflow-hidden border hover:scale-95 duration-150 cursor-pointer ">
+                        <motion.li variants={isChrome ? item : null} key={data?.price} className="item">
+                            <div className={`bg-[#070C1C]   shadow-lg rounded-lg overflow-hidden border  cursor-pointer
+                            ${isChrome && "hover:scale-95 duration-150 group"}
+                            `}>
                                 <div className="p-4">
                                     <h3 className="text-lg font-medium text-gray-900">
                                         {data?.plan}
