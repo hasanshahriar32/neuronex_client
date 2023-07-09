@@ -68,7 +68,7 @@ const SideCard = ({ sesstionData , setRefetch }) => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/session/${localStorage.getItem(
+        `https://neuronex-server-test.vercel.app/session/${localStorage.getItem(
           "user_id"
         )}`,
         { data },
