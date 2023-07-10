@@ -61,6 +61,7 @@ const ManageUsers = () => {
     const [transaction, setTransaction] = useState();
     const [loading, setLoading] = useState(false)
 
+    // see all transaction
     const handleUid = async (uid) => {
         setLoading(true)
         try {
@@ -93,22 +94,12 @@ const ManageUsers = () => {
             });
         }
     };
-
-    //see all transaction of a user
-
-
     if (confirm === "delete") {
         handleDelete(deleteId);
         setConfirm("");
         loadData();
-    }
-    if (confirm === "close") {
-        setConfirm("");
-    }
-
-    useEffect(() => {
-        loadData();
-    }, [page]);
+    } if (confirm === "close") { setConfirm(""); }
+    useEffect(() => { loadData(); }, [page]);
 
     return (
         <div className="w-full ">
