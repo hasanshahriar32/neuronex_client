@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BsFillSendFill } from "react-icons/bs";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import ManageProfitModal from "./ManageProfitModal";
-
 
 const ManageGigs = () => {
     const [pricingData, setPricingData] = useState([]);
     const [packageInfo, setPackageInfo] = useState({});
+    const [modelPriceConfig, setModelPriceConfig] = useState({});
+    const [modelRefetch, setModelRefetch] = useState(false);
     const [refetch, setRefetch] = useState(false);
 
     const getPackage = async () => {
@@ -20,6 +24,93 @@ const ManageGigs = () => {
     }, [refetch]);
 
 
+    const inputData = [
+        { ref: "initBalance", filed: "Add initBalance", value: modelPriceConfig?.initBalance },
+        { ref: "inPrice", filed: "Add inPrice", value: modelPriceConfig?.inPrice },
+        { ref: "outPrice", filed: "Add outPrice", value: modelPriceConfig?.outPrice },
+        { ref: "password", filed: "password", value: "", type: "password" }
+    ]
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent form submission reload
+        const form = event.target;
+        const updatedPackage = {
+            initBalance: form.initBalance.value,
+            inPrice: form.inPrice.value,
+            outPrice: form.outPrice.value,
+            password: form.password.value || ''
+        }
+        handleUpdatePrice(updatedPackage);
+    }
+
+    const handleUpdatePrice = async (data) => {
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            };
+            const { data: dataGet } = await axios.patch(
+                `https://neuronex-server-test.vercel.app/ai/${localStorage.getItem("user_id")}`, {
+                _id: modelPriceConfig?._id,
+                initBalance: data.initBalance,
+                inPrice: data.inPrice,
+                outPrice: data.outPrice,
+                password: data.password || ''
+            }, config
+            )
+            if (dataGet?._id) {
+                setModelRefetch(true)
+                getModelConfig();
+            }
+            toast.success("update Successfully", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        } catch (error) {
+            if (error?.response?.status === 403) {
+                toast.error("Wrong password", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            } else {
+                toast.success("Something went wrong", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+        }
+    };
+
+
+    const getModelConfig = async () => {
+        const { data: dataGet } = await axios.get(
+            `https://neuronex-server-test.vercel.app/ai/all`
+        );
+        setModelPriceConfig(dataGet[0]);
+    }
+    useEffect(() => {
+        setModelRefetch(false)
+        getModelConfig();
+    }, [modelRefetch]);
     return (
         <div className="p-2 md:p-5 ">
             <h1 className="text-4xl mt-3 font-bold">
@@ -59,13 +150,59 @@ const ManageGigs = () => {
                         </label>
                     ))}
                 </div>
-                {
-                    packageInfo &&
-                    <ManageProfitModal packageInfo={packageInfo} setPackageInfo={setPackageInfo} setRefetch={setRefetch} />}
-            </div>
-            <>
 
-            </>
+            </div>
+            <div className="mt-10">
+                <h3 className="text-xl">Ai model Config:</h3>
+                <div className="">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="">
+                        <div className="">
+                            <div className=" px-1 pt-4">
+                                <div className="container">
+                                    <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-2 sm:mb-5 ">
+                                        {inputData.map((data, index) => (
+                                            <div key={index} className="">
+                                                <label
+                                                    htmlFor={data.ref}
+                                                    className="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 font-bold"
+                                                >
+                                                    <input
+                                                        type={data.type || "text"}
+                                                        name="name"
+                                                        min="21"
+                                                        step="0.01"
+                                                        required={data.type === "password" ? false : true}
+                                                        id={data.ref}
+                                                        defaultValue={data.value}
+                                                        placeholder={data.ref}
+                                                        className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm font-normal"
+                                                    />
+                                                    <span className="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
+                                                        {data.filed}
+                                                    </span>
+                                                </label>
+                                            </div>)
+                                        )}
+                                    </div>
+                                    <div className="w-full">
+                                        <button type="submit" className="btn btn-info w-full">
+                                            <BsFillSendFill className="mt-1 mx-2 text-md" />
+                                            <p className="text-md">Update</p>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {
+                packageInfo &&
+                <ManageProfitModal packageInfo={packageInfo} setPackageInfo={setPackageInfo} setRefetch={setRefetch} />}
+
+            <ToastContainer />
         </div>
     );
 };
