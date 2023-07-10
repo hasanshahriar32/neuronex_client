@@ -321,7 +321,7 @@ const AiQuery2 = () => {
                 ) : (
                     <div
                         id="messages"
-                        className="flex flex-col overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch min-h-[70vh] pt-7"
+                        className="flex flex-col overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch min-h-[70vh] pt-7 chatScroll"
                     >
                         {messages.map((message) => (
                             <div
