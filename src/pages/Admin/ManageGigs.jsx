@@ -25,9 +25,10 @@ const ManageGigs = () => {
 
 
     const inputData = [
-        { ref: "initBalance", filed: "Add initBalance", value: modelPriceConfig?.initBalance },
-        { ref: "inPrice", filed: "Add inPrice", value: modelPriceConfig?.inPrice },
-        { ref: "outPrice", filed: "Add outPrice", value: modelPriceConfig?.outPrice },
+        { ref: "initBalance", filed: "Add initBalance", value: modelPriceConfig?.initBalance, type: "number" },
+        { ref: "initDuration", filed: "Add initDuration", value: modelPriceConfig?.initDuration, type: "number" },
+        { ref: "inPrice", filed: "Add inPrice", value: modelPriceConfig?.inPrice, type: "number" },
+        { ref: "outPrice", filed: "Add outPrice", value: modelPriceConfig?.outPrice, type: "number" },
         { ref: "password", filed: "password", value: "", type: "password" }
     ]
     const handleSubmit = (event) => {
@@ -35,6 +36,7 @@ const ManageGigs = () => {
         const form = event.target;
         const updatedPackage = {
             initBalance: form.initBalance.value,
+            initDuration: form.initDuration.value,
             inPrice: form.inPrice.value,
             outPrice: form.outPrice.value,
             password: form.password.value || ''
@@ -54,6 +56,7 @@ const ManageGigs = () => {
                 `https://neuronex-server-test.vercel.app/ai/${localStorage.getItem("user_id")}`, {
                 _id: modelPriceConfig?._id,
                 initBalance: data.initBalance,
+                initDuration: data.initDuration,
                 inPrice: data.inPrice,
                 outPrice: data.outPrice,
                 password: data.password || ''
@@ -176,7 +179,7 @@ const ManageGigs = () => {
                                                     <input
                                                         type={data.type || "text"}
                                                         name="name"
-                                                        min="21"
+                                                        min="0.00"
                                                         step="0.01"
                                                         required={data.type === "password" ? false : true}
                                                         id={data.ref}
