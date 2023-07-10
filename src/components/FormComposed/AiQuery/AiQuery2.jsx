@@ -264,7 +264,7 @@ const AiQuery2 = () => {
             <div className="relative w-full justify-end flex-row-reverse text-end flex items-center space-x-4 ">
               <div className="flex flex-col leading-tight">
                 <div className="text-md md:text-2xl mt-1 flex items-center">
-                  <span className="text-gray-700 mr-3 ">
+                  <span className="text-gray-700 mr-3 whitespace-nowrap overflow-hidden">
                     {aiConfig?.sessionTitle?.length > 30
                       ? aiConfig?.sessionTitle.substring(0, 30) + "..."
                       : aiConfig?.sessionTitle}
@@ -304,7 +304,7 @@ const AiQuery2 = () => {
                     <AiFillPrinter />
                   </button>
                 </div>
-                <span className="text-lg text-gray-600 ml-3 lg:ml-0">
+                <span className="text-lg whitespace-nowrap overflow-hidden text-gray-600 ml-3 lg:ml-0">
                   {aiConfig?.subjectSelection}
                 </span>
               </div>
