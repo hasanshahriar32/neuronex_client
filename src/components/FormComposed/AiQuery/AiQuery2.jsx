@@ -304,7 +304,7 @@ const AiQuery2 = () => {
                     <AiFillPrinter />
                   </button>
                 </div>
-                <span className="text-lg whitespace-nowrap overflow-hidden text-gray-600 ml-3 lg:ml-0">
+                <span className="text-lg whitespace-nowrap overflow-hidden hidden md:flex text-gray-600 ml-3 lg:ml-0">
                   {aiConfig?.subjectSelection}
                 </span>
               </div>
