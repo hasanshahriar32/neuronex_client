@@ -279,7 +279,11 @@ const AiQuery2 = () => {
   };
 
   return (
-    <div>
+    <div
+    style={
+      {fontFamily: "'Poppins', sans-serrif"}
+    }
+    >
       {/* <!-- component --> */}
       <div className="flex-1 md:px-[5%] justify-between flex flex-col w-[95vw] lg:w-[70vw] py-2 min-h-screen max-h-screen">
         <div className="flex flex-row-reverse sm:items-center justify-between py-3 border-b-2 border-gray-200">
@@ -379,8 +383,9 @@ const AiQuery2 = () => {
                             wordBreak: "break-word",
                             wordWrap: "break-word",
                             width: "fit-content",
+                            fontFamily: "'Poppins', sans-serrif"
                           }}
-                          className={`px-1 py-2 rounded-lg inline-block  rounded-${
+                          className={`px-1 py-2 rounded-lg inline-block text-lg rounded-${
                             message.type === "incoming" ? "bl" : "br"
                           }-none ${
                             message.type === "incoming"
