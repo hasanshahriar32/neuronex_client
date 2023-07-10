@@ -300,6 +300,12 @@ const AiQuery2 = () => {
                         </div>
                         <span className="text-lg text-gray-600 ml-3 lg:ml-6">
                             {aiConfig?.subjectSelection}
+                            <button
+                                onClick={() => window.print()}
+                                className="btn text-md ml-3 btn-primary btn-outline"
+                            >
+                                🖨️
+                            </button>
                         </span>
                     </div>
                 </div>
@@ -315,7 +321,7 @@ const AiQuery2 = () => {
                 ) : (
                     <div
                         id="messages"
-                        className="flex flex-col chatScroll space-y-4  pt-3 md:p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
+                        className="flex flex-col overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch min-h-[70vh] pt-7"
                     >
                         {messages.map((message) => (
                             <div

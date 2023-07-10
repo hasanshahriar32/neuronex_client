@@ -11,12 +11,13 @@ import SideCard from "./Components/SideCard";
 import DrawerToggle from "./DrawerToggle";
 const Dashboard = () => {
     const { setAiConfig, drawerOpen, setDrawerOpen } = useContext(AiContext);
+    const { messages, } = useContext(ChatContext)
     const navigate = useNavigate();
-    const [refetch, setRefetch] = useState(false)
+    const [refetch, setRefetch] = useState(false);
     const drawerRef = useRef(null);
     const [drawerCheckboxChecked, setDrawerCheckboxChecked] = useState(false);
     // const [sesstionData, setSessionData] = useState([]);
-    const {sesstionData, setSessionData} = useContext(ChatContext)
+    const { sesstionData, setSessionData } = useContext(ChatContext);
     const [loadingSession, setLoadingSession] = useState(false);
     const { user } = useContext(AuthContext);
 
@@ -50,8 +51,10 @@ const Dashboard = () => {
     };
 
     const getSessions = async () => {
-        setSessionData({});
-        setLoadingSession(true);
+        if (!sesstionData || sesstionData?.length === 0) {
+            setLoadingSession(true);
+        }
+        // setSessionData({});
         try {
             const config = {
                 headers: {
@@ -120,8 +123,9 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
+        console.log;
         getSessions();
-    }, [setAiConfig , refetch]);
+    }, [setAiConfig, refetch, messages]);
 
     return (
         <div className="drawer lg:drawer-open -mt-12" ref={drawerRef}>

@@ -4,7 +4,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import { AiContext } from "../../../Contexts/FormContext/FormContext";
 import { ChatContext } from "../../../Contexts/SessionContext/SessionContext";
 const SideCard = ({ sesstionData, setRefetch }) => {
@@ -75,13 +75,16 @@ const SideCard = ({ sesstionData, setRefetch }) => {
             );
             if (response) {
                 Swal.fire({
-                    icon: 'success',
+                    icon: "success",
                     title: `Delete SuccessFull`,
-                    showConfirmButton: false, timer: 1500
-                })
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
             }
-            setRefetch(true)
-            setAiConfig([]);
+            setRefetch(true);
+            if (sessionId === aiConfig?.sessionId) {
+                setAiConfig([]);
+            }
         } catch (error) {
             toast.error({
                 title: "Error Occurred!",
@@ -95,18 +98,18 @@ const SideCard = ({ sesstionData, setRefetch }) => {
     };
     const handleDeleteSession = (sessionId) => {
         Swal.fire({
-            title: 'Are you sure?',
+            title: "Are you sure?",
             text: "You want to delete !",
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: `Yes, delete it!`
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: `Yes, delete it!`,
         }).then((result) => {
             if (result.isConfirmed) {
                 deleteSessionFormDb(sessionId);
             }
-        })
+        });
     };
 
     return (
@@ -120,20 +123,20 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                         <a href="" className="group relative block">
                             <span
                                 className={`absolute inset-0 border-2 border-dashed ${aiConfig?.sessionId === session?.sessionId
-                                    ? ""
-                                    : "border-accent-focus"
+                                        ? ""
+                                        : "border-accent-focus"
                                     }`}
                             ></span>
                             <div
                                 className={`relative  duration-100 flex h-full transform items-end border-2 transition-transform  ${aiConfig?.sessionId === session?.sessionId
-                                    ? "border-accent mt-2 -translate-x-2 -translate-y-2 ml-2"
-                                    : "group-hover:mt-2 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:ml-2 "
+                                        ? "border-accent mt-2 -translate-x-2 -translate-y-2 ml-2"
+                                        : "group-hover:mt-2 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:ml-2 "
                                     }`}
                             >
                                 <div
                                     className={`p-4 my-[2px] lg:my-[1.2px] !pt-0 transition-opacity ${aiConfig?.sessionId === session?.sessionId
-                                        ? "absolute opacity-0"
-                                        : "group-hover:absolute group-hover:opacity-0"
+                                            ? "absolute opacity-0"
+                                            : "group-hover:absolute group-hover:opacity-0"
                                         }`}
                                 >
                                     {/* date and time  */}
@@ -230,12 +233,11 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                                                 />
                                             </svg>
                                         </div>
-                                        <button
-                                            onClick={(e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                handleDeleteSession(session?.sessionId);
-                                            }}
+                                        <button onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            handleDeleteSession(session?.sessionId);
+                                        }}
                                             id="delete-session"
                                             className={`btn btn-error btn-outline text-lg border ${aiConfig?.sessionId === session?.sessionId ? "" : ""
                                                 }`}
