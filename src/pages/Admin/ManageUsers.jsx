@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import LoadingPx from "../../components/Loading/Loading";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 
 const ManageUsers = () => {
@@ -57,9 +58,11 @@ const ManageUsers = () => {
             console.log("something went wrong");
         }
     };
+    const [transaction, setTransaction] = useState();
+    const [loading, setLoading] = useState(false)
 
-    //see all transaction of a user
     const handleUid = async (uid) => {
+        setLoading(true)
         try {
             const config = {
                 headers: {
@@ -68,17 +71,17 @@ const ManageUsers = () => {
                 },
             };
             const { data: dataGet } = await axios.post(
-                `https://neuronex-server-test.vercel.app/transaction/admin/all/${localStorage.getItem(
-                    "user_id"
-                )}`,
-                {
-                    uid,
-                },
-                config
+                `https://neuronex-server-test.vercel.app/transaction/admin/all/${localStorage.getItem("user_id")}`, { uid }, config
             );
-            console.log(dataGet);
-            console.log(uid);
+            if (dataGet.length > 0) {
+                setTransaction(dataGet[0])
+                setLoading(false)
+            } else {
+                setLoading(false)
+                setTransaction(dataGet)
+            }
         } catch (error) {
+            setLoading(false)
             console.log(error);
             toast.error({
                 title: "Error Occurred!",
@@ -90,6 +93,9 @@ const ManageUsers = () => {
             });
         }
     };
+
+    //see all transaction of a user
+
 
     if (confirm === "delete") {
         handleDelete(deleteId);
@@ -161,10 +167,6 @@ const ManageUsers = () => {
                                     </td>
                                     <td>Buyer</td>
                                     <th>
-                                        {/* <button className="btn btn-ghost btn-xs">
-                      Make Verified
-                    </button> */}
-
                                         <button
                                             onClick={() => {
                                                 window.my_modal_1.showModal();
@@ -176,16 +178,12 @@ const ManageUsers = () => {
                                         </button>
                                     </th>
                                     <th>
-                                        <button
+                                        <label
                                             onClick={() => handleUid(userData?.uid)}
-                                            className="btn btn-error btn-outline btn-xs"
-                                        >
-                                            see all
-                                        </button>
+                                            htmlFor="my_modal_7" className="btn">see transaction</label>
                                     </th>
                                 </tr>
                             ))}
-                            {/* row 2 */}
                         </tbody>
                         {/* foot */}
                         <tfoot className="flex">
@@ -238,13 +236,39 @@ const ManageUsers = () => {
                             </div>
                         </tfoot>
                     </table>
-                    <ConfirmModal
-                        message={"want to delete user"}
-                        setConfirm={setConfirm}
-                    />
+                    <ConfirmModal message={"want to delete user"} setConfirm={setConfirm} />
                 </div>
             )}
             <ToastContainer />
+            <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box h-[160px]">
+                    {loading ?
+                        <div className="flex items-center justify-center h-full">
+                            <LoadingPx />
+                        </div> :
+                        <>
+                            {transaction?.length === 0 ?
+                                <div className="flex items-center justify-center h-full">
+                                    <p className="text-2xl">No Transaction Found</p>
+                                </div> :
+                                <div className="text-md">
+                                    <p className="pt-4 text-sm">uid : {transaction?.uid}</p>
+                                    <p className="pt-4">Current Balance: {" "}{transaction?.currentBalance?.toFixed(2)}</p>
+                                    {transaction?.validity?.length > 10 ?
+                                        <p className=""> Remain validity :{transaction?.validity.substring(0, 10)} </p> :
+                                        <p className=""> Remain validity :{transaction?.validity} </p>}
+                                    <p>Transaction Complied : {transaction?.transactions?.length}</p>
+                                </div>
+                            }
+
+
+                        </>
+                    }
+
+                </div>
+                <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
+            </div>
         </div>
     );
 };

@@ -180,7 +180,7 @@ const ManageGigs = () => {
                                                         type={data.type || "text"}
                                                         name="name"
                                                         min="0.00"
-                                                        step="0.01"
+                                                        step="0.000001"
                                                         required={data.type === "password" ? false : true}
                                                         id={data.ref}
                                                         defaultValue={data.value}

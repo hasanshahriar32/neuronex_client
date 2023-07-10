@@ -69,7 +69,7 @@ const TransactionHistory = () => {
                 </div>
 
                 <div className="mt-10">
-                    <p className="text-sm font-bold uppercase">Current Amount : ${payment?.currentBalance?.toFixed(2)}</p>
+                    <p className="text-sm font-bold uppercase">Current Amount : ${payment?.currentBalance?.toFixed(4)}</p>
                     <p className="text-sm">validity : {payment?.validity?.slice(0, 10)}</p>
                 </div>
             </div>

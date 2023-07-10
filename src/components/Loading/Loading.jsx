@@ -1,13 +1,13 @@
 import { ScaleLoader } from "react-spinners";
 
-const Loading = () => {
+const LoadingPx = () => {
 
     return (
-        <ScaleLoader color="#0000"
-            height={40}
+        <ScaleLoader color="#ffffff"
+            height={20}
             aria-label="Loading Spinner"
             data-testid="loader"
         />
     );
 };
-export default Loading;
+export default LoadingPx;
