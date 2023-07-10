@@ -113,9 +113,14 @@ const ManageGigs = () => {
     }, [modelRefetch]);
     return (
         <div className="p-2 md:p-5 ">
-            <h1 className="text-4xl mt-3 font-bold">
-                Update, price and profit :
-            </h1>
+            <div className="flex justify-around  gap-4 lg:block">
+                <h1 className="text-3xl md:text-4xl mt-3 font-bold " >
+                    Update, price and profit :
+                </h1>
+                <div className="">
+                    <label htmlFor="my-drawer-2" className="cursor-pointer btn btn-sm lg:hidden mt-5">Open drawer </label>
+                </div>
+            </div>
             <div className="mt-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4  px-4">
                     {pricingData.map((data) => (
@@ -152,7 +157,7 @@ const ManageGigs = () => {
                 </div>
 
             </div>
-            <div className="mt-10">
+            <div className="mt-10 mx-6 ">
                 <h3 className="text-xl">Ai model Config:</h3>
                 <div className="">
                     <form

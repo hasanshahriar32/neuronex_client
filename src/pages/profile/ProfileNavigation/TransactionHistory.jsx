@@ -89,6 +89,9 @@ const TransactionHistory = () => {
 
 
                     </div>
+                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                        <label htmlFor="my-drawer-2" className="cursor-pointer btn lg:hidden">Open drawer </label>
+                    </div>
                 </div>
                 <div className="flex items-center gap-3">
                     <p className="pb-1 text-sm hidden md:block font-bold text-white">  Recharge Now! </p>
