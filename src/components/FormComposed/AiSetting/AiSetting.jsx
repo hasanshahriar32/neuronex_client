@@ -184,7 +184,7 @@ export default function AiSetting() {
                 <option value="Geography">Geography</option>
               </select>
               {errors["subjectSelection"] && (
-                <p role="alert" className="text-red-500 border-error">
+                <p role="alert" className="text-red-500 text-sm border-error">
                   {errors["subjectSelection"]?.message}
                 </p>
               )}
