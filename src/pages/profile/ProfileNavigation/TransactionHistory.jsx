@@ -69,7 +69,7 @@ const TransactionHistory = () => {
                 </div>
 
                 <div className="mt-10">
-                    <p className="text-sm font-bold uppercase">Current Amount : ${payment?.currentBalance?.toFixed(2)}</p>
+                    <p className="text-sm font-bold uppercase">Current Amount : ${payment?.currentBalance?.toFixed(4)}</p>
                     <p className="text-sm">validity : {payment?.validity?.slice(0, 10)}</p>
                 </div>
             </div>
@@ -88,6 +88,9 @@ const TransactionHistory = () => {
                         />
 
 
+                    </div>
+                    <div className="py-6 px-3 mt-32 sm:mt-0">
+                        <label htmlFor="my-drawer-2" className="cursor-pointer btn lg:hidden">Open drawer </label>
                     </div>
                 </div>
                 <div className="flex items-center gap-3">

@@ -34,6 +34,16 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
             if (dataGet?._id) {
                 setRefetch(true)
                 setPackageInfo()
+                toast.success("update Successfully", {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
             }
         } catch (error) {
             console.log(error);
