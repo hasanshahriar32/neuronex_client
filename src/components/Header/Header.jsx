@@ -45,6 +45,8 @@ const Header = () => {
         logOut();
         setAiConfig([]);
         Swal.fire("Logout!", "Your logout Complied.", "success");
+        // clear the local storage
+        localStorage.clear();
       }
     });
   };
