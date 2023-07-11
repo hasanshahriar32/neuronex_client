@@ -2,7 +2,7 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { toast , ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
 import app from "../../../../configs/firebase.config";
@@ -50,7 +50,7 @@ const LoginForm = () => {
         };
 
         //! Save User info to the database....
-        fetch("https://neuronex-server-test.vercel.app/user", {
+        fetch("https://neuronex-server.vercel.app/user", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -82,19 +82,18 @@ const LoginForm = () => {
   };
 
   const handleTestUser = () => {
-  const userEmail = "paradoxtechbd@outlook.com";
-  const userPassword = "neuronex";
+    const userEmail = "paradoxtechbd@outlook.com";
+    const userPassword = "neuronex";
 
-  // Call handleLogin with the test user credentials
-  handleLogin({
-    preventDefault: () => {},
-    target: {
-      email: { value: userEmail },
-      password: { value: userPassword }
-    }
-  });
-};
-
+    // Call handleLogin with the test user credentials
+    handleLogin({
+      preventDefault: () => {},
+      target: {
+        email: { value: userEmail },
+        password: { value: userPassword },
+      },
+    });
+  };
 
   //! handle Forget Password
   const handleEmailForResetPassword = (e) => {
@@ -216,7 +215,10 @@ const LoginForm = () => {
                   </button>
                 </div>
               </form>
-              <button onClick={handleTestUser} className="btn mt-2 text-md  btn-primary w-full ">
+              <button
+                onClick={handleTestUser}
+                className="btn mt-2 text-md  btn-primary w-full "
+              >
                 Test Account
               </button>
               <div className="divider text-md mt-6 ">OR</div>

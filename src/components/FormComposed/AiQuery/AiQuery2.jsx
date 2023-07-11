@@ -180,7 +180,7 @@ const AiQuery2 = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        `https://neuronex-server-test.vercel.app/generate/suggestions/${localStorage.getItem(
+        `https://neuronex-server.vercel.app/generate/suggestions/${localStorage.getItem(
           "user_id"
         )}`,
         {
@@ -230,7 +230,7 @@ const AiQuery2 = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server-test.vercel.app/session/favorite/switch",
+        "https://neuronex-server.vercel.app/session/favorite/switch",
         {
           sessionId: aiConfig?.sessionId,
           uid: user?.uid,
