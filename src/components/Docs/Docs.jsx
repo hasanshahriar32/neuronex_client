@@ -30,7 +30,9 @@ const Main = () => {
             <div className="border min-h-[70vh]">
             </div>
             <div className="my-10">
-                <FaqSection data={faq} />
+                <div className="flex flex-col max-w-7xl mx-auto">
+                    <FaqSection data={faq} />
+                </div>
             </div>
         </div>
 
