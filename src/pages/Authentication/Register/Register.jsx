@@ -1,18 +1,17 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 // import useToken from "../../../hooks/useToken";
 
 const Register = () => {
-  const { createUser, userprofile } = useContext(AuthContext);
+  const { createUser, userprofile, user } = useContext(AuthContext);
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
@@ -129,6 +128,9 @@ const Register = () => {
       });
   };
 
+  if (user?.uid && localStorage.getItem("token")) {
+    return <Navigate to="/"></Navigate>;
+  }
   return (
     <div>
       <ToastContainer />
