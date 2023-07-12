@@ -1,7 +1,7 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../../Contexts/UserContext/UserContext";
 import AuthProvider from "../../../../components/Authentication/AuthProvider/AuthProvider";
@@ -10,7 +10,7 @@ import app from "../../../../configs/firebase.config";
 const auth = getAuth(app);
 const LoginForm = () => {
   const { signin } = useContext(AuthContext);
-
+  const { user } = useContext(AuthContext);
   const [userEmail, setUserEmail] = useState("");
   const [changePassword, setChangePassword] = useState(true);
   const changeIcon = changePassword === true ? false : true;
@@ -144,6 +144,10 @@ const LoginForm = () => {
         });
     }
   };
+
+  if (user?.uid && localStorage.getItem("token")) {
+    return <Navigate to="/"></Navigate>;
+  }
   return (
     <div>
       <ToastContainer />
