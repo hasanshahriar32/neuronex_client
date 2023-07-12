@@ -85,6 +85,7 @@ const AiQuery2 = () => {
         assistanceLevel,
         uid: user?.uid,
       };
+      setMessageSearch([]);
       fetch(
         `https://neuronex-server.onrender.com/generate/prompt/${localStorage.getItem(
           "user_id"
