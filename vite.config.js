@@ -7,6 +7,9 @@ export default defineConfig({
     build: {
         outDir: "dist",
     },
+    define: {
+        'process.env': {}
+    }
 
     // server: {
     //   port: 3000,
