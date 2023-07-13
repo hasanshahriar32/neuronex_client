@@ -9,6 +9,7 @@
 Email: [paradoxtechbd@outlook.com](mailto:paradoxtechbd@outlook.com)
 
 Password: neuronex
+
 Admin dashboard password: hero
 
 ## Git Repositories
@@ -50,31 +51,30 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 
 ## we have two pages to interact with user to provide responses.
 
-1. ai settings page 
-    
-    purpose: to take settings info from the user
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d633d289-ca2b-4dde-bb1b-88f54786d598/Untitled.png)
-    
+1. ai settings page
+
+   purpose: to take settings info from the user
+
+   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d633d289-ca2b-4dde-bb1b-88f54786d598/Untitled.png)
+
 2. ai response page
-    
-    purpose: at this page, user will take the prompt from user and in response, it will give the result.
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/68f64973-11ed-4c46-9dd4-6a17f4170778/Untitled.png)
-    
+
+   purpose: at this page, user will take the prompt from user and in response, it will give the result.
+
+   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/68f64973-11ed-4c46-9dd4-6a17f4170778/Untitled.png)
 
 ## Business logic
 
 - like chat-gpt, this response layout will have session feature. that means, for every session will have its unique session Id.
 - If the session id changes, the application will create a call to the backend. Now there will be two cases.
-    - If the session is found (exists), then the application will load it’s messages to front end.
-    - If the session is not found, then a new session will be created. For both cases, the session data will be sent to the front-end.
+  - If the session is found (exists), then the application will load it’s messages to front end.
+  - If the session is not found, then a new session will be created. For both cases, the session data will be sent to the front-end.
 - After receiving session data to the front-end, the info will be saved to the context-api.
 - After that, for every new messages / query the message will be saved at the backend according to the session id.
 - There is also a save 💖 icon. At clicking this, the session will be saved (as favourite).
 - The application’s logic diagram is shown below.
 
-![Untitled (1).png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2a93717a-d793-42ab-a38b-02ccba666a5b/Untitled_(1).png)
+![Untitled (1).png](<https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2a93717a-d793-42ab-a38b-02ccba666a5b/Untitled_(1).png>)
 
 ## Features of Ai
 
@@ -97,7 +97,7 @@ Aa a glance, the security features are:
 
 1. Authentication is developed with firebase. (A renowned third party provider).
 2. Authorization is protected with a secondary password. The password is saved at database at bcrypt hash. The admin needs to change his password at admin section which is initially (by default) blank.
-3. The private and sensible api’s are protected with JWT token. The modular pattern of backend lets the developer to apply or remove the protection easily. 
+3. The private and sensible api’s are protected with JWT token. The modular pattern of backend lets the developer to apply or remove the protection easily.
 
 ## Business Logic:
 
@@ -117,7 +117,7 @@ Aa a glance, the security features are:
 ### Api protection:
 
 - The api’s are protected with jwt token.
-- When calling the protected api’s the developer will need to send the _id as parameter along with Bearer token at header.
+- When calling the protected api’s the developer will need to send the \_id as parameter along with Bearer token at header.
 - The full api documentation will be found here. [api docs for neuroNex coders (neuronex-server.vercel.app)](https://neuronex-server.vercel.app/)
 
 ## Feature of this section:
@@ -155,8 +155,8 @@ Demo card: 4242 4242 4242 4242 | 05 | 25 | 125 | 54685
 
 - The admin can change the ai configuration at ai dashboard.
 - The settings that can be modified are following:
-    - The initial balance of a new user.
-    - The packages to recharge.
-    - The charge at 1K token usage.
+  - The initial balance of a new user.
+  - The packages to recharge.
+  - The charge at 1K token usage.
 
 Overall, these are the features.
