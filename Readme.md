@@ -6,7 +6,13 @@ Front-end: [Neuronex Ai (neuronex-ai.vercel.app)](https://neuronex-ai.vercel.app
 
 Back-end Api documentation: <https://neuronex-server.vercel.app/>
 
-## Admin Login
+## Git Repositories
+
+- [Github Client Repo](https://github.com/hasanshahriar32/neuronex_client)
+- [Github Server Repo](https://github.com/hasanshahriar32/neuronex_server)
+
+
+## Admin Login (Front-end)
 
 Email: [paradoxtechbd@outlook.com](mailto:paradoxtechbd@outlook.com)
 
@@ -14,10 +20,6 @@ Password: neuronex
 
 Admin dashboard password: hero
 
-## Git Repositories
-
-- [Github Client Repo](https://github.com/hasanshahriar32/neuronex_client)
-- [Github Server Repo](https://github.com/hasanshahriar32/neuronex_server)
 
 ## Instruction Video
 
@@ -34,6 +36,9 @@ Admin dashboard password: hero
 - MongoDB
 - Firebase
 - Npm packages
+- jwt
+- mongoose
+- swagger-ui
 
 ## Introduction - The Project's Aim
 
