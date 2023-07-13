@@ -47,6 +47,15 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 - Better security: at authentication, authorization and api endpoint.
 - Model management at admin dashboard.
 
+
+## Table of Contents
+  - [AI manipulation](#-feature1-ai-manipulation)
+  - [Authentication, Authorization and Security](#-feature2-authentication-authorization-and-security)
+  - [Payment and token charge](#-feature3-payment-and-token-charge)
+  - [Ai Configuration](#-feature4-ai-configuration)
+
+
+
 # 🤖 Feature1: AI manipulation.
 
 ## Ai routes
