@@ -55,13 +55,13 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 
    purpose: to take settings info from the user
 
-   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d633d289-ca2b-4dde-bb1b-88f54786d598/Untitled.png)
+   ![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd633d289-ca2b-4dde-bb1b-88f54786d598%2FUntitled.png?id=67ec9a5a-5df8-4626-8741-f83231b45258&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1060&userId=&cache=v2)
 
 2. ai response page
 
    purpose: at this page, user will take the prompt from user and in response, it will give the result.
 
-   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/68f64973-11ed-4c46-9dd4-6a17f4170778/Untitled.png)
+   ![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F68f64973-11ed-4c46-9dd4-6a17f4170778%2FUntitled.png?id=73eb7537-4a97-4913-81a1-77bfe99b182f&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1540&userId=&cache=v2)
 
 ## Business logic
 
@@ -74,7 +74,7 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 - There is also a save 💖 icon. At clicking this, the session will be saved (as favourite).
 - The application’s logic diagram is shown below.
 
-![Untitled (1).png](<https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2a93717a-d793-42ab-a38b-02ccba666a5b/Untitled_(1).png>)
+![Untitled (1).png](<https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2a93717a-d793-42ab-a38b-02ccba666a5b%2FUntitled_(1).png?id=8390d4d9-0879-4d10-8548-5121fea470d6&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1060&userId=&cache=v2>)
 
 ## Features of Ai
 
@@ -82,7 +82,7 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 - The model which is used has given instruction to act as a tutor and tested to work perfectly.
 - After generating the response, the ai gives search suggestions. The suggestions are related to the previous response. And another model is used to propose search suggestion.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92e7c321-4821-4b31-8f7a-acf9cdd01887/Untitled.png)
+![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F92e7c321-4821-4b31-8f7a-acf9cdd01887%2FUntitled.png?id=ce81ef22-efbc-4b93-b8bb-76366368cd5d&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1900&userId=&cache=v2)
 
 - The user has freedom to save the session, delete it or print it.
 - The ai model can currently remember last 2 responses. (This number can be increased at backend). Which lets the user ask about the old questions. As the model used for this (gpt-3.5-turbo) is itself a chat friendly model, which means it lets the user to have a nice chatting experience.
@@ -112,7 +112,7 @@ Aa a glance, the security features are:
 - Authorization is protected with a secondary password. The password is saved at database at bcrypt hash. The admin needs to change his password at admin section which is initially (by default) blank.
 - For only the sensible events, the admin will be prompted to input this secondary password.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/81451904-d2a5-4a69-aac0-af99553d40b5/Untitled.png)
+![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F81451904-d2a5-4a69-aac0-af99553d40b5%2FUntitled.png?id=8ce37745-87d3-4b55-b5d5-0c07983c3901&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1250&userId=&cache=v2)
 
 ### Api protection:
 
@@ -136,11 +136,11 @@ Aa a glance, the security features are:
 
 Demo card: 4242 4242 4242 4242 | 05 | 25 | 125 | 54685
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/36948013-6cff-46c3-b70f-d5d6f4f68861/Untitled.png)
+![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F36948013-6cff-46c3-b70f-d5d6f4f68861%2FUntitled.png?id=287d8022-625b-44b6-9d19-696bc1a9769c&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1340&userId=&cache=v2)
 
 - (Admin can manage these recharge amount and duration).
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3156f070-ecdf-46c8-9aea-570897fb1c42/Untitled.png)
+![Untitled](https://loking.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3156f070-ecdf-46c8-9aea-570897fb1c42%2FUntitled.png?id=99680245-81e3-46f8-b4d2-9597b6966fa1&table=block&spaceId=7bd1b7a5-35f8-4a4d-be69-4a8272b2b6b5&width=1340&userId=&cache=v2)
 
 - Admin can also control how much the token will be charged at backend. (Default: 0.002$/1K token).
 - Admin can set how much credit a user might have when he first creates his account. Or not.
