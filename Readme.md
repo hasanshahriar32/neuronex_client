@@ -2,7 +2,9 @@
 
 ## Live Site
 
-[Neuronex Ai (neuronex-ai.vercel.app)](https://neuronex-ai.vercel.app/)
+Front-end: [Neuronex Ai (neuronex-ai.vercel.app)](https://neuronex-ai.vercel.app/)
+
+Back-end Api documentation: <https://neuronex-server.vercel.app/>
 
 ## Admin Login
 
