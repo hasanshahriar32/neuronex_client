@@ -11,7 +11,6 @@ Back-end Api documentation: <https://neuronex-server.vercel.app/>
 - [Github Client Repo](https://github.com/hasanshahriar32/neuronex_client)
 - [Github Server Repo](https://github.com/hasanshahriar32/neuronex_server)
 
-
 ## Admin Login (Front-end)
 
 Email: [paradoxtechbd@outlook.com](mailto:paradoxtechbd@outlook.com)
@@ -20,10 +19,9 @@ Password: neuronex
 
 Admin dashboard password: hero
 
-
 ## Instruction Video
 
-- [Video Link](https://vimeo.com/)
+- [Video Link](https://drive.google.com/file/d/13xfyx7ld1P1QGVUoMJRF4waMSnk6NY8w/view?usp=sharing)
 
 ## Technologies
 
@@ -52,14 +50,12 @@ The purpose of creating project Neuronex Ai is to help the students, educators, 
 - Better security: at authentication, authorization and api endpoint.
 - Model management at admin dashboard.
 
-
 ## Table of Contents
-  - [AI manipulation](#-feature1-ai-manipulation)
-  - [Authentication, Authorization and Security](#-feature2-authentication-authorization-and-security)
-  - [Payment and token charge](#-feature3-payment-and-token-charge)
-  - [Ai Configuration](#-feature4-ai-configuration)
 
-
+- [AI manipulation](#-feature1-ai-manipulation)
+- [Authentication, Authorization and Security](#-feature2-authentication-authorization-and-security)
+- [Payment and token charge](#-feature3-payment-and-token-charge)
+- [Ai Configuration](#-feature4-ai-configuration)
 
 # 🤖 Feature1: AI manipulation.
 
