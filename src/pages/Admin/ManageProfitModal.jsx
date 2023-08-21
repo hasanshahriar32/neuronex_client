@@ -30,7 +30,7 @@ const ManageProfitModal = ({ packageInfo, setPackageInfo, setRefetch }) => {
       };
 
       const { data: dataGet } = await axios.patch(
-        `https://neuronex-server.vercel.app/package/${localStorage.getItem(
+        `https://ai-chatbot-server.vercel.app/package/${localStorage.getItem(
           "user_id"
         )}`,
         {

@@ -20,79 +20,81 @@ import Home from "../pages/Home/Home";
 import ProfileEdit from "../pages/profile/ProfileEdit";
 import TransactionHistory from "../pages/profile/ProfileNavigation/TransactionHistory";
 import ProfilePage from "../pages/profile/ProfileSection";
+import Achievement from "../components/Hero/Achievement";
 
 const Routes = () => {
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        { path: "/", element: <Home></Home> },
+        { path: "/home", element: <Home></Home> },
+        { path: "/team", element: <Team></Team> },
+        { path: "/faq", element: <FAQ></FAQ> },
+        { path: "/docs", element: <Docs></Docs> },
+        { path: "/achievement", element: <Achievement></Achievement> },
+      ],
+    },
+    {
+      path: "/profile",
+      element: (
+        <PrivateRoute>
+          <ProfileLayout></ProfileLayout>
+        </PrivateRoute>
+      ),
+      children: [
+        { path: "/profile/", element: <ProfilePage></ProfilePage> },
+        { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
         {
-            path: "/",
-            element: <Main></Main>,
-            children: [
-                { path: "/", element: <Home></Home> },
-                { path: "/home", element: <Home></Home> },
-                { path: "/team", element: <Team></Team> },
-                { path: "/faq", element: <FAQ></FAQ> },
-                { path: "/docs", element: <Docs></Docs> },
-            ],
+          path: "/profile/my-transaction/history",
+          element: <TransactionHistory />,
         },
+      ],
+    },
+    {
+      path: "/admin",
+      element: (
+        <AdminRoute>
+          <AdminLayout />
+        </AdminRoute>
+      ),
+      children: [
+        { path: "/admin/", element: <Admin /> },
+        { path: "/admin/all-users", element: <ManageUsers /> },
+        { path: "/admin/all-admins", element: <ManageAdmins /> },
+        { path: "/admin/manage-price", element: <ManageGigs /> },
+      ],
+    },
+    {
+      path: "/ai",
+      element: (
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      ),
+      children: [
         {
-            path: "/profile",
-            element: (
-                <PrivateRoute>
-                    <ProfileLayout></ProfileLayout>
-                </PrivateRoute>
-            ),
-            children: [
-                { path: "/profile/", element: <ProfilePage></ProfilePage> },
-                { path: "/profile/edit", element: <ProfileEdit></ProfileEdit> },
-                {
-                    path: "/profile/my-transaction/history",
-                    element: <TransactionHistory />,
-                },
-            ],
+          path: "/ai/",
+          element: <Compose></Compose>,
         },
-        {
-            path: "/admin",
-            element: (
-                <AdminRoute>
-                    <AdminLayout />
-                </AdminRoute>
-            ),
-            children: [
-                { path: "/admin/", element: <Admin /> },
-                { path: "/admin/all-users", element: <ManageUsers /> },
-                { path: "/admin/all-admins", element: <ManageAdmins /> },
-                { path: "/admin/manage-price", element: <ManageGigs /> },
-            ],
-        },
-        {
-            path: "/ai",
-            element: (
-                <PrivateRoute>
-                    <Dashboard />
-                </PrivateRoute>
-            ),
-            children: [
-                {
-                    path: "/ai/",
-                    element: <Compose></Compose>,
-                },
 
-                {
-                    path: "/ai/compose",
-                    element: <Compose></Compose>,
-                },
-            ],
+        {
+          path: "/ai/compose",
+          element: <Compose></Compose>,
         },
-        { path: "/login", element: <Login></Login> },
-        { path: "/register", element: <Register></Register> },
-        { path: "*", element: <ErrorPage /> },
-    ]);
-    return (
-        <div className="bg-page-gradient pt-navigation-height">
-            {" "}
-            <RouterProvider router={router}></RouterProvider>
-        </div>
-    );
+      ],
+    },
+    { path: "/login", element: <Login></Login> },
+    { path: "/register", element: <Register></Register> },
+    { path: "*", element: <ErrorPage /> },
+  ]);
+  return (
+    <div className="bg-page-gradient pt-navigation-height">
+      {" "}
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 };
 
 export default Routes;

@@ -21,7 +21,7 @@ const SideCard = ({ sesstionData, setRefetch }) => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server.vercel.app/session/single",
+        "https://ai-chatbot-server.vercel.app/session/single",
         {
           sessionId: id,
         },
@@ -67,7 +67,7 @@ const SideCard = ({ sesstionData, setRefetch }) => {
 
     try {
       const response = await axios.delete(
-        `https://neuronex-server.vercel.app/session/${localStorage.getItem(
+        `https://ai-chatbot-server.vercel.app/session/${localStorage.getItem(
           "user_id"
         )}`,
         { data },
@@ -125,13 +125,21 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                 className={`absolute inset-0 border-2 border-dashed ${
                   aiConfig?.sessionId === session?.sessionId
                     ? ""
-                    : "border-accent-focus"
+                    : `${
+                        session?.subjectSelection === "Admission"
+                          ? "border-info"
+                          : "border-accent-focus"
+                      }`
                 }`}
               ></span>
               <div
                 className={`relative  duration-100 flex h-full transform items-end border-2 transition-transform  ${
                   aiConfig?.sessionId === session?.sessionId
-                    ? "border-accent mt-2 -translate-x-2 -translate-y-2 ml-2"
+                    ? `${
+                        session?.subjectSelection === "Admission"
+                          ? "border-info mt-2 -translate-x-2 -translate-y-2 ml-2"
+                          : "border-accent mt-2 -translate-x-2 -translate-y-2 ml-2"
+                      }`
                     : "group-hover:mt-2 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:ml-2 "
                 }`}
               >
@@ -185,7 +193,13 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                   <div className="flex mt-4  items-center justify-between flex-row flex-wrap ">
                     {session?.subjectSelection && (
                       <div className="flex  gap-1 text-left">
-                        <span className="whitespace-nowrap rounded-full w-[120px] lg:w-[150px]  overflow-hidden bg-success-content px-2 py-1 text-xs text-accent pl-4">
+                        <span
+                          className={`${
+                            session?.subjectSelection === "Admission"
+                              ? "whitespace-nowrap rounded-full w-[120px] lg:w-[150px]  overflow-hidden bg-success-content px-2 py-1 text-xs text-info pl-4"
+                              : "whitespace-nowrap rounded-full w-[120px] lg:w-[150px]  overflow-hidden bg-success-content px-2 py-1 text-xs text-accent pl-4"
+                          }`}
+                        >
                           {session?.subjectSelection}
                         </span>
                       </div>
@@ -211,20 +225,30 @@ const SideCard = ({ sesstionData, setRefetch }) => {
                                     } `}
                 >
                   <h2 className="text-sm font-medium mt-1 w-[210px] h-[20px]">
-                    {session?.sessionTitle?.length > 50
-                      ? session?.sessionTitle.substring(0, 50)
+                    {session?.sessionTitle?.length > 40
+                      ? session?.sessionTitle.substring(0, 45) + "..."
                       : session?.sessionTitle}
                   </h2>
                   <div className="flex mt-6 flex-row items-center justify-between ">
                     <div className="flex flex-row items-center justify-start">
-                      <p className="text-accent-focus font-bold text-md">
+                      <p
+                        className={`${
+                          session?.subjectSelection === "Admission"
+                            ? "text-info font-bold text-md"
+                            : "text-accent-focus font-bold text-md"
+                        }`}
+                      >
                         {aiConfig?.sessionId === session?.sessionId
                           ? "Active"
                           : "Restore"}
                       </p>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6  group-hover:translate-x-3 duration-1000 rotate-90 text-accent-focus"
+                        className={`${
+                          session?.subjectSelection === "Admission"
+                            ? "h-6 w-6  group-hover:translate-x-3 duration-1000 rotate-90 text-info"
+                            : "h-6 w-6  group-hover:translate-x-3 duration-1000 rotate-90 text-accent-focus"
+                        }`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

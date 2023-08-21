@@ -11,6 +11,7 @@ import { AuthContext } from "../../../Contexts/UserContext/UserContext";
 import DrawerToggle from "../../../layout/Dashboard/DrawerToggle";
 import AiSetting from "../AiSetting/AiSetting";
 import "./aiQuery.css";
+import AiSetting2 from "../AiSetting/AiSetting2";
 
 const AiQuery2 = () => {
   const { modalState, setAiConfig, aiConfig } = useContext(AiContext);
@@ -86,73 +87,166 @@ const AiQuery2 = () => {
         uid: user?.uid,
       };
       setMessageSearch([]);
-      fetch(
-        `https://neuronex-server.onrender.com/generate/prompt/${localStorage.getItem(
-          "user_id"
-        )}`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(promptConfig),
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setLoadingAi(false);
-          if (
-            Array.isArray(data) &&
-            data?.length > 0 &&
-            data[0]?.sessionId == localStorage.getItem("currentSessionid")
-          ) {
-            handleSearchSuggestion(data[1]?.message);
-            if (data[1]?.title && data[1]?.title?.length > 1) {
-              setAiConfig((prevConfig) => ({
-                ...prevConfig,
-                sessionTitle: data[1]?.title,
-              }));
-            }
-            setMessages((prevMessages) => {
-              // Check if any message with the same serial number already exists
-              const existingMessageIndex = prevMessages.findIndex(
-                (message) => message.serial === data[0].serial
-              );
+      if (aiConfig?.subjectSelection === "Admission") {
+        fetch(
+          `https://hstu-aichat-server.onrender.com/generate/finetune/${localStorage.getItem(
+            "user_id"
+          )}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(promptConfig),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.message);
+            const promptConfig2 = {
+              ...promptConfig,
+              finetune: data.message,
+            };
+            fetch(
+              `https://hstu-aichat-server.onrender.com/generate/admission/${localStorage.getItem(
+                "user_id"
+              )}`,
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify(promptConfig2),
+              }
+            )
+              .then((res) => res.json())
+              .then((data) => {
+                setLoadingAi(false);
+                if (
+                  Array.isArray(data) &&
+                  data?.length > 0 &&
+                  data[0]?.sessionId == localStorage.getItem("currentSessionid")
+                ) {
+                  // handleSearchSuggestion(data[1]?.message);
+                  if (data[1]?.title && data[1]?.title?.length > 1) {
+                    setAiConfig((prevConfig) => ({
+                      ...prevConfig,
+                      sessionTitle: data[1]?.title,
+                    }));
+                  }
+                  setMessages((prevMessages) => {
+                    // Check if any message with the same serial number already exists
+                    const existingMessageIndex = prevMessages.findIndex(
+                      (message) => message.serial === data[0].serial
+                    );
 
-              if (existingMessageIndex !== -1) {
-                // Remove the existing message with the same serial number
-                const updatedMessages = prevMessages.filter(
-                  (_, index) => index !== existingMessageIndex
+                    if (existingMessageIndex !== -1) {
+                      // Remove the existing message with the same serial number
+                      const updatedMessages = prevMessages.filter(
+                        (_, index) => index !== existingMessageIndex
+                      );
+
+                      // Append the new data to the updated messages
+                      return [...updatedMessages, ...data];
+                    } else {
+                      // Append the new data to the previous messages
+                      return [...prevMessages, ...data];
+                    }
+                  });
+                } else {
+                  // Handle empty data or non-iterable response
+                  toast.error("No session available, no response from AI", {
+                    // position: "bottom-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                  });
+                  // You can choose to display an error message or handle it as needed.
+                }
+              })
+              // eslint-disable-next-line no-unused-vars
+              .catch((err) => {
+                setLoadingAi(false);
+              });
+          })
+          // eslint-disable-next-line no-unused-vars
+          .catch((err) => {
+            setLoadingAi(false);
+          });
+      } else {
+        fetch(
+          `https://hstu-aichat-server.onrender.com/generate/prompt/${localStorage.getItem(
+            "user_id"
+          )}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(promptConfig),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            setLoadingAi(false);
+            if (
+              Array.isArray(data) &&
+              data?.length > 0 &&
+              data[0]?.sessionId == localStorage.getItem("currentSessionid")
+            ) {
+              handleSearchSuggestion(data[1]?.message);
+              if (data[1]?.title && data[1]?.title?.length > 1) {
+                setAiConfig((prevConfig) => ({
+                  ...prevConfig,
+                  sessionTitle: data[1]?.title,
+                }));
+              }
+              setMessages((prevMessages) => {
+                // Check if any message with the same serial number already exists
+                const existingMessageIndex = prevMessages.findIndex(
+                  (message) => message.serial === data[0].serial
                 );
 
-                // Append the new data to the updated messages
-                return [...updatedMessages, ...data];
-              } else {
-                // Append the new data to the previous messages
-                return [...prevMessages, ...data];
-              }
-            });
-          } else {
-            // Handle empty data or non-iterable response
-            toast.error("No session available, no response from AI", {
-              // position: "bottom-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
-            // You can choose to display an error message or handle it as needed.
-          }
-        })
-        // eslint-disable-next-line no-unused-vars
-        .catch((err) => {
-          setLoadingAi(false);
-        });
+                if (existingMessageIndex !== -1) {
+                  // Remove the existing message with the same serial number
+                  const updatedMessages = prevMessages.filter(
+                    (_, index) => index !== existingMessageIndex
+                  );
 
+                  // Append the new data to the updated messages
+                  return [...updatedMessages, ...data];
+                } else {
+                  // Append the new data to the previous messages
+                  return [...prevMessages, ...data];
+                }
+              });
+            } else {
+              // Handle empty data or non-iterable response
+              toast.error("No session available, no response from AI", {
+                // position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+              // You can choose to display an error message or handle it as needed.
+            }
+          })
+          // eslint-disable-next-line no-unused-vars
+          .catch((err) => {
+            setLoadingAi(false);
+          });
+      }
       input.value = "";
       scrollToBottom();
     }
@@ -181,7 +275,7 @@ const AiQuery2 = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        `https://neuronex-server.vercel.app/generate/suggestions/${localStorage.getItem(
+        `https://ai-chatbot-server.vercel.app/generate/suggestions/${localStorage.getItem(
           "user_id"
         )}`,
         {
@@ -231,7 +325,7 @@ const AiQuery2 = () => {
         },
       };
       const { data: dataGet } = await axios.post(
-        "https://neuronex-server.vercel.app/session/favorite/switch",
+        "https://ai-chatbot-server.vercel.app/session/favorite/switch",
         {
           sessionId: aiConfig?.sessionId,
           uid: user?.uid,
@@ -280,7 +374,7 @@ const AiQuery2 = () => {
                   <button
                     onClick={handleFavorite}
                     type="button"
-                    className="join-item hover:scale-110 inline-flex btn btn-primary text-lg items-center justify-center rounded-lg border  transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                    className="join-item hover:scale-110 inline-flex btn btn-success text-lg items-center justify-center rounded-lg border  transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
                   >
                     {aiConfig?.isBookmarked == true ? (
                       <AiFillHeart />
@@ -291,7 +385,7 @@ const AiQuery2 = () => {
                   <label
                     // type="checkbox"
                     htmlFor="my_modal_4"
-                    className="join-item hover:scale-110 tracking-wide btn btn-primary text-sm"
+                    className="join-item hover:scale-110 tracking-wide btn btn-success text-sm"
                   >
                     <span>
                       <FiEdit3></FiEdit3>
@@ -300,7 +394,7 @@ const AiQuery2 = () => {
                   </label>
                   <button
                     onClick={() => window.print()}
-                    className="join-item hover:scale-110 btn text-lg btn-primary "
+                    className="join-item hover:scale-110 btn text-lg btn-success "
                   >
                     <AiFillPrinter />
                   </button>
@@ -578,7 +672,11 @@ const AiQuery2 = () => {
           >
             ✕
           </button>
-          <AiSetting></AiSetting>
+          {aiConfig?.subjectSelection === "Admission" ? (
+            <AiSetting2></AiSetting2>
+          ) : (
+            <AiSetting></AiSetting>
+          )}
         </div>
       </div>
 

@@ -22,8 +22,8 @@ const HeroSection = () => {
           <Highlight>→</Highlight>
         </Button>
         <HeroTitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-          NeuroNex: the better
-          <br className="hidden md:block" /> way to Learn
+          NeuroNex: Empowering
+          <br className="hidden md:block" /> HSTU with AI
         </HeroTitle>
         <HeroSubtitle className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
           Learning Journeys, Revolutionizing Education with Transformative

@@ -64,7 +64,7 @@ const Register = () => {
               };
 
               //! Save User info to the database....
-              fetch("https://neuronex-server.vercel.app/user", {
+              fetch("https://ai-chatbot-server.vercel.app/user", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",

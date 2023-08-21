@@ -1,15 +1,15 @@
-# project : Neuronex ai
+# project : Hstu ai
 
 ## Live Site
 
-Front-end: [Neuronex Ai (neuronex-ai.vercel.app)](https://neuronex-ai.vercel.app/)
+Front-end: [Hstu Ai (hstu-ai.vercel.app)](https://hstu-ai.vercel.app/)
 
-Back-end Api documentation: <https://neuronex-server.vercel.app/>
+Back-end Api documentation: <https://ai-chatbot-server.vercel.app/>
 
 ## Git Repositories
 
-- [Github Client Repo](https://github.com/hasanshahriar32/neuronex_client)
-- [Github Server Repo](https://github.com/hasanshahriar32/neuronex_server)
+<!-- - [Github Client Repo](https://github.com/hasanshahriar32/neuronex_client)
+- [Github Server Repo](https://github.com/hasanshahriar32/neuronex_server) -->
 
 ## Admin Login (Front-end)
 
@@ -40,7 +40,7 @@ Admin dashboard password: hero
 
 ## Introduction - The Project's Aim
 
-The purpose of creating project Neuronex Ai is to help the students, educators, or general people at academic usage. It responses at step-by-step method or other method as instructed. The ai also gives suggestions based on previous search. It’s assistive and chat friendly response method gives user a better experience.
+The purpose of creating project Hstu Ai is to help the students, educators, or general people at academic usage. It responses at step-by-step method or other method as instructed. The ai also gives suggestions based on previous search. It’s assistive and chat friendly response method gives user a better experience.
 
 ## Project Features
 
@@ -130,7 +130,7 @@ Aa a glance, the security features are:
 
 - The api’s are protected with jwt token.
 - When calling the protected api’s the developer will need to send the \_id as parameter along with Bearer token at header.
-- The full api documentation will be found here. [api docs for neuroNex coders (neuronex-server.vercel.app)](https://neuronex-server.vercel.app/)
+- The full api documentation will be found here. [api docs for Hstu coders (ai-chatbot-server.vercel.app)](https://ai-chatbot-server.vercel.app/)
 
 ## Feature of this section:
 

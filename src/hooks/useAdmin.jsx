@@ -15,7 +15,7 @@ const useAdmin = (id) => {
             },
           };
           const { data: dataGet } = await axios.get(
-            `https://neuronex-server.vercel.app/admin/${id}`,
+            `https://ai-chatbot-server.vercel.app/admin/${id}`,
             config
           );
           setAdmin(dataGet.isAdmin);

@@ -41,7 +41,7 @@ const OneTap = () => {
     },
   });
   const saveUserToDb = (name, pic, email, uid, userAbout, verified) => {
-    fetch("https://neuronex-server.vercel.app/user", {
+    fetch("https://ai-chatbot-server.vercel.app/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

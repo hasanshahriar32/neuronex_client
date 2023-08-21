@@ -92,6 +92,9 @@ const Header = () => {
               <li>
                 <Link to="/faq">Faq</Link>
               </li>
+              <li>
+                <Link to="/achievement">Achievement</Link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -147,7 +150,7 @@ const Header = () => {
           onClick={() => setHamburgerMenuIsOpen((open) => !open)}
         >
           <span className="sr-only">Toggle menu</span>
-          <AiOutlineMenu />
+          <AiOutlineMenu className="text-lg" />
         </button>
       </Container>
     </header>
